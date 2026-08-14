@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { fetchShowcaseForPage, fetchShowcaseStats } from '../lib/showcaseApi'
 import '../styles/shipped-evidence.css'
+import { div } from 'framer-motion/client'
 
 function isImageUrl(value) {
   return typeof value === 'string' && /^https?:\/\//i.test(value.trim())
@@ -79,7 +80,7 @@ export default function ShippedEvidenceSection({
     }
   }, [pageKey])
 
-  if (!loaded || items.length === 0) return null
+
 
   return (
     <section className="section shipped-evidence-section">
@@ -99,10 +100,10 @@ export default function ShippedEvidenceSection({
               </div>
             ))}
           </div>
-        ) : null}
+        ) : <div>failed to load data</div>}
 
         <div className="se-pairs">
-          {items.map((item, index) => {
+          {items.length >  0 ? items.map((item, index) => {
             const tags = normalizeTags(item.adaptation_tags)
             const originHref = item.origin_url
               ? (/^https?:\/\//i.test(item.origin_url) ? item.origin_url : `https://${item.origin_url}`)
@@ -141,7 +142,9 @@ export default function ShippedEvidenceSection({
                 </div>
               </article>
             )
-          })}
+          }) : <div>
+            failed to load data
+            </div>}
         </div>
       </div>
     </section>
