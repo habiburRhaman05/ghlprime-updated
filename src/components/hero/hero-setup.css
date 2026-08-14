@@ -1,0 +1,382 @@
+/* HeroSetupCard — scoped to .hsetup */
+
+.hsetup {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10), 0 1px 3px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #0F172A;
+}
+
+.hsetup *,
+.hsetup *::before,
+.hsetup *::after {
+  box-sizing: border-box;
+}
+
+/* ===== Browser chrome bar ===== */
+.hsetup .hsetup-chrome {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.hsetup .hsetup-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.hsetup .hsetup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hsetup .hsetup-dot-red { background: #FF5F57; }
+.hsetup .hsetup-dot-yellow { background: #FEBC2E; }
+.hsetup .hsetup-dot-green { background: #28C840; }
+
+.hsetup .hsetup-url {
+  flex: 1;
+  max-width: 320px;
+  margin: 0 auto;
+  text-align: center;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 50px;
+  padding: 4px 16px;
+  font-size: 12px;
+  color: #64748B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hsetup .hsetup-mode {
+  flex-shrink: 0;
+  background: #EFF6FF;
+  color: #2563EB;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+/* ===== Content ===== */
+.hsetup .hsetup-content {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  background: #FFFFFF;
+}
+
+.hsetup .hsetup-left {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Header */
+.hsetup .hsetup-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #2563EB;
+  margin-bottom: 4px;
+}
+
+.hsetup .hsetup-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.2;
+}
+
+.hsetup .hsetup-subtitle {
+  font-size: 13px;
+  color: #64748B;
+  margin-top: 2px;
+  margin-bottom: 14px;
+}
+
+/* Checklist */
+.hsetup .hsetup-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hsetup .hsetup-check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  height: 36px;
+}
+
+.hsetup .hsetup-checkbox {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hsetup .hsetup-cb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hsetup .hsetup-cb-done {
+  background: #2563EB;
+}
+
+.hsetup .hsetup-cb-pending {
+  border: 2px solid #E2E8F0;
+  background: transparent;
+}
+
+.hsetup .hsetup-cb-progress {
+  border: 2px solid #FDE68A;
+  border-top-color: #F59E0B;
+  background: transparent;
+  animation: hsetup-spin 0.9s linear infinite;
+}
+
+.hsetup .hsetup-check-label {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hsetup .hsetup-done .hsetup-check-label {
+  color: #0F172A;
+}
+
+.hsetup .hsetup-progress .hsetup-check-label {
+  color: #0F172A;
+  font-weight: 700;
+}
+
+.hsetup .hsetup-pending .hsetup-check-label {
+  color: #94A3B8;
+}
+
+/* Status badge pills */
+.hsetup .hsetup-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+.hsetup .hsetup-badge-done {
+  background: #DCFCE7;
+  color: #166534;
+}
+
+.hsetup .hsetup-badge-progress {
+  background: #FEF9C3;
+  color: #854D0E;
+}
+
+.hsetup .hsetup-badge-pending {
+  background: #F1F5F9;
+  color: #94A3B8;
+}
+
+/* ===== Right column ===== */
+.hsetup .hsetup-right {
+  flex: 1;
+  min-width: 0;
+  background: #F8FAFC;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.hsetup .hsetup-right-header {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 12px;
+}
+
+.hsetup .hsetup-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 32px;
+  height: 32px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.hsetup .hsetup-setting-row:last-child {
+  border-bottom: none;
+}
+
+.hsetup .hsetup-setting-key {
+  font-size: 12px;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+.hsetup .hsetup-setting-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0F172A;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.hsetup .hsetup-verify {
+  flex-shrink: 0;
+}
+
+/* ===== Footer bar ===== */
+.hsetup .hsetup-footer {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 24px;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+}
+
+.hsetup .hsetup-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.hsetup .hsetup-progress-track {
+  width: 140px;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 50px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.hsetup .hsetup-progress-fill {
+  width: 62.5%;
+  height: 100%;
+  background: #2563EB;
+  border-radius: 50px;
+}
+
+.hsetup .hsetup-progress-label {
+  font-size: 11px;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+.hsetup .hsetup-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.hsetup .hsetup-cert-text {
+  font-size: 11px;
+  color: #94A3B8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hsetup .hsetup-cert-badge {
+  flex-shrink: 0;
+}
+
+/* ===== Animations ===== */
+@keyframes hsetup-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .hsetup .hsetup-content {
+    padding: 18px;
+    gap: 0;
+  }
+
+  /* Hide the right column (Account Settings) */
+  .hsetup .hsetup-right {
+    display: none;
+  }
+
+  .hsetup .hsetup-url {
+    font-size: 11px;
+    max-width: none;
+  }
+
+  .hsetup .hsetup-mode {
+    font-size: 10px;
+  }
+
+  .hsetup .hsetup-title {
+    font-size: 15px;
+  }
+
+  .hsetup .hsetup-subtitle {
+    font-size: 12px;
+  }
+
+  .hsetup .hsetup-check-label {
+    font-size: 12px;
+  }
+
+  .hsetup .hsetup-badge {
+    font-size: 9px;
+  }
+
+  /* Allow the checklist rows to scroll horizontally if cramped */
+  .hsetup .hsetup-checklist {
+    overflow-x: auto;
+  }
+
+  .hsetup .hsetup-check-item {
+    overflow-x: auto;
+  }
+
+  .hsetup .hsetup-progress-label,
+  .hsetup .hsetup-cert-text {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hsetup .hsetup-cb-progress {
+    animation: none;
+  }
+}

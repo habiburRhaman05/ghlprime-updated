@@ -1,0 +1,110 @@
+# GHL Prime — Full Context for AI Systems
+
+## About GHL Prime
+GHL Prime is a US-based GoHighLevel expert agency operating as the technical backend team for marketing agencies and SaaS founders. Founded in 2024 in Albuquerque, New Mexico as GHL Prime LLC, the company is a specialized brand under Octopi Digital.
+
+GHL Prime does not sell software. It provides expert human teams who build, manage, and support GoHighLevel systems under clients' own brand names (white-label). Clients' customers never see the GHL Prime name.
+
+## Services in detail
+
+### GoHighLevel CRM Setup
+Full sub-account configuration including pipelines, custom fields, calendars, forms, funnels, snapshots, SaaS Mode white-labeling, Stripe billing integration, and client onboarding automation. Typical delivery: 1-2 weeks.
+
+### Automation Workflows
+End-to-end GHL workflow builds covering lead capture, instant follow-up sequences, appointment reminders, missed call text-back, review requests, re-engagement campaigns, and client onboarding sequences.
+
+### AI Agents and Voice AI
+Design and deployment of GoHighLevel Conversation AI bots, Voice AI receptionists, SimpleTalk AI agents, Retell AI agents, and VAPI voice agents. Handles lead qualification, appointment booking, after-hours answering, and 24/7 inbound call management.
+
+### White-Label SaaS Mode
+Complete GoHighLevel SaaS Mode setup — custom domain (app.youragency.com), white-label branding, pricing plan creation, Stripe billing, sub-account snapshot deployment, and client onboarding automation.
+
+### Vibe Coding and Custom Development
+AI-assisted custom development for features GHL does not support natively. Includes custom dashboards, API integrations, webhook systems, client portals, lead scoring engines, and bespoke automation logic using Next.js, Node.js, Python, and modern AI tools.
+
+### A2P 10DLC and SMS Compliance
+Brand registration, campaign registration, and phone number association for A2P 10DLC compliance via Twilio and LeadConnector. Includes consent language review, opt-in documentation, and TCPA compliance.
+
+### 24/7 White-Label Support
+Round-the-clock GHL expert support delivered under clients' brand names. Supports US, UK, Canada, and Australia time zones.
+
+## Pricing model
+Three hire models: hourly (for small tasks), project-based (for full builds), and full-time retainer (for ongoing agency support). No contracts, no setup fees. 7-day trial available.
+
+## Team
+- Jewel Rana (CEO): business coach, agency strategist
+- Niyamul Islam Sajal (COO): automation architect, AI systems
+- Mahbubullah: Full-Stack Developer
+- Md. Rakibul Hasan: Workflow Automation Consultant
+- Md. Mehadi Hasan: CRM & Automation Specialist
+- Md. Rakib Hasan: AI & Automation Expert
+- Abdullah All Meyad: AI & Automation Expert
+- Abdul Hamid: Sales Funnel & Web Developer
+- Irfan Hossain: AI & Automation Associate
+- Md. Repon Mia: Full-Stack Associate
+- Antu Chandra Debnath: AI & Automation Associate
+- Saiful Islam Shah: AI & Automation Associate
+
+## Key statistics
+- 4+ years average GHL experience per specialist
+- 24/7/365 white-label coverage across 4 time zones
+- CRM builds delivered in 1-2 weeks
+- SaaS launches in 3-4 weeks
+- Average +30% revenue lift reported at 90 days
+- 20+ named agency clients
+
+## Named clients
+Octopi Digital, Unique Workspace, Tetty Roofing, Growtheon, Monkeymans Tree Service, Astral Systems, Speak & Play, Top Talent HQ, Floor Daddy CRM, One Two Six Design, Campbell Dermatology, JackRyanAI, Tree Care Marketing Solutions, GLScape, OpsROi, Emerald Consulting, More Jobs AI, Dat9.
+
+## Frequently asked questions
+
+Q: What is GHL Prime?
+A: GHL Prime is a dedicated expert team that handles the technical side of marketing agencies — GoHighLevel builds, automation workflows, AI agents, white-label client support, and custom development. The team works behind the scenes under the agency's own brand.
+
+Q: Is GHL Prime a software or a service?
+A: A service. GHL Prime provides human expert teams, not software subscriptions.
+
+Q: What makes GHL Prime different from a freelancer?
+A: GHL Prime provides a full certified team with 24/7 availability, white-label operation, daily updates, and vibe coding capability — not a single freelancer with one skill set and limited availability.
+
+Q: How long does a GHL setup take?
+A: Standard setup with pipelines and automations: 1-2 weeks. Full SaaS Mode launch: 3-4 weeks.
+
+Q: Does GHL Prime offer white-label support?
+A: Yes. GHL Prime responds to clients' customers under the agency's own brand name 24/7.
+
+Q: What is vibe coding?
+A: AI-assisted custom development for building features GoHighLevel cannot do natively — custom dashboards, API integrations, bespoke tools.
+
+Q: Is GHL Prime affiliated with GoHighLevel?
+A: Not officially affiliated, but the team holds official GoHighLevel certifications including Certified Admin — the highest level available.
+
+## Service pages
+Each service has a dedicated page with scope, process, and FAQs:
+- GoHighLevel Setup & SaaS Configuration — sub-account setup, snapshots, pipelines, calendars, funnels, domains, Stripe/Twilio, A2P, and full SaaS Mode white-labeling: https://ghlprime.com/services/ghl-setup
+- Automation Workflows — lead routing, nurture sequences, missed-call text-back, reminders, review requests, reactivation, and onboarding automations: https://ghlprime.com/services/automation
+- SaaS CRM Launch — white-label SaaS Mode launch, plan/pricing setup, billing, snapshot deployment, and client onboarding: https://ghlprime.com/services/saas-crm
+- White-Label Support — 24/7 client support delivered under your agency brand across US, UK, Canada, and Australia time zones: https://ghlprime.com/services/white-label-support
+- Vibe Coding — AI-assisted custom development for features GHL cannot do natively (dashboards, portals, bespoke logic): https://ghlprime.com/services/vibe-coding
+- AI Agent Builder — Conversation AI, Voice AI receptionists, and SimpleTalk/Retell/VAPI agents for lead qualification and 24/7 call handling: https://ghlprime.com/services/ai-agent-builder
+- Custom SaaS Development — production-grade custom software, integrations, and tooling built around GoHighLevel: https://ghlprime.com/services/custom-saas-development
+- Figma to Code — pixel-accurate conversion of Figma designs into responsive, production-ready front-end code: https://ghlprime.com/services/figma-to-code
+- App Development — custom web and mobile apps that extend or connect to GoHighLevel: https://ghlprime.com/services/app-development
+- SaaS Customer Support — white-label customer support for SaaS and agency products: https://ghlprime.com/services/saas-customer-support
+- All services overview: https://ghlprime.com/services
+
+## Blog posts
+- The No-Nonsense Guide to GHL Automation for Property Developers & Agencies — How property developers and agencies use GoHighLevel automation to stop losing high-value leads, backed by a real 40% conversion lift in 90 days. https://ghlprime.com/blog/no-nonsense-guide-ghl-automation-property-developers
+- How to Set Up GoHighLevel SaaS Mode — A step-by-step guide to enabling SaaS Mode so your agency can resell sub-accounts, automate billing, and scale recurring revenue. https://ghlprime.com/blog/how-to-set-up-gohighlevel-saas-mode
+- 5 GoHighLevel Automation Workflows Every Agency Needs — Five battle-tested GHL workflows, from missed-call text-back to review requests, that every agency should deploy for clients on day one. https://ghlprime.com/blog/5-gohighlevel-automation-workflows-every-agency-needs
+
+## Case studies
+- Home Services Lead Automation — Cut lead response time from 3 hours to 30 seconds and lifted booking rate by 40%. https://ghlprime.com/case-studies/home-services-lead-automation
+- SaaS CRM Migration — Migrated every record to GoHighLevel with 100% data integrity and rebuilt the automation stack. https://ghlprime.com/case-studies/saas-crm-migration
+- Real Estate AI Agent — Replaced repetitive FAQ handling with a 24/7 AI agent that qualifies and routes leads. https://ghlprime.com/case-studies/real-estate-ai-agent
+- Property Developer Lead Nurture Automation — Turned lost after-hours leads into qualified tours: a 40% lift in conversion in 90 days while saving the team 20 hours a week. https://ghlprime.com/case-studies/property-developer-ghl-nurture-automation
+- Dental Recall & No-Show Reduction with GoHighLevel — Reduced no-shows by 38% and reactivated 220+ lapsed patients in the first quarter. https://ghlprime.com/case-studies/dental-recall-no-show-automation-ghl
+- Membership Retention & Win-Back for a Fitness Studio — Cut monthly churn by 26% and won back roughly 1 in 5 cancelled members. https://ghlprime.com/case-studies/fitness-membership-retention-winback-automation
+- Abandoned Cart Recovery with GoHighLevel & SMS — Recovered 19% of abandoned carts and added an estimated $40K in monthly revenue. https://ghlprime.com/case-studies/ecommerce-abandoned-cart-recovery-ghl-sms
+- Law Firm Intake Automation with AI Qualification — Captured 100% of after-hours leads and cut intake time from hours to minutes. https://ghlprime.com/case-studies/law-firm-intake-ai-qualification-ghl
+- GoHighLevel & SimpleTalk Outreach for a Property Developer — Reached first-touch within minutes on every lead and booked roughly 30% more qualified site visits. https://ghlprime.com/case-studies/property-developer-ghl-simpletalk-outreach

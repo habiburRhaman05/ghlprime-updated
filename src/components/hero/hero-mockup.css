@@ -1,0 +1,30 @@
+﻿/* Shared wrapper for hero mockups: centering, max-width, fade-in, float.
+   Three nested layers keep transforms from conflicting:
+   .hero-mockup        -> centering + mobile scale (static transform)
+   .hero-mockup-in     -> one-shot fade-up on load
+   .hero-mockup-float  -> continuous float */
+.hero-mockup { width: 100%; margin: 44px auto 0; }
+.hero-mockup--wide { max-width: 720px; }
+.hero-mockup--phone { max-width: 340px; }
+.hero-mockup--apptabs { max-width: 760px; }
+/* tab mockup is interactive — no continuous float so tabs are easy to click */
+.hero-mockup--apptabs .hero-mockup-float { animation: none; }
+.hero-mockup-in { opacity: 0; animation: hmIn .6s ease .15s forwards; }
+.hero-mockup-float { animation: hmFloat 4s ease-in-out infinite; will-change: transform; }
+
+@keyframes hmIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hmFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+.hero-mockup-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+.hero-mockup-pill { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #e2e8f0; border-radius: 50px; padding: 6px 14px; font-size: 12px; color: #475569; }
+.hero-mockup-pill svg { color: #22c55e; flex: none; }
+
+@media (max-width: 768px) {
+  .hero-mockup { transform: scale(.9); transform-origin: top center; }
+  .hero-mockup--phone { transform: none; max-width: 300px; }
+  .hero-mockup-float { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-mockup-in { opacity: 1; animation: none; }
+  .hero-mockup-float { animation: none; }
+}

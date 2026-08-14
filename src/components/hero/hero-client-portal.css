@@ -1,0 +1,382 @@
+.hportal {
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px -18px rgba(15, 23, 42, 0.25);
+  color: #0F172A;
+}
+
+.hportal *,
+.hportal *::before,
+.hportal *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Browser chrome ---------- */
+.hportal-chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.hportal-dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.hportal-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hportal-dot-red { background: #FF5F57; }
+.hportal-dot-yellow { background: #FEBC2E; }
+.hportal-dot-green { background: #28C840; }
+
+.hportal-url {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #64748B;
+}
+
+.hportal-url-lock { flex-shrink: 0; }
+
+.hportal-url span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hportal-secure {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+/* ---------- Body ---------- */
+.hportal-body {
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+}
+
+/* ---------- Sidebar ---------- */
+.hportal-sidebar {
+  width: 140px;
+  flex-shrink: 0;
+  background: #FFFFFF;
+  border-right: 1px solid #F1F5F9;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 10px;
+}
+
+.hportal-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.hportal-logo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #2563EB;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.hportal-brand-text {
+  min-width: 0;
+}
+
+.hportal-brand-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.2;
+}
+
+.hportal-brand-sub {
+  font-size: 10px;
+  color: #64748B;
+  line-height: 1.2;
+}
+
+.hportal-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+}
+
+.hportal-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #475569;
+  text-decoration: none;
+}
+
+.hportal-nav-item svg {
+  flex-shrink: 0;
+  color: #94A3B8;
+}
+
+.hportal-nav-active {
+  background: #EFF6FF;
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.hportal-nav-active svg {
+  color: #2563EB;
+}
+
+.hportal-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #F1F5F9;
+}
+
+.hportal-avatar {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hportal-user-name {
+  font-size: 11px;
+  color: #475569;
+  font-weight: 600;
+}
+
+/* ---------- Main ---------- */
+.hportal-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: #F8FAFC;
+  padding: 16px;
+}
+
+.hportal-main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.hportal-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.hportal-range-pill {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: #2563EB;
+  border: 1px solid #2563EB;
+  border-radius: 999px;
+  padding: 3px 10px;
+  background: #FFFFFF;
+  white-space: nowrap;
+}
+
+/* ---------- Metric cards ---------- */
+.hportal-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.hportal-metric {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.hportal-metric-label {
+  font-size: 10px;
+  color: #64748B;
+}
+
+.hportal-metric-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.25;
+  margin: 2px 0;
+}
+
+.hportal-metric-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+}
+
+.hportal-change-up {
+  color: #22C55E;
+}
+
+.hportal-metric-change svg {
+  flex-shrink: 0;
+}
+
+/* ---------- Mini chart ---------- */
+.hportal-chart {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px;
+  height: 80px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hportal-chart-svg {
+  flex: 1 1 auto;
+  width: 100%;
+  display: block;
+}
+
+.hportal-chart-x {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #94A3B8;
+  margin-top: 4px;
+}
+
+/* ---------- Campaign table ---------- */
+.hportal-table {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.hportal-table-head,
+.hportal-table-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 0.8fr 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+}
+
+.hportal-table-head {
+  font-size: 11px;
+  color: #94A3B8;
+  background: #FFFFFF;
+}
+
+.hportal-table-row {
+  font-size: 12px;
+  color: #0F172A;
+  background: #FFFFFF;
+}
+
+.hportal-table-row-alt {
+  background: #F8FAFC;
+}
+
+.hportal-col-num {
+  text-align: right;
+}
+
+.hportal-col-campaign {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Footer ---------- */
+.hportal-footer {
+  padding: 9px 14px;
+  background: #F8FAFC;
+  border-top: 1px solid #F1F5F9;
+  font-size: 11px;
+  color: #94A3B8;
+  text-align: center;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+  .hportal-sidebar {
+    display: none;
+  }
+
+  .hportal-secure span {
+    display: none;
+  }
+
+  .hportal-title {
+    font-size: 14px;
+  }
+
+  .hportal-metric-value {
+    font-size: 18px;
+  }
+
+  .hportal-url {
+    font-size: 11px;
+  }
+
+  .hportal-table-head,
+  .hportal-table-row {
+    overflow-x: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hportal * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

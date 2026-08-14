@@ -1,0 +1,431 @@
+.hfigma {
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px -20px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+  color: #0F172A;
+}
+
+.hfigma *,
+.hfigma *::before,
+.hfigma *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Chrome ---------- */
+.hfigma-chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.hfigma-dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.hfigma-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hfigma-dot-r { background: #FF5F57; }
+.hfigma-dot-y { background: #FEBC2E; }
+.hfigma-dot-g { background: #28C840; }
+
+.hfigma-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.hfigma-favicon {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #CBD5E1;
+  flex-shrink: 0;
+}
+
+.hfigma-url {
+  font-size: 12.5px;
+  color: #64748B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hfigma-arrow {
+  flex-shrink: 0;
+}
+
+.hfigma-tab-blue {
+  font-size: 12.5px;
+  color: #2563EB;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 8px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hfigma-badge-build {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #16A34A;
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: 999px;
+  padding: 4px 11px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ---------- Body / split ---------- */
+.hfigma-body {
+  display: flex;
+  position: relative;
+  align-items: stretch;
+}
+
+.hfigma-panel {
+  flex: 1 1 50%;
+  width: 50%;
+  min-width: 0;
+  padding: 0 0 16px;
+}
+
+.hfigma-left {
+  background: #FAFAFA;
+  border-right: 1px solid #E2E8F0;
+}
+
+.hfigma-right {
+  background: #FFFFFF;
+}
+
+.hfigma-panel-label {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 8px;
+}
+
+.hfigma-label-figma { color: #94A3B8; }
+.hfigma-label-live { color: #22C55E; }
+
+/* ---------- Layer tree ---------- */
+.hfigma-tree {
+  padding: 4px 14px 10px;
+}
+
+.hfigma-tree-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  color: #64748B;
+  line-height: 1.9;
+  white-space: nowrap;
+}
+
+.hfigma-tri {
+  flex-shrink: 0;
+}
+
+/* ---------- Design properties ---------- */
+.hfigma-props {
+  padding: 6px 14px 12px;
+  border-top: 1px solid #EEF2F6;
+  margin: 0 6px;
+}
+
+.hfigma-prop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 11.5px;
+}
+
+.hfigma-prop-key {
+  color: #94A3B8;
+  flex-shrink: 0;
+}
+
+.hfigma-prop-val {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #334155;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.hfigma-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid #E2E8F0;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ---------- Wireframe ---------- */
+.hfigma-wire {
+  margin: 4px 14px 0;
+  padding: 14px;
+  background: #FFFFFF;
+  border: 1px solid #EEF2F6;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.hfigma-wire-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #E2E8F0;
+}
+
+.hfigma-wire-text {
+  width: 80%;
+  height: 22px;
+  border-radius: 5px;
+  background: #E2E8F0;
+  margin: 2px 0;
+}
+
+.hfigma-wire-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.hfigma-wire-btn {
+  width: 48px;
+  height: 14px;
+  border-radius: 999px;
+  background: #E2E8F0;
+}
+
+.hfigma-wire-badges {
+  display: flex;
+  gap: 6px;
+}
+
+.hfigma-wire-pill {
+  width: 30px;
+  height: 9px;
+  border-radius: 999px;
+  background: #E2E8F0;
+}
+
+/* ---------- Live render ---------- */
+.hfigma-render {
+  margin: 4px 14px 0;
+  padding: 22px 16px;
+  border-radius: 10px;
+  border: 1px solid #EEF2F6;
+  background: linear-gradient(160deg, #EFF6FF 0%, #F8FAFC 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  text-align: center;
+}
+
+.hfigma-render-h1 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: -0.01em;
+}
+
+.hfigma-render-sub {
+  width: 70%;
+  height: 7px;
+  border-radius: 4px;
+  background: #CBD5E1;
+}
+
+.hfigma-render-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.hfigma-render-btn {
+  font-size: 10.5px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+.hfigma-render-btn-fill {
+  background: #2563EB;
+  color: #FFFFFF;
+}
+
+.hfigma-render-btn-outline {
+  background: transparent;
+  color: #2563EB;
+  border: 1px solid #93C5FD;
+}
+
+.hfigma-render-badges {
+  display: flex;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.hfigma-render-pill {
+  width: 32px;
+  height: 11px;
+  border-radius: 999px;
+  background: #DBEAFE;
+}
+
+.hfigma-render-stat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 12px 14px 0;
+  padding: 7px 12px;
+  background: #16A34A;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ---------- Center divider swap icon ---------- */
+.hfigma-divider-swap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  z-index: 2;
+}
+
+/* ---------- Footer ---------- */
+.hfigma-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 16px;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  font-size: 11.5px;
+}
+
+.hfigma-foot-left {
+  color: #94A3B8;
+  white-space: nowrap;
+}
+
+.hfigma-foot-center {
+  color: #475569;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.hfigma-foot-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #16A34A;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+  .hfigma-body {
+    flex-direction: column;
+  }
+
+  .hfigma-panel {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .hfigma-left {
+    border-right: none;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .hfigma-tree-row {
+    font-size: 10.5px;
+    overflow-x: auto;
+  }
+
+  .hfigma-prop {
+    font-size: 10.5px;
+  }
+
+  .hfigma-render-h1 {
+    font-size: 15px;
+  }
+
+  .hfigma-render-stat,
+  .hfigma-badge-build {
+    font-size: 10px;
+  }
+
+  .hfigma-url,
+  .hfigma-tab-blue,
+  .hfigma-footer {
+    font-size: 10.5px;
+  }
+
+  /* swap icon rotates to sit on the horizontal divider */
+  .hfigma-divider-swap {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .hfigma-foot-center {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hfigma * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,252 @@
+/* Team testimonials.
+   Flat layout: a draggable vertical avatar rail on the left, the quote in
+   the middle, stepper arrows on the right. Colors come from the app tokens
+   in App.css (--primary / --navy / --muted ...) rather than hardcoded, so
+   this stays in step with the rest of the site.
+
+   The rail uses a FIXED pitch per slot and scales the active face with a
+   transform, rather than animating width/height. Transform doesn't affect
+   layout, which keeps the drag/snap math to simple arithmetic on one
+   constant and avoids reflow on every frame of the drag. */
+
+.tt-section {
+  position: relative;
+  overflow: hidden;
+  background: #f8fbff;
+}
+
+/* Head -------------------------------------------------------------------- */
+
+.tt-head {
+  max-width: 40rem;
+  margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+  text-align: center;
+}
+.tt-head h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  font-weight: 700;
+}
+.tt-head p {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+/* Stage ------------------------------------------------------------------- */
+
+.tt-stage {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+
+/* Avatar rail ------------------------------------------------------------- */
+
+.tt-rail {
+  position: relative;
+  flex: 0 0 auto;
+  width: 200px;
+  height: var(--tt-viewport, 504px);
+  overflow: hidden;
+  /* Fade the strip out at both ends so items entering/leaving the viewport
+     don't pop at a hard edge. */
+  mask-image: linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
+}
+.tt-rail-track {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.tt-rail-track:active { cursor: grabbing; }
+
+/* Each item is pinned to an ABSOLUTE, fixed pixel offset (index * pitch,
+   set inline in JS) rather than laid out via flex document order. The
+   rendered window of items shifts every time the active slot changes (see
+   RAIL_BUFFER in the component), so if position depended on sibling order
+   the track's slide transform and each item's on-screen position would
+   fall out of sync the moment the window re-centers. Absolute placement
+   keeps every item's position mathematically independent of its siblings,
+   so the two stay correct together no matter which slots are rendered. */
+.tt-rail-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--tt-pitch, 168px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tt-face {
+  position: relative;
+  width: 132px;
+  height: 148px;
+  padding: 0;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  /* The whole rail is a drag surface -- faces show "grab" like the track
+     itself, not "pointer", even though they're also clickable. */
+  cursor: grab;
+  background: var(--soft-slate);
+  box-shadow: 0 14px 32px -18px rgba(28, 61, 110, 0.5);
+  /* Inactive faces read as "background" -- desaturated and dimmed -- so the
+     active one carries the eye without needing a heavier treatment. */
+  filter: grayscale(1);
+  opacity: 0.5;
+  transition: filter 0.45s ease, opacity 0.45s ease, box-shadow 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+}
+.tt-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.tt-face:hover { opacity: 0.8; filter: grayscale(0.35); }
+.tt-face:active { cursor: grabbing; }
+.tt-face:focus-visible { outline: 2px solid var(--primary-dark); outline-offset: 4px; }
+
+.tt-face.is-active {
+  filter: none;
+  opacity: 1;
+  /* Still grabbable -- dragging from the active face keeps working, it
+     just doesn't re-trigger a "go to this slide" click. */
+  cursor: grab;
+  /* Scaled rather than resized -- see the note at the top of this file. */
+  transform: scale(1.16);
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px rgba(22, 132, 234, 0.8),
+    0 22px 44px -18px rgba(28, 61, 110, 0.55);
+}
+
+/* Quote ------------------------------------------------------------------- */
+
+.tt-quote {
+  flex: 1;
+  min-width: 0;
+}
+
+.tt-badge {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #3da5ff);
+  box-shadow: 0 14px 28px -10px rgba(22, 132, 234, 0.6);
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.tt-text {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.75vw, 1.65rem);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  font-weight: 500;
+  max-width: 34ch;
+}
+.tt-text .hl {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.tt-meta { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+.tt-name { font-size: 1.15rem; font-weight: 700; color: var(--navy); }
+.tt-role { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-top: 0.15rem; }
+
+/* Stepper ----------------------------------------------------------------- */
+
+.tt-nav {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.tt-arrow {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(22, 132, 234, 0.28);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+.tt-arrow:hover {
+  transform: translateY(-2px);
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #3da5ff);
+  border-color: transparent;
+  box-shadow: 0 14px 26px -10px rgba(22, 132, 234, 0.65);
+}
+.tt-arrow:active { transform: translateY(0) scale(0.94); }
+.tt-arrow:focus-visible { outline: 2px solid var(--primary-dark); outline-offset: 3px; }
+
+/* Responsive -------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  /* Rail flips to a horizontal strip above the quote; the JS switches the
+     drag axis to match at this same breakpoint. */
+  .tt-stage {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  .tt-rail {
+    width: 100%;
+    height: var(--tt-pitch-h, 150px);
+    mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  }
+  .tt-rail-track {
+    touch-action: pan-x;
+  }
+  .tt-rail-item {
+    /* Horizontal mode: fill height instead of width, and position via the
+       inline `left` the component sets (index * pitch) instead of `top`. */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: var(--tt-pitch-h, 150px);
+    height: auto;
+  }
+  .tt-face { width: 108px; height: 120px; border-radius: 16px; }
+  .tt-badge { margin-inline: auto; }
+  .tt-text { margin-inline: auto; }
+  .tt-nav { flex-direction: row; }
+}
+
+@media (max-width: 640px) {
+  .tt-section { padding: 3.5rem 0; }
+  .tt-head { margin-bottom: 2rem; }
+  .tt-head p { font-size: 0.96rem; }
+  .tt-badge { width: 46px; height: 46px; }
+  .tt-arrow { width: 42px; height: 42px; }
+}
+
+/* Motion preferences ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .tt-face, .tt-arrow { transition: none; }
+}

@@ -1,0 +1,164 @@
+/* "Life At GHL Prime" scrolling gallery section.
+   Two rows of photos that drift horizontally (row 1 right, row 2 left) in
+   direct proportion to page scroll -- driven from JS via transform, not a
+   CSS keyframe marquee, so motion stops the instant scrolling stops. */
+
+.life-at-ghl-section {
+  overflow: hidden;
+  /* A subtle wash instead of flat white -- separates the section from its
+     plain-white neighbors without a hard border. */
+  background: radial-gradient(120% 70% at 50% 0%, rgba(22, 132, 234, 0.05), transparent 60%);
+  /* The three blocks below (head / rows / cta) are laid out as flex
+     children with one shared gap, rather than each carrying its own
+     margin. That was the source of the cramped spacing: per-element
+     margins are easy to under-tune and don't scale as a set. */
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+
+.life-at-ghl-head {
+  max-width: 40rem;
+  margin-inline: auto;
+  padding-inline: 0.5rem;
+  text-align: center;
+}
+
+.life-at-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1.05rem;
+  margin-bottom: 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 132, 234, 0.28);
+  background: var(--soft-blue);
+  color: var(--primary-dark);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.life-at-ghl-head h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.life-at-brand {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--primary);
+  /* Reset the heading's tight tracking -- a negative letter-spacing reads
+     fine on the bold sans text but pinches a serif italic. */
+  letter-spacing: normal;
+}
+
+.life-at-ghl-head p {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.life-at-ghl-rows {
+  display: flex;
+  flex-direction: column;
+  /* Row-to-row separation is deliberately much larger than the gap between
+     cards inside a row (below) -- they read as two distinct strips, not
+     one four-row grid. */
+  gap: clamp(1.25rem, 3vw, 2rem);
+  /* Fade the strip out at both edges instead of hard-cropping mid-photo.
+     Fixed-px stops (rather than %) keep the fade a consistent, visible
+     width no matter how wide the viewport is. */
+  mask-image: linear-gradient(90deg, transparent, #000 96px, #000 calc(100% - 96px), transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 96px, #000 calc(100% - 96px), transparent);
+}
+
+.life-at-row-viewport {
+  overflow: hidden;
+}
+
+.life-at-row {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(0.7rem, 1.4vw, 1rem);
+  width: max-content;
+  will-change: transform;
+}
+
+.life-at-card {
+  position: relative;
+  flex-shrink: 0;
+  height: clamp(170px, 21vw, 250px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--soft-slate);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.life-at-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.life-at-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.life-at-card:hover img {
+  transform: scale(1.06);
+}
+
+.life-at-card.size-sm { width: clamp(130px, 13vw, 190px); }
+.life-at-card.size-md { width: clamp(190px, 17vw, 250px); }
+.life-at-card.size-lg { width: clamp(270px, 25vw, 370px); }
+.life-at-card.size-xl { width: clamp(330px, 31vw, 450px); }
+
+.life-at-ghl-cta-row {
+  text-align: center;
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  /* Between the phone and desktop breakpoints below -- vw-driven card
+     heights were fine here, but the fade width (fixed at 96px) starts
+     eating a big chunk of a mid-size viewport, so trim it back. */
+  .life-at-ghl-rows {
+    mask-image: linear-gradient(90deg, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+  }
+}
+
+@media (max-width: 720px) {
+  /* The generic .section rhythm (5.5rem top/bottom) is too roomy once the
+     head text and rows are already stacked tight on a phone. */
+  .life-at-ghl-section { padding: 3.5rem 0; gap: 2rem; }
+  .life-at-ghl-head p { font-size: 0.96rem; }
+  .life-at-card { height: clamp(130px, 32vw, 190px); border-radius: 14px; }
+  .life-at-ghl-rows { gap: 0.9rem; }
+  .life-at-row { gap: 0.6rem; }
+}
+
+@media (max-width: 560px) {
+  /* Below ~560px the vw component of each clamp() all but disappears, so
+     every size tier was bottoming out at its desktop-oriented min width --
+     an "xl" card alone could span ~90% of a phone screen. Give phones their
+     own, tighter min/preferred widths so a couple of cards always peek. */
+  .life-at-card.size-sm { width: clamp(108px, 34vw, 150px); }
+  .life-at-card.size-md { width: clamp(140px, 42vw, 190px); }
+  .life-at-card.size-lg { width: clamp(168px, 52vw, 225px); }
+  .life-at-card.size-xl { width: clamp(196px, 62vw, 265px); }
+  .life-at-badge { font-size: 0.7rem; padding: 0.35rem 0.9rem; }
+  .life-at-ghl-rows {
+    mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "destination": "/",
+      "source": "/home",
+      "statusCode": 301
+    },
+    {
+      "destination": "/case-studies/real-estate-lead-qualification-ghl-ai",
+      "source": "/case-studies/eal-estate-lead-qualification-ghl-ai",
+      "statusCode": 301
+    },
+    {
+      "destination": "/case-studies/:slug*",
+      "source": "/case-studies/case-studies/:slug*",
+      "statusCode": 301
+    },
+    {
+      "destination": "/case-studies",
+      "source": "/client-studies",
+      "statusCode": 301
+    },
+    {
+      "destination": "/case-studies/:slug",
+      "source": "/client-studies/:slug",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-set-up-gohighlevel-saas-mode",
+      "destination": "/blog/gohighlevel-saas-mode-setup-guide-2026",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/5-gohighlevel-automation-workflows-every-agency-needs",
+      "destination": "/blog/gohighlevel-automation-workflows-agencies-2026",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "destination": "/api/gone",
+      "source": "/free-scripts"
+    },
+    {
+      "destination": "/api/$1",
+      "source": "/api/(.*)"
+    },
+    {
+      "destination": "/index.html",
+      "source": "/(.*)"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/services",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/services>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/about",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/about>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/team",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/team>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/booking",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/booking>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/contact",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/contact>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/case-studies",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/case-studies>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/privacy-policy",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/privacy-policy>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/terms",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://ghlprime.com/terms>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://widgets.leadconnectorhq.com https://link.msgsndr.com https://*.leadconnectorhq.com https://*.msgsndr.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https: wss:; frame-src 'self' https://scheduler.zoom.us https://widgets.leadconnectorhq.com https://link.msgsndr.com https://*.leadconnectorhq.com; object-src 'none'; base-uri 'self'; form-action 'self' https:;"
+        }
+      ]
+    }
+  ]
+}

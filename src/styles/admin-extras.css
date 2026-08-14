@@ -1,0 +1,219 @@
+/* Admin styles for the Showcase + Gallery admin pages. Matches the dark glass
+   admin theme (deep navy gradient, white text, teal/indigo accents).
+   Placement rules are scoped under .showcase-admin so they out-specify the
+   global ".admin-form-grid input { width:100% }" rule that would otherwise
+   blow up the checkboxes and order inputs. */
+
+/* ---- Placement checklist (Shipped Evidence item -> pages) ---- */
+.showcase-admin .showcase-placement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+.showcase-admin .showcase-placement-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(132, 164, 218, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.showcase-admin .showcase-placement-row.is-on {
+  border-color: rgba(0, 225, 209, 0.5);
+  background: linear-gradient(180deg, rgba(0, 225, 209, 0.1), rgba(116, 93, 255, 0.08));
+  box-shadow: 0 0 0 1px rgba(0, 225, 209, 0.15), 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+.showcase-admin .showcase-placement-chip {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #eaf2ff;
+  cursor: pointer;
+}
+.showcase-admin .showcase-placement-chip span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+/* Reset the native checkbox (global input rule mangles it) */
+.showcase-admin .showcase-placement-row input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+  appearance: auto;
+  -webkit-appearance: auto;
+  accent-color: #00e1d1;
+  cursor: pointer;
+}
+/* Small order input, overriding the global full-width input */
+.showcase-admin .showcase-order-input {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 34px;
+  min-height: 0;
+  text-align: center;
+  padding: 0 0.3rem;
+  border: 1px solid rgba(137, 177, 228, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+.showcase-admin .showcase-order-input:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+.showcase-admin .showcase-order-input:focus {
+  border-color: rgba(0, 225, 209, 0.6);
+  outline: none;
+}
+
+/* ---- Shared small bits (dark-theme corrected) ---- */
+.admin-showcase-stats-grid {
+  margin-top: 1.5rem;
+}
+.admin-empty-note {
+  color: #9db2d6;
+  font-size: 0.9rem;
+  padding: 0.75rem 0;
+}
+.admin-danger-btn {
+  color: #ff9a9a;
+}
+.admin-danger-btn:hover {
+  border-color: rgba(255, 120, 120, 0.5);
+  background: rgba(255, 90, 90, 0.08);
+}
+
+/* ---- Gallery admin thumbs + category pills ---- */
+.admin-gallery-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(134, 173, 233, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.admin-cat-pill {
+  display: inline-block;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(0, 225, 209, 0.12);
+  color: #7fe9e0;
+  border: 1px solid rgba(0, 225, 209, 0.25);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* ---- ImageUrlField (shared paste-URL + upload-file control) ----
+   Selectors here intentionally out-specify the global
+   ".admin-form-grid input { width:100% }" / ".admin-team-edit-grid input"
+   rules (same trick as .showcase-order-input above) so the text/file inputs
+   can sit side by side instead of each claiming the full row width. */
+.image-url-field {
+  display: grid;
+  gap: 0.45rem;
+}
+.image-url-field-label {
+  color: #d9e8ff;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.image-url-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+.image-url-field-row input[type="text"] {
+  flex: 1 1 16rem;
+  width: auto;
+}
+.image-url-field-row input[type="file"].image-url-file-input {
+  flex: 1 1 14rem;
+  width: auto;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.82rem;
+  color: #d9e8ff;
+}
+.image-url-field-row input[type="file"].image-url-file-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.image-url-field-status {
+  color: #7fe9e0;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.image-url-field-error {
+  color: #ff9a9a;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.image-url-field-preview {
+  max-width: 16rem;
+}
+
+/* ---- Premium polish, scoped to the showcase admin page ---- */
+.showcase-admin .admin-hero-panel {
+  background: linear-gradient(120deg, rgba(116, 93, 255, 0.18), rgba(0, 225, 209, 0.08)),
+    linear-gradient(180deg, rgba(14, 29, 52, 0.92), rgba(11, 23, 40, 0.96));
+  border: 1px solid rgba(120, 150, 220, 0.28);
+  box-shadow: 0 26px 64px rgba(0, 0, 0, 0.38);
+}
+.showcase-admin .auth-kicker {
+  color: #8ff0e6;
+  letter-spacing: 0.04em;
+}
+.showcase-admin .admin-card-head {
+  border-bottom: 1px solid rgba(134, 173, 233, 0.14);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+.showcase-admin .admin-card-head span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #9db2d6;
+  font-size: 0.76rem;
+}
+.showcase-admin .admin-team-assignment-box {
+  border: 1px dashed rgba(134, 173, 233, 0.22);
+  border-radius: 14px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+.showcase-admin .admin-team-assignment-box > span {
+  color: #d9e8ff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.showcase-admin .admin-study-item {
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.showcase-admin .admin-study-item:hover {
+  border-color: rgba(0, 225, 209, 0.35);
+  transform: translateX(2px);
+}

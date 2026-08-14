@@ -1,0 +1,171 @@
+/* Dedicated /gallery page. Brand-consistent with the ghlprime navy/blue system;
+   tabs reuse the .blog-filter-pill visual language. */
+
+.gallery-page {
+  background: var(--white, #ffffff);
+}
+
+.gallery-hero {
+  padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+  background: linear-gradient(180deg, #f7fafd 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--line, rgba(16, 37, 63, 0.08));
+}
+.gallery-eyebrow {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--soft-blue, #edf5ff);
+  color: var(--primary-dark, #0a66cc);
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.gallery-title {
+  margin: 1rem 0 0;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: var(--navy, #10253f);
+  max-width: 16ch;
+}
+.gallery-subtitle {
+  margin: 1rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--muted, #60738b);
+  max-width: 52ch;
+}
+
+.gallery-body {
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.gallery-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
+}
+.gallery-filter-pill {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line, rgba(16, 37, 63, 0.1));
+  background: var(--white, #ffffff);
+  color: var(--text, #1a2a40);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.gallery-filter-pill:hover {
+  border-color: rgba(22, 132, 234, 0.4);
+}
+.gallery-filter-pill.active {
+  background: var(--navy, #10253f);
+  color: #ffffff;
+  border-color: var(--navy, #10253f);
+}
+
+.gallery-note {
+  text-align: center;
+  color: var(--muted, #60738b);
+  padding: 2rem 0;
+}
+
+.gallery-grid {
+  /* Masonry via CSS columns, not a fixed-ratio grid: photos come in from
+     the admin at whatever size someone uploads, and forcing them into
+     equal-height cells meant object-fit: cover was cropping people and
+     logos out of frame. Columns let every image keep its natural
+     proportions -- full photo, no crop -- while still packing tightly. */
+  column-width: 260px;
+  column-gap: clamp(0.9rem, 2vw, 1.4rem);
+}
+.gallery-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 clamp(0.9rem, 2vw, 1.4rem);
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--soft-slate, #eef4f8);
+  box-shadow: var(--shadow-soft, 0 20px 50px rgba(33, 73, 130, 0.08));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  break-inside: avoid;
+}
+.gallery-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow, 0 20px 60px rgba(28, 61, 110, 0.12));
+}
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.gallery-item-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.6rem 0.9rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: left;
+  background: linear-gradient(180deg, rgba(16, 37, 63, 0) 0%, rgba(16, 37, 63, 0.75) 100%);
+}
+
+/* Lightbox --------------------------------------------------------------- */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(10, 20, 35, 0.88);
+  backdrop-filter: blur(4px);
+}
+.gallery-lightbox-img {
+  max-width: min(92vw, 1100px);
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+.gallery-lightbox-caption {
+  color: #eaf1f8;
+  font-size: 0.95rem;
+}
+.gallery-lightbox-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  cursor: pointer;
+}
+.gallery-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 640px) {
+  .gallery-grid { column-width: 150px; }
+}

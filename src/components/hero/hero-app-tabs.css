@@ -1,0 +1,940 @@
+.happtabs {
+  width: 100%;
+  box-sizing: border-box;
+  color: #0F172A;
+}
+
+.happtabs *,
+.happtabs *::before,
+.happtabs *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Tab row ---------- */
+.happtabs-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.happtabs-tab {
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #475569;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.happtabs-tab-active {
+  background: #2563EB;
+  border: 1px solid #2563EB;
+  color: #FFFFFF;
+}
+
+.happtabs-tab-short {
+  display: none;
+}
+
+/* ---------- Panels ---------- */
+.happtabs-panel {
+  width: 100%;
+  animation: happtabs-fade 0.25s ease;
+}
+
+@keyframes happtabs-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ================================================== */
+/* TAB 1 — Mobile Apps (phone)                        */
+/* ================================================== */
+.happtabs-phone-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.happtabs-phone {
+  width: 100%;
+  max-width: 280px;
+  background: #1C1C1E;
+  border: 8px solid #2A2A2A;
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.happtabs-phone-screen {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 36px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Status bar */
+.happtabs-statusbar {
+  height: 20px;
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.happtabs-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.happtabs-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.happtabs-status-icons svg {
+  display: block;
+}
+
+/* App header */
+.happtabs-appheader {
+  height: 48px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.happtabs-appheader-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.happtabs-appheader-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+/* Phone content */
+.happtabs-phone-content {
+  background: #F8FAFC;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Balance card */
+.happtabs-balance {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.happtabs-balance-label {
+  font-size: 11px;
+  color: #94A3B8;
+}
+
+.happtabs-balance-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.2;
+  margin: 2px 0 4px;
+}
+
+.happtabs-balance-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  color: #22C55E;
+}
+
+.happtabs-balance-change svg {
+  flex-shrink: 0;
+}
+
+/* Action row */
+.happtabs-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.happtabs-action {
+  flex: 1 1 0;
+  height: 52px;
+  background: #FFFFFF;
+  border: 1px solid #F1F5F9;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.happtabs-action svg {
+  display: block;
+}
+
+.happtabs-action-label {
+  font-size: 10px;
+  color: #64748B;
+}
+
+/* Portfolio card */
+.happtabs-portfolio {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.happtabs-portfolio-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.happtabs-portfolio-sub {
+  font-size: 11px;
+  color: #94A3B8;
+  margin-bottom: 6px;
+}
+
+.happtabs-sparkline {
+  display: block;
+  width: 100%;
+  height: 32px;
+}
+
+/* AI card */
+.happtabs-ai {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.happtabs-ai-circle {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #8B5CF6;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.happtabs-ai-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.happtabs-ai-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.happtabs-ai-sub {
+  font-size: 11px;
+  color: #94A3B8;
+}
+
+.happtabs-ai svg {
+  flex-shrink: 0;
+}
+
+/* Bottom nav */
+.happtabs-bottomnav {
+  height: 48px;
+  background: #FFFFFF;
+  border-top: 1px solid #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.happtabs-navitem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: #94A3B8;
+}
+
+.happtabs-navitem svg {
+  display: block;
+}
+
+.happtabs-navitem-label {
+  font-size: 10px;
+}
+
+.happtabs-navitem-active {
+  color: #2563EB;
+}
+
+/* Store buttons */
+.happtabs-store {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.happtabs-store-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 10px;
+  padding: 10px 20px;
+  min-width: 148px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.happtabs-store-btn svg {
+  flex-shrink: 0;
+  display: block;
+}
+
+.happtabs-store-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.happtabs-store-top {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.happtabs-store-bottom {
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* Small stats row */
+.happtabs-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.happtabs-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 50px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.happtabs-stat svg {
+  flex-shrink: 0;
+  display: block;
+}
+
+/* ================================================== */
+/* TAB 2 — Web Apps (browser)                         */
+/* ================================================== */
+.happtabs-browser {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px -18px rgba(15, 23, 42, 0.25);
+}
+
+.happtabs-chrome {
+  height: 40px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+}
+
+.happtabs-dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.happtabs-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.happtabs-dot-red { background: #ff5f57; }
+.happtabs-dot-yellow { background: #febc2e; }
+.happtabs-dot-green { background: #28c840; }
+
+.happtabs-url {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  font-size: 12px;
+  color: #64748B;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.happtabs-live {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #16A34A;
+  background: #DCFCE7;
+  border-radius: 50px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.happtabs-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22C55E;
+}
+
+.happtabs-dash {
+  display: flex;
+  background: #F8FAFC;
+  padding: 16px;
+  gap: 0;
+}
+
+/* Browser sidebar */
+.happtabs-bsidebar {
+  width: 120px;
+  flex-shrink: 0;
+  background: #FFFFFF;
+  border-right: 1px solid #F1F5F9;
+  padding: 12px 8px;
+  border-radius: 10px 0 0 10px;
+}
+
+.happtabs-bbrand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.happtabs-blogo {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #2563EB;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.happtabs-bbrand-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.happtabs-bnav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.happtabs-bnav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.happtabs-bnav-item svg {
+  flex-shrink: 0;
+  color: #94A3B8;
+}
+
+.happtabs-bnav-active {
+  background: #EFF6FF;
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.happtabs-bnav-active svg {
+  color: #2563EB;
+}
+
+/* Browser main */
+.happtabs-bmain {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 12px;
+}
+
+.happtabs-bmain-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.happtabs-bmain-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.happtabs-bmain-drop {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #475569;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 50px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.happtabs-bmetrics {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.happtabs-bmetric {
+  flex: 1 1 0;
+  min-width: 0;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.happtabs-bmetric-label {
+  font-size: 10px;
+  color: #64748B;
+}
+
+.happtabs-bmetric-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.25;
+  margin: 2px 0;
+}
+
+.happtabs-bmetric-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: #22C55E;
+}
+
+.happtabs-bmetric-change svg {
+  flex-shrink: 0;
+}
+
+.happtabs-bchart {
+  width: 100%;
+  height: 80px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.happtabs-bchart-svg {
+  flex: 1 1 auto;
+  width: 100%;
+  display: block;
+}
+
+.happtabs-bchart-x {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #94A3B8;
+  margin-top: 4px;
+}
+
+.happtabs-btable {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.happtabs-btable-head,
+.happtabs-btable-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 1fr 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+}
+
+.happtabs-btable-head {
+  font-size: 10px;
+  color: #94A3B8;
+  background: #FFFFFF;
+}
+
+.happtabs-btable-row {
+  font-size: 11px;
+  color: #0F172A;
+  background: #FFFFFF;
+}
+
+.happtabs-btable-row-alt {
+  background: #F8FAFC;
+}
+
+.happtabs-btable-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.happtabs-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22C55E;
+  flex-shrink: 0;
+}
+
+/* ================================================== */
+/* TAB 3 — Tablet Apps                                */
+/* ================================================== */
+.happtabs-tablet-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.happtabs-tablet {
+  width: 100%;
+  max-width: 580px;
+  background: #2A2A2A;
+  border: 7px solid #333333;
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.happtabs-tablet-screen {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Tablet left panel */
+.happtabs-tleft {
+  width: 220px;
+  flex-shrink: 0;
+  background: #F8FAFC;
+  border-right: 1px solid #E2E8F0;
+}
+
+.happtabs-tleft-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+}
+
+.happtabs-tleft-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.happtabs-tnew {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #2563EB;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.happtabs-titem {
+  height: 44px;
+  border-bottom: 1px solid #F1F5F9;
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.happtabs-titem-active {
+  background: #EFF6FF;
+}
+
+.happtabs-titem-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0F172A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.happtabs-titem-meta {
+  font-size: 11px;
+  color: #94A3B8;
+}
+
+.happtabs-titem-active .happtabs-titem-meta {
+  color: #2563EB;
+}
+
+/* Tablet right panel */
+.happtabs-tright {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: #FFFFFF;
+  padding: 14px;
+}
+
+.happtabs-tright-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 8px;
+}
+
+.happtabs-tbadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.happtabs-tbadge {
+  font-size: 10px;
+  color: #475569;
+  background: #F1F5F9;
+  border-radius: 50px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+
+.happtabs-tbadge-blue {
+  color: #2563EB;
+  background: #EFF6FF;
+}
+
+.happtabs-tprogress-track {
+  width: 100%;
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.happtabs-tprogress-fill {
+  height: 100%;
+  width: 68%;
+  background: #2563EB;
+  border-radius: 4px;
+}
+
+.happtabs-tprogress-label {
+  font-size: 12px;
+  color: #64748B;
+  margin: 6px 0 14px;
+}
+
+.happtabs-ttasks {
+  display: flex;
+  flex-direction: column;
+}
+
+.happtabs-ttask {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.happtabs-ttask svg {
+  flex-shrink: 0;
+  display: block;
+}
+
+.happtabs-ttask-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.happtabs-ttask-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 12px;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.happtabs-tavatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #E2E8F0;
+  color: #475569;
+  font-size: 9px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.happtabs-tmilestone {
+  font-size: 12px;
+  color: #94A3B8;
+  font-style: italic;
+  margin-top: 14px;
+}
+
+/* ================================================== */
+/* Responsive                                         */
+/* ================================================== */
+@media (max-width: 768px) {
+  .happtabs-tab-full {
+    display: none;
+  }
+
+  .happtabs-tab-short {
+    display: inline;
+  }
+
+  .happtabs-tab {
+    padding: 10px 18px;
+  }
+
+  /* Phone scaled down */
+  .happtabs-phone {
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+
+  /* Web tab: hide sidebar, show main only */
+  .happtabs-bsidebar {
+    display: none;
+  }
+
+  .happtabs-bmain {
+    padding: 12px 8px;
+  }
+
+  /* Tablet scaled down */
+  .happtabs-tablet {
+    transform: scale(0.75);
+    transform-origin: top center;
+  }
+
+  /* Store buttons stack full width */
+  .happtabs-store {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .happtabs-store-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ================================================== */
+/* Reduced motion                                     */
+/* ================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .happtabs,
+  .happtabs * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

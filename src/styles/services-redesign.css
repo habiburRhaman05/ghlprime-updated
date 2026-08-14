@@ -1,0 +1,251 @@
+.services-page-redesign {
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 32%, #f7fbff 100%);
+}
+.services-redesign-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 2rem;
+  align-items: center;
+}
+.services-redesign-hero-copy h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.85rem);
+  line-height: .98;
+  letter-spacing: -0.08em;
+  color: #16283f;
+  max-width: 10ch;
+}
+.services-redesign-hero-copy p {
+  max-width: 42rem;
+  color: #607895;
+  font-size: 1.04rem;
+  line-height: 1.85;
+  margin-top: 1rem;
+}
+.services-redesign-hero-pills,
+.services-skills-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+}
+.services-redesign-hero-pills {
+  margin-top: 1.4rem;
+}
+.services-redesign-hero-pills span,
+.services-skills-pills span {
+  min-height: 2.35rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(207,220,238,.95);
+  color: #5e7490;
+  font-weight: 700;
+  backdrop-filter: blur(12px);
+}
+.services-redesign-hero-pills .positive { color: #2176e7; background: rgba(239,246,255,.88); }
+.services-redesign-hero-pills .negative { color: #6b7d93; }
+.services-redesign-hero-actions { display: flex; gap: .9rem; flex-wrap: wrap; margin-top: 1.6rem; }
+.services-redesign-hero-visual {
+  position: relative;
+  min-height: 26rem;
+}
+.services-hero-glass-card {
+  border-radius: 1.8rem;
+  border: 1px solid rgba(255,255,255,.72);
+  background: rgba(255,255,255,.74);
+  box-shadow: 0 24px 48px rgba(23,59,108,.08);
+  backdrop-filter: blur(16px);
+}
+.services-hero-glass-card.main {
+  min-height: 22rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: .9rem;
+  padding: 2rem;
+}
+.services-hero-glass-card.main strong { font-size: 1.7rem; color: #16283f; }
+.services-hero-glass-card.main span { color: #607895; }
+.services-hero-glass-card.floating {
+  position: absolute;
+  min-height: 3.2rem;
+  padding: 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+}
+.services-hero-glass-card.floating.one { right: 1rem; top: 1.2rem; }
+.services-hero-glass-card.floating.two { left: 1rem; bottom: 1.2rem; }
+.services-section-heading h2 {
+  max-width: 24ch;
+}
+.services-hire-model-grid,
+.services-expert-grid,
+.services-why-grid {
+  display: grid;
+  gap: 1rem;
+}
+.services-hire-model-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.services-hire-card,
+.services-expert-card,
+.services-how-it-works-card,
+.services-why-card {
+  position: relative;
+  border-radius: 1.7rem;
+  border: 1px solid rgba(255,255,255,.72);
+  background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(249,252,255,.72));
+  box-shadow: 0 20px 42px rgba(43,83,138,.06);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+}
+.services-hire-card::before,
+.services-expert-card::before,
+.services-why-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(22,132,234,.08), rgba(22,132,234,.36), rgba(22,132,234,.08));
+}
+.services-hire-card {
+  position: relative;
+  padding: 1.6rem 1.45rem 1.45rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 22rem;
+}
+.services-hire-card.featured {
+  background: linear-gradient(180deg, rgba(22,132,234,.08), rgba(255,255,255,.82));
+}
+.services-hire-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  min-height: 1.9rem;
+  padding: 0 .75rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  background: #eaf3ff;
+  color: #2678e8;
+  font-size: .78rem;
+  font-weight: 800;
+}
+.services-hire-card h3,
+.services-expert-card h3,
+.services-step-item h3,
+.services-why-card h3 {
+  margin: 0;
+  color: #16283f;
+}
+.services-hire-card p,
+.services-expert-card p,
+.services-step-item p,
+.services-why-card p {
+  color: #607895;
+  line-height: 1.7;
+}
+.services-hire-card ul {
+  margin: 1rem 0 1.2rem;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: .6rem;
+  color: #30455f;
+}
+.services-expert-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.services-expert-card {
+  padding: 1.25rem;
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.services-expert-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: .9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .9rem;
+  background: linear-gradient(180deg, #eef5ff, #e7f0ff);
+  color: #2b77e7;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+}
+.services-how-it-works-card {
+  padding: 2rem;
+}
+.services-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+.services-step-item {
+  border-radius: 1.35rem;
+  padding: 1rem;
+  background: rgba(255,255,255,.64);
+  border: 1px solid rgba(225,235,247,.9);
+}
+.services-step-number {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e9f2ff;
+  color: #2b77e7;
+  font-weight: 800;
+  margin-bottom: .8rem;
+}
+.services-skills-pills { margin-top: 1rem; }
+.services-why-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.services-why-card {
+  min-height: 12rem;
+  padding: 1.3rem 1.25rem;
+  border-left: 2px solid #c9dfff;
+}
+.services-redesign-final-cta {
+  border-radius: 1.9rem;
+  background: linear-gradient(180deg, #122136 0%, #132640 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2.8rem 2rem;
+}
+.services-redesign-final-cta h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+.services-redesign-final-cta p {
+  max-width: 40rem;
+  margin: .9rem auto 1.5rem;
+  color: rgba(255,255,255,.76);
+  line-height: 1.7;
+}
+.services-redesign-final-cta .final-cta-actions {
+  justify-content: center;
+}
+@media (max-width: 980px) {
+  .services-redesign-hero-grid,
+  .services-hire-model-grid,
+  .services-expert-grid,
+  .services-why-grid,
+  .services-steps-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 780px) {
+  .services-redesign-hero-grid,
+  .services-hire-model-grid,
+  .services-expert-grid,
+  .services-why-grid,
+  .services-steps-grid {
+    grid-template-columns: 1fr;
+  }
+  .services-redesign-hero-visual { min-height: auto; }
+  .services-hero-glass-card.floating { position: static; margin-top: .8rem; }
+}

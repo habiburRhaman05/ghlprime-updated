@@ -1,0 +1,280 @@
+.hphone {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hphone *,
+.hphone *::before,
+.hphone *::after {
+  box-sizing: border-box;
+}
+
+/* Phone outer body */
+.hphone-body {
+  width: 100%;
+  background: #1C1C1E;
+  border: 8px solid #2A2A2A;
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25), 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Inner screen */
+.hphone-screen {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 36px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Notch */
+.hphone-notch {
+  width: 60px;
+  height: 5px;
+  background: #E2E8F0;
+  border-radius: 3px;
+  margin: 8px auto 0;
+}
+
+/* Status bar */
+.hphone-statusbar {
+  height: 20px;
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.hphone-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.hphone-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hphone-svc-icon {
+  display: block;
+}
+
+/* WhatsApp header */
+.hphone-header {
+  height: 44px;
+  background: #075E54;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+}
+
+.hphone-back {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.hphone-avatar {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hphone-header-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.hphone-header-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hphone-header-online {
+  font-size: 11px;
+  color: #a8e6b0;
+}
+
+.hphone-header-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hphone-header-actions svg {
+  display: block;
+}
+
+/* Chat area */
+.hphone-chat {
+  background: #ECE5DD;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hphone-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+}
+
+.hphone-msg-in {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.hphone-msg-out {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.hphone-bubble {
+  position: relative;
+  padding: 6px 9px 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.hphone-msg-in .hphone-bubble {
+  background: #ffffff;
+  border-radius: 0 12px 12px 12px;
+}
+
+.hphone-msg-out .hphone-bubble {
+  background: #DCF8C6;
+  border-radius: 12px 0 12px 12px;
+}
+
+.hphone-text {
+  display: block;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: #0F172A;
+}
+
+.hphone-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.hphone-msg-time {
+  font-size: 10px;
+  color: #94A3B8;
+}
+
+.hphone-ticks {
+  display: block;
+}
+
+/* Lead qualified pill */
+.hphone-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  background: #DCFCE7;
+  color: #166534;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 3px 10px;
+}
+
+.hphone-pill svg {
+  display: block;
+}
+
+/* Bottom input bar */
+.hphone-inputbar {
+  height: 36px;
+  background: #F0F0F0;
+  border-top: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.hphone-input-icon {
+  flex: 0 0 auto;
+  display: block;
+}
+
+.hphone-placeholder {
+  flex: 1 1 auto;
+  font-size: 12px;
+  color: #94A3B8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Respect reduced-motion: disable any animation / transition */
+@media (prefers-reduced-motion: reduce) {
+  .hphone,
+  .hphone * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Internal responsive */
+@media (max-width: 768px) {
+  .hphone-body {
+    border-radius: 40px;
+  }
+
+  .hphone-header-name {
+    font-size: 12px;
+  }
+
+  .hphone-header-online,
+  .hphone-time {
+    font-size: 10px;
+  }
+
+  .hphone-text {
+    font-size: 11.5px;
+  }
+
+  .hphone-chat {
+    overflow-x: auto;
+  }
+
+  .hphone-placeholder {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,217 @@
+.redesigned-footer {
+  background: #0d1827;
+  color: rgba(255,255,255,.82);
+}
+.redesigned-footer-grid {
+  grid-template-columns: 1.2fr .8fr .8fr .9fr;
+  gap: 2rem;
+}
+.redesigned-footer .footer-heading {
+  color: rgba(255,255,255,.45);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .82rem;
+}
+.redesigned-footer a,
+.redesigned-footer li,
+.redesigned-footer p,
+.redesigned-footer span {
+  color: rgba(255,255,255,.72);
+}
+.redesigned-footer ul {
+  display: grid;
+  gap: .7rem;
+}
+.redesigned-footer-brand p {
+  max-width: 16rem;
+  line-height: 1.8;
+}
+.footer-brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+.footer-social-row {
+  display: flex;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.footer-social-link {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: .8rem;
+  border: 1px solid rgba(255,255,255,.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.02);
+}
+.footer-social-link svg {
+  width: 1rem;
+  height: 1rem;
+}
+.footer-hire-column p {
+  max-width: 15rem;
+  line-height: 1.8;
+}
+.footer-hire-links {
+  display: grid;
+  gap: .85rem;
+  margin-top: 1rem;
+}
+.footer-static-link {
+  color: rgba(255,255,255,.54);
+  cursor: default;
+}
+.footer-hire-expert-link {
+  position: relative;
+  overflow: hidden;
+  min-height: 2.8rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  background: linear-gradient(90deg, #1e7ef1, #5bb4ff, #1e7ef1);
+  background-size: 200% 100%;
+  color: white !important;
+  font-weight: 800;
+  box-shadow: 0 12px 28px rgba(30,126,241,.22);
+  animation: footerHireShift 2.8s linear infinite;
+}
+.footer-hire-expert-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.35) 50%, transparent 80%);
+  transform: translateX(-120%);
+  animation: footerHireShine 2.2s ease-in-out infinite;
+}
+@keyframes footerHireShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes footerHireShine {
+  0% { transform: translateX(-120%); }
+  60%, 100% { transform: translateX(140%); }
+}
+.redesigned-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.45);
+}
+.redesigned-footer-bottom span {
+  color: rgba(255,255,255,.45);
+}
+@media (max-width: 980px) {
+  .redesigned-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 780px) {
+  .redesigned-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.footer-last-updated {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+  margin-left: 12px;
+}
+.footer-last-updated time {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------------------------
+   Bottom bar alignment. Previously four direct flex children were spread with
+   space-between, which squeezed each one into a narrow column and forced
+   mid-phrase wrapping ("All rights reserved." and the date breaking onto a
+   second line, the attribution dropping under the links). Grouping them into
+   a left and right cluster keeps everything on one baseline.
+--------------------------------------------------------------------------- */
+.redesigned-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* The two groups never fit on one line at the container max-width, so they
+     stack as two left-aligned rows flush with the footer columns above. */
+  justify-content: flex-start;
+  gap: 0.55rem 2rem;
+}
+.redesigned-footer-bottom .footer-bottom-left,
+.redesigned-footer-bottom .footer-bottom-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  margin: 0;
+}
+.redesigned-footer-bottom .footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.15rem;
+  margin: 0;
+}
+.redesigned-footer-bottom .footer-bottom-left > span,
+.redesigned-footer-bottom .footer-parent-brand {
+  white-space: nowrap;
+  line-height: 1.5;
+}
+.redesigned-footer-bottom .footer-parent-brand a {
+  opacity: 0.75;
+}
+.redesigned-footer-bottom .footer-parent-brand a:hover {
+  opacity: 1;
+}
+
+.footer-ask-ai {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.footer-ask-ai-label {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+.footer-ask-ai-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-ask-ai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+.footer-ask-ai-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+.footer-ask-ai-btn img {
+  width: 1rem;
+  height: 1rem;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+/* On narrow screens let the long phrases wrap normally and stack left. */
+@media (max-width: 900px) {
+  .redesigned-footer-bottom {
+    justify-content: flex-start;
+  }
+  .redesigned-footer-bottom .footer-bottom-left > span,
+  .redesigned-footer-bottom .footer-parent-brand {
+    white-space: normal;
+  }
+}
