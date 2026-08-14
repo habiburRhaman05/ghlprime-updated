@@ -13,9 +13,10 @@ import { fetchPartnerLogos } from '../lib/logosApi'
 import { fetchGalleryImages } from '../lib/galleryApi'
 import { fetchCaseStudies } from '../lib/caseStudiesApi'
 import ShippedEvidenceSection from '../components/ShippedEvidenceSection'
-import { ArrowRight, Bot, BrainCircuit, CalendarCheck2, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Code2, Contact, GraduationCap, Headphones, LayoutDashboard, LayoutGrid, MessageSquareText, RefreshCw, Share2, ShieldCheck, Sparkles, TrendingUp, Users, Video, Webhook, Workflow, Wrench, X, Zap } from 'lucide-react'
+import { ArrowRight, Bot, BrainCircuit, CalendarCheck2, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Code2, Contact, GraduationCap, Headphones, LayoutDashboard, LayoutGrid, MessageSquareText, RefreshCw, Rocket, Share2, ShieldCheck, Sparkles, TrendingUp, UserPlus, Users, Video, Webhook, Workflow, Wrench, X, Zap } from 'lucide-react'
 import LifeAtGHL from '../components/home-page/LifeAtGHL'
 import TeamTestimonials from '../components/home-page/TeamTestimonials'
+import HomeHeroDeck from '../components/hero/HomeHeroDeck'
 import { div } from 'framer-motion/client'
 
 const SITE_URL = 'https://ghlprime.com'
@@ -24,7 +25,7 @@ const HOMEPAGE_LAST_MODIFIED = '2026-05-24'
 const HOMEPAGE_SERVICES = [
   {
     name: 'GoHighLevel Setup & Sub-Account Configuration',
-    description: 'Complete CRM setup from scratch — sub-accounts, pipelines, calendars, forms, and integrations configured for agency and SaaS use.',
+    description: 'Complete CRM setup from scratch  sub-accounts, pipelines, calendars, forms, and integrations configured for agency and SaaS use.',
     url: SITE_URL + '/services#setup',
   },
   {
@@ -34,27 +35,27 @@ const HOMEPAGE_SERVICES = [
   },
   {
     name: 'AI Agents & Voice Receptionists',
-    description: 'AI agents that qualify leads, answer inquiries, run AI call centers, and book meetings 24/7 — deployed directly inside GoHighLevel.',
+    description: 'AI agents that qualify leads, answer inquiries, run AI call centers, and book meetings 24/7  deployed directly inside GoHighLevel.',
     url: SITE_URL + '/services#ai-agents',
   },
   {
     name: '24/7 White-Label Client Support',
-    description: 'Round-the-clock GoHighLevel expert support delivered under your agency brand — your clients never know we exist.',
+    description: 'Round-the-clock GoHighLevel expert support delivered under your agency brand  your clients never know we exist.',
     url: SITE_URL + '/services#white-label-support',
   },
   {
     name: 'White-Label SaaS CRM Launch',
-    description: 'Fully white-labeled GoHighLevel SaaS setups — branded sub-accounts, Stripe + Twilio configuration, and client-ready onboarding flows.',
+    description: 'Fully white-labeled GoHighLevel SaaS setups  branded sub-accounts, Stripe + Twilio configuration, and client-ready onboarding flows.',
     url: SITE_URL + '/services#saas-launch',
   },
   {
     name: 'API Integrations',
-    description: 'Connect GoHighLevel to Zapier, Slack, Google Workspace, custom CRMs, databases, and any platform with an API — including custom integrations when no native option exists.',
+    description: 'Connect GoHighLevel to Zapier, Slack, Google Workspace, custom CRMs, databases, and any platform with an API  including custom integrations when no native option exists.',
     url: SITE_URL + '/services#integrations',
   },
   {
     name: 'Vibe Coding & Custom Development',
-    description: 'AI-assisted custom development for anything GoHighLevel cannot do natively — custom dashboards, bespoke integrations, and unique automation logic.',
+    description: 'AI-assisted custom development for anything GoHighLevel cannot do natively  custom dashboards, bespoke integrations, and unique automation logic.',
     url: SITE_URL + '/services#custom-development',
   },
   {
@@ -65,7 +66,7 @@ const HOMEPAGE_SERVICES = [
 ]
 
 const HOMEPAGE_HOWTO_STEPS = [
-  { name: 'System Walkthrough & Handoff', text: 'We walk you through everything we have built — how it works, why it is set up that way, and how to use it confidently with your clients.' },
+  { name: 'System Walkthrough & Handoff', text: 'We walk you through everything we have built  how it works, why it is set up that way, and how to use it confidently with your clients.' },
   { name: 'Technical Deep Dive Sessions', text: 'Live sessions on GoHighLevel, automations, AI agents, and whatever part of the system you want to master. We go deep, not surface-level.' },
   { name: 'Ongoing Support & Upskilling', text: 'As the platform evolves and your agency grows, we keep you updated with new features, better workflows, and smarter approaches.' },
 ]
@@ -79,7 +80,7 @@ const buildHomepageSchemas = () => {
       '@id': SITE_URL + '/#webpage',
       url: SITE_URL + '/',
       name: 'GoHighLevel Experts for Agencies | GHL Prime',
-      description: 'Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents — built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support.',
+      description: 'Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support.',
       inLanguage: 'en-US',
       isPartOf: { '@id': SITE_URL + '/#website' },
       about: orgRef,
@@ -219,24 +220,22 @@ function TrustedLogosSection() {
 }
 
 function SolutionVisual({ variant }) {
+  // Each icon now matches what its card is actually about. The previous map
+  // paired "no expert on your team" with a grid glyph and "no support" with
+  // a wrench, which told the reader nothing.
   const iconMap = {
-    crm: LayoutGrid,
-    support: Workflow,
-    ai: BrainCircuit,
-    team: Wrench,
-    backend: Zap,
+    crm: UserPlus,        // hire specialists on demand
+    support: Rocket,      // launch your SaaS
+    backend: Workflow,    // build / fix automations
+    ai: Bot,              // AI agents
+    team: Headphones,     // 24/7 client support
   }
 
   const Icon = iconMap[variant] || Workflow
 
   return (
-    <div className={`abstract-visual-card ${variant}`}>
-      <div className="abstract-orb orb-one" />
-      <div className="abstract-orb orb-two" />
-      <div className="abstract-grid-line line-one" />
-      <div className="abstract-grid-line line-two" />
-      <div className="abstract-icon-shell"><Icon size={28} /></div>
-      <div className="abstract-chip-row"><span className="abstract-chip" /><span className="abstract-chip wide" /><span className="abstract-chip" /></div>
+    <div className="solution-icon-tile">
+      <Icon size={22} />
     </div>
   )
 }
@@ -501,35 +500,35 @@ function WhatWeHandleSection() {
   const items = [
     {
       title: 'No GHL Expert on Your Team',
-      text: 'Stop paying for a full-time hire you barely need. Tap certified GHL specialists on demand — for builds, fixes, strategy, or anything in between.',
+      text: 'Stop paying for a full-time hire you barely need. Tap certified GHL specialists on demand for builds, fixes, strategy, or anything in between.',
       variant: 'crm',
       tags: ['Hire GHL Experts'],
       tone: 'blue',
     },
     {
       title: "Can't Launch Your SaaS Fast Enough",
-      text: 'We set up your fully white-labeled CRM from scratch — branded, configured, and client-ready. You own the product. We do the build.',
+      text: 'We set up your fully white-labeled CRM from scratch: branded, configured, and client-ready. You own the product. We do the build.',
       variant: 'support',
       tags: ['White-Label Launch'],
       tone: 'green',
     },
     {
       title: 'Broken or Half-Built Automations',
-      text: 'Leaking leads, missed follow-ups, workflows that randomly break. We build, audit, and fix automations end-to-end — so every lead is handled perfectly.',
+      text: 'Leaking leads, missed follow-ups, workflows that randomly break. We build, audit, and fix automations end-to-end, so every lead is handled perfectly.',
       variant: 'backend',
       tags: ['Full Automation Builds'],
       tone: 'amber',
     },
     {
       title: 'AI Agents That Actually Work for Your Agency',
-      text: 'We design, build, and deploy AI agents tailored to your agency\'s workflow. Qualify leads, handle inquiries, run AI call centers, and book meetings — 24/7, without you touching a thing.',
+      text: 'We design, build, and deploy AI agents tailored to your agency\'s workflow. Qualify leads, handle inquiries, run AI call centers, and book meetings 24/7, without you touching a thing.',
       variant: 'ai',
       tags: ['AI Agent Deployment', 'AI Call Centers', 'Lead Qualification'],
       tone: 'violet',
     },
     {
       title: 'No Support = Clients Leave Your Platform',
-      text: 'Your clients expect fast answers. We provide round-the-clock GHL expert support, fully under your brand. They think it\'s your team — we make you look like a well-staffed operation.',
+      text: 'Your clients expect fast answers. We provide round-the-clock GHL expert support, fully under your brand. They think it\'s your team; we make you look like a well-staffed operation.',
       variant: 'team',
       tags: ['24/7 White-Label Support', 'GHL-Certified Team'],
       tone: 'red',
@@ -547,16 +546,14 @@ function WhatWeHandleSection() {
         <div className="replacement-solutions-grid modern-stack-grid">
           {items.map((item, index) => (
             <motion.article key={item.title} className={`replacement-solution-card modern-solution-stack-card tone-${item.tone} ${index > 2 ? 'wide' : ''}`} initial="hidden" whileInView="show" whileHover={{ y: -8 }} viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
+              {/* Icon leads the card. It sat below the body copy before,
+                  which put the one scannable element last. */}
+              <SolutionVisual variant={item.variant} />
               <div className="solution-copy align-left">
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </div>
-              <div className="solution-card-footer">
-                <div className="solution-icon-row">
-                  <SolutionVisual variant={item.variant} />
-                </div>
-                <div className="stack-tag-row">{item.tags.map((tag) => <span key={tag} className="stack-tag">{tag}</span>)}</div>
-              </div>
+              <div className="stack-tag-row">{item.tags.map((tag) => <span key={tag} className="stack-tag">{tag}</span>)}</div>
             </motion.article>
           ))}
         </div>
@@ -616,7 +613,7 @@ function TrainingSection() {
     {
       number: '01',
       title: 'System Walkthrough & Handoff',
-      text: 'We walk you through everything we’ve built — how it works, why it’s set up that way, and how to use it confidently with your clients.',
+      text: 'We walk you through everything we’ve built  how it works, why it’s set up that way, and how to use it confidently with your clients.',
       icon: ClipboardCheck,
     },
     {
@@ -628,7 +625,7 @@ function TrainingSection() {
     {
       number: '03',
       title: 'Ongoing Support & Upskilling',
-      text: 'As the platform evolves and your agency grows, we keep you updated — new features, better workflows, smarter approaches. You’re never left behind.',
+      text: 'As the platform evolves and your agency grows, we keep you updated  new features, better workflows, smarter approaches. You’re never left behind.',
       icon: TrendingUp,
     },
   ]
@@ -705,7 +702,7 @@ function TrainingSection() {
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.55, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
           >
-            Our team trains you hands-on, technically — so you understand your own system, can serve clients better, and don’t depend on anyone to run your business.
+            Our team trains you hands-on, technically  so you understand your own system, can serve clients better, and don’t depend on anyone to run your business.
           </motion.p>
 
           <motion.div
@@ -825,7 +822,7 @@ function VibeCodingSection() {
   ]
 
   const tokenLines = useMemo(() => [
-    [{ k: 'comment', t: '// Custom integration — built fast' }],
+    [{ k: 'comment', t: '// Custom integration  built fast' }],
     [],
     [
       { k: 'kw', t: 'const' },
@@ -1032,7 +1029,7 @@ function VibeCodingSection() {
               <div className="ide-titlebar-dots">
                 <span /><span /><span />
               </div>
-              <div className="ide-titlebar-title">ghl-prime — vibe-coding</div>
+              <div className="ide-titlebar-title">ghl-prime  vibe-coding</div>
               <div className="ide-titlebar-ai" aria-hidden="true">
                 <span className="ide-ai-dot" />
                 Copilot
@@ -1167,7 +1164,7 @@ function VibeCodingSection() {
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.5, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
           >
-            Most GHL agencies are stuck with what’s inside the platform. We’re not. Our vibe coding team builds custom features, tools, and integrations that GHL doesn’t support natively — fast, clean, and ready to deploy.
+            Most GHL agencies are stuck with what’s inside the platform. We’re not. Our vibe coding team builds custom features, tools, and integrations that GHL doesn’t support natively  fast, clean, and ready to deploy.
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 22 }}
@@ -1223,7 +1220,7 @@ function WhyChooseSection() {
   const items = [
     {
       title: 'GHL-Only Specialists',
-      text: 'We don’t do everything. We focus exclusively on GHL and automation — which means you get depth, not breadth.',
+      text: 'We don’t do everything. We focus exclusively on GHL and automation  which means you get depth, not breadth.',
       icon: ShieldCheck,
       tone: 'blue',
     },
@@ -1235,7 +1232,7 @@ function WhyChooseSection() {
     },
     {
       title: 'Fully White-Labeled',
-      text: 'We stay invisible. Your clients see your brand, your team, your expertise. We’re the engine room — you’re the front door.',
+      text: 'We stay invisible. Your clients see your brand, your team, your expertise. We’re the engine room  you’re the front door.',
       icon: Contact,
       tone: 'purple',
     },
@@ -1253,7 +1250,7 @@ function WhyChooseSection() {
     },
     {
       title: 'Vibe Coding Capability',
-      text: 'When GHL can’t do it natively, we build it. Custom dev, API integrations, bespoke tools — no other GHL team offers this.',
+      text: 'When GHL can’t do it natively, we build it. Custom dev, API integrations, bespoke tools  no other GHL team offers this.',
       icon: Code2,
       tone: 'pink',
     },
@@ -1273,7 +1270,7 @@ function WhyChooseSection() {
           <span className="eyebrow-label">Why do agencies hire GHL Prime instead of a freelancer?</span>
 
           <h2>Focused Expertise. Real Delivery. <span>Power.</span></h2>
-          <p>GHL Prime is a specialized team backed by Octopi Digital. We don’t do everything — we go deep on GHL, automation, AI, and custom dev so your agency has the best possible team behind it.</p>
+          <p>GHL Prime is a specialized team backed by Octopi Digital. We don’t do everything  we go deep on GHL, automation, AI, and custom dev so your agency has the best possible team behind it.</p>
         </motion.div>
 
         <div className="why-choose-card-grid why-choose-reference-card-grid">
@@ -1371,14 +1368,33 @@ function FinalCtaSection() {
   return (
     <section className="section final-cta-section">
       <div className="container">
-        <motion.div className="final-cta-card premium-final-cta" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.55 }}>
-          <div>
+        <motion.div
+          className="final-cta-card premium-final-cta"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.55 }}
+        >
+          {/* Decorative light sources -- see .premium-final-cta in App.css. */}
+          <span className="cta-glow one" aria-hidden="true" />
+          <span className="cta-glow two" aria-hidden="true" />
+
+          <div className="premium-cta-inner">
+            {/* Primary mark (navy lettering) -- the one that reads on the
+                light panel. The /footer-logo.png variant is the light-text
+                version reserved for dark surfaces. */}
+            <img src="/ghl-prime-logo.png" alt="GHL Prime" className="premium-cta-logo" />
+
             <span className="cta-label">Ready to scale delivery without doing it all yourself?</span>
             <h2>You Close the Clients. We Handle Everything Else.</h2>
-          </div>
-          <div className="final-cta-actions homepage-final-cta-actions">
-            <Link to="/booking" className="primary-pill large homepage-cta-btn">Get a free consultation</Link>
-            <Link to="/services" className="secondary-pill homepage-cta-btn secondary-homepage-cta-btn">See What We Do</Link>
+
+            <div className="final-cta-actions homepage-final-cta-actions">
+              <Link to="/booking" className="primary-pill large homepage-cta-btn">
+                Get a free consultation
+                <ArrowRight size={17} />
+              </Link>
+              <Link to="/services" className="secondary-pill homepage-cta-btn secondary-homepage-cta-btn">See What We Do</Link>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -1465,17 +1481,17 @@ export default function HomePage() {
     <>
       <Helmet>
         <title>GoHighLevel Experts for Agencies | GHL Prime</title>
-        <meta name="description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents — built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
+        <meta name="description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents  built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
         <meta name="keywords" content="GoHighLevel experts, hire GoHighLevel team, GoHighLevel agency, GHL automation, GoHighLevel CRM setup, white-label GoHighLevel support, AI agents, GHL Prime" />
         <link rel="canonical" href="https://ghlprime.com/" />
         <meta property="og:title" content="GoHighLevel Experts for Agencies | GHL Prime" />
-        <meta property="og:description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents — built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
+        <meta property="og:description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents  built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
         <meta property="og:url" content="https://ghlprime.com/" />
         <meta property="og:image" content="https://ghlprime.com/og-home.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:image" content="https://ghlprime.com/og-home.png" />
         <meta name="twitter:title" content="GoHighLevel Experts for Agencies | GHL Prime" />
-        <meta name="twitter:description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents — built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
+        <meta name="twitter:description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents  built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
         <meta name="last-modified" content="2026-05-24" />
         <script type="application/ld+json">{JSON.stringify(buildHomepageSchemas())}</script>
       </Helmet>
@@ -1501,28 +1517,74 @@ export default function HomePage() {
 
       <HomeSeoShell />
 
-      <section className="hero container homepage-hero-redesign homepage-hero-v2">
-        <motion.div className="hero-copy homepage-hero-copy homepage-hero-copy-v2" initial="hidden" animate="show" variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}>
-          <motion.div className="rotating-hero-pill" variants={fadeUp} key={activePill}>{rotatingPills[activePill]}</motion.div>
-          <motion.h1 variants={fadeUp}>
-            Hire a Dedicated Team of{' '}
-            <span className="homepage-hero-ghl-inline">
-              <span className="homepage-hero-ghl-word"><span className="ghl-go">Go</span><span className="ghl-high">High</span><span className="ghl-level">Level</span></span>
-            </span>
-            <br />
-            <span className="homepage-hero-ghl-inline">
-              <span>Automation</span>
-            </span>{' '}
-            Experts for
-            <br />
-            Your Agency and Local Business.
-          </motion.h1>
-          <motion.p className="speakable-intro" variants={fadeUp}>GHL Prime is a specialist expert team you hire to run the technical side of your agency — GHL builds, automation workflows, AI agents, vibe coding, and 24/7 client support. All under your brand.</motion.p>
-          <motion.div className="hero-cta homepage-hero-cta" variants={fadeUp}>
-            <a href="https://www.upwork.com/agencies/ghlprime/" target="_blank" rel="noopener noreferrer" className="primary-pill large">Hire Your Expert Team</a>
-            <Link to="/services" className="secondary-pill">See What We Do</Link>
-          </motion.div>
-        </motion.div>
+      {/* Hero. Copy is unchanged word for word -- the h1 only re-breaks
+          across four lines so it sits in the narrower left column beside
+          the illustration (see HomeHeroDeck). Entrance animations are CSS
+          rather than framer because the h1 is the LCP element and CSS
+          paints without waiting for hydration. */}
+      <section className="hero container homepage-hero-v3">
+        <div className="hh-ambient" aria-hidden="true">
+          <span className="hh-aurora a" />
+          <span className="hh-aurora b" />
+          <span className="hh-aurora c" />
+          <span className="hh-noise" />
+        </div>
+
+        <div className="hh-grid">
+          <div className="hero-copy hh-copy">
+            <div className="hh-pill-slot">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activePill}
+                  className="rotating-hero-pill hh-pill"
+                  initial={{ opacity: 0, y: 6, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <span className="hh-pill-dot" aria-hidden="true" />
+                  {rotatingPills[activePill]}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <h1>
+              {/* Trailing {' '} on each line: whitespace-with-newline between
+                  JSX siblings is stripped, so without these the accessible
+                  name (and any text extraction) would read
+                  "...Team ofGoHighLevelAutomation...". */}
+              <span className="hh-line">Hire a Dedicated Team of{' '}</span>
+              {/* The wordmark gets a line to itself -- the tri-colour lockup
+                  is the strongest visual moment in the headline. */}
+              <span className="hh-line">
+                <span className="homepage-hero-ghl-inline">
+                  <span className="homepage-hero-ghl-word"><span className="ghl-go">Go</span><span className="ghl-high">High</span><span className="ghl-level">Level</span></span>
+                </span>
+              </span>
+              <span className="hh-line">
+                <span className="hh-accent-word">Automation<span className="hh-accent-sweep" aria-hidden="true" /></span>{' '}
+                Experts for
+              </span>
+              <span className="hh-line">Your Agency and Local Business.</span>
+
+            </h1>
+
+            <p className="speakable-intro hh-lede">GHL Prime is a specialist expert team you hire to run the technical side of your agency  GHL builds, automation workflows, AI agents, vibe coding, and 24/7 client support. All under your brand.</p>
+
+            <div className="hero-cta hh-cta">
+              <a href="https://www.upwork.com/agencies/ghlprime/" target="_blank" rel="noopener noreferrer" className="primary-pill large hh-cta-primary">
+                Hire Your Expert Team
+                <ArrowRight size={17} />
+              </a>
+              <Link to="/services" className="secondary-pill hh-cta-ghost">
+                See What We Do
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+
+          <HomeHeroDeck />
+        </div>
       </section>
 
       <TrustedLogosSection />
@@ -1540,7 +1602,7 @@ export default function HomePage() {
       <section className="section section-white">
         <div className="container">
           <h2>What GoHighLevel certifications does GHL Prime hold?</h2>
-          <p>GHL Prime holds official GoHighLevel certifications including Certified Admin — the highest certification available on the platform — plus A2P Compliance, HIPAA Compliance, AI Employee, SaaS Mode, and 7 additional specializations.</p>
+          <p>GHL Prime holds official GoHighLevel certifications including Certified Admin  the highest certification available on the platform  plus A2P Compliance, HIPAA Compliance, AI Employee, SaaS Mode, and 7 additional specializations.</p>
         </div>
       </section>
       <ExpertsSection />

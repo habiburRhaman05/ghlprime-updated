@@ -4,17 +4,46 @@
 }
 .modern-solution-stack-card {
   min-height: auto;
-  padding: 1.45rem;
-  border-radius: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  background: linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(252,254,255,.66) 100%);
-  box-shadow: 0 24px 48px rgba(23, 59, 108, 0.08);
-  backdrop-filter: blur(14px);
+  padding: 1.7rem 1.6rem 1.6rem;
+  border-radius: 1.5rem;
+  /* Solid white on a definite hairline border, not translucent glass. The
+     section sits on a patterned background, and a semi-transparent card let
+     that pattern show through behind the body copy. A real border also gives
+     the card a defined edge without needing a coloured accent bar. */
+  border: 1px solid rgba(16, 37, 63, 0.08);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(23, 59, 108, 0.06);
   display: flex;
   flex-direction: column;
-  gap: .9rem;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.15rem;
+  transition: border-color .25s ease, box-shadow .25s ease;
 }
+/* One consistent hover for every card -- the lift comes from framer-motion,
+   this just firms up the edge and deepens the same shadow. Deliberately not
+   a per-tone coloured glow: five different glow colours in one grid reads
+   decorative rather than considered. */
+.modern-solution-stack-card:hover {
+  border-color: rgba(16, 37, 63, 0.14);
+  box-shadow: 0 20px 40px rgba(23, 59, 108, 0.1);
+}
+/* Icon tile: tone-tinted fill, no border, sized to lead the card. */
+.solution-icon-tile {
+  width: 2.9rem;
+  height: 2.9rem;
+  flex-shrink: 0;
+  border-radius: .9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(49, 128, 236, 0.1);
+  color: #2d74d9;
+}
+.modern-solution-stack-card.tone-blue .solution-icon-tile { background: rgba(72, 132, 255, 0.1); color: #2f6fdd; }
+.modern-solution-stack-card.tone-green .solution-icon-tile { background: rgba(46, 155, 98, 0.1); color: #238954; }
+.modern-solution-stack-card.tone-amber .solution-icon-tile { background: rgba(199, 138, 24, 0.12); color: #a9741a; }
+.modern-solution-stack-card.tone-violet .solution-icon-tile { background: rgba(109, 83, 220, 0.1); color: #5f47c9; }
+.modern-solution-stack-card.tone-red .solution-icon-tile { background: rgba(213, 93, 93, 0.1); color: #c04f4f; }
 .modern-solution-stack-card:nth-child(-n+3) { grid-column: span 2; }
 .modern-solution-stack-card.wide { grid-column: span 3; min-height: auto; }
 .align-left { text-align: left !important; }
@@ -23,30 +52,25 @@
   font-size: clamp(1.5rem, 2.7vw, 2.45rem) !important;
 }
 .modern-solution-stack-card .solution-copy {
-  display: flex;
-  flex-direction: column;
-  gap: .7rem;
+  display: block;
+  width: 100%;
 }
 .modern-solution-stack-card .solution-copy h3 {
-  margin: 0;
-  font-size: clamp(1.6rem, 2.1vw, 2.4rem);
-  line-height: 1.08;
+  margin: 0 0 .6rem;
+  /* Was clamp(1.6rem, 2.1vw, 2.4rem) -- up to ~38px, i.e. section-heading
+     scale. At that size all five titles competed with the section h2 above
+     them and pushed the body copy into a secondary role. */
+  font-size: clamp(1.18rem, 1.5vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.26;
+  letter-spacing: -0.015em;
+  color: #10253f;
 }
 .modern-solution-stack-card .solution-copy p {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.55;
-}
-.solution-card-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: .55rem;
-}
-.solution-icon-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  font-size: .97rem;
+  line-height: 1.62;
+  color: #4a5b70;
 }
 .modern-solution-stack-card .abstract-visual-card {
   min-height: 2.3rem;
@@ -77,7 +101,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: .45rem;
-  margin-top: 0;
+  /* Pins the tags to the bottom edge so they line up across cards of
+     differing copy length, instead of floating right under the text. */
+  margin-top: auto;
+  padding-top: .35rem;
 }
 .stack-tag {
   min-height: 1.9rem;
