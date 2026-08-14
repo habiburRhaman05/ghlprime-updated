@@ -1,0 +1,418 @@
+/* ==========================================================================
+   Homepage hero illustration -- "Automation Core"
+   --------------------------------------------------------------------------
+   Companion to home-hero-deck.css (which owns the hero shell + copy column).
+   Everything here is scoped to .hac-*.
+
+   Two sizing systems, on purpose:
+     - Geometry-critical sizes (the core disc) are percentages of the stage,
+       because the SVG wires stop on the disc rim and any mismatch shows as
+       a stroke poking out from under it.
+     - Typography and padding use clamp()+cqw, so the cards stay readable
+       while the stage scales.
+   ========================================================================== */
+
+.hac {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  animation: hac-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+@keyframes hac-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Ratio matches the SVG viewBox (560 x 460) so a coordinate expressed as a
+   percentage lands on the same pixel as the path aiming at it. */
+.hac-stage {
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  max-width: 34rem;
+  margin-inline: auto;
+  aspect-ratio: 560 / 460;
+}
+
+/* --- Ambient ------------------------------------------------------------- */
+.hac-wash {
+  position: absolute;
+  inset: -6% -4%;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(32, 93, 171, 0.14) 1.1px, transparent 1.1px);
+  background-size: 15px 15px;
+  -webkit-mask-image: radial-gradient(62% 60% at 50% 50%, #000 0%, transparent 76%);
+  mask-image: radial-gradient(62% 60% at 50% 50%, #000 0%, transparent 76%);
+}
+/* Warm centre light. Sits under the wires so the core reads as the source. */
+.hac-halo {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 62%; height: 72%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(22, 132, 234, 0.22) 0%, rgba(126, 89, 255, 0.12) 45%, transparent 70%);
+  filter: blur(26px);
+  animation: hac-breathe 7s ease-in-out infinite;
+}
+@keyframes hac-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
+  50% { transform: translate(-50%, -50%) scale(1.09); opacity: 1; }
+}
+
+/* --- Wires + rings ------------------------------------------------------- */
+.hac-wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hac-ring {
+  fill: none;
+  stroke: rgba(32, 93, 171, 0.16);
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+}
+.hac-sweep {
+  fill: none;
+  stroke: rgba(22, 132, 234, 0.55);
+  stroke-width: 2;
+  stroke-linecap: round;
+  animation: hac-sweep 9s linear infinite;
+}
+.hac-sweep-reverse {
+  stroke: rgba(139, 92, 246, 0.5);
+  animation-duration: 12s;
+  animation-direction: reverse;
+}
+@keyframes hac-sweep {
+  to { stroke-dashoffset: calc(var(--ring) * -1); }
+}
+
+.hac-wire {
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0.75;
+  transition: stroke-width 0.3s ease, opacity 0.3s ease;
+}
+.hac-lane.is-active .hac-wire {
+  stroke-width: 2.6;
+  opacity: 1;
+}
+
+/* The packet. A short dash running the length of the wire, from the core
+   rim out to the service -- the whole point of the illustration is that
+   work flows OUT of GHL Prime into every channel. */
+.hac-packet {
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 7 var(--len);
+  stroke-dashoffset: 0;
+  animation: hac-packet 2.6s linear infinite;
+  animation-delay: var(--delay);
+}
+@keyframes hac-packet {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: calc((var(--len) + 7) * -1); }
+}
+
+/* --- Core ---------------------------------------------------------------- */
+.hac-core {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  /* 2 x CORE_R (58) over VIEW_W (560). The wires terminate on this rim. */
+  width: 20.71%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+.hac-core-ring {
+  position: absolute;
+  inset: -22%;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 132, 234, 0.3);
+  animation: hac-ping 3.4s ease-out infinite;
+}
+.hac-core-ring-2 {
+  inset: -40%;
+  border-color: rgba(139, 92, 246, 0.22);
+  animation-delay: 1.7s;
+}
+@keyframes hac-ping {
+  0% { transform: scale(0.9); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+
+.hac-core-disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(120% 120% at 30% 20%, #4bb0ff 0%, #1684ea 42%, #6d5cf5 100%);
+  box-shadow:
+    0 18px 38px -12px rgba(22, 132, 234, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.35) inset,
+    0 0 34px rgba(22, 132, 234, 0.35);
+}
+/* Slow specular rotation -- the detail that makes the disc read as a lit
+   object rather than a flat blue circle. */
+.hac-core-sheen {
+  position: absolute;
+  inset: -35%;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.45) 40deg, transparent 110deg, transparent 360deg);
+  animation: hac-spin 8s linear infinite;
+  mix-blend-mode: soft-light;
+}
+@keyframes hac-spin {
+  to { transform: rotate(360deg); }
+}
+.hac-core-bolt {
+  position: relative;
+  filter: drop-shadow(0 2px 4px rgba(6, 34, 68, 0.35));
+}
+.hac-core-name {
+  position: relative;
+  font-size: clamp(7.5px, 1.75cqw, 9.5px);
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  opacity: 0.95;
+}
+
+/* --- Service nodes ------------------------------------------------------- */
+/* Outer layer: placement + entrance. The entrance uses fill `both`, which
+   outranks any normal-declaration transform for the life of the element --
+   which is exactly why the active lift lives on the inner pill instead.
+   Entrance order runs clockwise from the top, so the ring draws itself. */
+.hac-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  animation: hac-node-in 0.5s cubic-bezier(0.34, 1.5, 0.64, 1) both;
+  animation-delay: calc(0.62s + var(--i) * 0.06s);
+}
+@keyframes hac-node-in {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Inner layer: the pill itself, and the only transform that changes state. */
+.hac-node-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(5px, 1.2cqw, 7px);
+  padding: clamp(5px, 1.15cqw, 7px) clamp(9px, 2cqw, 12px) clamp(5px, 1.15cqw, 7px) clamp(5px, 1.15cqw, 7px);
+  white-space: nowrap;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #e2e8f0;
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 10px 24px -12px rgba(15, 23, 42, 0.35),
+    0 1px 2px rgba(15, 23, 42, 0.05);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.hac-node-pill.is-active {
+  transform: scale(1.07);
+  border-color: color-mix(in srgb, var(--tint) 45%, #e2e8f0);
+  box-shadow:
+    0 14px 30px -10px color-mix(in srgb, var(--tint) 45%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--tint) 14%, transparent);
+}
+
+.hac-node-icon {
+  display: grid;
+  place-items: center;
+  width: clamp(22px, 4.7cqw, 27px);
+  height: clamp(22px, 4.7cqw, 27px);
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--tint);
+  box-shadow: 0 4px 10px -3px color-mix(in srgb, var(--tint) 65%, transparent);
+}
+.hac-node-icon svg {
+  width: clamp(12px, 2.6cqw, 15px);
+  height: clamp(12px, 2.6cqw, 15px);
+}
+.hac-node-label {
+  font-size: clamp(10px, 2.3cqw, 13px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: #17304d;
+}
+
+/* --- Stat strip ---------------------------------------------------------- */
+/* Sits below the stage in normal flow, centred on the same axis as the core.
+   Nothing floats: this is the one element outside the orbit and it is
+   aligned to it rather than pinned near it. */
+.hac-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.7rem, 1.8vw, 1.35rem);
+  max-width: 34rem;
+  margin: 0.4rem auto 0;
+  padding: 0.7rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(198, 218, 242, 0.7);
+  box-shadow: 0 14px 34px -22px rgba(23, 59, 108, 0.45);
+  backdrop-filter: blur(8px);
+  animation: hac-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.95s both;
+}
+.hac-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #15803d;
+}
+.hac-live-dot {
+  position: relative;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+.hac-live-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #16a34a;
+  animation: hac-live 1.8s ease-out infinite;
+}
+@keyframes hac-live {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+.hac-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+.hac-stat-value {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+.hac-stat-label {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .hac-stage { max-width: 31rem; }
+}
+
+@media (max-width: 1024px) {
+  .hac-stage { max-width: 33rem; }
+  .hac-stats { max-width: 33rem; }
+}
+
+/* Below this the ellipse can no longer hold eight readable cards, so the
+   orbit is abandoned outright rather than shrunk into illegibility. The
+   nodes become a plain two-column grid under the core -- same content, same
+   colours, no geometry left to break. */
+@media (max-width: 640px) {
+  .hac-stage {
+    aspect-ratio: auto;
+    max-width: 26rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    padding: 0.4rem 0 0;
+  }
+  .hac-wires,
+  .hac-wash { display: none; }
+  .hac-halo {
+    width: 70%;
+    height: 8rem;
+    top: 4rem;
+  }
+
+  .hac-core {
+    position: static;
+    transform: none;
+    grid-column: 1 / -1;
+    width: 5.6rem;
+    justify-self: center;
+    margin-bottom: 0.35rem;
+  }
+  .hac-core-name { font-size: 8.5px; }
+
+  .hac-node {
+    position: static;
+    transform: none;
+    animation-delay: 0s !important;
+  }
+  /* Redefined for this breakpoint: the desktop keyframes bake in the
+     translate(-50%, -50%) that centres a node on its orbit coordinate, and
+     `both` fill would keep applying it after the grid has taken over. */
+  @keyframes hac-node-in {
+    from { opacity: 0; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .hac-node-pill {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.5rem 0.7rem;
+  }
+  .hac-node-pill.is-active { transform: none; }
+  .hac-node-icon { width: 25px; height: 25px; }
+  .hac-node-icon svg { width: 14px; height: 14px; }
+  .hac-node-label { font-size: 12.5px; }
+
+  .hac-stats {
+    max-width: 26rem;
+    margin-top: 0.9rem;
+    gap: 0.55rem 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hac-stage { grid-template-columns: 1fr; }
+  .hac-stat-label { font-size: 0.72rem; }
+}
+
+/* --- Reduced motion ------------------------------------------------------ */
+/* The JS side separately freezes the lane cycle and the count-ups. */
+@media (prefers-reduced-motion: reduce) {
+  .hac-halo,
+  .hac-sweep,
+  .hac-packet,
+  .hac-core-ring,
+  .hac-core-sheen,
+  .hac-live-dot::after {
+    animation: none !important;
+  }
+  .hac-packet { display: none; }
+  .hac-core-ring { opacity: 0.4; }
+  .hac,
+  .hac-node,
+  .hac-stats {
+    animation-duration: 0.2s !important;
+    animation-delay: 0s !important;
+  }
+}

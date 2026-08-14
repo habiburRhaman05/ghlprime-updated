@@ -45,7 +45,16 @@ button { font: inherit; }
 .hero-glow.bottom-right { top: 18rem; right: -10rem; background: rgba(170, 209, 255, 0.22); }
 
 .navbar {
-  position: sticky; top: 0; z-index: 40; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: .95rem 1rem; margin-top: .85rem; border-radius: 999px; background: rgba(255,255,255,.86); border: 1px solid rgba(198,218,242,.78); backdrop-filter: blur(18px); box-shadow: 0 18px 38px rgba(33,73,130,.08);
+  position: sticky; top: 0; z-index: 40; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; padding: .85rem 1.1rem; margin-top: .85rem; border-radius: 999px; background: rgba(255,255,255,.86); border: 1px solid rgba(198,218,242,.78); backdrop-filter: blur(18px); box-shadow: 0 18px 38px rgba(33,73,130,.08);
+  transition: padding .32s cubic-bezier(.22,1,.36,1), background .32s ease, box-shadow .32s ease, border-color .32s ease;
+}
+/* Compacts once the page moves, so the bar reads as chrome rather than as
+   part of the hero. Only padding animates -- height would reflow the page. */
+.navbar.is-scrolled {
+  padding: .55rem 1.1rem;
+  background: rgba(255,255,255,.94);
+  border-color: rgba(198,218,242,.95);
+  box-shadow: 0 14px 34px rgba(33,73,130,.14);
 }
 .brand { display: inline-flex; align-items: center; }
 .mobile-menu-toggle,
@@ -87,14 +96,64 @@ button { font: inherit; }
   margin-top: .9rem;
 }
 .brand-logo {
-  height: 2rem; width: auto; max-width: 10rem; display: block; object-fit: contain; filter: drop-shadow(0 10px 18px rgba(22, 132, 234, 0.12));
+  height: 2.85rem; width: auto; max-width: 14rem; display: block; object-fit: contain; filter: drop-shadow(0 10px 18px rgba(22, 132, 234, 0.12));
+  transition: height .32s cubic-bezier(.22,1,.36,1);
 }
+.navbar.is-scrolled .brand-logo { height: 2.4rem; }
+/* The bar loses its nav row at 1024 and its horizontal room at 520, so the
+   logo steps down with it rather than crowding the hamburger. */
+@media (max-width: 1024px) {
+  .brand-logo { height: 2.5rem; }
+  .navbar.is-scrolled .brand-logo { height: 2.2rem; }
+}
+@media (max-width: 520px) {
+  .brand-logo { height: 2.15rem; max-width: 10.5rem; }
+  .navbar.is-scrolled .brand-logo { height: 2rem; }
+}
+
+/* Mobile drawer. It mounts on toggle, so it animates in from nothing rather
+   than appearing as a hard block. */
+.mobile-menu-panel { animation: nav-drawer-in .28s cubic-bezier(.22,1,.36,1) both; }
+@keyframes nav-drawer-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .brand-logo,
+  .mobile-menu-panel { transition: none; animation: none; }
+}
+
 .nav-links, .nav-actions { display: inline-flex; align-items: center; }
-.nav-links { justify-content: center; gap: 1.6rem; color: #4e5f75; font-size: .95rem; }
-.nav-links a, .login-link { transition: color .25s ease, transform .25s ease; }
-.nav-links a:hover, .login-link:hover { color: var(--primary); transform: translateY(-1px); }
+.nav-links { justify-content: center; gap: 1.5rem; color: #4e5f75; font-size: .95rem; }
+.nav-links a, .login-link { transition: color .25s ease; }
+.nav-links a:hover, .login-link:hover { color: var(--primary); }
+
+/* Underline indicator. The child combinator is load-bearing: `.nav-links a`
+   also matches every link inside the services megamenu panel, which is a
+   descendant of this nav. */
+.nav-links > a {
+  position: relative;
+  padding-block: .4rem;
+  font-weight: 600;
+}
+.nav-links > a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), #7e59ff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+.nav-links > a:hover::after,
+.nav-links > a.is-active::after { transform: scaleX(1); }
+.nav-links > a.is-active { color: var(--primary-dark); font-weight: 700; }
+
 .nav-actions { gap: 1rem; }
-.login-link { color: #3f536d; font-size: .95rem; }
+.login-link { color: #3f536d; font-size: .95rem; font-weight: 600; }
 
 .primary-pill, .secondary-pill, .platform-tabs button, .dashboard-tabs button, .dashboard-cta, .banner-settings, .widget-preview-card button, .sidebar-link {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: 0 1rem; border-radius: 999px; font-weight: 700; transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;

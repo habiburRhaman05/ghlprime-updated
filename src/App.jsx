@@ -1,7 +1,7 @@
 ﻿import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { ArrowRight, Menu, X, ChevronDown } from 'lucide-react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import HomePage from './pages/HomePage'
 import './App.css'
@@ -242,10 +242,23 @@ function SiteHeader() {
     setMobileServicesOpen(false)
   }
 
+  // Compacts the bar once the page has moved. Threshold is well past the
+  // .85rem top margin so the transition can't oscillate at rest.
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const servicesActive = location.pathname.startsWith('/services')
+    || SERVICE_MENU.some((col) => col.items.some((it) => it.to === location.pathname))
+
   if (isAuthLayout) return null
 
   return (
-    <header className="navbar container">
+    <header className={`navbar container${scrolled ? ' is-scrolled' : ''}`}>
       <div className="brand">
         <Link to="/">
           <img className="brand-logo" src="/ghl-prime-logo.png" alt="GHL Prime" />
@@ -261,7 +274,7 @@ function SiteHeader() {
         >
           <button
             type="button"
-            className="megamenu-trigger"
+            className={`megamenu-trigger${servicesActive ? ' is-active' : ''}`}
             aria-haspopup="true"
             aria-expanded={servicesOpen}
             onClick={() => setServicesOpen((v) => !v)}
@@ -269,25 +282,37 @@ function SiteHeader() {
             Services <ChevronDown size={15} />
           </button>
           <div className="megamenu-panel" role="menu">
-            {SERVICE_MENU.map((col) => (
-              <div key={col.category}>
-                <div className="megamenu-col-title">{col.category}</div>
-                {col.items.map((it) => (
-                  <Link
-                    key={it.to}
-                    to={it.to}
-                    role="menuitem"
-                    className={`megamenu-link${location.pathname === it.to ? ' is-active' : ''}`}
-                  >
-                    {it.label}
-                  </Link>
-                ))}
-              </div>
-            ))}
+            <div className="megamenu-cols">
+              {SERVICE_MENU.map((col) => (
+                <div key={col.category}>
+                  <div className="megamenu-col-title">{col.category}</div>
+                  {col.items.map((it) => (
+                    <Link
+                      key={it.to}
+                      to={it.to}
+                      role="menuitem"
+                      className={`megamenu-link${location.pathname === it.to ? ' is-active' : ''}`}
+                    >
+                      {it.label}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <Link to="/services" role="menuitem" className="megamenu-all">
+              View all services
+              <ArrowRight size={15} />
+            </Link>
           </div>
         </div>
         {secondaryNav.map((item) => (
-          <Link key={item.label} to={item.href}>{item.label}</Link>
+          <Link
+            key={item.label}
+            to={item.href}
+            className={location.pathname === item.href ? 'is-active' : undefined}
+          >
+            {item.label}
+          </Link>
         ))}
       </nav>
 

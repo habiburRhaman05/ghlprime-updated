@@ -1,13 +1,17 @@
 /* ==========================================================================
-   Homepage hero -- "Delivery Deck"
+   Homepage hero -- shell + copy column
    --------------------------------------------------------------------------
    Scoped entirely to .homepage-hero-v3 / .hh-*, so nothing here can reach
    the service-page heroes or the shared .hero rules.
 
-   Specificity note: this file is imported via HomeHeroDeck -> HomePage ->
-   App.jsx, which puts it BEFORE App.css in the cascade. So every override
-   of a global rule doubles up its selector (.hero.homepage-hero-v3 h1 beats
-   .hero h1) rather than relying on source order.
+   The right-hand illustration lives in hero-automation-core.css (.hac-*).
+   This file owns only the section shell, the ambient wash, and the copy
+   column -- headline, lede, CTAs.
+
+   Specificity note: this file is imported via HeroAutomationCore ->
+   HomePage -> App.jsx, which puts it BEFORE App.css in the cascade. So every
+   override of a global rule doubles up its selector (.hero.homepage-hero-v3
+   h1 beats .hero h1) rather than relying on source order.
    ========================================================================== */
 
 /* Doubled selector throughout: `.hero` in App.css already sets padding and
@@ -22,8 +26,8 @@
 
 .hh-grid {
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: clamp(1.8rem, 3.4vw, 3.4rem);
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: clamp(1.8rem, 3.4vw, 3.2rem);
   align-items: center;
 }
 
@@ -125,6 +129,10 @@
   border-radius: 50%;
   background: var(--primary);
   animation: hh-pulse 1.8s ease-out infinite;
+}
+@keyframes hh-pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
 /* Headline. Navy rather than #1b2d43 -- deeper, reads richer on white. */
@@ -263,643 +271,21 @@
   border-radius: 999px;
 }
 
-/* --- Visual shell -------------------------------------------------------- */
-/* Bleeds past its grid cell toward the viewport edge. .site-shell already
-   has overflow-x: clip, so the overhang is safe -- and reads deliberate
-   rather than cramped. No `contain` here: the satellites must be able to
-   sit outside the box. */
-.hh-visual {
-  position: relative;
-  z-index: 1;
-  width: min(118%, calc(100vw - 3rem));
-  perspective: 1400px;
-  animation: hh-deck-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
-}
-@keyframes hh-deck-in {
-  from { opacity: 0; transform: translateY(28px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.hh-deck-stage {
-  position: relative;
-  padding: 2.4rem 0 2.2rem 2.6rem;
-}
-
-.hh-deck-dots {
-  position: absolute;
-  inset: -8% -6%;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(32, 93, 171, 0.16) 1.2px, transparent 1.2px);
-  background-size: 14px 14px;
-  -webkit-mask-image: radial-gradient(70% 65% at 50% 45%, #000 0%, transparent 78%);
-  mask-image: radial-gradient(70% 65% at 50% 45%, #000 0%, transparent 78%);
-}
-.hh-deck-glow {
-  position: absolute;
-  inset: 12% 4% 8% 12%;
-  border-radius: 50%;
-  background: rgba(22, 132, 234, 0.16);
-  filter: blur(70px);
-  pointer-events: none;
-}
-
-.hh-deck {
-  position: relative;
-  transform-style: preserve-3d;
-}
-
-.hh-deck-plinth {
-  position: absolute;
-  inset: -14px -18px;
-  z-index: 0;
-  border-radius: 24px;
-  border: 1px solid rgba(180, 208, 240, 0.55);
-  background: linear-gradient(180deg, #ffffff, #f2f8ff);
-  transform: rotate(-1.4deg);
-  box-shadow: 0 24px 50px -28px rgba(23, 59, 108, 0.3);
-}
-
-/* --- Panel --------------------------------------------------------------- */
-/* Same material as the service-page mocks: white, 20px, #e2e8f0 hairline,
-   layered shadow. Consistency is what makes it read as one product. */
-.hh-panel {
-  position: relative;
-  z-index: 1;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow:
-    0 20px 50px rgba(15, 23, 42, 0.12),
-    0 4px 12px rgba(15, 23, 42, 0.06);
-  color: #0f172a;
-}
-
-.hh-chrome {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 12px;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
-}
-.hh-chrome-dots {
-  display: flex;
-  gap: 5px;
-  flex-shrink: 0;
-}
-.hh-chrome-dots i {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  display: block;
-}
-.hh-chrome-dots i:nth-child(1) { background: #ff5f57; }
-.hh-chrome-dots i:nth-child(2) { background: #febc2e; }
-.hh-chrome-dots i:nth-child(3) { background: #28c840; }
-
-.hh-url {
-  flex: 1;
-  min-width: 0;
-  height: 23px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 0 10px;
-  border-radius: 999px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-}
-.hh-url svg { flex-shrink: 0; }
-.hh-url-text {
-  font-size: 10.5px;
-  color: #64748b;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.hh-live {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
-}
-.hh-live-text {
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #16a34a;
-  white-space: nowrap;
-}
-
-/* Shared pulse -- same timing as the service-page mocks. */
-.hh-pulse {
-  position: relative;
-  width: 7px; height: 7px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: #16a34a;
-  display: inline-block;
-}
-.hh-pulse::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: #16a34a;
-  animation: hh-pulse 1.8s ease-out infinite;
-}
-@keyframes hh-pulse {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(2.6); opacity: 0; }
-}
-
-.hh-panel-body { padding: 16px 16px 14px; }
-
-.hh-panel-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-.hh-panel-head-copy { display: block; }
-.hh-panel-title {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: #0f172a;
-  line-height: 1.3;
-}
-.hh-panel-sub {
-  display: block;
-  margin-top: 3px;
-  font-size: 11.5px;
-  color: #64748b;
-}
-
-.hh-crew {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-.hh-crew-face {
-  width: 24px; height: 24px;
-  margin-left: -7px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  color: #fff;
-  border: 2px solid #fff;
-}
-.hh-crew-face:first-child { margin-left: 0; }
-.hh-crew-face:nth-child(1) { background: linear-gradient(135deg, #1684ea, #3da5ff); }
-.hh-crew-face:nth-child(2) { background: linear-gradient(135deg, #7e59ff, #a58bff); }
-.hh-crew-face:nth-child(3) { background: linear-gradient(135deg, #10b981, #34d3a0); }
-.hh-crew-more {
-  margin-left: 5px;
-  padding: 0 6px;
-  height: 20px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  background: #eef4fb;
-  color: #5b7590;
-  font-size: 10px;
-  font-weight: 700;
-}
-.hh-crew.compact .hh-crew-face {
-  width: 20px; height: 20px;
-  font-size: 8px;
-}
-
-/* --- KPI tiles ----------------------------------------------------------- */
-.hh-kpi-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 14px;
-}
-.hh-kpi {
-  padding: 9px 10px;
-  border-radius: 10px;
-  background: #f8fafc;
-  border: 1px solid #eef2f7;
-}
-.hh-kpi-label {
-  display: block;
-  font-size: 10px;
-  font-weight: 600;
-  color: #8093a8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.hh-kpi-value {
-  display: block;
-  margin-top: 2px;
-  font-size: 17px;
-  line-height: 1.1;
-  font-weight: 800;
-  color: #16283f;
-  /* Stops the count-up from jittering the layout digit by digit. */
-  font-variant-numeric: tabular-nums;
-}
-
-/* --- Workflow spine ------------------------------------------------------ */
-.hh-spine {
-  display: flex;
-  align-items: center;
-  margin-bottom: 14px;
-}
-.hh-spine-item {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-.hh-node {
-  width: 96px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 8px;
-  border-radius: 8px;
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-left: 7px solid var(--node-color);
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
-}
-/* Lights each node in turn so the row reads as *running*, not decorative. */
-.hh-node.is-active {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 16px -4px color-mix(in srgb, var(--node-color) 45%, transparent),
-    0 0 0 3px color-mix(in srgb, var(--node-color) 12%, transparent);
-}
-.hh-node-icon {
-  display: flex;
-  flex-shrink: 0;
-  color: var(--node-color);
-}
-.hh-node-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: #1e293b;
-  line-height: 1.2;
-}
-.hh-conn {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  padding: 0 3px;
-  color: #94a3b8;
-  transition: color 0.35s ease;
-}
-.hh-conn.is-active { color: var(--primary); }
-.hh-conn-line {
-  width: 14px;
-  height: 1.5px;
-  display: block;
-  background: #cbd5e1;
-  transition: background 0.35s ease;
-}
-.hh-conn.is-active .hh-conn-line { background: var(--primary); }
-.hh-conn svg { margin-left: -3px; }
-
-/* --- Live feed ----------------------------------------------------------- */
-.hh-feed {
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: #f8fafc;
-}
-.hh-feed-head {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 6px;
-}
-.hh-feed-title {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: #0f172a;
-}
-.hh-feed-updated {
-  margin-left: auto;
-  font-size: 10.5px;
-  color: #94a3b8;
-}
-.hh-feed-rows {
-  /* Locked height so rows cycling in and out never resize the panel.
-     position:relative is load-bearing: AnimatePresence mode="popLayout"
-     absolutely positions the exiting row, which would otherwise anchor to
-     .hh-panel and visibly fly to the panel corner every cycle. */
-  position: relative;
-  height: 84px;
-  overflow: hidden;
-}
-.hh-feed-row {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  height: 28px;
-}
-.hh-feed-dot {
-  width: 7px; height: 7px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  display: inline-block;
-}
-.hh-feed-dot.tone-green { background: #16a34a; }
-.hh-feed-dot.tone-blue { background: #3b82f6; }
-.hh-feed-dot.tone-amber { background: #f59e0b; }
-.hh-feed-text {
-  font-size: 11.5px;
-  color: #475569;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.hh-feed-time {
-  margin-left: auto;
-  flex-shrink: 0;
-  font-size: 11px;
-  color: #94a3b8;
-}
-
-.hh-statusbar {
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: #f8fafc;
-  border-top: 1px solid #e2e8f0;
-  font-size: 11px;
-  color: #64748b;
-}
-.hh-statusbar i {
-  width: 1px;
-  height: 14px;
-  display: block;
-  background: #e2e8f0;
-}
-
-/* --- Satellites ---------------------------------------------------------- */
-.hh-orbit {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  transform-style: preserve-3d;
-}
-.hh-orbit > * { pointer-events: auto; }
-
-/* Three nested layers on purpose, because three independent transforms have
-   to coexist: depth (translateZ), entrance, and the idle bob. Collapsing
-   them means one animation clobbers another's transform. */
-.hh-float { position: absolute; }
-.hh-float-ai {
-  width: 215px;
-  top: -1.4rem;
-  left: clamp(-3.2rem, -2.4vw, -1rem);
-  transform: translateZ(44px);
-}
-.hh-float-support {
-  width: 230px;
-  bottom: -1.2rem;
-  left: clamp(-2.4rem, -1.8vw, -0.6rem);
-  transform: translateZ(28px);
-}
-.hh-float-cert {
-  width: 194px;
-  top: 2.2rem;
-  right: clamp(-1.8rem, -1.4vw, -0.4rem);
-  transform: translateZ(60px);
-}
-
-.hh-float-in {
-  animation: hh-float-pop 0.5s cubic-bezier(0.34, 1.5, 0.64, 1) both;
-}
-.hh-float-ai .hh-float-in { animation-delay: 0.64s; }
-.hh-float-support .hh-float-in { animation-delay: 0.74s; }
-.hh-float-cert .hh-float-in { animation-delay: 0.84s; }
-@keyframes hh-float-pop {
-  from { opacity: 0; transform: translateY(14px) scale(0.9); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.hh-float-inner {
-  padding: 11px 12px;
-  border-radius: 14px;
-  /* Slightly translucent so the backdrop blur actually does something --
-     at 0.97 alpha it was pure GPU cost for no visible effect. */
-  background: rgba(255, 255, 255, 0.86);
-  border: 1px solid #e2e8f0;
-  backdrop-filter: blur(10px);
-  box-shadow:
-    0 18px 40px -14px rgba(15, 23, 42, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-/* Long periods, small amplitudes, and negative delays so they never fall
-   into sync -- synchronised bobbing is the giveaway of cheap work. */
-.hh-float-ai .hh-float-inner { animation: hh-bob 7s ease-in-out -2.1s infinite; }
-.hh-float-support .hh-float-inner { animation: hh-bob-sm 9s ease-in-out -4.4s infinite; }
-.hh-float-cert .hh-float-inner { animation: hh-bob 6s ease-in-out -0.8s infinite; }
-@keyframes hh-bob {
-  0%, 100% { transform: translateY(-5px); }
-  50% { transform: translateY(5px); }
-}
-@keyframes hh-bob-sm {
-  0%, 100% { transform: translateY(4px); }
-  50% { transform: translateY(-4px); }
-}
-/* Hover parks the drift -- feels controlled instead of twitchy. */
-.hh-float:hover .hh-float-inner {
-  animation-play-state: paused;
-  transform: translateY(-6px);
-  border-color: rgba(22, 132, 234, 0.3);
-  box-shadow:
-    0 26px 52px -16px rgba(15, 23, 42, 0.34),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-.hh-float-top {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-.hh-float-icon {
-  width: 26px; height: 26px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-}
-.hh-float-icon.tone-blue { background: #edf5ff; color: var(--primary); }
-.hh-float-icon.tone-green { background: #e9faf1; color: #10b981; }
-.hh-float-title {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: #0f172a;
-  line-height: 1.25;
-}
-.hh-float-meta {
-  display: block;
-  margin-top: 7px;
-  font-size: 10.5px;
-  color: #64748b;
-}
-.hh-float-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 9px;
-}
-.hh-float-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #16a34a;
-}
-
-.hh-wave {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 20px;
-  margin-top: 9px;
-}
-.hh-wave i {
-  width: 3px;
-  height: 100%;
-  display: block;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #3da5ff, var(--primary));
-  transform-origin: bottom;
-  animation: hh-wave 1.05s ease-in-out infinite;
-}
-.hh-wave i:nth-child(2) { animation-delay: 0.12s; }
-.hh-wave i:nth-child(3) { animation-delay: 0.24s; }
-.hh-wave i:nth-child(4) { animation-delay: 0.36s; }
-.hh-wave i:nth-child(5) { animation-delay: 0.48s; }
-@keyframes hh-wave {
-  0%, 100% { transform: scaleY(0.35); }
-  50% { transform: scaleY(1); }
-}
-
-.hh-cert-logo {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  object-fit: contain;
-}
-.hh-cert-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 8px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: #edf5ff;
-  color: var(--primary-dark);
-  font-size: 10px;
-  font-weight: 700;
-}
-.hh-cert-badge svg { flex-shrink: 0; }
-
-/* Signal line from the AI card into the AI Qualify node. Two stacked paths:
-   a static hairline plus a short travelling dash. */
-.hh-signal {
-  position: absolute;
-  left: 100%;
-  top: 40%;
-  width: 82px;
-  height: 44px;
-  overflow: visible;
-  pointer-events: none;
-}
-.hh-signal-base {
-  stroke: #cbd5e1;
-  stroke-width: 1.2;
-}
-.hh-signal-dash {
-  stroke: var(--primary);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-dasharray: 7 105;
-  animation: hh-signal 2.4s linear infinite;
-}
-@keyframes hh-signal {
-  from { stroke-dashoffset: 112; }
-  to { stroke-dashoffset: 0; }
-}
-
 /* --- Responsive ---------------------------------------------------------- */
 /* Handled entirely here rather than in App.css's shared collapse lists. */
 @media (max-width: 1180px) {
   .hh-grid { gap: 2rem; }
-  .hh-deck { transform-origin: center left; }
-  .hh-deck-stage { padding-left: 2.2rem; }
 }
 
 @media (max-width: 1024px) {
   .hh-grid {
     grid-template-columns: 1fr;
-    gap: 2.6rem;
+    gap: 2.4rem;
   }
   .hh-grid .hh-copy {
     max-width: 40rem;
     margin-inline: auto;
   }
-  .hh-visual {
-    width: 100%;
-    margin-inline: auto;
-    max-width: 40rem;
-  }
-  /* The stage carries a 2.6rem left inset for the desktop layout, where the
-     deck sits in the right-hand column and leans away from the copy. Once
-     the grid stacks and the visual is centred, that inset just pushes it
-     visibly off-centre -- and the left-biased transform origin skews the
-     tilt with it. */
-  .hh-deck-stage { padding: 2.2rem 0 2rem; }
-  .hh-deck { transform-origin: center; }
-  /* Third satellite is the first thing to go -- it adds clutter once the
-     composition narrows. */
-  .hh-float-cert { display: none; }
-}
-
-/* Satellites leave the absolute layer here rather than at 720: between these
-   two widths the panel is already capped at 40rem while the cards keep their
-   full 215-230px, so they overlap most of the panel's edges and hang past
-   the viewport on the narrower end of the band. */
-@media (max-width: 900px) {
-  .hh-visual { perspective: none; }
-  .hh-deck-stage { padding: 0; }
-  .hh-deck-plinth { display: none; }
-  .hh-orbit {
-    position: static;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-top: 0.9rem;
-  }
-  .hh-float {
-    position: static;
-    width: auto;
-    flex: 1 1 200px;
-    transform: none;
-  }
-  .hh-float-cert { display: block; }
-  .hh-signal { display: none; }
 }
 
 @media (max-width: 720px) {
@@ -907,59 +293,13 @@
   .hero.homepage-hero-v3 h1 { font-size: clamp(2.1rem, 8vw, 2.5rem); }
   .hero-cta.hh-cta { width: 100%; }
   .hero-cta.hh-cta > * { width: 100%; }
-
-  .hh-kpi-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hh-kpi-row > :nth-child(3) { display: none; }
-  .hh-feed-rows { height: 56px; }
-  .hh-spine {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
-  }
-  .hh-statusbar { gap: 8px; font-size: 10px; }
-}
-
-@media (max-width: 520px) {
-  /* Two satellites side by side would each be ~150px here, which truncates
-     "24/7 White-Label Support" mid-word -- one per row instead. */
-  .hh-float { flex: 1 1 100%; }
-  /* 4 x 96px nodes plus connectors need ~430px; trimming the node keeps the
-     spine's horizontal scroll to a nudge rather than a full drag. */
-  .hh-node { width: 84px; }
-  .hh-panel-head { gap: 0.6rem; }
-  .hh-crew-more { display: none; }
-}
-
-@media (max-width: 420px) {
-  .hh-deck-dots { display: none; }
-  .hh-node { width: 78px; }
-  .hh-kpi-value { font-size: 15px; }
-  /* Wrap rather than shrink further -- 10px was already the floor. The
-     fixed 32px height has to become a minimum or the second line clips. */
-  .hh-statusbar {
-    flex-wrap: wrap;
-    row-gap: 2px;
-    height: auto;
-    min-height: 32px;
-    padding: 5px 10px;
-  }
-}
-
-/* Tilt is mouse-only -- it makes no sense on touch and would fight scroll. */
-@media (hover: none), (pointer: coarse) {
-  .hh-deck { transform: none !important; }
 }
 
 /* --- Reduced motion ------------------------------------------------------ */
-/* Loops off, reveals resolved to their end state. The JS side separately
-   freezes the feed, the spine and the count-ups. */
+/* Loops off, reveals resolved to their end state. */
 @media (prefers-reduced-motion: reduce) {
   .hh-aurora,
-  .hh-float-inner,
-  .hh-wave i,
-  .hh-pulse::after,
-  .hh-pill-dot::after,
-  .hh-signal-dash {
+  .hh-pill-dot::after {
     animation: none !important;
   }
   .hh-line {
@@ -970,13 +310,10 @@
     transform: scaleX(1);
     animation: none;
   }
-  .hh-visual,
-  .hh-float-in,
   .hero.homepage-hero-v3 p.hh-lede,
   .hh-cta > * {
     animation-duration: 0.2s !important;
     animation-delay: 0s !important;
   }
-  .hh-deck { transform: none !important; }
   .primary-pill.hh-cta-primary:hover::after { animation: none; }
 }

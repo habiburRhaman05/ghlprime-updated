@@ -16,7 +16,7 @@ import ShippedEvidenceSection from '../components/ShippedEvidenceSection'
 import { ArrowRight, Bot, BrainCircuit, CalendarCheck2, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Code2, Contact, GraduationCap, Headphones, LayoutDashboard, LayoutGrid, MessageSquareText, RefreshCw, Rocket, Share2, ShieldCheck, Sparkles, TrendingUp, UserPlus, Users, Video, Webhook, Workflow, Wrench, X, Zap } from 'lucide-react'
 import LifeAtGHL from '../components/home-page/LifeAtGHL'
 import TeamTestimonials from '../components/home-page/TeamTestimonials'
-import HomeHeroDeck from '../components/hero/HomeHeroDeck'
+import HeroAutomationCore from '../components/hero/HeroAutomationCore'
 import { div } from 'framer-motion/client'
 
 const SITE_URL = 'https://ghlprime.com'
@@ -1519,7 +1519,7 @@ export default function HomePage() {
 
       {/* Hero. Copy is unchanged word for word -- the h1 only re-breaks
           across four lines so it sits in the narrower left column beside
-          the illustration (see HomeHeroDeck). Entrance animations are CSS
+          the illustration (see HeroAutomationCore). Entrance animations are CSS
           rather than framer because the h1 is the LCP element and CSS
           paints without waiting for hydration. */}
       <section className="hero container homepage-hero-v3">
@@ -1583,7 +1583,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <HomeHeroDeck />
+          <HeroAutomationCore />
         </div>
       </section>
 
