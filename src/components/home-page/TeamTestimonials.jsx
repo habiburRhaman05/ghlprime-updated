@@ -55,18 +55,7 @@ import './team-testimonials.css'
       { text: '.' },
     ],
   },
-  {
-    name: 'Andrea Bagtas',
-    role: 'GoHighLevel Automation Expert & Project Manager',
-    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/6a35199f0a683b64fe00dcb3.webp',
-    segments: [
-      { text: 'Managing automation projects across multiple agencies used to mean constant firefighting. ' },
-      { text: 'At GHL Prime our process is tight enough that I can actually plan ahead instead of just reacting', highlight: true },
-      { text: ', and that changes everything for how clients experience us. ' },
-      { text: 'Deadlines stopped feeling like a gamble', highlight: true },
-      { text: '.' },
-    ],
-  },
+  
   {
     name: 'Mahbubullah',
     role: 'Full-Stack Developer',
@@ -269,10 +258,6 @@ export default function TeamTestimonials({ testimonials = TESTIMONIALS, autoPlay
         '--tt-pitch-h': `${PITCH_H}px`,
         '--tt-viewport': `${PITCH_V * VISIBLE}px`,
       }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
       onKeyDown={onKeyDown}
       aria-roledescription="carousel"
       aria-label="Team testimonials"
@@ -290,7 +275,19 @@ export default function TeamTestimonials({ testimonials = TESTIMONIALS, autoPlay
           <p>The people building GHL Prime, in their own words.</p>
         </motion.div>
 
-        <div className="tt-stage">
+        {/* Pause-on-hover lives on the stage, NOT the section: the section is
+            a full-bleed band, so hovering it meant "cursor anywhere on screen
+            while this is scrolled into view", which left autoplay paused
+            almost permanently. The stage is the actual content -- rail, quote
+            and arrows -- so pausing there still does what it's meant to
+            (don't advance mid-read) without swallowing the whole page. */}
+        <div
+          className="tt-stage"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
+        >
           <div className="tt-rail" ref={railRef}>
             <motion.div
               className="tt-rail-track"
