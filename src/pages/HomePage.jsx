@@ -15,6 +15,7 @@ import ShippedEvidenceSection from '../components/ShippedEvidenceSection'
 import { ArrowRight, Bot, BrainCircuit, CalendarCheck2, ClipboardCheck, Clock3, Code2, Contact, GraduationCap, LayoutDashboard, LayoutGrid, MessageSquareText, RefreshCw, Share2, ShieldCheck, Sparkles, TrendingUp, Users, Video, Webhook, Workflow, Wrench, X, Zap } from 'lucide-react'
 import LifeAtGHL from '../components/home-page/LifeAtGHL'
 import TeamTestimonials from '../components/home-page/TeamTestimonials'
+import { div } from 'framer-motion/client'
 
 const SITE_URL = 'https://ghlprime.com'
 const HOMEPAGE_LAST_MODIFIED = '2026-05-24'
@@ -1182,7 +1183,7 @@ function FinalCtaSection() {
 function LeadersSection() {
   const [leaders, setLeaders] = useState([])
   useEffect(() => { fetchTeamMembers().then(setLeaders) }, [])
-  if (!leaders.length) return null
+  
   return (
     <section className="section section-white mentor-showcase-section leader-card-section">
       <div className="container">
@@ -1191,7 +1192,11 @@ function LeadersSection() {
           <h2>Meet Your Mentors</h2>
           <p>Our leaders bring years of experience building automation systems, CRM infrastructures, and AI-powered workflows for growth-focused businesses.</p>
         </div>
+       
+        
+   
         <LeaderCardGrid leaders={leaders} />
+        
       </div>
     </section>
   )
@@ -1200,7 +1205,7 @@ function LeadersSection() {
 function ExpertsSection() {
   const [experts, setExperts] = useState([])
   useEffect(() => { fetchTeamPageExperts().then(setExperts) }, [])
-  if (!experts.length) return null
+
   return (
     <section className="section section-white experts-section">
       <div className="container">
@@ -1209,7 +1214,7 @@ function ExpertsSection() {
           <h2>Specialists supporting the work behind the scenes.</h2>
           <p>Focused team members supporting design, systems, delivery, and execution across GHL Prime projects.</p>
         </div>
-        <div className="experts-grid">
+    {  !experts.length ?  <div> failed to fetch teams</div> :  <div className="experts-grid">
           {experts.map((member, index) => (
             <motion.article
               key={member.id || member.name}
@@ -1229,7 +1234,7 @@ function ExpertsSection() {
               </div>
             </motion.article>
           ))}
-        </div>
+        </div>}
       </div>
     </section>
   )
@@ -1323,6 +1328,7 @@ export default function HomePage() {
       <TrainingSection />
       <VibeCodingSection />
       <WhyChooseSection />
+     
       <LeadersSection />
       <CertificationsSection />
       <section className="section section-white">

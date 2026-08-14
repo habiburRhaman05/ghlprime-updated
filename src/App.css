@@ -1035,13 +1035,7 @@ button { font: inherit; }
 .agency-service-card.tone-teal { --tone-a: #0d95a4; --tone-b: #57d7df; }
 .agency-service-card.tone-red { --tone-a: #ef4740; --tone-b: #ff8f82; }
 
-.agency-service-card:hover {
-  border-color: rgba(15, 34, 54, 0.1);
-  box-shadow:
-    0 30px 56px rgba(7, 18, 32, 0.32),
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-    0 22px 40px -14px var(--tone-a);
-}
+
 .agency-service-card .homepage-service-icon {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
