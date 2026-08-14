@@ -436,22 +436,71 @@ button { font: inherit; }
   background: transparent;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+}
+/* Faint dot texture in the top-left corner, per the reference. Masked to a
+   corner wedge so it never runs under the copy. */
+.wwa-dot-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12rem;
+  height: 9rem;
+  background-image: radial-gradient(rgba(46, 115, 240, 0.2) 1.4px, transparent 1.4px);
+  background-size: 14px 14px;
+  mask-image: radial-gradient(circle at top left, #000 25%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle at top left, #000 25%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+.what-we-are-section .what-we-are-layout {
+  position: relative;
+  z-index: 1;
 }
 .what-we-are-section .container {
   max-width: 1280px;
 }
 .what-we-are-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  /* Near-even split rather than the old 0.88/1.12. The image column drives
+     its own height from the photo's aspect ratio, so giving it less width
+     also makes it shorter -- that plus the feature row below is what brings
+     the two columns to roughly matching heights. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 3.2rem;
   align-items: center;
 }
 .what-we-are-copy {
   padding-right: .5rem;
 }
+.wwa-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin-bottom: 1.1rem;
+}
 .what-we-are-copy .eyebrow-label {
   color: #2e73f0;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+/* Trailing rule + terminal dot, as in the reference. */
+.wwa-eyebrow-rule {
+  position: relative;
+  flex: 0 1 4.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(46, 115, 240, .5), rgba(46, 115, 240, 0));
+}
+.wwa-eyebrow-rule::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: .35rem;
+  height: .35rem;
+  border-radius: 50%;
+  background: #2e73f0;
+  transform: translate(-.1rem, -50%);
 }
 .what-we-are-heading {
   margin: 0 0 1.15rem;
@@ -462,9 +511,23 @@ button { font: inherit; }
   font-weight: 600;
 }
 .what-we-are-heading .accent {
+  position: relative;
   color: #2e73f0;
   font-style: italic;
   font-weight: 500;
+}
+/* Hand-drawn-ish underline sweep beneath the accent phrase, matching the
+   reference. Sits on the last line only, which is why it hangs off the
+   inline box rather than being a border. */
+.what-we-are-heading .accent::after {
+  content: '';
+  position: absolute;
+  left: .05em;
+  right: .25em;
+  bottom: -.06em;
+  height: .09em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(46, 115, 240, 0), #2e73f0 22%, #2e73f0 72%, rgba(46, 115, 240, 0));
 }
 .what-we-are-lede {
   max-width: 32rem;
@@ -472,6 +535,72 @@ button { font: inherit; }
   color: #5a6478;
   font-size: 1rem;
   line-height: 1.7;
+}
+.wwa-lede-hl {
+  color: #2e73f0;
+  font-weight: 700;
+}
+
+/* Feature row ------------------------------------------------------------- */
+.wwa-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin-top: clamp(2rem, 3.5vw, 2.9rem);
+}
+.wwa-feature {
+  --tone-a: #2e73f0;
+  --tone-soft: #e8f0ff;
+  --tone-card: rgba(46, 115, 240, 0.05);
+  --tone-line: rgba(46, 115, 240, 0.13);
+  padding: 1.3rem 1.2rem 1.4rem;
+  border-radius: 1.15rem;
+  background: var(--tone-card);
+  border: 1px solid var(--tone-line);
+  transition: background-color .3s ease, border-color .3s ease, transform .3s cubic-bezier(.22,1,.36,1);
+}
+.wwa-feature.tone-blue {
+  --tone-a: #2e73f0; --tone-soft: #e3edff;
+  --tone-card: rgba(46, 115, 240, 0.05); --tone-line: rgba(46, 115, 240, 0.13);
+}
+.wwa-feature.tone-green {
+  --tone-a: #1c9c60; --tone-soft: #ddf5e8;
+  --tone-card: rgba(28, 156, 96, 0.05); --tone-line: rgba(28, 156, 96, 0.14);
+}
+.wwa-feature.tone-purple {
+  --tone-a: #7e59ff; --tone-soft: #ece5ff;
+  --tone-card: rgba(126, 89, 255, 0.05); --tone-line: rgba(126, 89, 255, 0.13);
+}
+.wwa-feature:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--tone-a) 28%, transparent);
+  background: color-mix(in srgb, var(--tone-a) 8%, transparent);
+}
+.wwa-feature-icon {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .95rem;
+  /* Solid tint, a shade deeper than the card behind it, so the tile still
+     separates now that the card itself is tinted. */
+  background: var(--tone-soft);
+  color: var(--tone-a);
+}
+.wwa-feature strong {
+  display: block;
+  color: #0d1730;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.wwa-feature p {
+  margin: .45rem 0 0;
+  color: #5a6478;
+  font-size: .92rem;
+  line-height: 1.55;
 }
 
 .what-we-are-image-card {
@@ -486,6 +615,156 @@ button { font: inherit; }
   width: 100%;
   aspect-ratio: 1080 / 962;
   object-fit: cover;
+}
+
+/* Slider variant of the image card ---------------------------------------- */
+/* The card box is deliberately unchanged -- the aspect ratio simply moves
+   from the <img> to the stage, because slides are absolutely stacked (two
+   are in the DOM at once during a crossfade) and so can't size the card
+   themselves. Rendered dimensions stay identical to the single-image
+   version. */
+.what-we-are-slider {
+  position: relative;
+}
+.wwa-stage {
+  position: relative;
+  width: 100%;
+  /* Fallback only -- the live value is set inline from the photo's own
+     dimensions so the frame matches the image exactly (full width, full
+     height, no crop). Eased so swapping between differently-shaped photos
+     resizes smoothly instead of snapping. */
+  aspect-ratio: 1080 / 962;
+  transition: aspect-ratio .45s cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwa-stage { transition: none; }
+}
+.wwa-slide {
+  position: absolute;
+  inset: 0;
+  will-change: opacity, transform;
+}
+/* The photo itself is never cropped -- `contain` guarantees the whole frame
+   is visible whatever aspect ratio comes out of the gallery. `cover` was
+   cutting the top/sides off anything that wasn't 1080x962. */
+.wwa-slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  z-index: 1;
+}
+/* ...and a blurred, over-scaled copy of the same image fills whatever space
+   `contain` leaves over, so the card still reads as edge-to-edge artwork
+   instead of a photo floating on grey bars. */
+.wwa-slide-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.18);
+  filter: blur(26px) saturate(1.15);
+  z-index: 0;
+}
+.wwa-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: .95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  z-index: 2;
+}
+.wwa-dot {
+  width: .45rem;
+  height: .45rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.55);
+  /* Photos vary, so the inactive dots need their own contrast rather than
+     relying on whatever happens to be behind them. */
+  box-shadow: 0 1px 4px rgba(9, 20, 36, 0.45);
+  transition: width .35s cubic-bezier(.22,1,.36,1), background-color .35s ease;
+}
+.wwa-dot:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+.wwa-dot.is-active {
+  width: 1.5rem;
+  background: #ffffff;
+}
+
+/* Hover arrows, sitting on the same bottom line as the dots ---------------- */
+.wwa-arrow {
+  position: absolute;
+  bottom: .8rem;
+  z-index: 3;
+  width: 2.3rem;
+  height: 2.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #10253f;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 6px 18px rgba(9, 20, 36, 0.28);
+  opacity: 0;
+  transition: opacity .3s ease, transform .3s cubic-bezier(.22,1,.36,1), background-color .2s ease;
+}
+.wwa-arrow.prev { left: .8rem; transform: translateX(-8px); }
+.wwa-arrow.next { right: .8rem; transform: translateX(8px); }
+.what-we-are-slider:hover .wwa-arrow,
+/* Keyboard users never trigger :hover -- without this the controls would be
+   focusable but invisible. */
+.wwa-arrow:focus-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.wwa-arrow:hover {
+  background: #ffffff;
+}
+
+/* Touch devices have no hover state to reveal the arrows, so show them. */
+@media (hover: none) {
+  .wwa-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 900px) {
+  /* The three features get cramped well before the layout stacks at 1100px,
+     so tighten the padding and gap rather than letting text wrap oddly. */
+  .wwa-features { gap: .8rem; }
+  .wwa-feature { padding: 1.1rem 1rem 1.2rem; }
+  .wwa-feature-icon { width: 2.8rem; height: 2.8rem; border-radius: .9rem; }
+  .wwa-feature p { font-size: .88rem; }
+}
+
+@media (max-width: 560px) {
+  .wwa-dots { bottom: .7rem; }
+  .wwa-dot.is-active { width: 1.2rem; }
+  .wwa-arrow { width: 2rem; height: 2rem; bottom: .6rem; }
+  .wwa-arrow.prev { left: .6rem; }
+  .wwa-arrow.next { right: .6rem; }
+  /* Below this the 3-up row squeezes each item to ~90px -- two columns keeps
+     the labels on one line. */
+  .wwa-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1rem;
+  }
+  .wwa-dot-grid { width: 8rem; height: 6rem; }
 }
 
 .diff-card {

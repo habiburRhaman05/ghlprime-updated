@@ -6,82 +6,11 @@ import './team-testimonials.css'
 // TODO: placeholder copy + avatars. Swap for real team quotes and photos
 // (the Admin > Team manager already stores headshots via src/lib/teamApi.js).
  const TESTIMONIALS = [
-  {
-    name: 'Abdullah All Meyad',
-    role: 'AI & Automation Expert',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt1/240/280',
-    segments: [
-      { text: "I've built automation systems before, but " },
-      { text: 'GHL Prime is where I finally get to push AI workflows to their full potential', highlight: true },
-      { text: '. The team trusts me to experiment, ship fast, and actually see ' },
-      { text: 'the impact on client accounts within days, not months', highlight: true },
-      { text: '.' },
-    ],
-  },
-  {
-    name: 'Abdul Hamid',
-    role: 'Sales Funnel & Web Developer',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt2/240/280',
-    segments: [
-      { text: 'Every funnel I build here has to actually convert, not just look good. ' },
-      { text: 'What I love about GHL Prime is that the whole team obsesses over results the same way I do', highlight: true },
-      { text: ', from the copy, to the code, to the final call to action. ' },
-      { text: "That kind of alignment is rare on a dev team", highlight: true },
-      { text: '.' },
-    ],
-  },
-  {
-    name: 'Andrea Bagtas',
-    role: 'GoHighLevel Automation Expert & Project Manager',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt3/240/280',
-    segments: [
-      { text: 'Managing automation projects across multiple agencies used to mean constant firefighting. ' },
-      { text: 'At GHL Prime our process is tight enough that I can actually plan ahead instead of just reacting', highlight: true },
-      { text: ', and that changes everything for how clients experience us. ' },
-      { text: 'Deadlines stopped feeling like a gamble', highlight: true },
-      { text: '.' },
-    ],
-  },
-  {
-    name: 'Mahbubullah',
-    role: 'Full-Stack Developer',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt4/240/280',
-    segments: [
-      { text: "I've worked on teams where design, backend, and automation live in separate silos. " },
-      { text: 'GHL Prime is the first place I have seen those three actually talk to each other every day', highlight: true },
-      { text: ', and it shows in how fast we ship. ' },
-      { text: 'Nobody hands off half a solution and walks away', highlight: true },
-      { text: '.' },
-    ],
-  },
-  {
-    name: 'Md. Rakibul Hasan',
-    role: 'Workflow Automation Consultant',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt5/240/280',
-    segments: [
-      { text: 'Clients come to us with workflows held together with patchwork fixes. ' },
-      { text: 'What GHL Prime taught me is that a good automation consultant does not just fix what is broken', highlight: true },
-      { text: ', they rebuild the system so ' },
-      { text: 'it never breaks the same way twice', highlight: true },
-      { text: '.' },
-    ],
-  },
-  {
-    name: 'Md. Rakib Hasan',
-    role: 'AI & Automation Expert',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt6/240/280',
-    segments: [
-      { text: 'AI is only as good as the workflow it is plugged into. ' },
-      { text: 'At GHL Prime I sit with the strategy side before I ever touch a build', highlight: true },
-      { text: ', so the automation actually solves the problem instead of ' },
-      { text: 'just automating the mess', highlight: true },
-      { text: '.' },
-    ],
-  },
+
   {
     name: 'Jewel Rana',
     role: 'CEO & Co-Founder',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt7/240/280',
+    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69a7daecb701feb9ee7f20f7.png',
     segments: [
       { text: 'We started GHL Prime because too many freelancers and agencies were drowning in manual work they never needed to do. ' },
       { text: 'Every system we build gets judged by one question: does this actually give our client their time back', highlight: true },
@@ -93,7 +22,7 @@ import './team-testimonials.css'
   {
     name: 'Niyamul Islam Sajal',
     role: 'COO & Co-Founder',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt8/240/280',
+    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69a7daec618c8d0100ae531c.png',
     segments: [
       { text: 'My job is making sure the CRM infrastructure and AI workflows we build for clients hold up long after the project ends. ' },
       { text: 'GHL Prime is not interested in automations that break the moment we walk away', highlight: true },
@@ -102,6 +31,79 @@ import './team-testimonials.css'
       { text: '.' },
     ],
   },
+  {
+    name: 'Abdullah All Meyad',
+    role: 'AI & Automation Expert',
+    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/697ae7d9eae6bb3819baa49f.png',
+    segments: [
+      { text: "I've built automation systems before, but " },
+      { text: 'GHL Prime is where I finally get to push AI workflows to their full potential', highlight: true },
+      { text: '. The team trusts me to experiment, ship fast, and actually see ' },
+      { text: 'the impact on client accounts within days, not months', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Abdul Hamid',
+    role: 'Sales Funnel & Web Developer',
+    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69aa9f08618c8d73381ef7d9.svg',
+    segments: [
+      { text: 'Every funnel I build here has to actually convert, not just look good. ' },
+      { text: 'What I love about GHL Prime is that the whole team obsesses over results the same way I do', highlight: true },
+      { text: ', from the copy, to the code, to the final call to action. ' },
+      { text: "That kind of alignment is rare on a dev team", highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Andrea Bagtas',
+    role: 'GoHighLevel Automation Expert & Project Manager',
+    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/6a35199f0a683b64fe00dcb3.webp',
+    segments: [
+      { text: 'Managing automation projects across multiple agencies used to mean constant firefighting. ' },
+      { text: 'At GHL Prime our process is tight enough that I can actually plan ahead instead of just reacting', highlight: true },
+      { text: ', and that changes everything for how clients experience us. ' },
+      { text: 'Deadlines stopped feeling like a gamble', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Mahbubullah',
+    role: 'Full-Stack Developer',
+    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69aa9f087bdf386b45949128.svg',
+    segments: [
+      { text: "I've worked on teams where design, backend, and automation live in separate silos. " },
+      { text: 'GHL Prime is the first place I have seen those three actually talk to each other every day', highlight: true },
+      { text: ', and it shows in how fast we ship. ' },
+      { text: 'Nobody hands off half a solution and walks away', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Md. Rakibul Hasan',
+    role: 'Workflow Automation Consultant',
+    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69ae608680d35968fc757ab8.svg',
+    segments: [
+      { text: 'Clients come to us with workflows held together with patchwork fixes. ' },
+      { text: 'What GHL Prime taught me is that a good automation consultant does not just fix what is broken', highlight: true },
+      { text: ', they rebuild the system so ' },
+      { text: 'it never breaks the same way twice', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Md. Rakib Hasan',
+    role: 'AI & Automation Expert',
+    avatar: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/6a12a7bffe2210f89e5edbc6.png',
+    segments: [
+      { text: 'AI is only as good as the workflow it is plugged into. ' },
+      { text: 'At GHL Prime I sit with the strategy side before I ever touch a build', highlight: true },
+      { text: ', so the automation actually solves the problem instead of ' },
+      { text: 'just automating the mess', highlight: true },
+      { text: '.' },
+    ],
+  },
+  
 ];
 
 // Slot pitch = face size + gap. Kept in JS as the single source of truth and

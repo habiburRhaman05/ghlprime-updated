@@ -97,12 +97,12 @@
      itself, not "pointer", even though they're also clickable. */
   cursor: grab;
   background: var(--soft-slate);
-  box-shadow: 0 14px 32px -18px rgba(28, 61, 110, 0.5);
+  /* box-shadow: 0 14px 32px -18px rgba(28, 61, 110, 0.5); */
   /* Inactive faces read as "background" -- desaturated and dimmed -- so the
      active one carries the eye without needing a heavier treatment. */
-  filter: grayscale(1);
-  opacity: 0.5;
-  transition: filter 0.45s ease, opacity 0.45s ease, box-shadow 0.45s ease,
+  /* filter: grayscale(1); */
+  /* opacity: 0.5; */
+  transition: filter 0.45s ease, opacity 0.45s ease, 0.45s ease,
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   transform-origin: center;
 }

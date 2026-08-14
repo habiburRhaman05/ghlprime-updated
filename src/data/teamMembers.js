@@ -4,7 +4,7 @@ export const teamMembers = [
     name: 'Jewel Rana',
     role: 'CEO & Co-Founder',
     description:
-      'Jewel Rana is a business coach and agency leader who has helped freelancers and service providers build profitable careers and scalable service businesses. As CEO of GHL Prime, he leads strategy, client growth, and the vision behind building one of the most specialized GoHighLevel expert teams available to agencies.',
+      'Jewel Rana is a business coach and agency leader who has helped freelancers and service providers build profitable careers and scalable service businesse',
     image_url: '/jewel-rana.png',
     sort_order: 1,
     linkedin_url: 'https://www.linkedin.com/in/thejewelrana/',
@@ -19,7 +19,7 @@ export const teamMembers = [
     name: 'Niyamul Islam Sajal',
     role: 'Co-Founder',
     description:
-      'Automation architect focused on GoHighLevel systems, AI-enabled workflows, CRM optimization, and scalable backend operations.',
+      'Niyamul Islam Sajal is a senior automation engineer with extensive experience building AI-powered systems, CRM infrastructures, and custom integrations for agencies and fast-growing businesses.',
     image_url: '/niyamul-islam-sajal.png',
     sort_order: 2,
     linkedin_url: 'https://www.linkedin.com/in/niyamulislam/',
