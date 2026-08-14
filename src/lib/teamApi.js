@@ -23,7 +23,13 @@ function fallbackExperts() {
 
 export async function fetchTeamMembers() {
   const { data, error } = await apiGet('/api/team-members')
-  if (error || !data) return sortByDisplayOrder(teamMembers)
+  // `data` can resolve to a valid, empty array (API reachable, but the
+  // team_members table has nothing in it) -- `!data` alone doesn't catch
+  // that since `![]` is false, so the section silently rendered nothing
+  // instead of falling back to the bundled team list. Falling back on
+  // "nothing usable came back" (missing OR empty) instead of just "nothing
+  // came back" means the section always has content.
+  if (error || !data || !data.length) return sortByDisplayOrder(teamMembers)
   return sortByDisplayOrder(data)
 }
 

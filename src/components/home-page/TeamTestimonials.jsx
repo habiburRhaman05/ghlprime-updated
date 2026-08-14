@@ -5,80 +5,104 @@ import './team-testimonials.css'
 
 // TODO: placeholder copy + avatars. Swap for real team quotes and photos
 // (the Admin > Team manager already stores headshots via src/lib/teamApi.js).
-const TESTIMONIALS = [
+ const TESTIMONIALS = [
   {
-    name: 'Tanvir Ahmed',
-    role: 'Backend Developer',
+    name: 'Abdullah All Meyad',
+    role: 'AI & Automation Expert',
     avatar: 'https://picsum.photos/seed/ghlprime-tt1/240/280',
     segments: [
-      { text: 'Before joining, I thought remote teams always feel disconnected. ' },
-      { text: 'GHL Prime proved me wrong', highlight: true },
-      { text: '. Everyone actually shows up for each other, no matter the timezone. My manager checks in on ' },
-      { text: "how I'm doing, not just what I'm shipping", highlight: true },
-      { text: ", and that's rare to find." },
-    ],
-  },
-  {
-    name: 'Sabiha Sultana',
-    role: 'Content Writer',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt2/240/280',
-    segments: [
-      { text: 'I used to dread commuting to the office, but ' },
-      { text: 'GHL Prime', highlight: true },
-      { text: ' changed everything. Working remotely in such a friendly environment is like a dream. Intern or CEO, everyone is treated with the ' },
-      { text: 'same respect and warmth', highlight: true },
-      { text: '. In seven years, this is the first place where I never have to hesitate about anything.' },
-    ],
-  },
-  {
-    name: 'Mahin Rahman',
-    role: 'Automation Specialist',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt3/240/280',
-    segments: [
-      { text: 'What stands out to me is the ' },
-      { text: 'creative freedom', highlight: true },
-      { text: '. No one hands you a rigid brief and walks away — feedback here actually helps you grow. It genuinely feels like ' },
-      { text: 'people want to see you do your best work', highlight: true },
-      { text: ', not just finish tasks.' },
-    ],
-  },
-  {
-    name: 'Farhan Kabir',
-    role: 'AI Agent Engineer',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt4/240/280',
-    segments: [
-      { text: "I've worked on distributed teams before, but never one where " },
-      { text: 'async actually means trust', highlight: true },
-      { text: ", not just a timezone workaround. Nobody's watching a clock here — they're watching whether the work lands. That's " },
-      { text: 'a completely different way to be managed', highlight: true },
-      { text: ', and it\'s the reason I stopped looking elsewhere.' },
-    ],
-  },
-  {
-    name: 'Nusrat Jahan',
-    role: 'QA & Support Lead',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt5/240/280',
-    segments: [
-      { text: 'Support roles get treated as an afterthought most places. Here, ' },
-      { text: 'my team actually acts on what I flag', highlight: true },
-      { text: ' instead of filing it away. When a client escalation comes in at 2am my time, someone on another shift already ' },
-      { text: 'has my back before I even wake up', highlight: true },
+      { text: "I've built automation systems before, but " },
+      { text: 'GHL Prime is where I finally get to push AI workflows to their full potential', highlight: true },
+      { text: '. The team trusts me to experiment, ship fast, and actually see ' },
+      { text: 'the impact on client accounts within days, not months', highlight: true },
       { text: '.' },
     ],
   },
   {
-    name: 'Rifat Chowdhury',
-    role: 'Frontend Developer',
-    avatar: 'https://picsum.photos/seed/ghlprime-tt6/240/280',
+    name: 'Abdul Hamid',
+    role: 'Sales Funnel & Web Developer',
+    avatar: 'https://picsum.photos/seed/ghlprime-tt2/240/280',
     segments: [
-      { text: 'I joined expecting another agency grind. Instead I found ' },
-      { text: 'people who genuinely care how a build turns out', highlight: true },
-      { text: ', not just whether it shipped on time. Code review here is a conversation, not a gate — and ' },
-      { text: "that's made me a better engineer", highlight: true },
-      { text: ' in under a year.' },
+      { text: 'Every funnel I build here has to actually convert, not just look good. ' },
+      { text: 'What I love about GHL Prime is that the whole team obsesses over results the same way I do', highlight: true },
+      { text: ', from the copy, to the code, to the final call to action. ' },
+      { text: "That kind of alignment is rare on a dev team", highlight: true },
+      { text: '.' },
     ],
   },
-]
+  {
+    name: 'Andrea Bagtas',
+    role: 'GoHighLevel Automation Expert & Project Manager',
+    avatar: 'https://picsum.photos/seed/ghlprime-tt3/240/280',
+    segments: [
+      { text: 'Managing automation projects across multiple agencies used to mean constant firefighting. ' },
+      { text: 'At GHL Prime our process is tight enough that I can actually plan ahead instead of just reacting', highlight: true },
+      { text: ', and that changes everything for how clients experience us. ' },
+      { text: 'Deadlines stopped feeling like a gamble', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Mahbubullah',
+    role: 'Full-Stack Developer',
+    avatar: 'https://picsum.photos/seed/ghlprime-tt4/240/280',
+    segments: [
+      { text: "I've worked on teams where design, backend, and automation live in separate silos. " },
+      { text: 'GHL Prime is the first place I have seen those three actually talk to each other every day', highlight: true },
+      { text: ', and it shows in how fast we ship. ' },
+      { text: 'Nobody hands off half a solution and walks away', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Md. Rakibul Hasan',
+    role: 'Workflow Automation Consultant',
+    avatar: 'https://picsum.photos/seed/ghlprime-tt5/240/280',
+    segments: [
+      { text: 'Clients come to us with workflows held together with patchwork fixes. ' },
+      { text: 'What GHL Prime taught me is that a good automation consultant does not just fix what is broken', highlight: true },
+      { text: ', they rebuild the system so ' },
+      { text: 'it never breaks the same way twice', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Md. Rakib Hasan',
+    role: 'AI & Automation Expert',
+    avatar: 'https://picsum.photos/seed/ghlprime-tt6/240/280',
+    segments: [
+      { text: 'AI is only as good as the workflow it is plugged into. ' },
+      { text: 'At GHL Prime I sit with the strategy side before I ever touch a build', highlight: true },
+      { text: ', so the automation actually solves the problem instead of ' },
+      { text: 'just automating the mess', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Jewel Rana',
+    role: 'CEO & Co-Founder',
+    avatar: 'https://picsum.photos/seed/ghlprime-tt7/240/280',
+    segments: [
+      { text: 'We started GHL Prime because too many freelancers and agencies were drowning in manual work they never needed to do. ' },
+      { text: 'Every system we build gets judged by one question: does this actually give our client their time back', highlight: true },
+      { text: '. If it does not, ' },
+      { text: 'we have not finished the job', highlight: true },
+      { text: '.' },
+    ],
+  },
+  {
+    name: 'Niyamul Islam Sajal',
+    role: 'COO & Co-Founder',
+    avatar: 'https://picsum.photos/seed/ghlprime-tt8/240/280',
+    segments: [
+      { text: 'My job is making sure the CRM infrastructure and AI workflows we build for clients hold up long after the project ends. ' },
+      { text: 'GHL Prime is not interested in automations that break the moment we walk away', highlight: true },
+      { text: ', we build for ' },
+      { text: 'the next two years, not the next two weeks', highlight: true },
+      { text: '.' },
+    ],
+  },
+];
 
 // Slot pitch = face size + gap. Kept in JS as the single source of truth and
 // pushed into CSS as custom properties, so the drag math and the layout can

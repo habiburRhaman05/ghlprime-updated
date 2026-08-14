@@ -967,6 +967,33 @@ button { font: inherit; }
 .agent-badge.outline { background: rgba(255,255,255,.76); }
 .homepage-services-redesign {
   background: linear-gradient(180deg, #0f2236 0%, #17365c 62%, #edf3f8 100%);
+  position: relative;
+  overflow: hidden;
+}
+/* Soft depth behind the grid -- confined to the dark upper portion of the
+   section (the background fades to light by 100%, where a glow wouldn't
+   read anyway). Same hues as the primary/tone gradients used elsewhere, at
+   low opacity, so it reads as depth rather than a new color. */
+.agency-needs-glow {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+.agency-needs-glow.a {
+  width: 32rem; height: 32rem;
+  top: -12rem; left: -8rem;
+  background: rgba(22, 132, 234, 0.28);
+}
+.agency-needs-glow.b {
+  width: 26rem; height: 26rem;
+  top: 6rem; right: -10rem;
+  background: rgba(126, 89, 255, 0.22);
+}
+.agency-needs-section .container {
+  position: relative;
+  z-index: 1;
 }
 .homepage-services-title h2,
 .homepage-services-title p,
@@ -981,38 +1008,77 @@ button { font: inherit; }
 .homepage-service-card {
   min-height: 11.5rem;
   border-radius: 1.6rem;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.78);
-  box-shadow: 0 24px 46px rgba(14, 30, 55, 0.16);
-  backdrop-filter: blur(14px);
-  padding: 1.15rem 1.2rem;
+  border: 1px solid rgba(15, 34, 54, 0.05);
+  /* Solid, not translucent -- an earlier version used a blurred glass
+     background here, but that let the section's depth-blobs bleed through
+     and wash out the card text. Opaque white keeps the card a fixed,
+     dependable contrast surface regardless of what's behind it. */
+  background: #ffffff;
+  box-shadow: 0 22px 46px rgba(7, 18, 32, 0.28);
+  padding: 1.5rem 1.4rem 1.6rem;
+  overflow: hidden;
+}
+/* Agency-needs cards specifically: a tone-matched top bar, a bigger icon
+   tile with its own colored glow, and a hover state that deepens the shadow
+   and tints the border in that same tone -- so each card visually commits
+   to its color instead of six identical grey boxes with a small icon. */
+.agency-service-card {
+  position: relative;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  --tone-a: var(--primary);
+  --tone-b: #4fb0ff;
+}
+.agency-service-card.tone-blue { --tone-a: #1684ea; --tone-b: #4fb0ff; }
+.agency-service-card.tone-green { --tone-a: #20b76f; --tone-b: #67dd95; }
+.agency-service-card.tone-amber { --tone-a: #e69500; --tone-b: #ffd35c; }
+.agency-service-card.tone-purple { --tone-a: #7e59ff; --tone-b: #b284ff; }
+.agency-service-card.tone-teal { --tone-a: #0d95a4; --tone-b: #57d7df; }
+.agency-service-card.tone-red { --tone-a: #ef4740; --tone-b: #ff8f82; }
+
+.agency-service-card:hover {
+  border-color: rgba(15, 34, 54, 0.1);
+  box-shadow:
+    0 30px 56px rgba(7, 18, 32, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+    0 22px 40px -14px var(--tone-a);
+}
+.agency-service-card .homepage-service-icon {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.agency-service-card:hover .homepage-service-icon {
+  transform: scale(1.08) rotate(-4deg);
 }
 .homepage-service-icon {
-  width: 2.15rem;
-  height: 2.15rem;
-  border-radius: 999px;
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 1rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: white;
-  margin-bottom: .75rem;
+  margin-bottom: 1.1rem;
 }
-.homepage-service-icon.blue { background: linear-gradient(135deg, #1684ea, #4fb0ff); }
-.homepage-service-icon.green { background: linear-gradient(135deg, #20b76f, #67dd95); }
-.homepage-service-icon.amber { background: linear-gradient(135deg, #f4a300, #ffd35c); }
-.homepage-service-icon.purple { background: linear-gradient(135deg, #7e59ff, #b284ff); }
-.homepage-service-icon.teal { background: linear-gradient(135deg, #12a8b8, #57d7df); }
-.homepage-service-icon.red { background: linear-gradient(135deg, #ff5f57, #ff8f82); }
+.homepage-service-icon.blue { background: linear-gradient(135deg, #1684ea, #4fb0ff); box-shadow: 0 12px 24px -8px rgba(22, 132, 234, 0.55); }
+.homepage-service-icon.green { background: linear-gradient(135deg, #1c9c60, #67dd95); box-shadow: 0 12px 24px -8px rgba(32, 183, 111, 0.5); }
+.homepage-service-icon.amber { background: linear-gradient(135deg, #d98c00, #ffd35c); box-shadow: 0 12px 24px -8px rgba(244, 163, 0, 0.5); }
+.homepage-service-icon.purple { background: linear-gradient(135deg, #7e59ff, #b284ff); box-shadow: 0 12px 24px -8px rgba(126, 89, 255, 0.5); }
+.homepage-service-icon.teal { background: linear-gradient(135deg, #0d95a4, #57d7df); box-shadow: 0 12px 24px -8px rgba(18, 168, 184, 0.5); }
+.homepage-service-icon.red { background: linear-gradient(135deg, #e6534b, #ff8f82); box-shadow: 0 12px 24px -8px rgba(255, 95, 87, 0.5); }
+.homepage-service-icon.pink { background: linear-gradient(135deg, #d6399a, #ff8fc7); box-shadow: 0 12px 24px -8px rgba(214, 57, 154, 0.5); }
 .homepage-service-card h3 {
   margin: 0 0 .55rem;
-  color: #16283f;
-  font-size: 1.12rem;
+  color: #0f2035;
+  font-size: 1.15rem;
+  font-weight: 700;
   line-height: 1.28;
 }
 .homepage-service-card p {
   margin: 0;
-  color: #667b92;
-  line-height: 1.5;
+  /* #4a5b70, not the original #667b92 -- the old gray sat right at the AA
+     contrast floor for body text on white (~4.4:1); this clears it (~6.3:1)
+     without reading as "just black text." */
+  color: #4a5b70;
+  line-height: 1.55;
 }
 .case-study-card, .reason-card, .award-card, .client-study-card, .about-value-card, .about-pillar-card, .about-team-card, .services-page-card {
   border-radius: 1.5rem; border: 1px solid rgba(214,226,241,.9); background: linear-gradient(180deg, #fff, #fbfdff); box-shadow: 0 25px 45px rgba(23, 59, 108, 0.07);

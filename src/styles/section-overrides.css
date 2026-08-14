@@ -178,14 +178,28 @@
   filter: blur(.2px);
 }
 .training-step-list-redesign {
+  position: relative;
   display: grid;
   gap: 1.65rem;
   margin-top: 2rem;
 }
+/* A connecting line through the step tiles -- centered on the 2.9rem tile
+   column below, running from the middle of the first tile to the middle of
+   the last. Turns three separate rows into one visible process/path. */
+.training-step-list-redesign::before {
+  content: '';
+  position: absolute;
+  top: 1.45rem;
+  bottom: 1.45rem;
+  left: 1.45rem;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(44, 115, 240, 0.32), rgba(44, 115, 240, 0.08));
+}
 .training-step-row {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1rem;
+  gap: 1.1rem;
   align-items: start;
   padding-left: .2rem;
   border-left: 2px solid transparent;
@@ -206,19 +220,39 @@
   line-height: 1.65;
 }
 .training-step-number {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 999px;
+  position: relative;
+  z-index: 1;
+  width: 2.9rem;
+  height: 2.9rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #eff6ff, #e7f0ff);
-  border: 1px solid rgba(177, 205, 241, 0.8);
+  background: linear-gradient(135deg, #1684ea, #4fb0ff);
+  color: #ffffff;
+  box-shadow: 0 12px 24px -8px rgba(22, 132, 234, 0.5);
+  padding: 0;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+/* Small numeral chip overlapping the tile's corner -- keeps the 01/02/03
+   sequence visible without it having to be the tile's main content. */
+.training-step-index {
+  position: absolute;
+  right: -.4rem;
+  bottom: -.4rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1.5px solid #dceafd;
   color: #2a74df;
   font-weight: 800;
-  font-size: .85rem;
-  padding: 0;
-  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  font-size: .58rem;
+  line-height: 1;
 }
 .training-step-row:hover {
   border-left-color: rgba(44, 115, 240, 0.24);
@@ -229,9 +263,8 @@
   color: #2c73f0;
 }
 .training-step-row:hover .training-step-number {
-  background: linear-gradient(180deg, rgba(66, 135, 245, 0.16), rgba(66, 135, 245, 0.22));
-  border-color: rgba(66, 135, 245, 0.38);
-  box-shadow: 0 10px 24px rgba(44, 115, 240, 0.14);
+  box-shadow: 0 16px 30px -8px rgba(22, 132, 234, 0.65);
+  transform: scale(1.05);
 }
 .training-panel-flat {
   grid-column: auto;
@@ -255,6 +288,26 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(74, 144, 255, 0.46), transparent);
   box-shadow: 0 0 24px rgba(74, 144, 255, 0.18);
+  z-index: 1;
+}
+/* Soft depth in the corner, same technique/hue as the agency-needs section
+   glows -- ties the two dark panels together as one visual language. */
+.training-panel-card-flat::after {
+  content: '';
+  position: absolute;
+  width: 18rem;
+  height: 18rem;
+  right: -8rem;
+  bottom: -9rem;
+  border-radius: 50%;
+  background: rgba(22, 132, 234, 0.22);
+  filter: blur(70px);
+  pointer-events: none;
+}
+.training-panel-label-flat,
+.training-outcome-stack-flat {
+  position: relative;
+  z-index: 1;
 }
 .training-panel-label-flat {
   display: inline-block;
@@ -271,6 +324,9 @@
   margin-top: 1.6rem;
 }
 .training-outcome-card-flat {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
   border-radius: 1.3rem;
   background: rgba(255,255,255,.08);
   border: 1px solid rgba(255,255,255,.08);
@@ -283,6 +339,19 @@
   border-left-color: rgba(79, 160, 255, 0.7);
   box-shadow: 0 14px 28px rgba(7, 17, 31, 0.18);
 }
+.training-outcome-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: .85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(79, 160, 255, 0.16);
+  border: 1px solid rgba(79, 160, 255, 0.28);
+  color: #7cb8ff;
+}
+.training-outcome-copy { min-width: 0; }
 .training-outcome-card-flat span {
   display: block;
   color: rgba(255,255,255,.46);
@@ -542,12 +611,17 @@
 }
 .vibe-pill-row-reference span {
   min-height: 2.5rem;
-  padding: 0 1.05rem;
+  padding: 0 1.05rem 0 .85rem;
+  gap: .45rem;
   background: #eef5ff;
   border: 1px solid #d9e6fb;
   color: #4585e6;
   font-weight: 700;
   font-size: .95rem;
+}
+.vibe-pill-row-reference span svg {
+  flex-shrink: 0;
+  opacity: .85;
 }
 .vibe-floating-pill {
   animation: vibeBadgeFloat 5.2s ease-in-out infinite;
@@ -558,6 +632,9 @@
   color: #ffffff !important;
   border-color: #2d74d9 !important;
   box-shadow: 0 14px 24px rgba(45, 116, 217, 0.18);
+}
+.vibe-floating-pill:hover svg {
+  opacity: 1;
 }
 @keyframes vibeBadgeFloat {
   0%, 100% { transform: translateY(0); }
@@ -609,70 +686,152 @@
   background: linear-gradient(180deg, #f6fbff 0%, #eef5fd 100%);
 }
 .why-choose-reference-section {
+  position: relative;
+  overflow: hidden;
   background: #f8fbff;
 }
-.why-choose-reference-grid {
-  grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
-  gap: 3.4rem;
-  align-items: center;
+/* Small dot-grid texture tucked in the top-right corner -- kept modest in
+   size and behind the container's own stacking context so it stays clear
+   of the (translucent, blurred) cards below rather than showing through
+   them. */
+.why-choose-dot-grid {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  width: 11rem;
+  height: 11rem;
+  background-image: radial-gradient(rgba(38, 120, 232, 0.22) 1.5px, transparent 1.5px);
+  background-size: 15px 15px;
+  mask-image: radial-gradient(circle at top right, #000 35%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle at top right, #000 35%, transparent 72%);
+  pointer-events: none;
 }
-.why-choose-reference-copy h2 {
-  font-size: clamp(2.45rem, 4.2vw, 3.8rem);
-  line-height: .98;
-  letter-spacing: -0.08em;
-  max-width: 8.8ch;
+/* Top: centered eyebrow/heading/paragraph block (reuses the site's shared
+   .section-title.centered pattern, so this section's header sits/scales
+   exactly like every other centered section header on the page). */
+.why-choose-reference-head {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
 }
-.why-choose-reference-copy h2 span {
+.why-choose-reference-head h2 {
+  font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+  color: #10253f;
+}
+.why-choose-reference-head h2 span {
   color: #2678e8;
 }
-.why-choose-reference-copy p {
-  max-width: 34rem;
+.why-choose-eyebrow-rule {
+  display: block;
+  width: 2.9rem;
+  height: 3px;
+  border-radius: 2px;
+  background: #2678e8;
+  margin: .85rem auto 1.35rem;
+}
+.why-choose-reference-head p {
   font-size: 1.02rem;
-  line-height: 1.85;
+  line-height: 1.8;
   color: #607895;
-  margin-bottom: 2rem;
 }
-.why-choose-reference-cta {
-  min-width: 14rem;
-}
+
+/* Middle: the 6 cards, full-width now that the header owns the top and the
+   CTA owns the bottom -- 3 columns makes better use of that width than the
+   old 2-column layout did. */
 .why-choose-card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .85rem;
 }
 .why-choose-reference-card-grid {
-  gap: 1.15rem;
+  position: relative;
+  z-index: 1;
+  /* Explicit 3/2/1 column steps (below), not auto-fit -- with a fixed set
+     of 6 cards, auto-fit(minmax(250px,1fr)) fits 4 columns across a full
+     desktop container, leaving row 2 with only 2 cards and two blank
+     column-widths of empty space. Explicit steps tied to the known item
+     count always fill every row. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+@media (max-width: 900px) {
+  .why-choose-reference-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+@media (max-width: 560px) {
+  .why-choose-reference-card-grid {
+    grid-template-columns: 1fr;
+    gap: .9rem;
+  }
+  .why-choose-detail-card {
+    padding: 1.5rem 1.35rem 1.6rem;
+  }
 }
 .why-choose-detail-card {
-  min-height: 16rem;
+  position: relative;
+  overflow: hidden;
   border-radius: 1.6rem;
-  border: 1px solid rgba(255,255,255,.72);
-  background: rgba(255,255,255,.72);
-  padding: 1.45rem;
-  box-shadow: 0 18px 38px rgba(43,83,138,.06);
-  backdrop-filter: blur(14px);
+  border: 1px solid rgba(15, 34, 54, 0.05);
+  /* Solid, not translucent -- matches the fix already made on the
+     agency-needs cards: a blurred/translucent background lets whatever
+     sits behind the card (here, the dot-grid texture) bleed through and
+     wash out the text, so these stay a dependable opaque surface. */
+  background: #ffffff;
+  padding: 1.85rem 1.6rem 1.9rem;
+  box-shadow: 0 20px 40px rgba(15, 34, 54, 0.07);
+  transition: box-shadow .3s ease, border-color .3s ease;
+  --tone-a: #1684ea;
+  --tone-b: #4fb0ff;
 }
-.why-choose-detail-icon {
-  width: 2.55rem;
-  height: 2.55rem;
-  border-radius: .85rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  background: #edf4ff;
-  color: #2877e7;
+.why-choose-detail-card.tone-blue { --tone-a: #1684ea; --tone-b: #4fb0ff; }
+.why-choose-detail-card.tone-green { --tone-a: #1c9c60; --tone-b: #67dd95; }
+.why-choose-detail-card.tone-purple { --tone-a: #7e59ff; --tone-b: #b284ff; }
+.why-choose-detail-card.tone-amber { --tone-a: #d98c00; --tone-b: #ffd35c; }
+.why-choose-detail-card.tone-teal { --tone-a: #0d95a4; --tone-b: #57d7df; }
+.why-choose-detail-card.tone-pink { --tone-a: #d6399a; --tone-b: #ff8fc7; }
+
+.why-choose-detail-card:hover {
+  border-color: rgba(15, 34, 54, 0.1);
+  box-shadow:
+    0 28px 50px rgba(15, 34, 54, 0.12),
+    0 20px 38px -16px var(--tone-a);
+}
+.why-choose-detail-card .homepage-service-icon {
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+}
+.why-choose-detail-card:hover .homepage-service-icon {
+  transform: scale(1.08) rotate(-4deg);
 }
 .why-choose-detail-card h3 {
-  margin: 0 0 .65rem;
-  color: #10253f;
+  margin: 0 0 .6rem;
+  color: #0f2035;
   font-size: 1.12rem;
-  line-height: 1.35;
+  font-weight: 700;
+  line-height: 1.32;
 }
 .why-choose-detail-card p {
   margin: 0;
-  color: #5d7693;
-  line-height: 1.75;
+  color: #4a5b70;
+  line-height: 1.65;
+}
+
+/* Bottom: the CTA, on its own centered row below the full card grid. */
+.why-choose-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+.why-choose-reference-cta {
+  min-width: 14rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
 }
 
 .case-studies-reference-section {
@@ -785,7 +944,6 @@
   .training-grid,
   .vibe-grid,
   .why-choose-grid,
-  .why-choose-card-grid,
   .training-outcome-stack-flat,
   .case-studies-reference-grid {
     grid-template-columns: 1fr;

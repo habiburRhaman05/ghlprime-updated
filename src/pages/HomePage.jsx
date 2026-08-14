@@ -12,7 +12,7 @@ import { fetchTeamMembers, fetchTeamPageExperts } from '../lib/teamApi'
 import { fetchPartnerLogos } from '../lib/logosApi'
 import { fetchCaseStudies } from '../lib/caseStudiesApi'
 import ShippedEvidenceSection from '../components/ShippedEvidenceSection'
-import { ArrowRight, Bot, BrainCircuit, CheckCircle2, Clock3, LayoutGrid, MessageSquareText, ShieldCheck, TrendingUp, Workflow, Wrench, X, Zap } from 'lucide-react'
+import { ArrowRight, Bot, BrainCircuit, CalendarCheck2, ClipboardCheck, Clock3, Code2, Contact, GraduationCap, LayoutDashboard, LayoutGrid, MessageSquareText, RefreshCw, Share2, ShieldCheck, Sparkles, TrendingUp, Users, Video, Webhook, Workflow, Wrench, X, Zap } from 'lucide-react'
 import LifeAtGHL from '../components/home-page/LifeAtGHL'
 import TeamTestimonials from '../components/home-page/TeamTestimonials'
 
@@ -359,27 +359,39 @@ function WhatWeHandleSection() {
 }
 
 function AgencyNeedsSection() {
+  // title/text copy is unchanged from the original -- only icon + tone are
+  // new, purely visual metadata for the redesigned cards below.
   const items = [
-    ['GHL Technical Support', 'Direct expert support for setup, troubleshooting, cleanup, and backend execution.'],
-    ['AI Agents & Call Center Setup', 'Deploy AI systems that qualify leads, support clients, and automate repetitive communication.'],
-    ['White-Labeled Client Support', 'Stay invisible behind your agency while we help you support clients under your own brand.'],
-    ['API Integrations', 'Connect HighLevel with third-party tools, CRMs, dashboards, and custom workflows.'],
-    ['Vibe Coding & Custom Dev', 'If HighLevel can’t do it natively, we can build around it with custom code and automation logic.'],
-    ['Training & SOP Support', 'We train your team, document the system, and help you scale delivery with more confidence.'],
+    ['GHL Technical Support', 'Direct expert support for setup, troubleshooting, cleanup, and backend execution.', Wrench, 'blue'],
+    ['AI Agents & Call Center Setup', 'Deploy AI systems that qualify leads, support clients, and automate repetitive communication.', Bot, 'purple'],
+    ['White-Labeled Client Support', 'Stay invisible behind your agency while we help you support clients under your own brand.', ShieldCheck, 'teal'],
+    ['API Integrations', 'Connect HighLevel with third-party tools, CRMs, dashboards, and custom workflows.', Share2, 'amber'],
+    ['Vibe Coding & Custom Dev', 'If HighLevel can’t do it natively, we can build around it with custom code and automation logic.', Code2, 'green'],
+    ['Training & SOP Support', 'We train your team, document the system, and help you scale delivery with more confidence.', GraduationCap, 'red'],
   ]
 
   return (
     <section className="section homepage-services-redesign agency-needs-section" id="platform">
+      <div className="agency-needs-glow a" aria-hidden="true" />
+      <div className="agency-needs-glow b" aria-hidden="true" />
       <div className="container">
         <div className="section-title centered light homepage-services-title">
           <span className="eyebrow-label">Everything Your Agency Needs, Done by Experts</span>
-          <h2>Technical execution, client support,<br />automation, and training — all in one team.</h2>
+          <h2>Technical execution, client support,<br />automation, and training all in one team.</h2>
           <p>Built for agencies and SaaS founders who need real execution power behind their offers.</p>
         </div>
         <div className="homepage-services-grid agency-needs-grid">
-          {items.map(([title, text], index) => (
-            <motion.article key={title} className="homepage-service-card agency-service-card" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -8 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.45, delay: index * 0.05 }}>
-              <div className="agency-service-icon"><CheckCircle2 size={18} /></div>
+          {items.map(([title, text, Icon, tone], index) => (
+            <motion.article
+              key={title}
+              className={`homepage-service-card agency-service-card tone-${tone}`}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -8 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: index * 0.05 }}
+            >
+              <div className={`homepage-service-icon ${tone}`}><Icon size={19} /></div>
               <h3>{title}</h3>
               <p>{text}</p>
             </motion.article>
@@ -391,21 +403,26 @@ function AgencyNeedsSection() {
 }
 
 function TrainingSection() {
+  // Copy is unchanged -- `icon` is new, purely visual metadata for the
+  // redesigned step tiles / outcome cards below.
   const steps = [
     {
       number: '01',
       title: 'System Walkthrough & Handoff',
       text: 'We walk you through everything we’ve built — how it works, why it’s set up that way, and how to use it confidently with your clients.',
+      icon: ClipboardCheck,
     },
     {
       number: '02',
       title: 'Technical Deep Dive Sessions',
       text: 'Live sessions on GHL, automations, AI agents, and whatever part of the system you want to master. We go deep, not surface-level.',
+      icon: Video,
     },
     {
       number: '03',
       title: 'Ongoing Support & Upskilling',
       text: 'As the platform evolves and your agency grows, we keep you updated — new features, better workflows, smarter approaches. You’re never left behind.',
+      icon: TrendingUp,
     },
   ]
 
@@ -413,18 +430,22 @@ function TrainingSection() {
     {
       eyebrow: 'Confidence to manage your GHL setup',
       title: 'Full technical ownership of your platform',
+      icon: ShieldCheck,
     },
     {
       eyebrow: 'Understanding of your automations',
       title: 'Ability to explain the system to clients',
+      icon: MessageSquareText,
     },
     {
       eyebrow: 'Access to our expert knowledge',
       title: 'Ongoing upskilling as your agency scales',
+      icon: TrendingUp,
     },
     {
       eyebrow: 'No more depending on developers',
       title: 'You run it. We support you when needed.',
+      icon: Users,
     },
   ]
 
@@ -519,7 +540,8 @@ function TrainingSection() {
                     },
                   }}
                 >
-                  {step.number}
+                  <step.icon size={20} />
+                  <span className="training-step-index">{step.number}</span>
                 </motion.div>
                 <div className="training-step-copy">
                   <strong>{step.title}</strong>
@@ -568,8 +590,11 @@ function TrainingSection() {
                   }}
                   whileHover={{ y: -2 }}
                 >
-                  <span>{item.eyebrow}</span>
-                  <strong>{item.title}</strong>
+                  <div className="training-outcome-icon"><item.icon size={17} /></div>
+                  <div className="training-outcome-copy">
+                    <span>{item.eyebrow}</span>
+                    <strong>{item.title}</strong>
+                  </div>
                 </motion.article>
               ))}
             </motion.div>
@@ -581,13 +606,15 @@ function TrainingSection() {
 }
 
 function VibeCodingSection() {
+  // Labels are unchanged -- `icon` is new, purely visual metadata for the
+  // redesigned pill row below.
   const vibeTags = [
-    'Custom Integrations',
-    'API Connections',
-    'Custom Dashboards',
-    'AI-Assisted Dev',
-    'Webhooks & Triggers',
-    'Third-Party Syncs',
+    { label: 'Custom Integrations', icon: Webhook },
+    { label: 'API Connections', icon: Share2 },
+    { label: 'Custom Dashboards', icon: LayoutDashboard },
+    { label: 'AI-Assisted Dev', icon: Sparkles },
+    { label: 'Webhooks & Triggers', icon: Zap },
+    { label: 'Third-Party Syncs', icon: RefreshCw },
   ]
 
   const tokenLines = useMemo(() => [
@@ -952,7 +979,7 @@ function VibeCodingSection() {
           >
             {vibeTags.map((tag, index) => (
               <motion.span
-                key={tag}
+                key={tag.label}
                 className="vibe-floating-pill"
                 variants={{
                   hidden: { opacity: 0, scale: 0.8, y: 10 },
@@ -961,7 +988,8 @@ function VibeCodingSection() {
                 style={{ animationDelay: `${index * 0.4}s` }}
                 whileHover={{ scale: 1.04 }}
               >
-                {tag}
+                <tag.icon size={14} />
+                {tag.label}
               </motion.span>
             ))}
           </motion.div>
@@ -983,62 +1011,98 @@ function VibeCodingSection() {
 }
 
 function WhyChooseSection() {
+  // Copy is unchanged -- `icon`/`tone` are new, purely visual metadata for
+  // the redesigned cards below.
   const items = [
     {
       title: 'GHL-Only Specialists',
       text: 'We don’t do everything. We focus exclusively on GHL and automation — which means you get depth, not breadth.',
       icon: ShieldCheck,
+      tone: 'blue',
     },
     {
       title: '24/7 Availability',
       text: 'Your agency doesn’t sleep. Neither do we. Expert support available around the clock for you and your clients.',
-      icon: MessageSquareText,
+      icon: Clock3,
+      tone: 'green',
     },
     {
       title: 'Fully White-Labeled',
       text: 'We stay invisible. Your clients see your brand, your team, your expertise. We’re the engine room — you’re the front door.',
-      icon: Bot,
+      icon: Contact,
+      tone: 'purple',
     },
     {
       title: 'Strategy-Led, Not Just Setup',
       text: 'We don’t just click buttons. We design workflows around your sales process and build systems that actually perform.',
       icon: TrendingUp,
+      tone: 'amber',
     },
     {
       title: 'We Train Your Team',
       text: 'We don’t keep you in the dark. We train you so you own your system, can speak to it confidently, and aren’t dependent on us forever.',
-      icon: LayoutGrid,
+      icon: Users,
+      tone: 'teal',
     },
     {
       title: 'Vibe Coding Capability',
       text: 'When GHL can’t do it natively, we build it. Custom dev, API integrations, bespoke tools — no other GHL team offers this.',
-      icon: Wrench,
+      icon: Code2,
+      tone: 'pink',
     },
   ]
 
   return (
     <section className="section why-choose-section why-choose-reference-section">
-      <div className="container why-choose-grid why-choose-reference-grid">
-        <div className="why-choose-copy why-choose-reference-copy">
+      <div className="why-choose-dot-grid" aria-hidden="true" />
+      <div className="container">
+        <motion.div
+          className="section-title centered why-choose-reference-head"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5 }}
+        >
           <span className="eyebrow-label">Why do agencies hire GHL Prime instead of a freelancer?</span>
-          <h2>Focused Expertise.<br /><span>Real Delivery Power.</span></h2>
+
+          <h2>Focused Expertise. Real Delivery. <span>Power.</span></h2>
           <p>GHL Prime is a specialized team backed by Octopi Digital. We don’t do everything — we go deep on GHL, automation, AI, and custom dev so your agency has the best possible team behind it.</p>
-          <Link to="/booking" className="primary-pill large why-choose-reference-cta">Book a Free Call</Link>
-        </div>
+        </motion.div>
+
         <div className="why-choose-card-grid why-choose-reference-card-grid">
-          {items.map((item) => {
+          {items.map((item, index) => {
             const Icon = item.icon
             return (
-              <div key={item.title} className="why-choose-detail-card">
-                <div className="why-choose-detail-icon"><Icon size={18} /></div>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </div>
-              </div>
+              <motion.div
+                key={item.title}
+                className={`why-choose-detail-card tone-${item.tone}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -8 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+              >
+                <div className={`homepage-service-icon ${item.tone}`}><Icon size={19} /></div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </motion.div>
             )
           })}
         </div>
+
+        <motion.div
+          className="why-choose-cta-row"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.45, delay: 0.15 }}
+        >
+          <Link to="/booking" className="primary-pill large why-choose-reference-cta">
+            <CalendarCheck2 size={18} />
+            Book a Free Call
+            <ArrowRight size={16} />
+          </Link>
+        </motion.div>
       </div>
     </section>
   )
