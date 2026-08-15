@@ -1,0 +1,544 @@
+/* ==========================================================================
+   Mock GHL Prime dashboards  (.tm-*)
+   --------------------------------------------------------------------------
+   Rendered as markup so they stay sharp at any width. Sizes are driven by
+   container query units off the frame, so one set of rules covers every
+   breakpoint and the mock scales as a single object instead of reflowing
+   into something that no longer looks like a product screenshot.
+   ========================================================================== */
+
+.tm-frame {
+  container-type: inline-size;
+  position: relative;
+  display: grid;
+  grid-template-columns: 21.5% minmax(0, 1fr);
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(203, 219, 240, 0.9);
+  box-shadow:
+    0 30px 60px -34px rgba(20, 45, 90, 0.5),
+    0 2px 6px rgba(20, 45, 90, 0.05);
+  /* Holds the product-shot proportion whatever the copy inside does. */
+  aspect-ratio: 16 / 10;
+}
+.tm-frame-image {
+  display: block;
+  aspect-ratio: auto;
+  padding: 0;
+}
+.tm-real {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- Sidebar ------------------------------------------------------------- */
+.tm-side {
+  min-width: 0;
+  padding: 3.4cqw 2.4cqw;
+  background: linear-gradient(180deg, #10233f 0%, #14294a 100%);
+  color: #cddcf0;
+}
+.tm-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.4cqw;
+  margin-bottom: 3.6cqw;
+}
+.tm-brand-mark {
+  width: 2.6cqw;
+  height: 2.6cqw;
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 3px;
+  object-fit: contain;
+}
+.tm-brand-name {
+  font-size: 2.05cqw;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff;
+  white-space: nowrap;
+}
+.tm-nav {
+  display: grid;
+  gap: 0.35cqw;
+}
+.tm-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2cqw;
+  padding: 1.05cqw 1.3cqw;
+  border-radius: 4px;
+  font-size: 1.72cqw;
+  line-height: 1;
+  color: #93a9c6;
+  white-space: nowrap;
+}
+.tm-nav-item svg {
+  width: 1.85cqw;
+  height: 1.85cqw;
+  flex-shrink: 0;
+}
+.tm-nav-item.is-active {
+  color: #fff;
+  background: #2563eb;
+}
+
+/* --- Body ---------------------------------------------------------------- */
+.tm-body {
+  min-width: 0;
+  padding: 2.6cqw 2.8cqw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 2cqw;
+  overflow: hidden;
+}
+.tm-head {
+  display: flex;
+  justify-content: center;
+}
+.tm-head-title {
+  font-size: 2.1cqw;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #16294a;
+}
+
+.tm-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 2.6cqw;
+  padding-bottom: 1cqw;
+  border-bottom: 1px solid #e8eef7;
+}
+.tm-tab {
+  position: relative;
+  font-size: 1.55cqw;
+  color: #8497b0;
+  white-space: nowrap;
+}
+.tm-tab.is-active { color: #2563eb; font-weight: 700; }
+.tm-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -1.05cqw;
+  height: 2px;
+  border-radius: 999px;
+  background: #2563eb;
+}
+
+/* --- 01. Workflow -------------------------------------------------------- */
+.tm-flow-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30%;
+  gap: 2.4cqw;
+  align-items: start;
+  min-height: 0;
+}
+.tm-flow {
+  display: grid;
+  justify-items: stretch;
+}
+.tm-flow-item { display: grid; justify-items: center; }
+.tm-node {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.4cqw;
+  padding: 1.35cqw 1.6cqw;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #e2eaf5;
+  box-shadow: 0 2px 6px rgba(20, 45, 90, 0.05);
+  animation: tm-node-pulse 3.6s ease-in-out infinite;
+  animation-delay: var(--d);
+}
+@keyframes tm-node-pulse {
+  0%, 72%, 100% { border-color: #e2eaf5; box-shadow: 0 2px 6px rgba(20, 45, 90, 0.05); }
+  12%, 26% { border-color: rgba(37, 99, 235, 0.5); box-shadow: 0 3px 12px rgba(37, 99, 235, 0.2); }
+}
+.tm-node-dot {
+  display: grid;
+  place-items: center;
+  width: 2.6cqw;
+  height: 2.6cqw;
+  min-width: 12px;
+  min-height: 12px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: #fff;
+}
+.tm-node-dot.tone-green { background: #10b981; }
+.tm-node-dot.tone-blue { background: #3b82f6; }
+.tm-node-dot svg { width: 1.3cqw; height: 1.3cqw; }
+.tm-node-copy { display: grid; min-width: 0; }
+.tm-node-title {
+  font-size: 1.62cqw;
+  font-weight: 700;
+  color: #16294a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tm-node-sub {
+  font-size: 1.42cqw;
+  color: #8497b0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tm-flow-join {
+  display: grid;
+  place-items: center;
+  height: 2.4cqw;
+  font-size: 1.6cqw;
+  line-height: 1;
+  color: #b3c3d8;
+}
+
+.tm-stats-card {
+  display: grid;
+  gap: 0.5cqw;
+  padding: 1.8cqw;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #e8eef7;
+  box-shadow: 0 6px 18px -12px rgba(20, 45, 90, 0.35);
+}
+.tm-stats-label { font-size: 1.42cqw; color: #8497b0; }
+.tm-stats-value {
+  font-size: 3.4cqw;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #16294a;
+}
+.tm-stats-sub { font-size: 1.35cqw; color: #8497b0; }
+.tm-spark {
+  width: 100%;
+  height: 5cqw;
+  margin: 0.6cqw 0;
+}
+.tm-spark-line {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: tm-draw 2.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+}
+@keyframes tm-draw { to { stroke-dashoffset: 0; } }
+.tm-stats-foot {
+  padding-top: 0.7cqw;
+  border-top: 1px solid #eef3fa;
+  font-size: 1.3cqw;
+  color: #8497b0;
+}
+.tm-badge-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7cqw;
+  font-size: 1.3cqw;
+  color: #0f9d6f;
+}
+.tm-badge-ok svg { width: 1.4cqw; height: 1.4cqw; }
+
+/* --- 02. AI agent -------------------------------------------------------- */
+.tm-agent {
+  display: grid;
+  grid-template-columns: 22% minmax(0, 1fr) 30%;
+  gap: 2cqw;
+  min-height: 0;
+}
+.tm-agent-nav { display: grid; gap: 0.4cqw; align-content: start; }
+.tm-agent-nav-item {
+  padding: 1.05cqw 1.2cqw;
+  border-radius: 4px;
+  font-size: 1.5cqw;
+  color: #6b7f99;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tm-agent-nav-item.is-active {
+  color: #16294a;
+  font-weight: 700;
+  background: #eef4ff;
+}
+.tm-agent-main { display: grid; align-content: start; gap: 0.7cqw; min-width: 0; }
+.tm-label {
+  font-size: 1.5cqw;
+  font-weight: 700;
+  color: #16294a;
+}
+.tm-textarea {
+  padding: 1.4cqw;
+  border-radius: 5px;
+  background: #f7fafd;
+  border: 1px solid #e6edf7;
+  font-size: 1.38cqw;
+  line-height: 1.6;
+  color: #6b7f99;
+}
+.tm-cflow { display: grid; justify-items: center; gap: 0; }
+.tm-cnode {
+  width: 100%;
+  padding: 1.05cqw;
+  border-radius: 4px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #e2eaf5;
+  font-size: 1.38cqw;
+  color: #16294a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tm-cbar {
+  width: 1px;
+  height: 1.5cqw;
+  background: #cfdcec;
+}
+.tm-cbranch {
+  display: flex;
+  justify-content: space-between;
+  width: 62%;
+  margin-top: 1cqw;
+}
+.tm-cyes, .tm-cno {
+  padding: 0.35cqw 1cqw;
+  border-radius: 999px;
+  font-size: 1.2cqw;
+  font-weight: 700;
+}
+.tm-cyes { color: #0f9d6f; background: #e7f8f1; }
+.tm-cno { color: #d9556c; background: #fdeef1; }
+.tm-couts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1cqw;
+  width: 100%;
+  margin-top: 1cqw;
+}
+.tm-cout {
+  padding: 1.05cqw;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 1.3cqw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tm-cout.tone-green { color: #0f9d6f; background: #e9f9f2; border: 1px solid #c7ecdd; }
+.tm-cout.tone-red { color: #d9556c; background: #fdeff2; border: 1px solid #f5ccd5; }
+
+.tm-agent-test { display: grid; align-content: start; gap: 0.8cqw; min-width: 0; }
+.tm-chat-head { display: flex; align-items: center; gap: 1cqw; }
+.tm-avatar {
+  display: grid;
+  place-items: center;
+  width: 2.4cqw;
+  height: 2.4cqw;
+  min-width: 12px;
+  min-height: 12px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: #5b6e85;
+  background: #e8eef7;
+}
+.tm-avatar.sm { width: 2cqw; height: 2cqw; }
+.tm-avatar svg { width: 1.2cqw; height: 1.2cqw; }
+.tm-chat-who { display: grid; }
+.tm-chat-name { font-size: 1.35cqw; font-weight: 700; color: #16294a; }
+.tm-chat-status { font-size: 1.15cqw; color: #10b981; }
+.tm-chat { display: grid; gap: 0.9cqw; justify-items: start; }
+.tm-msg {
+  max-width: 88%;
+  padding: 1cqw 1.2cqw;
+  border-radius: 6px;
+  font-size: 1.3cqw;
+  line-height: 1.5;
+}
+.tm-msg-in { background: #f2f6fb; color: #3f5570; }
+.tm-msg-out {
+  justify-self: end;
+  background: #e4efff;
+  color: #2b4a72;
+}
+.tm-typing { display: flex; align-items: center; gap: 0.8cqw; }
+.tm-dots {
+  display: inline-flex;
+  gap: 0.45cqw;
+  padding: 1cqw 1.2cqw;
+  border-radius: 6px;
+  background: #f2f6fb;
+}
+.tm-dots i {
+  width: 0.7cqw;
+  height: 0.7cqw;
+  min-width: 3px;
+  min-height: 3px;
+  border-radius: 50%;
+  background: #9fb2c9;
+  animation: tm-dot 1.3s ease-in-out infinite;
+}
+.tm-dots i:nth-child(2) { animation-delay: 0.18s; }
+.tm-dots i:nth-child(3) { animation-delay: 0.36s; }
+@keyframes tm-dot {
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-1px); }
+}
+.tm-chat-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1cqw;
+  margin-top: 0.4cqw;
+  padding: 1.05cqw 1.2cqw;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #e2eaf5;
+  font-size: 1.28cqw;
+  color: #9fb2c9;
+}
+.tm-send { color: #2563eb; display: inline-grid; place-items: center; }
+.tm-send svg { width: 1.5cqw; height: 1.5cqw; }
+
+/* --- 03. Overview -------------------------------------------------------- */
+.tm-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.4cqw;
+}
+.tm-stat {
+  display: grid;
+  gap: 0.35cqw;
+  padding: 1.5cqw;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #e8eef7;
+  box-shadow: 0 4px 12px -10px rgba(20, 45, 90, 0.4);
+}
+.tm-stat-label { font-size: 1.3cqw; color: #8497b0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tm-stat-value {
+  font-size: 2.9cqw;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #16294a;
+}
+.tm-stat-delta { font-size: 1.15cqw; color: #10b981; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.tm-lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34%;
+  gap: 1.6cqw;
+  min-height: 0;
+}
+.tm-side-col { display: grid; gap: 1.6cqw; align-content: start; }
+.tm-panel {
+  display: grid;
+  gap: 1cqw;
+  align-content: start;
+  padding: 1.6cqw;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #e8eef7;
+}
+.tm-panel-title { font-size: 1.45cqw; font-weight: 700; color: #16294a; }
+.tm-activity { display: grid; gap: 0.9cqw; }
+.tm-activity-row {
+  display: grid;
+  grid-template-columns: 2.2cqw minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.1cqw;
+}
+.tm-activity-mark {
+  width: 2.2cqw;
+  height: 2.2cqw;
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 4px;
+  background: #e4edfb;
+}
+.tm-activity-text {
+  font-size: 1.3cqw;
+  color: #3f5570;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tm-activity-time { font-size: 1.2cqw; color: #9fb2c9; white-space: nowrap; }
+
+.tm-training { display: flex; align-items: center; gap: 1.1cqw; }
+.tm-training-icon {
+  display: grid;
+  place-items: center;
+  width: 2.9cqw;
+  height: 2.9cqw;
+  min-width: 14px;
+  min-height: 14px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  color: #2563eb;
+  background: #e8f0ff;
+}
+.tm-training-icon svg { width: 1.5cqw; height: 1.5cqw; }
+.tm-training-copy { display: grid; min-width: 0; }
+.tm-training-name { font-size: 1.32cqw; font-weight: 700; color: #16294a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tm-training-when { font-size: 1.18cqw; color: #8497b0; white-space: nowrap; }
+.tm-join {
+  justify-self: start;
+  padding: 0.85cqw 1.5cqw;
+  border-radius: 4px;
+  font-size: 1.25cqw;
+  font-weight: 700;
+  color: #fff;
+  background: #2563eb;
+}
+
+.tm-update { display: flex; align-items: center; gap: 1.1cqw; }
+.tm-update-tag {
+  display: grid;
+  place-items: center;
+  width: 2.9cqw;
+  height: 2.9cqw;
+  min-width: 14px;
+  min-height: 14px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  font-size: 1.05cqw;
+  font-weight: 800;
+  color: #6d5cf5;
+  background: #eeecff;
+}
+.tm-update-copy { display: grid; min-width: 0; flex: 1; }
+.tm-update-name { font-size: 1.32cqw; font-weight: 700; color: #16294a; }
+.tm-update-link { font-size: 1.18cqw; color: #8497b0; }
+.tm-update-chev { color: #b3c3d8; flex-shrink: 0; width: 1.6cqw; height: 1.6cqw; }
+
+/* --- Small screens ------------------------------------------------------- */
+/* Threshold sits below the ~440px the mockups occupy in the desktop climb,
+   so the full dashboard shows there exactly as in the reference. Everything
+   inside is sized in cqw, so at that width the UI reads as a scaled-down
+   product shot rather than as body copy. Only once a mock is genuinely
+   narrow does it shed panels. */
+@container (max-width: 420px) {
+  .tm-frame { grid-template-columns: 28% minmax(0, 1fr); aspect-ratio: 4 / 3; }
+  .tm-nav-item:nth-child(n + 8) { display: none; }
+  .tm-flow-wrap { grid-template-columns: minmax(0, 1fr); }
+  .tm-stats-card { display: none; }
+  .tm-agent { grid-template-columns: minmax(0, 1fr) 42%; }
+  .tm-agent-nav { display: none; }
+  .tm-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tm-lower { grid-template-columns: minmax(0, 1fr); }
+  .tm-side-col { display: none; }
+  .tm-activity-row:nth-child(n + 4) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tm-node,
+  .tm-dots i { animation: none !important; }
+  .tm-spark-line { animation: none; stroke-dashoffset: 0; }
+}

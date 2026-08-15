@@ -405,7 +405,7 @@ button { font: inherit; }
 .section { padding: 5.5rem 0; }
 .section-white { background: #fff; }
 .section-dark { background: radial-gradient(circle at top, rgba(32, 89, 160, 0.48), rgba(15, 31, 51, 0.98) 36%, #0b1f35 100%); }
-.section-title { max-width: 48rem; margin-bottom: 2rem; }
+.section-title { max-width: 50rem; margin-bottom: 2rem; }
 .section-title.centered { margin-inline: auto; text-align: center; }
 .section-title.light h2, .section-title.light p, .section-title.light .eyebrow-label { color: #f8fbff; }
 .eyebrow-label {
@@ -1304,7 +1304,7 @@ button { font: inherit; }
 }
 .agent-badge.outline { background: rgba(255,255,255,.76); }
 .homepage-services-redesign {
-  background: linear-gradient(180deg, #0f2236 0%, #17365c 62%, #edf3f8 100%);
+  background: linear-gradient(179deg, #0f2236f0 0%, #17365cdb 62%, #1d415f 100%);
   position: relative;
   overflow: hidden;
 }
@@ -2929,7 +2929,7 @@ button { font: inherit; }
   box-shadow: 0 16px 30px rgba(34, 73, 130, 0.05);
 }
 .compact-team-title {
-  max-width: 31rem;
+  max-width: 33rem;
   margin-inline: auto;
 }
 .premium-about-team-section .section-title {

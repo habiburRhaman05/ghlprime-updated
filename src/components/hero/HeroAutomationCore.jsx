@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Bot, Code2, Headphones, Mail, MessageSquareText, Share2, Users, Workflow, Zap } from 'lucide-react'
+import { Bot, Code2, Headphones, Mail, MessageSquareText, Share2, Users, Workflow } from 'lucide-react'
 import './home-hero-deck.css'
 import './hero-automation-core.css'
 
@@ -37,7 +37,15 @@ const CX = VIEW_W / 2
 const CY = VIEW_H / 2
 const RX = 214
 const RY = 164
-const CORE_R = 58
+
+// The core is a wide chip, not a disc, because the GHL Prime lockup is a
+// ~2.9:1 horizontal logo -- a circle could only ever show it small. Wires
+// therefore stop on a rounded RECTANGLE boundary rather than a radius, or
+// they would either pierce the chip horizontally or float away from it
+// vertically.
+const CORE_HW = 104
+const CORE_HH = 42
+const CORE_GAP = 11
 
 const SERVICES = [
   { key: 'automation', label: 'Automation', color: '#1684ea', Icon: Workflow },
@@ -59,20 +67,28 @@ const NODES = SERVICES.map((service, index) => {
   const angle = (-90 + index * STEP) * (Math.PI / 180)
   const x = CX + Math.cos(angle) * RX
   const y = CY + Math.sin(angle) * RY
-  // Where the wire starts: on the rim of the core, not its centre, so the
-  // stroke never shows through the translucent disc.
+
   const dx = x - CX
   const dy = y - CY
   const dist = Math.hypot(dx, dy)
+  const ux = dx / dist
+  const uy = dy / dist
+
+  // Ray/box intersection: how far along this spoke the chip edge sits. The
+  // smaller of the two axis crossings is the one the ray actually meets.
+  const tx = Math.abs(ux) < 1e-6 ? Infinity : CORE_HW / Math.abs(ux)
+  const ty = Math.abs(uy) < 1e-6 ? Infinity : CORE_HH / Math.abs(uy)
+  const edge = Math.min(tx, ty) + CORE_GAP
+
   return {
     ...service,
     x,
     y,
     leftPct: (x / VIEW_W) * 100,
     topPct: (y / VIEW_H) * 100,
-    x0: CX + (dx / dist) * CORE_R,
-    y0: CY + (dy / dist) * CORE_R,
-    wireLen: dist - CORE_R,
+    x0: CX + ux * edge,
+    y0: CY + uy * edge,
+    wireLen: dist - edge,
   }
 })
 
@@ -178,6 +194,11 @@ export default function HeroAutomationCore() {
       <div className="hac-stage" aria-hidden="true" onPointerLeave={() => setHovered(null)}>
         <span className="hac-wash" />
         <span className="hac-halo" />
+        {/* Six drifting motes. Positions and phases come from CSS nth-child
+            so this stays markup-cheap. */}
+        <span className="hac-motes">
+          <i /><i /><i /><i /><i /><i />
+        </span>
 
         <svg className="hac-wires" viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} fill="none">
           <defs>
@@ -215,6 +236,13 @@ export default function HeroAutomationCore() {
             const isActive = activeKey === node.key
             return (
               <g key={node.key} className={`hac-lane${isActive ? ' is-active' : ''}`}>
+                {/* Blurred understroke. This is what turns a hairline into
+                    something that reads as emitted light rather than ink. */}
+                <line
+                  className="hac-wire-glow"
+                  x1={node.x0} y1={node.y0} x2={node.x} y2={node.y}
+                  stroke={node.color}
+                />
                 <line
                   className="hac-wire"
                   x1={node.x0} y1={node.y0} x2={node.x} y2={node.y}
@@ -233,12 +261,23 @@ export default function HeroAutomationCore() {
         </svg>
 
         <div className="hac-core">
+          <span className="hac-core-halo" />
           <span className="hac-core-ring" />
           <span className="hac-core-ring hac-core-ring-2" />
-          <span className="hac-core-disc">
-            <span className="hac-core-sheen" />
-            <Zap className="hac-core-bolt" size={22} strokeWidth={2.4} />
-            <span className="hac-core-name">GHL PRIME</span>
+          <span className="hac-core-chip">
+            <span className="hac-core-spin" />
+            <span className="hac-core-face">
+              <img
+                className="hac-core-logo"
+                src="/ghl-prime-logo.png"
+                alt=""
+                width="860"
+                height="300"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+              />
+            </span>
           </span>
         </div>
 
@@ -261,8 +300,12 @@ export default function HeroAutomationCore() {
               onPointerEnter={() => setHovered(node.key)}
             >
               <span className={`hac-node-pill${isActive ? ' is-active' : ''}`}>
+                {/* Bloom sits behind the pill so the glow spills outward
+                    without washing out the label sitting on top of it. */}
+                <span className="hac-node-bloom" />
                 <span className="hac-node-icon"><node.Icon size={15} /></span>
                 <span className="hac-node-label">{node.label}</span>
+                <span className="hac-node-led" />
               </span>
             </div>
           )

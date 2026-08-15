@@ -61,6 +61,34 @@
   50% { transform: translate(-50%, -50%) scale(1.09); opacity: 1; }
 }
 
+/* Drifting motes. Purely atmospheric, six of them, all transform+opacity. */
+.hac-motes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hac-motes i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: hac-mote 11s ease-in-out infinite;
+}
+.hac-motes i:nth-child(1) { left: 14%; top: 72%; background: #1684ea; animation-delay: 0s; }
+.hac-motes i:nth-child(2) { left: 82%; top: 26%; background: #8b5cf6; animation-delay: -2.4s; }
+.hac-motes i:nth-child(3) { left: 34%; top: 15%; background: #06b6d4; animation-delay: -4.6s; }
+.hac-motes i:nth-child(4) { left: 68%; top: 80%; background: #10b981; animation-delay: -6.1s; }
+.hac-motes i:nth-child(5) { left: 22%; top: 42%; background: #f59e0b; animation-delay: -8.3s; }
+.hac-motes i:nth-child(6) { left: 90%; top: 60%; background: #f43f5e; animation-delay: -9.7s; }
+@keyframes hac-mote {
+  0% { opacity: 0; transform: translateY(6px) scale(0.6); }
+  25% { opacity: 0.7; }
+  60% { opacity: 0.5; }
+  100% { opacity: 0; transform: translateY(-26px) scale(1); }
+}
+
 /* --- Wires + rings ------------------------------------------------------- */
 .hac-wires {
   position: absolute;
@@ -104,6 +132,21 @@
   opacity: 1;
 }
 
+/* Blur is applied through a filter on a thick, low-opacity copy of the same
+   line. Kept off the crisp stroke above so the wire stays sharp while only
+   the halo around it softens. */
+.hac-wire-glow {
+  stroke-width: 5;
+  stroke-linecap: round;
+  opacity: 0.18;
+  filter: blur(4px);
+  transition: opacity 0.35s ease, stroke-width 0.35s ease;
+}
+.hac-lane.is-active .hac-wire-glow {
+  stroke-width: 8;
+  opacity: 0.5;
+}
+
 /* The packet. A short dash running the length of the wire, from the core
    rim out to the service -- the whole point of the illustration is that
    work flows OUT of GHL Prime into every channel. */
@@ -121,76 +164,97 @@
 }
 
 /* --- Core ---------------------------------------------------------------- */
+/* 2 x CORE_HW (104) and 2 x CORE_HH (42) over VIEW_W (560). The wires stop
+   on this box's edge, so these two numbers must stay in step with the
+   constants in HeroAutomationCore.jsx. */
 .hac-core {
   position: absolute;
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
-  /* 2 x CORE_R (58) over VIEW_W (560). The wires terminate on this rim. */
-  width: 20.71%;
-  aspect-ratio: 1;
+  width: 37.14%;
+  aspect-ratio: 208 / 84;
   display: grid;
   place-items: center;
 }
+/* Soft light pooled under the chip, so it sits IN the scene rather than on
+   top of it. */
+.hac-core-halo {
+  position: absolute;
+  inset: -55% -30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(22, 132, 234, 0.4) 0%, rgba(139, 92, 246, 0.2) 45%, transparent 72%);
+  filter: blur(18px);
+  animation: hac-core-glow 5s ease-in-out infinite;
+}
+@keyframes hac-core-glow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.07); }
+}
 .hac-core-ring {
   position: absolute;
-  inset: -22%;
-  border-radius: 50%;
-  border: 1px solid rgba(22, 132, 234, 0.3);
+  inset: -14% -7%;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 132, 234, 0.32);
   animation: hac-ping 3.4s ease-out infinite;
 }
 .hac-core-ring-2 {
-  inset: -40%;
-  border-color: rgba(139, 92, 246, 0.22);
+  inset: -28% -14%;
+  border-color: rgba(139, 92, 246, 0.24);
   animation-delay: 1.7s;
 }
 @keyframes hac-ping {
-  0% { transform: scale(0.9); opacity: 0; }
+  0% { transform: scale(0.92); opacity: 0; }
   30% { opacity: 1; }
-  100% { transform: scale(1.28); opacity: 0; }
+  100% { transform: scale(1.2); opacity: 0; }
 }
 
-.hac-core-disc {
+/* The chip. A gradient rim rotates around a white glass face -- the rim is
+   a spinning conic layer clipped by the inset face on top of it, which is
+   cheaper and smoother than animating a border-image. */
+.hac-core-chip {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
+  border-radius: 22px;
   overflow: hidden;
-  color: #fff;
-  background:
-    radial-gradient(120% 120% at 30% 20%, #4bb0ff 0%, #1684ea 42%, #6d5cf5 100%);
+  display: grid;
+  place-items: center;
+  background: #dbeafe;
   box-shadow:
-    0 18px 38px -12px rgba(22, 132, 234, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.35) inset,
-    0 0 34px rgba(22, 132, 234, 0.35);
+    0 22px 44px -14px rgba(23, 59, 108, 0.42),
+    0 0 40px rgba(22, 132, 234, 0.3);
 }
-/* Slow specular rotation -- the detail that makes the disc read as a lit
-   object rather than a flat blue circle. */
-.hac-core-sheen {
+.hac-core-spin {
   position: absolute;
-  inset: -35%;
-  background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.45) 40deg, transparent 110deg, transparent 360deg);
-  animation: hac-spin 8s linear infinite;
-  mix-blend-mode: soft-light;
+  /* Wider than the chip so the conic's corners never clip into view. */
+  width: 180%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    from 0deg,
+    #1684ea, #06b6d4, #10b981, #f59e0b, #f43f5e, #8b5cf6, #1684ea
+  );
+  animation: hac-spin 6s linear infinite;
 }
 @keyframes hac-spin {
   to { transform: rotate(360deg); }
 }
-.hac-core-bolt {
+.hac-core-face {
   position: relative;
-  filter: drop-shadow(0 2px 4px rgba(6, 34, 68, 0.35));
+  inset: 0;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 19px;
+  display: grid;
+  place-items: center;
+  padding: 0 8%;
+  background: linear-gradient(160deg, #ffffff 0%, #f6faff 55%, #eef5ff 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
-.hac-core-name {
-  position: relative;
-  font-size: clamp(7.5px, 1.75cqw, 9.5px);
-  font-weight: 800;
-  letter-spacing: 0.13em;
-  line-height: 1;
-  opacity: 0.95;
+.hac-core-logo {
+  width: 100%;
+  height: auto;
+  max-height: 74%;
+  object-fit: contain;
 }
 
 /* --- Service nodes ------------------------------------------------------- */
@@ -211,26 +275,100 @@
 
 /* Inner layer: the pill itself, and the only transform that changes state. */
 .hac-node-pill {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: clamp(5px, 1.2cqw, 7px);
   padding: clamp(5px, 1.15cqw, 7px) clamp(9px, 2cqw, 12px) clamp(5px, 1.15cqw, 7px) clamp(5px, 1.15cqw, 7px);
   white-space: nowrap;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.93);
   backdrop-filter: blur(6px);
   box-shadow:
     0 10px 24px -12px rgba(15, 23, 42, 0.35),
     0 1px 2px rgba(15, 23, 42, 0.05);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
+
+/* Emissive border. A gradient fill masked down to a 1.2px ring, so the edge
+   itself carries the service colour and glows -- a plain `border` can only
+   ever be a flat line. */
+.hac-node-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.2px;
+  background: linear-gradient(140deg,
+    color-mix(in srgb, var(--tint) 85%, transparent) 0%,
+    rgba(226, 232, 240, 0.9) 45%,
+    color-mix(in srgb, var(--tint) 70%, transparent) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+/* The LED bloom. Each node breathes on its own phase (--i), so the ring
+   reads as eight independent lights rather than one synchronised flash. */
+.hac-node-bloom {
+  position: absolute;
+  inset: -18%;
+  border-radius: inherit;
+  background: radial-gradient(circle, color-mix(in srgb, var(--tint) 55%, transparent) 0%, transparent 70%);
+  filter: blur(9px);
+  opacity: 0.45;
+  pointer-events: none;
+  animation: hac-breathe-led 4.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.53s);
+  transition: opacity 0.35s ease;
+}
+@keyframes hac-breathe-led {
+  0%, 100% { opacity: 0.28; }
+  50% { opacity: 0.72; }
+}
+
 .hac-node-pill.is-active {
-  transform: scale(1.07);
-  border-color: color-mix(in srgb, var(--tint) 45%, #e2e8f0);
+  transform: scale(1.08);
   box-shadow:
-    0 14px 30px -10px color-mix(in srgb, var(--tint) 45%, transparent),
-    0 0 0 3px color-mix(in srgb, var(--tint) 14%, transparent);
+    0 16px 34px -10px color-mix(in srgb, var(--tint) 55%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--tint) 16%, transparent),
+    0 0 22px color-mix(in srgb, var(--tint) 35%, transparent);
+}
+.hac-node-pill.is-active::before {
+  background: linear-gradient(140deg,
+    var(--tint) 0%,
+    color-mix(in srgb, var(--tint) 55%, #ffffff) 50%,
+    var(--tint) 100%);
+}
+.hac-node-pill.is-active .hac-node-bloom {
+  opacity: 1;
+  animation-play-state: paused;
+}
+
+/* Status LED. Small, but it is the detail that sells the whole node as a
+   powered device rather than a label. */
+.hac-node-led {
+  position: relative;
+  width: clamp(4px, 0.95cqw, 5.5px);
+  height: clamp(4px, 0.95cqw, 5.5px);
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--tint);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--tint) 80%, transparent);
+  animation: hac-led-blink 2.4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.31s);
+}
+@keyframes hac-led-blink {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.hac-node-pill.is-active .hac-node-led {
+  opacity: 1;
+  animation: none;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--tint) 95%, transparent);
 }
 
 .hac-node-icon {
@@ -344,7 +482,8 @@
     padding: 0.4rem 0 0;
   }
   .hac-wires,
-  .hac-wash { display: none; }
+  .hac-wash,
+  .hac-motes { display: none; }
   .hac-halo {
     width: 70%;
     height: 8rem;
@@ -355,11 +494,14 @@
     position: static;
     transform: none;
     grid-column: 1 / -1;
-    width: 5.6rem;
+    width: min(15rem, 80%);
     justify-self: center;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.6rem;
   }
-  .hac-core-name { font-size: 8.5px; }
+  /* The ping rings key off the chip's own box, which is now much wider
+     relative to the grid, so they need pulling back in. */
+  .hac-core-ring { inset: -10% -5%; }
+  .hac-core-ring-2 { inset: -20% -10%; }
 
   .hac-node {
     position: static;
@@ -403,12 +545,21 @@
   .hac-sweep,
   .hac-packet,
   .hac-core-ring,
-  .hac-core-sheen,
+  .hac-core-halo,
+  .hac-core-spin,
+  .hac-node-bloom,
+  .hac-node-led,
+  .hac-motes i,
   .hac-live-dot::after {
     animation: none !important;
   }
-  .hac-packet { display: none; }
+  .hac-packet,
+  .hac-motes { display: none; }
   .hac-core-ring { opacity: 0.4; }
+  /* Frozen mid-rotation the conic would show a hard seam, so the rim falls
+     back to a static brand gradient instead. */
+  .hac-core-spin { background: linear-gradient(135deg, #1684ea, #8b5cf6); }
+  .hac-node-bloom { opacity: 0.4; }
   .hac,
   .hac-node,
   .hac-stats {
