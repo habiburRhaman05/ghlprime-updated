@@ -1,12 +1,25 @@
 ﻿import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { ArrowRight, Menu, X, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown, Code2, Headphones, LayoutGrid, Mail, Menu, Workflow, X } from 'lucide-react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import HomePage from './pages/HomePage'
+import BackToTop from './components/BackToTop'
 import './App.css'
 import './styles/service-detail.css'
 import { SERVICE_MENU } from './data/serviceCatalog'
+
+// Icon per mega-menu category, keyed off the same strings SERVICE_MENU
+// already uses -- so a category rename in the data file just stops
+// matching here instead of silently mislabelling. Kept local to App.jsx
+// rather than added to serviceCatalog.js, which is also read by the footer
+// and has no other icon-bearing consumer.
+const CATEGORY_ICON = {
+  'GoHighLevel': Workflow,
+  'Vibe Coding & AI Dev': Code2,
+  'Design & Build': LayoutGrid,
+  'Support': Headphones,
+}
 
 const SITE_URL = 'https://ghlprime.com'
 const SITE_LOGO = 'https://ghlprime.com/ghl-prime-logo.png'
@@ -283,21 +296,27 @@ function SiteHeader() {
           </button>
           <div className="megamenu-panel" role="menu">
             <div className="megamenu-cols">
-              {SERVICE_MENU.map((col) => (
-                <div key={col.category}>
-                  <div className="megamenu-col-title">{col.category}</div>
-                  {col.items.map((it) => (
-                    <Link
-                      key={it.to}
-                      to={it.to}
-                      role="menuitem"
-                      className={`megamenu-link${location.pathname === it.to ? ' is-active' : ''}`}
-                    >
-                      {it.label}
-                    </Link>
-                  ))}
-                </div>
-              ))}
+              {SERVICE_MENU.map((col) => {
+                const CategoryIcon = CATEGORY_ICON[col.category]
+                return (
+                  <div key={col.category}>
+                    <div className="megamenu-col-title">
+                      {CategoryIcon ? <CategoryIcon size={13} className="megamenu-col-icon" aria-hidden="true" /> : null}
+                      {col.category}
+                    </div>
+                    {col.items.map((it) => (
+                      <Link
+                        key={it.to}
+                        to={it.to}
+                        role="menuitem"
+                        className={`megamenu-link${location.pathname === it.to ? ' is-active' : ''}`}
+                      >
+                        {it.label}
+                      </Link>
+                    ))}
+                  </div>
+                )
+              })}
             </div>
             <Link to="/services" role="menuitem" className="megamenu-all">
               View all services
@@ -317,8 +336,14 @@ function SiteHeader() {
       </nav>
 
       <div className="nav-actions desktop-nav-actions">
-        <Link to="/contact" className="login-link">Contact</Link>
-        <Link to="/booking" className="primary-pill">Get a free consultation</Link>
+        <Link to="/contact" className="login-link nav-ghost">
+          <Mail size={15} aria-hidden="true" />
+          Contact
+        </Link>
+        <Link to="/booking" className="primary-pill nav-cta">
+          Get a free consultation
+          <ArrowRight size={15} aria-hidden="true" />
+        </Link>
       </div>
 
       <button type="button" className="mobile-menu-toggle" onClick={() => setMobileMenuOpen((current) => !current)} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileMenuOpen}>
@@ -334,14 +359,20 @@ function SiteHeader() {
             {mobileServicesOpen ? (
               <div className="mobile-svc-catalog">
                 <Link to="/services" className="mobile-svc-all" onClick={() => setMobileMenuOpen(false)}>All Services</Link>
-                {SERVICE_MENU.map((col) => (
-                  <div key={col.category} className="mobile-svc-group">
-                    <div className="mobile-svc-cat">{col.category}</div>
-                    {col.items.map((it) => (
-                      <Link key={it.to} to={it.to} className="mobile-svc-link" onClick={() => setMobileMenuOpen(false)}>{it.label}</Link>
-                    ))}
-                  </div>
-                ))}
+                {SERVICE_MENU.map((col) => {
+                  const CategoryIcon = CATEGORY_ICON[col.category]
+                  return (
+                    <div key={col.category} className="mobile-svc-group">
+                      <div className="mobile-svc-cat">
+                        {CategoryIcon ? <CategoryIcon size={13} aria-hidden="true" /> : null}
+                        {col.category}
+                      </div>
+                      {col.items.map((it) => (
+                        <Link key={it.to} to={it.to} className="mobile-svc-link" onClick={() => setMobileMenuOpen(false)}>{it.label}</Link>
+                      ))}
+                    </div>
+                  )
+                })}
               </div>
             ) : null}
             {secondaryNav.map((item) => (
@@ -349,8 +380,14 @@ function SiteHeader() {
             ))}
           </nav>
           <div className="mobile-menu-actions">
-            <Link to="/contact" className="login-link" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
-            <Link to="/booking" className="primary-pill" onClick={() => setMobileMenuOpen(false)}>Get a free consultation</Link>
+            <Link to="/contact" className="login-link nav-ghost" onClick={() => setMobileMenuOpen(false)}>
+              <Mail size={16} aria-hidden="true" />
+              Contact
+            </Link>
+            <Link to="/booking" className="primary-pill nav-cta" onClick={() => setMobileMenuOpen(false)}>
+              Get a free consultation
+              <ArrowRight size={16} aria-hidden="true" />
+            </Link>
           </div>
         </div>
       ) : null}
@@ -399,6 +436,7 @@ export default function App() {
       <div className="hero-glow bottom-right" />
       <SiteHeader />
       <ScrollToTop />
+      <BackToTop />
       <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
