@@ -103,13 +103,6 @@ function ellipsePerimeter(rx, ry) {
 const OUTER_RING = ellipsePerimeter(RX, RY)
 const INNER_RING = ellipsePerimeter(RX * 0.56, RY * 0.56)
 
-const STATS = [
-  { label: 'Live Products', value: 90, format: (v) => `${v}+` },
-  { label: 'Users Served', value: 550, format: (v) => `${v}+` },
-  { label: 'Enterprise Systems', value: 15, format: (v) => String(v) },
-  { label: 'Years in Production', value: 7, format: (v) => `${v}+` },
-]
-
 const CYCLE_MS = 2000
 
 // Mirrors the matchMedia pattern already used by WhatWeAreSlider.
@@ -125,52 +118,6 @@ function usePrefersReducedMotion() {
   }, [])
 
   return reduced
-}
-
-function useCountUp(target, enabled, delay) {
-  const [value, setValue] = useState(enabled ? 0 : target)
-
-  useEffect(() => {
-    if (!enabled) {
-      setValue(target)
-      return undefined
-    }
-
-    let frame = null
-    let start = null
-
-    const startTimer = window.setTimeout(() => {
-      const step = (now) => {
-        if (start === null) start = now
-        const progress = Math.min((now - start) / 1100, 1)
-        // easeOutCubic -- fast arrival, soft landing.
-        setValue(Math.round(target * (1 - (1 - progress) ** 3)))
-        if (progress < 1) frame = window.requestAnimationFrame(step)
-      }
-      frame = window.requestAnimationFrame(step)
-    }, delay)
-
-    return () => {
-      window.clearTimeout(startTimer)
-      if (frame) window.cancelAnimationFrame(frame)
-    }
-  }, [target, enabled, delay])
-
-  return value
-}
-
-function StatTile({ stat, animate, delay }) {
-  const value = useCountUp(stat.value, animate, delay)
-
-  return (
-    <div className="hac-stat">
-      <strong className="hac-stat-value">{stat.format(value)}</strong>
-      <span className="hac-stat-label">
-        <span className="hac-stat-dot" />
-        {stat.label}
-      </span>
-    </div>
-  )
 }
 
 export default function HeroAutomationCore() {
@@ -316,11 +263,6 @@ export default function HeroAutomationCore() {
         })}
       </div>
 
-      <div className="hac-stats" aria-hidden="true">
-        {STATS.map((stat, index) => (
-          <StatTile key={stat.label} stat={stat} animate={!reduced} delay={900 + index * 90} />
-        ))}
-      </div>
     </div>
   )
 }

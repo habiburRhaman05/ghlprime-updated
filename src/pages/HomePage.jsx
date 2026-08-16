@@ -19,6 +19,7 @@ import TeamTestimonials from '../components/home-page/TeamTestimonials'
 import TrainingOnboarding from '../components/home-page/TrainingOnboarding'
 import VibeCoding from '../components/home-page/VibeCoding'
 import HeroAutomationCore from '../components/hero/HeroAutomationCore'
+import HeroStatsBar from '../components/hero/HeroStatsBar'
 import { div } from 'framer-motion/client'
 
 const SITE_URL = 'https://ghlprime.com'
@@ -981,6 +982,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <HeroStatsBar />
       <TrustedLogosSection />
       <WhatWeAreSection />
       <LifeAtGHL/>

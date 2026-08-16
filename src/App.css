@@ -55,12 +55,28 @@ button { font: inherit; }
   /* Layered shadow: outer lift plus an inset top rim, so the pill reads as
      lit glass from above rather than a flat card with a drop shadow. */
   box-shadow: 0 18px 38px rgba(33,73,130,.08), inset 0 1px 0 rgba(255,255,255,.75);
-  transition: padding .32s cubic-bezier(.22,1,.36,1), background .32s ease, box-shadow .32s ease, border-color .32s ease;
+  transition: padding .32s cubic-bezier(.22,1,.36,1), background .32s ease, box-shadow .32s ease, border-color .32s ease,
+    width .32s cubic-bezier(.22,1,.36,1), border-radius .32s ease, top .32s cubic-bezier(.22,1,.36,1);
 }
-/* Compacts once the page moves, so the bar reads as chrome rather than as
-   part of the hero. Only padding animates -- height would reflow the page. */
+/* Once the page moves the bar stops being a floating pill and becomes a
+   full-bleed chrome bar: edge-to-edge background, square corners, flush to
+   the viewport top. Its CONTENT stays on the container's 1260px measure via
+   the padding calc below, so nothing shifts horizontally in the process.
+
+   `top` (not `margin-top`) is what closes the gap above the bar. Dropping
+   the margin would pull every following section up by .85rem mid-scroll --
+   the margin only does anything at rest, where the floating pill is the
+   intended look, so it stays. */
 .navbar.is-scrolled {
-  padding: .55rem 1.1rem;
+  top: 0;
+  width: 100%;
+  max-width: none;
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  /* Reproduces .container: 1260px of content, centred, never less than a
+     1rem gutter. `100%` (not 100vw) so the scrollbar can't push it wide. */
+  padding: .55rem max(1rem, calc((100% - 1260px) / 2));
   background: rgba(255,255,255,.94);
   border-color: rgba(198,218,242,.95);
   box-shadow: 0 14px 34px rgba(33,73,130,.14), inset 0 1px 0 rgba(255,255,255,.85);
@@ -3855,6 +3871,9 @@ button { font: inherit; }
 
 @media (max-width: 780px) {
   .container { width: min(1160px, calc(100% - 1rem)); }
+  /* Track the container's narrower measure/gutter at this breakpoint, or the
+     stuck bar's content would sit .5rem inside the page content below it. */
+  .navbar.is-scrolled { padding-inline: max(.5rem, calc((100% - 1160px) / 2)); }
   .hero-cta, .platform-tabs, .static-tabs, .client-study-filters { width: 100%; justify-content: center; flex-wrap: wrap; }
   .reference-solution-card {
     min-height: 22rem;

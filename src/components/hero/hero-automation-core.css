@@ -394,97 +394,6 @@
   color: #17304d;
 }
 
-/* --- Stat strip ---------------------------------------------------------- */
-/* Sits below the stage in normal flow, centred on the same axis as the core.
-   Nothing floats: this is the one element outside the orbit and it is
-   aligned to it rather than pinned near it. */
-.hac-stats {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  /* No gap -- the cells divide the bar evenly and are separated by the
-     hairline borders on .hac-stat instead. */
-  gap: 0;
-  max-width: 36rem;
-  margin: 0.4rem auto 0;
-  padding: 0.75rem 0.6rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(198, 218, 242, 0.7);
-  box-shadow: 0 14px 34px -22px rgba(23, 59, 108, 0.45);
-  backdrop-filter: blur(8px);
-  animation: hac-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.95s both;
-}
-.hac-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #15803d;
-}
-.hac-live-dot {
-  position: relative;
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: #16a34a;
-}
-.hac-live-dot::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: #16a34a;
-  animation: hac-live 1.8s ease-out infinite;
-}
-@keyframes hac-live {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(2.6); opacity: 0; }
-}
-/* Stacked cell: figure over a dotted caption, divided by hairlines -- four
-   equal columns rather than the previous inline "128 Workflows live" pairs,
-   which read as a sentence fragment instead of a metric. */
-.hac-stat {
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.34rem;
-  padding: 0.15rem 0.55rem;
-}
-.hac-stat + .hac-stat {
-  border-left: 1px solid rgba(198, 218, 242, 0.85);
-}
-.hac-stat-value {
-  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
-  font-weight: 800;
-  color: var(--navy);
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-.hac-stat-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.32rem;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-align: center;
-}
-.hac-stat-dot {
-  width: 5px;
-  height: 5px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--primary);
-}
-
 /* --- Responsive ---------------------------------------------------------- */
 @media (max-width: 1180px) {
   .hac-stage { max-width: 31rem; }
@@ -492,7 +401,6 @@
 
 @media (max-width: 1024px) {
   .hac-stage { max-width: 33rem; }
-  .hac-stats { max-width: 33rem; }
 }
 
 /* Below this the ellipse can no longer hold eight readable cards, so the
@@ -552,26 +460,10 @@
   .hac-node-icon { width: 25px; height: 25px; }
   .hac-node-icon svg { width: 14px; height: 14px; }
   .hac-node-label { font-size: 12.5px; }
-
-  .hac-stats {
-    max-width: 26rem;
-    margin-top: 0.9rem;
-    row-gap: 0.85rem;
-  }
-  /* Four cells across would leave ~65px each here, which wraps every label
-     onto two lines. Two per row keeps them readable. */
-  .hac-stat { flex: 0 0 50%; }
-  .hac-stat:nth-child(odd) { border-left: 0; }
-  /* Row 2 gets a top hairline so the 2x2 grid still reads as divided. */
-  .hac-stat:nth-child(n + 3) {
-    border-top: 1px solid rgba(198, 218, 242, 0.85);
-    padding-top: 0.8rem;
-  }
 }
 
 @media (max-width: 380px) {
   .hac-stage { grid-template-columns: 1fr; }
-  .hac-stat-label { font-size: 0.62rem; letter-spacing: 0.05em; }
 }
 
 /* --- Reduced motion ------------------------------------------------------ */
@@ -585,8 +477,7 @@
   .hac-core-spin,
   .hac-node-bloom,
   .hac-node-led,
-  .hac-motes i,
-  .hac-live-dot::after {
+  .hac-motes i {
     animation: none !important;
   }
   .hac-packet,
@@ -597,8 +488,7 @@
   .hac-core-spin { background: linear-gradient(135deg, #1684ea, #8b5cf6); }
   .hac-node-bloom { opacity: 0.4; }
   .hac,
-  .hac-node,
-  .hac-stats {
+  .hac-node {
     animation-duration: 0.2s !important;
     animation-delay: 0s !important;
   }

@@ -1,0 +1,98 @@
+/* Headline metrics bar -- its own section directly below the hero.
+   Scoped to .hero-stats-section / .hsb-*, so nothing here reaches the hero
+   illustration this was lifted out of (.hac-*). */
+
+.hero-stats-section {
+  position: relative;
+  z-index: 1;
+  /* Tight against the hero above it: this reads as the hero's footer line,
+     not as a section in its own right, so it doesn't take the full
+     5.5rem .section rhythm. */
+  padding: 0 0 clamp(2rem, 4vw, 3rem);
+}
+
+.hsb-bar {
+  /* 20% narrower than the container, centred -- keeps the bar visibly
+     inset from the copy above rather than running the full page width. */
+  width: 80%;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  padding: clamp(0.85rem, 1.8vw, 1.15rem) clamp(0.6rem, 1.4vw, 1rem);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(198, 218, 242, 0.7);
+  box-shadow: 0 18px 40px -24px rgba(23, 59, 108, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+/* Stacked cell: figure over a dotted caption, cells divided by hairlines
+   and flexed to equal widths. */
+.hsb-stat {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.34rem;
+  padding: 0.15rem 0.55rem;
+}
+.hsb-stat + .hsb-stat {
+  border-left: 1px solid rgba(198, 218, 242, 0.85);
+}
+.hsb-stat-value {
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  /* Tabular figures stop the number jittering horizontally while it counts
+     -- proportional digits have different widths, so 0->550 would otherwise
+     twitch on nearly every frame. */
+  font-variant-numeric: tabular-nums;
+}
+.hsb-stat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+.hsb-stat-dot {
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  /* The -20% inset is a desktop refinement; below this the bar needs the
+     width back or the four cells start crushing. */
+  .hsb-bar { width: 92%; }
+}
+
+@media (max-width: 720px) {
+  .hsb-bar { width: 100%; row-gap: 0.9rem; }
+  /* Four across leaves ~65px per cell here, which wraps every label onto
+     two lines -- two per row instead. */
+  .hsb-stat { flex: 0 0 50%; }
+  .hsb-stat:nth-child(odd) { border-left: 0; }
+  /* Row 2 keeps a divider so the 2x2 still reads as a grid. */
+  .hsb-stat:nth-child(n + 3) {
+    border-top: 1px solid rgba(198, 218, 242, 0.85);
+    padding-top: 0.85rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hsb-stat-label { font-size: 0.62rem; letter-spacing: 0.05em; }
+}
