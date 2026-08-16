@@ -29,9 +29,15 @@ import './hero-automation-core.css'
  *     changes how far a node extends outward, never where its connector
  *     meets it.
  *
- * CONNECTORS NEVER ENTER THE CARD. Every path stops 14 units outside the
+ * CONNECTORS NEVER ENTER THE CARD. Every path stops 8 units outside the
  * card's edge, and the card is painted on a higher layer than the SVG, so
  * the logo reads as a separate object sitting above the grid.
+ *
+ * POWER READS AS COMING FROM THE LOGO because three things fire together:
+ * the card's glow swells once per BEAT (lap / 8, i.e. once per departing
+ * pulse), the port on the card edge ignites, and the pulse leaves. Tying the
+ * card's glow to the lap instead meant it swelled once while eight pulses
+ * departed, which is why the effect previously did not read.
  *
  * Deliberately no JS: no timers, no state, no listeners. The hero is the LCP
  * region, so the animation is pure CSS keyframes that paint on the first
