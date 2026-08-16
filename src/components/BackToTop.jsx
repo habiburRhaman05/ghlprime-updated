@@ -88,18 +88,8 @@ export default function BackToTop() {
           so the accessible name comes from the visible text rather than a
           duplicate aria-label. */}
       <span className="btt-badge">
-        <svg className="btt-ring" viewBox="0 0 48 48" aria-hidden="true">
-          <circle className="btt-ring-track" cx="24" cy="24" r={RADIUS} />
-          <circle
-            className="btt-ring-fill"
-            cx="24" cy="24" r={RADIUS}
-            style={{
-              strokeDasharray: CIRCUMFERENCE,
-              strokeDashoffset: CIRCUMFERENCE * (1 - progress),
-            }}
-          />
-        </svg>
-        <ArrowUp className="btt-icon" size={16} strokeWidth={2.6} aria-hidden="true" />
+   
+        <ArrowUp className="" size={16} strokeWidth={2.6} aria-hidden="true" />
       </span>
       <span className="btt-label">Back to Top</span>
     </button>

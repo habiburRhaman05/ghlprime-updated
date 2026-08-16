@@ -26,7 +26,10 @@
 
 .hh-grid {
   display: grid;
-  grid-template-columns: 1.02fr 0.98fr;
+  /* Visual column takes the larger share: the power-grid illustration has
+     eight labelled nodes to place, while the copy column only needs enough
+     width to hold the headline's existing line breaks. */
+  grid-template-columns: 0.96fr 1.04fr;
   gap: clamp(1.8rem, 3.4vw, 3.2rem);
   align-items: center;
 }
