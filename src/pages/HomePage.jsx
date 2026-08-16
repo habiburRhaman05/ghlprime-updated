@@ -435,7 +435,7 @@ function WhatWeAreSection() {
             transition={{ duration: 0.45 }}
           >
             <span className="eyebrow-label">What We Actually Are</span>
-            <span className="wwa-eyebrow-rule" aria-hidden="true" />
+            {/* <span className="wwa-eyebrow-rule" aria-hidden="true" /> */}
           </motion.div>
 
           <motion.h2

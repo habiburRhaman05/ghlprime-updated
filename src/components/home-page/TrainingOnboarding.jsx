@@ -322,7 +322,6 @@ export default function TrainingOnboarding() {
               >
                 <span className="jr-outcome-icon"><item.Icon size={22} /></span>
                 <div className="jr-outcome-copy">
-                  <span className="jr-outcome-idx" aria-hidden="true">{`0${index + 1}`}</span>
                   <strong className="jr-outcome-title">{item.title}</strong>
                   <span className="jr-outcome-eyebrow">{item.eyebrow}</span>
                 </div>

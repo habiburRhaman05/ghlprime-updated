@@ -104,9 +104,10 @@ const OUTER_RING = ellipsePerimeter(RX, RY)
 const INNER_RING = ellipsePerimeter(RX * 0.56, RY * 0.56)
 
 const STATS = [
-  { label: 'Workflows live', value: 128, format: (v) => String(v) },
-  { label: 'Tickets solved', value: 4900, format: (v) => (v >= 1000 ? `${(v / 1000).toFixed(1)}k` : String(v)) },
-  { label: 'First reply', value: 6, format: (v) => `${v}m` },
+  { label: 'Live Products', value: 90, format: (v) => `${v}+` },
+  { label: 'Users Served', value: 550, format: (v) => `${v}+` },
+  { label: 'Enterprise Systems', value: 15, format: (v) => String(v) },
+  { label: 'Years in Production', value: 7, format: (v) => `${v}+` },
 ]
 
 const CYCLE_MS = 2000
@@ -164,7 +165,10 @@ function StatTile({ stat, animate, delay }) {
   return (
     <div className="hac-stat">
       <strong className="hac-stat-value">{stat.format(value)}</strong>
-      <span className="hac-stat-label">{stat.label}</span>
+      <span className="hac-stat-label">
+        <span className="hac-stat-dot" />
+        {stat.label}
+      </span>
     </div>
   )
 }
@@ -313,10 +317,6 @@ export default function HeroAutomationCore() {
       </div>
 
       <div className="hac-stats" aria-hidden="true">
-        <span className="hac-live">
-          <span className="hac-live-dot" />
-          Live
-        </span>
         {STATS.map((stat, index) => (
           <StatTile key={stat.label} stat={stat} animate={!reduced} delay={900 + index * 90} />
         ))}

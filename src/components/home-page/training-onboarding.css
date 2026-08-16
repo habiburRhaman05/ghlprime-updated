@@ -60,7 +60,7 @@
 .jr-heading-accent { color: #2563eb; }
 
 .section.jr .jr-lede {
-  max-width: 34rem;
+  max-width: 36rem;
   margin: 1.15rem auto 0;
   font-size: 1.02rem;
   line-height: 1.7;
@@ -71,7 +71,8 @@
 .jr-stage {
   position: relative;
   container-type: inline-size;
-  width: 100%;
+  width: 95%;
+  margin: auto;
 }
 
 .jr-lines {
@@ -252,6 +253,9 @@
   gap: 1.5rem;
   justify-items: center;
   margin-top: clamp(1rem, 2vw, 2rem);
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .jr-outcomes-label {
   font-size: 0.8rem;
@@ -269,8 +273,9 @@
 .jr-outcome {
   position: relative;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: auto minmax(0, 1fr); */
   gap: 1rem;
   align-items: start;
   padding: 1.5rem 1.4rem;
@@ -287,16 +292,16 @@
 
 /* The accent sweep along the bottom left edge, as in the reference. */
 .jr-outcome::after {
-  content: "";
+  /* content: "";
   position: absolute;
   left: 0; right: 38%;
   bottom: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--tone), transparent);
+  background: linear-gradient(90deg, var(--tone), transparent); */
 }
 .jr-outcome:hover {
   border-color: color-mix(in srgb, var(--tone) 42%, transparent);
-  box-shadow: 0 26px 48px -30px color-mix(in srgb, var(--tone) 70%, transparent);
+  /* box-shadow: 0 26px 48px -30px color-mix(in srgb, var(--tone) 70%, transparent); */
 }
 .jr-outcome-icon {
   display: grid;

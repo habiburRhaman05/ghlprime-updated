@@ -72,34 +72,9 @@
   font-weight: 800;
   letter-spacing: 0.17em;
   text-transform: uppercase;
-  color: var(--primary-dark);
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(37, 99, 235, 0.22);
-  box-shadow:
-    0 10px 24px -16px rgba(23, 59, 108, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(6px);
+  color: var(--primary);
 }
-.vv2-eyebrow-dot {
-  position: relative;
-  width: 6px;
-  height: 6px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), #6d5cf5);
-}
-.vv2-eyebrow-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--primary);
-  animation: vv2-ping 2s ease-out infinite;
-}
-@keyframes vv2-ping {
-  0% { transform: scale(1); opacity: 0.55; }
-  100% { transform: scale(2.8); opacity: 0; }
-}
+
 
 .vv2-heading {
   margin: 1.15rem 0 0;
@@ -115,14 +90,12 @@
 /* Gradient rather than flat blue. It is the one place in the section that
    earns the extra richness. */
 .vv2-heading-accent {
-  background: linear-gradient(100deg, #2563eb 0%, #4f46e5 55%, #6d5cf5 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+ 
+  color: #2563eb;
 }
 
 .section.vv2 .vv2-lede {
-  max-width: 48rem;
+  max-width: 50rem;
   margin: 1.5rem 0 0;
   font-size: 1.045rem;
   line-height: 1.82;
@@ -188,7 +161,7 @@
 }
 .vv2-card.is-lit {
   border-color: color-mix(in srgb, var(--tone) 55%, transparent);
-  box-shadow: 0 20px 40px -24px color-mix(in srgb, var(--tone) 80%, transparent);
+  /* box-shadow: 0 20px 40px -24px color-mix(in srgb, var(--tone) 80%, transparent); */
 }
 .vv2-card.is-lit .vv2-card-glow { opacity: 1; }
 .vv2-card.is-lit .vv2-card-icon { transform: scale(1.08); }

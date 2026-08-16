@@ -24,7 +24,7 @@
   border-radius: 999px;
   cursor: pointer;
   color: #fff;
-  background: linear-gradient(135deg, var(--primary) 0%, #3da5ff 55%, #6d5cf5 100%);
+  background: var(--primary);
   border: 1px solid rgba(255, 255, 255, .28);
   box-shadow: 0 18px 36px -16px rgba(22, 132, 234, .55), inset 0 1px 0 rgba(255, 255, 255, .35);
   opacity: 0;
@@ -43,6 +43,7 @@
 .btt:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 24px 44px -18px rgba(22, 132, 234, .65), inset 0 1px 0 rgba(255, 255, 255, .4);
+  
 }
 .btt:active { transform: translateY(-1px) scale(.98); }
 .btt:focus-visible {

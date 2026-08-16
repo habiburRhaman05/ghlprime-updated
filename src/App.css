@@ -33,9 +33,10 @@ a { color: inherit; text-decoration: none; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { font: inherit; }
 #root { min-height: 100vh; }
-.container { width: min(1160px, calc(100% - 2rem)); margin: 0 auto; }
+.container { width: min(1260px, calc(100% - 2rem)); margin: 0 auto; }
 .site-shell { position: relative; overflow-x: clip; }
 .page-grid {
+  
   position: absolute; inset: 0;
   background-image: linear-gradient(rgba(32, 93, 171, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(32, 93, 171, 0.055) 1px, transparent 1px);
   background-size: 36px 36px; pointer-events: none; mask-image: linear-gradient(180deg, rgba(0,0,0,.8), transparent 72%);
