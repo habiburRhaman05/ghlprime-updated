@@ -40,20 +40,23 @@
   margin-inline: auto;
   text-align: center;
 }
+/* Homepage section-header spec: 14px/600/#2563eb eyebrow, up to 48px/700
+   title with the highlighted phrase (already this exact blue) in
+   #2563eb, 16px/500 description. */
 .jr-eyebrow {
   display: inline-block;
-  font-size: 0.82rem;
-  font-weight: 800;
+  font-size: 0.875rem;
+  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #2563eb;
 }
 .jr-heading {
   margin: 0.85rem 0 0;
-  font-size: clamp(2rem, 3.9vw, 3.15rem);
-  line-height: 1.1;
+  font-size: clamp(1.85rem, 4.4vw, 3rem);
+  line-height: 1.14;
   letter-spacing: -0.05em;
-  font-weight: 800;
+  font-weight: 700;
   text-wrap: balance;
 }
 .jr-heading-dark { color: #0f1f38; }
@@ -62,7 +65,8 @@
 .section.jr .jr-lede {
   max-width: 36rem;
   margin: 1.15rem auto 0;
-  font-size: 1.02rem;
+  font-size: 1rem;
+  font-weight: 500;
   line-height: 1.7;
   color: #5b6e85;
 }

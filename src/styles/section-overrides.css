@@ -740,25 +740,36 @@
   z-index: 1;
   max-width: 46rem;
 }
+/* Homepage section-header spec: 14px/600/#2563eb eyebrow, up to 48px/700
+   title with the highlighted phrase in the same blue, 16px/500 description.
+   Scoped here (not the shared .eyebrow-label/.section-title h2/p) so it
+   can't reach any other page. */
+.why-choose-reference-head .eyebrow-label {
+  font-size: .875rem;
+  font-weight: 600;
+  color: #2563eb;
+}
 .why-choose-reference-head h2 {
-  font-size: clamp(2.1rem, 3.6vw, 3.1rem);
-  line-height: 1.12;
+  font-size: clamp(1.85rem, 4.4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.14;
   letter-spacing: -0.045em;
   color: #10253f;
 }
 .why-choose-reference-head h2 span {
-  color: #2678e8;
+  color: #2563eb;
 }
 .why-choose-eyebrow-rule {
   display: block;
   width: 2.9rem;
   height: 3px;
   border-radius: 2px;
-  background: #2678e8;
+  background: #2563eb;
   margin: .85rem auto 1.35rem;
 }
 .why-choose-reference-head p {
-  font-size: 1.02rem;
+  font-size: 1rem;
+  font-weight: 500;
   line-height: 1.8;
   color: #607895;
 }

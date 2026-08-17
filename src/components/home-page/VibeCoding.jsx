@@ -236,8 +236,8 @@ export default function VibeCoding() {
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.6, ease: EASE }}
           >
-            <span className="vv2-heading-dark">If GHL Can’t</span>{' '}
-            <span className="vv2-heading-accent">Do It, We Build It.</span>
+            <span className="vv2-heading-dark">If GHL Can’t Do It,</span>{' '}
+            <span className="vv2-heading-accent">We Build It.</span>
           </motion.h2>
 
           <motion.p

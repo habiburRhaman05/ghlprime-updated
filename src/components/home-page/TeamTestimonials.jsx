@@ -271,7 +271,7 @@ export default function TeamTestimonials({ testimonials = TESTIMONIALS, autoPlay
           transition={{ duration: 0.5 }}
         >
           <span className="eyebrow-label">Team Voices</span>
-          <h2>What It&rsquo;s Like Working Here</h2>
+          <h2>What It&rsquo;s Like <span className="hl">Working Here</span></h2>
           <p>The people building GHL Prime, in their own words.</p>
         </motion.div>
 

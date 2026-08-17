@@ -72,6 +72,11 @@ button { font: inherit; }
   width: 100%;
   max-width: none;
   border-radius: 0;
+  /* Flush to the viewport top: no top/side edges, only the bottom hairline
+     separating the bar from the page. The inset white rim goes with them --
+     it was the "lit glass" highlight for the floating pill and would read as
+     a second line right under the top edge. */
+  border-top: 0;
   border-left: 0;
   border-right: 0;
   /* Reproduces .container: 1260px of content, centred, never less than a
@@ -79,7 +84,7 @@ button { font: inherit; }
   padding: .55rem max(1rem, calc((100% - 1260px) / 2));
   background: rgba(255,255,255,.94);
   border-color: rgba(198,218,242,.95);
-  box-shadow: 0 14px 34px rgba(33,73,130,.14), inset 0 1px 0 rgba(255,255,255,.85);
+  box-shadow: 0 14px 34px rgba(33,73,130,.14);
 }
 .brand { display: inline-flex; align-items: center; }
 .mobile-menu-toggle,
@@ -124,18 +129,18 @@ button { font: inherit; }
   height: 2.85rem; width: auto; max-width: 14rem; display: block; object-fit: contain; filter: drop-shadow(0 10px 18px rgba(22, 132, 234, 0.12));
   transition: height .32s cubic-bezier(.22,1,.36,1), transform .32s cubic-bezier(.22,1,.36,1), filter .32s ease;
 }
-.navbar.is-scrolled .brand-logo { height: 2.4rem; }
+/* The logo holds ONE size per breakpoint, scrolled or not -- only the bar's
+   padding compacts on scroll. A logo that resizes as you scroll draws the
+   eye back to the chrome every time. */
 .brand:hover .brand-logo { transform: scale(1.035); filter: drop-shadow(0 12px 22px rgba(22, 132, 234, 0.22)); }
 .brand:active .brand-logo { transform: scale(0.99); }
 /* The bar loses its nav row at 1024 and its horizontal room at 520, so the
    logo steps down with it rather than crowding the hamburger. */
 @media (max-width: 1024px) {
   .brand-logo { height: 2.5rem; }
-  .navbar.is-scrolled .brand-logo { height: 2.2rem; }
 }
 @media (max-width: 520px) {
   .brand-logo { height: 2.15rem; max-width: 10.5rem; }
-  .navbar.is-scrolled .brand-logo { height: 2rem; }
 }
 
 /* Mobile drawer. It mounts on toggle, so it animates in from nothing rather
@@ -489,6 +494,61 @@ button { font: inherit; }
 }
 .section-title h2 { margin: 0; font-size: clamp(1.8rem, 3.5vw, 2.95rem); line-height: 1.08; letter-spacing: -0.055em; color: #1b2d43; }
 .section-title p { margin: .8rem auto 0; max-width: 42rem; color: var(--muted); }
+
+/* Homepage section-header spec ---------------------------------------------
+   Eyebrow: 14px / 600 / #2563eb. Title: up to 48px / 700, with a 2-3 word
+   highlighted phrase (.hl) in the same #2563eb. Description: 16px / 500.
+
+   Scoped to each homepage section's own title-container class (never to the
+   bare .section-title/.eyebrow-label above) so this can't leak onto any
+   other page that reuses those shared classes. */
+.trust-band-title .eyebrow-label,
+.replacement-solutions-title .eyebrow-label,
+.compact-team-title .eyebrow-label,
+.experts-section-title .eyebrow-label {
+  font-size: .875rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+.trust-band-title h2,
+.replacement-solutions-title h2,
+.compact-team-title h2,
+.experts-section-title h2 {
+  font-size: clamp(1.85rem, 4.4vw, 3rem);
+  font-weight: 700;
+}
+.trust-band-title p,
+.replacement-solutions-title p,
+.compact-team-title p,
+.experts-section-title p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.trust-band-title h2 .hl,
+.replacement-solutions-title h2 .hl,
+.compact-team-title h2 .hl,
+.experts-section-title h2 .hl {
+  color: #2563eb;
+}
+/* Dark/"light"-variant section (Agency Needs, navy background): same sizes,
+   but the highlight stays the same blue rather than switching to white with
+   the rest of the heading -- it's the one thing on the section that's meant
+   to read as brand-colored regardless of surface. */
+.homepage-services-title .eyebrow-label {
+  font-size: .875rem;
+  font-weight: 600;
+}
+.homepage-services-title h2 {
+  font-size: clamp(1.85rem, 4.4vw, 3rem);
+  font-weight: 700;
+}
+.homepage-services-title p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.homepage-services-title h2 .hl {
+  color: #2563eb;
+}
 .logo-grid, .solutions-grid, .services-grid, .outcomes-grid, .founders-grid, .reasons-grid, .awards-grid, .case-study-cards-grid { display: grid; gap: 1rem; }
 .logo-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 50rem; margin: 0 auto; }
 .logo-chip { min-height: 3.8rem; display: inline-flex; align-items: center; justify-content: center; gap: .65rem; border-radius: 14px; background: #fff; border: 1px solid rgba(179,202,228,.6); box-shadow: 0 12px 24px rgba(69,107,156,.05); font-weight: 700; color: #6f8298; padding: .75rem 1rem; }
@@ -615,7 +675,11 @@ button { font: inherit; }
   margin-bottom: 1.1rem;
 }
 .what-we-are-copy .eyebrow-label {
-  color: #2e73f0;
+  /* Homepage section-header spec: 14px / 600 / #2563eb, consistent across
+     every top-of-section eyebrow on the homepage. */
+  color: #2563eb;
+  font-size: .875rem;
+  font-weight: 600;
   margin-bottom: 0;
   white-space: nowrap;
 }
@@ -640,14 +704,16 @@ button { font: inherit; }
 .what-we-are-heading {
   margin: 0 0 1.15rem;
   color: #0d1730;
-  font-size: clamp(2.15rem, 4.2vw, 3.55rem);
-  line-height: 1.04;
+  /* Homepage section-header spec: up to 48px / 700 -- the clamp's ceiling is
+     3rem (48px) rather than the previous 3.55rem (~57px). */
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  line-height: 1.08;
   letter-spacing: -0.045em;
-  font-weight: 600;
+  font-weight: 700;
 }
 .what-we-are-heading .accent {
   position: relative;
-  color: #2e73f0;
+  color: #2563eb;
   font-style: italic;
   font-weight: 500;
 }
@@ -662,13 +728,15 @@ button { font: inherit; }
   bottom: -.06em;
   height: .09em;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(46, 115, 240, 0), #2e73f0 22%, #2e73f0 72%, rgba(46, 115, 240, 0));
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0), #2563eb 22%, #2563eb 72%, rgba(37, 99, 235, 0));
 }
 .what-we-are-lede {
   max-width: 32rem;
   margin: 0;
   color: #5a6478;
+  /* Homepage section-header spec: 16px / 500. */
   font-size: 1rem;
+  font-weight: 500;
   line-height: 1.7;
 }
 .wwa-lede-hl {
@@ -1043,8 +1111,10 @@ button { font: inherit; }
   font-weight: 600;
 }
 
+/* Superseded by .replacement-solutions-title h2 .hl (homepage-header spec,
+   above) -- left as a fallback in case a future span here isn't .hl. */
 .replacement-solutions-title h2 span {
-  color: var(--primary);
+  color: #2563eb;
 }
 .replacement-pill-row {
   display: flex;

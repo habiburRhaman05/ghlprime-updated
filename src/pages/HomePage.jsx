@@ -164,16 +164,6 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] } },
 }
 
-function SectionTitle({ title, text, centered = true, light = false, eyebrow }) {
-  return (
-    <motion.div className={`section-title ${centered ? 'centered' : ''} ${light ? 'light' : ''}`} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
-      {eyebrow ? <span className="eyebrow-label">{eyebrow}</span> : null}
-      <h2>{title}</h2>
-      <p>{text}</p>
-    </motion.div>
-  )
-}
-
 function LogoMarqueeRow({ items, reverse = false }) {
   const filteredItems = items.filter((logo) => logo?.image_url)
   const trackItems = [...filteredItems, ...filteredItems]
@@ -213,7 +203,11 @@ function TrustedLogosSection() {
   return (
     <section className="trust-band premium-trust-band">
       <div className="container trust-inner">
-        <SectionTitle eyebrow="Trusted environment" title="Trusted by agencies and growth-focused businesses" text="Built for companies that want their CRM, automation, and client journey to feel more premium and more intentional." />
+        <motion.div className="section-title centered trust-band-title" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
+          <span className="eyebrow-label">Trusted environment</span>
+          <h2>Trusted by agencies and <span className="hl">growth-focused businesses</span></h2>
+          <p>Built for companies that want their CRM, automation, and client journey to feel more premium and more intentional.</p>
+        </motion.div>
         <div className="logo-marquee-shell">
           {imageOnlyLogos.length ? <LogoMarqueeRow items={imageOnlyLogos} /> : null}
         </div>
@@ -542,7 +536,7 @@ function WhatWeHandleSection() {
       <div className="container">
         <div className="section-title centered replacement-solutions-title">
           <span className="eyebrow-label">What We Handle For You</span>
-          <h2 className="single-line-heading">You Get the Experts. We Work Behind the Scenes.</h2>
+          <h2>You Get the Experts. We Work <span className="hl">Behind the Scenes.</span></h2>
           <p>From white-label launch support to automation builds, AI deployment, and client support, we become the technical team your agency can rely on.</p>
         </div>
         <div className="replacement-solutions-grid modern-stack-grid">
@@ -583,7 +577,7 @@ function AgencyNeedsSection() {
       <div className="container">
         <div className="section-title centered light homepage-services-title">
           <span className="eyebrow-label">Everything Your Agency Needs, Done by Experts</span>
-          <h2>Technical execution, client support,<br />automation, and training all in one team.</h2>
+          <h2>Technical execution, client support,<br />automation, and training all in <span className="hl">one team.</span></h2>
           <p>Built for agencies and SaaS founders who need real execution power behind their offers.</p>
         </div>
         <div className="homepage-services-grid agency-needs-grid">
@@ -807,7 +801,7 @@ function LeadersSection() {
       <div className="container">
         <div className="section-title centered compact-team-title">
           <span className="eyebrow-label">Leaders</span>
-          <h2>Meet Your Mentors</h2>
+          <h2>Meet <span className="hl">Your Mentors</span></h2>
           <p>Our leaders bring years of experience building automation systems, CRM infrastructures, and AI-powered workflows for growth-focused businesses.</p>
         </div>
        
@@ -829,7 +823,7 @@ function ExpertsSection() {
       <div className="container">
         <div className="section-title centered experts-section-title">
           <span className="eyebrow-label">Meet The Experts</span>
-          <h2>Specialists supporting the work behind the scenes.</h2>
+          <h2>Specialists supporting the work <span className="hl">behind the scenes.</span></h2>
           <p>Focused team members supporting design, systems, delivery, and execution across GHL Prime projects.</p>
         </div>
     {  !experts.length ?  <div> failed to fetch teams</div> :  <div className="experts-grid">
@@ -913,18 +907,14 @@ export default function HomePage() {
 
       <HomeSeoShell />
 
-      {/* Hero. Copy is unchanged word for word -- the h1 only re-breaks
-          across four lines so it sits in the narrower left column beside
-          the illustration (see HeroAutomationCore). Entrance animations are CSS
-          rather than framer because the h1 is the LCP element and CSS
-          paints without waiting for hydration. */}
+
       <section className="hero container homepage-hero-v3">
-        <div className="hh-ambient" aria-hidden="true">
+        {/* <div className="hh-ambient" aria-hidden="true">
           <span className="hh-aurora a" />
           <span className="hh-aurora b" />
           <span className="hh-aurora c" />
           <span className="hh-noise" />
-        </div>
+        </div> */}
 
         <div className="hh-grid">
           <div className="hero-copy hh-copy">

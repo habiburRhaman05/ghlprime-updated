@@ -24,6 +24,11 @@
   text-align: center;
 }
 
+/* Homepage section-header spec: 14px/600/#2563eb eyebrow (the badge shell
+   -- background/border/padding -- is this section's own decoration, kept
+   as-is), up to 48px/700 title (already exactly 48px at its ceiling, no
+   change needed) with the highlighted phrase in the same blue, and
+   16px/500 description. */
 .life-at-badge {
   display: inline-flex;
   align-items: center;
@@ -32,9 +37,9 @@
   border-radius: 999px;
   border: 1px solid rgba(22, 132, 234, 0.28);
   background: var(--soft-blue);
-  color: var(--primary-dark);
-  font-size: 0.76rem;
-  font-weight: 700;
+  color: #2563eb;
+  font-size: 0.875rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -52,7 +57,7 @@
   font-family: Georgia, 'Times New Roman', serif;
   font-style: italic;
   font-weight: 600;
-  color: var(--primary);
+  color: #2563eb;
   /* Reset the heading's tight tracking -- a negative letter-spacing reads
      fine on the bold sans text but pinches a serif italic. */
   letter-spacing: normal;
@@ -61,7 +66,8 @@
 .life-at-ghl-head p {
   margin: 1rem 0 0;
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: 1rem;
+  font-weight: 500;
   line-height: 1.65;
 }
 
@@ -141,7 +147,6 @@
   /* The generic .section rhythm (5.5rem top/bottom) is too roomy once the
      head text and rows are already stacked tight on a phone. */
   .life-at-ghl-section { padding: 3.5rem 0; gap: 2rem; }
-  .life-at-ghl-head p { font-size: 0.96rem; }
   .life-at-card { height: clamp(130px, 32vw, 190px); border-radius: 14px; }
   .life-at-ghl-rows { gap: 0.9rem; }
   .life-at-row { gap: 0.6rem; }
@@ -156,7 +161,9 @@
   .life-at-card.size-md { width: clamp(140px, 42vw, 190px); }
   .life-at-card.size-lg { width: clamp(168px, 52vw, 225px); }
   .life-at-card.size-xl { width: clamp(196px, 62vw, 265px); }
-  .life-at-badge { font-size: 0.7rem; padding: 0.35rem 0.9rem; }
+  /* Shell padding only shrinks here -- font-size stays at the homepage-wide
+     14px per the eyebrow spec. */
+  .life-at-badge { padding: 0.35rem 0.9rem; }
   .life-at-ghl-rows {
     mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent);
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent);

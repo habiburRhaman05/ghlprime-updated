@@ -9,12 +9,7 @@ import { ACCOUNT_SAFE_COLUMNS, saveClaudeAccount } from '../lib/blogAiAccountRep
 import { getConnectSession, destroyConnectSession, publicConnectSession } from '../lib/connectSessions.js'
 import { startClaudeConnectSession, submitClaudeConnectCode, startCodexConnectSession } from '../lib/blogAiConnect.js'
 
-// Decrypts the stored token/API-key and runs testClaudeAccount() against a
-// single account row, respecting the account's own model/auth_type and the
-// panel-level claude_model / claude_cli_command settings. Shared by both the
-// single-account "Test" button (POST /accounts/:id/test) and the "Test all
-// (say hi)" bulk button (POST /accounts/test-all) below, so there's exactly
-// one place that knows how to test an account.
+
 async function testSingleClaudeAccount(account, settings) {
   let token
   try {
@@ -31,10 +26,6 @@ async function testSingleClaudeAccount(account, settings) {
   })
 }
 
-// Registers the Auto Blog admin API. Codex has no per-account rotation (see
-// blog_ai_settings.codex_* in schema.sql) so every account row created here
-// is always provider='claude' — the "Test connection" flow for Codex is a
-// separate settings-level endpoint instead of an accounts/:id/test call.
 export default function registerBlogAiRoutes(app) {
   const router = express.Router()
 
@@ -65,10 +56,7 @@ export default function registerBlogAiRoutes(app) {
         label: p.label,
         rawToken: p.token,
         model: p.model || null,
-        // Defaults to 'oauth' for backward compatibility with the existing
-        // manual-paste and browser-connect flows, which both explicitly
-        // pass 'oauth' themselves anyway (see blogAiConnect.js) -- this
-        // fallback only matters for any other/older caller of this route.
+        
         authType: p.auth_type === 'api_key' ? 'api_key' : 'oauth',
       })
     } catch (error) {

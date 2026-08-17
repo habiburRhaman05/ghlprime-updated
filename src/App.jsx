@@ -1,7 +1,8 @@
 ﻿import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { ArrowRight, ChevronDown, Code2, Headphones, LayoutGrid, Mail, Menu, Workflow, X } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight, ChevronDown, ChevronRight, Mail, Menu, X } from 'lucide-react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import HomePage from './pages/HomePage'
 import BackToTop from './components/BackToTop'
@@ -10,15 +11,23 @@ import './styles/service-detail.css'
 import { SERVICE_MENU } from './data/serviceCatalog'
 
 // Icon per mega-menu category, keyed off the same strings SERVICE_MENU
-// already uses -- so a category rename in the data file just stops
-// matching here instead of silently mislabelling. Kept local to App.jsx
-// rather than added to serviceCatalog.js, which is also read by the footer
-// and has no other icon-bearing consumer.
+// already uses -- so a category rename in the data file just stops matching
+// here instead of silently mislabelling.
+//
+// These are real, full-colour marks rather than generic line glyphs:
+//   GoHighLevel        -> the GoHighLevel logo
+//   Vibe Coding & AI   -> purpose-drawn spark mark in the brand purple (not
+//                         Claude's logo -- that's a specific tool credit,
+//                         not a category identity, and reads oddly as a
+//                         nav icon at this size)
+//   Design & Build     -> Figma (the category leads with "Figma to Code")
+//   Support            -> no third-party product involved, so a purpose-drawn
+//                         headset mark in the brand teal instead of a logo.
 const CATEGORY_ICON = {
-  'GoHighLevel': Workflow,
-  'Vibe Coding & AI Dev': Code2,
-  'Design & Build': LayoutGrid,
-  'Support': Headphones,
+  'GoHighLevel': '/gohighlevel.png',
+  'Vibe Coding & AI Dev': '/nav-icons/ai-dev.svg',
+  'Design & Build': '/nav-icons/figma.svg',
+  'Support': '/nav-icons/support.svg',
 }
 
 const SITE_URL = 'https://ghlprime.com'
@@ -237,6 +246,10 @@ function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+  // Which left-column category the right panel is showing. Reset (below) on
+  // every close rather than left to whatever was last hovered, so each fresh
+  // open always lands back on the first category, per spec.
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0)
   const servicesCloseTimer = useRef(null)
   const openServices = () => {
     if (servicesCloseTimer.current) { clearTimeout(servicesCloseTimer.current); servicesCloseTimer.current = null }
@@ -244,7 +257,10 @@ function SiteHeader() {
   }
   const closeServicesSoon = () => {
     if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
-    servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 200)
+    servicesCloseTimer.current = setTimeout(() => {
+      setServicesOpen(false)
+      setActiveCategoryIndex(0)
+    }, 200)
   }
 
   const [prevPathname, setPrevPathname] = useState(location.pathname)
@@ -253,6 +269,7 @@ function SiteHeader() {
     setMobileMenuOpen(false)
     setServicesOpen(false)
     setMobileServicesOpen(false)
+    setActiveCategoryIndex(0)
   }
 
   // Compacts the bar once the page has moved. Threshold is well past the
@@ -290,38 +307,107 @@ function SiteHeader() {
             className={`megamenu-trigger${servicesActive ? ' is-active' : ''}`}
             aria-haspopup="true"
             aria-expanded={servicesOpen}
-            onClick={() => setServicesOpen((v) => !v)}
+            onClick={() => setServicesOpen((v) => {
+              if (v) setActiveCategoryIndex(0)
+              return !v
+            })}
           >
             Services <ChevronDown size={15} />
           </button>
           <div className="megamenu-panel" role="menu">
-            <div className="megamenu-cols">
-              {SERVICE_MENU.map((col) => {
-                const CategoryIcon = CATEGORY_ICON[col.category]
-                return (
-                  <div key={col.category}>
-                    <div className="megamenu-col-title">
-                      {CategoryIcon ? <CategoryIcon size={13} className="megamenu-col-icon" aria-hidden="true" /> : null}
-                      {col.category}
-                    </div>
-                    {col.items.map((it) => (
+            <div className="megamenu-body">
+              {/* Left: primary categories. Hover, click, or keyboard-focus
+                  any of them swaps the right panel to that category's
+                  sub-services -- these are plain buttons, not links, since
+                  a category itself has no page of its own to go to. */}
+              <div className="megamenu-categories">
+                {/* The "Services" trigger above is a toggle button, not a
+                    link -- this is the only way into /services itself, so it
+                    stays even though the reference mockup doesn't have an
+                    equivalent row. */}
+                <Link to="/services" role="menuitem" className="megamenu-all-link">
+                  All Services
+                  <ArrowRight size={13} />
+                </Link>
+                {SERVICE_MENU.map((col, index) => {
+                  const iconSrc = CATEGORY_ICON[col.category]
+                  const isActive = index === activeCategoryIndex
+                  return (
+                    <button
+                      key={col.category}
+                      type="button"
+                      role="menuitem"
+                      className={`megamenu-category${isActive ? ' is-active' : ''}`}
+                      onMouseEnter={() => setActiveCategoryIndex(index)}
+                      onFocus={() => setActiveCategoryIndex(index)}
+                      onClick={() => setActiveCategoryIndex(index)}
+                      aria-expanded={isActive}
+                    >
+                      {/* Text block (icon + title line, description below)
+                          and the arrow chip are siblings in one row, so the
+                          chip centers against the full two-line height
+                          instead of pinning to just the title line. */}
+                      <span className="megamenu-category-main">
+                        <span className="megamenu-category-row">
+                          {iconSrc ? (
+                            <img src={iconSrc} alt="" aria-hidden="true" className="megamenu-category-icon" loading="lazy" decoding="async" />
+                          ) : null}
+                          <span className="megamenu-category-label">{col.category}</span>
+                        </span>
+                        <span className="megamenu-category-desc">{col.description}</span>
+                      </span>
+                      <span className="megamenu-arrow-chip" aria-hidden="true">
+                        <ChevronRight size={14} />
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Right: sub-services for whichever category is active.
+                  Crossfades as a group on category change -- absolutely
+                  positioned during the transition (see CSS) so the
+                  exiting/entering sets never stack and bump the fixed row
+                  height from the divider fix above. */}
+              <div className="megamenu-services">
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.div
+                    key={activeCategoryIndex}
+                    className="megamenu-services-group"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {SERVICE_MENU[activeCategoryIndex].items.map((it) => (
                       <Link
                         key={it.to}
                         to={it.to}
                         role="menuitem"
-                        className={`megamenu-link${location.pathname === it.to ? ' is-active' : ''}`}
+                        className={`megamenu-service${location.pathname === it.to ? ' is-active' : ''}`}
                       >
-                        {it.label}
+                        <span className="megamenu-service-main">
+                          <span className="megamenu-service-label">{it.label}</span>
+                          <span className="megamenu-service-desc">{it.description}</span>
+                        </span>
+                        <span className="megamenu-arrow-chip" aria-hidden="true">
+                          <ArrowRight size={14} />
+                        </span>
                       </Link>
                     ))}
-                  </div>
-                )
-              })}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
-            <Link to="/services" role="menuitem" className="megamenu-all">
-              View all services
-              <ArrowRight size={15} />
-            </Link>
+
+            {/* Bottom row: brand mark left, primary CTA right. */}
+            <div className="megamenu-footer">
+              <img src="/ghl-prime-logo.png" alt="GHL Prime" className="megamenu-footer-logo" />
+              <Link to="/booking" role="menuitem" className="primary-pill megamenu-footer-cta">
+                Get a free consultation
+                <ArrowRight size={15} />
+              </Link>
+            </div>
           </div>
         </div>
         {secondaryNav.map((item) => (
@@ -360,11 +446,11 @@ function SiteHeader() {
               <div className="mobile-svc-catalog">
                 <Link to="/services" className="mobile-svc-all" onClick={() => setMobileMenuOpen(false)}>All Services</Link>
                 {SERVICE_MENU.map((col) => {
-                  const CategoryIcon = CATEGORY_ICON[col.category]
+                  const iconSrc = CATEGORY_ICON[col.category]
                   return (
                     <div key={col.category} className="mobile-svc-group">
                       <div className="mobile-svc-cat">
-                        {CategoryIcon ? <CategoryIcon size={13} aria-hidden="true" /> : null}
+                        {iconSrc ? <img src={iconSrc} alt="" aria-hidden="true" className="mobile-svc-cat-icon" loading="lazy" decoding="async" /> : null}
                         {col.category}
                       </div>
                       {col.items.map((it) => (
