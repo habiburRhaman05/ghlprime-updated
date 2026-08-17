@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { fetchShowcaseForPage, fetchShowcaseStats } from '../lib/showcaseApi'

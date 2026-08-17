@@ -1,6 +1,8 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { Check, Copy } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import { fetchCaseStudyBySlug, SEEDED_CASE_STUDIES } from '../lib/caseStudiesApi'
@@ -11,7 +13,9 @@ function findSeededStudy(slug) {
   return SEEDED_STUDIES.find((item) => item.slug === slug) || null
 }
 
-const CASE_STUDY_META = {
+// Exported so app/case-studies/[slug]/page.tsx's generateMetadata can reuse
+// this exact per-slug override table instead of duplicating it.
+export const CASE_STUDY_META = {
   'monkeyman-tree-service-automation': {
     title: 'Voice AI Case Study: Monkeyman Tree Service | GHL Prime',
     description: 'How GHL Prime deployed a 24/7 Voice AI agent and GoHighLevel automation for Monkeyman Tree Service stopping missed calls and capturing thousands in lost revenue.',
@@ -154,10 +158,8 @@ export default function ClientStudyDetailPage() {
   if (status === 'loading' || isStaleStudy) {
     return (
       <main className="section section-white client-study-detail-page">
-        <Helmet>
-          <title>Loading case study… | GHL Prime</title>
-          <meta name="robots" content="noindex" />
-        </Helmet>
+        {/* Transient loading title/robots never reaches a crawler; not ported
+            (see app/case-studies/[slug]/page.tsx generateMetadata). */}
         <div className="container client-study-state" role="status" aria-live="polite">
           <span className="client-study-state-spinner" aria-hidden="true" />
           <p className="client-study-state-text">Loading case study…</p>
@@ -169,12 +171,8 @@ export default function ClientStudyDetailPage() {
   if (status === 'notfound' || !study) {
     return (
       <main className="section section-white client-study-detail-page">
-        <Helmet>
-          <title>Case study not found | GHL Prime</title>
-          <meta name="description" content="The case study you're looking for could not be found. Browse all GHL Prime GoHighLevel case studies and automation builds." />
-          <meta name="robots" content="noindex, follow" />
-          {meta ? <link rel="canonical" href={meta.canonical} /> : null}
-        </Helmet>
+        {/* Not-found title/description/robots/canonical ported to
+            app/case-studies/[slug]/page.tsx's generateMetadata fallback branch. */}
         <div className="container client-study-notfound">
           <span className="eyebrow-label">404 Case Study</span>
           <h1>Case study not found</h1>
@@ -183,8 +181,8 @@ export default function ClientStudyDetailPage() {
             published yet. Explore our other GoHighLevel and automation builds instead.
           </p>
           <div className="client-study-notfound-actions">
-            <Link to="/case-studies" className="primary-pill large">Browse all case studies</Link>
-            <Link to="/booking" className="secondary-pill">Book a free consultation</Link>
+            <Link href="/case-studies" className="primary-pill large">Browse all case studies</Link>
+            <Link href="/booking" className="secondary-pill">Book a free consultation</Link>
           </div>
         </div>
         <SiteFooter />
@@ -216,20 +214,13 @@ export default function ClientStudyDetailPage() {
 
   return (
     <main className="section section-white client-study-detail-page">
+      {/* title/description/keywords/canonical/og:*, twitter:*, and last-modified now
+          come from app/case-studies/[slug]/page.tsx's generateMetadata (same
+          `meta` derivation). JSON-LD stays here, unchanged, still gated on
+          `meta` exactly as before. */}
       {meta ? (
-        <Helmet>
-          <title>{meta.title}</title>
-          <meta name="description" content={meta.description} />
-          <meta name="keywords" content={`${study.category || 'GoHighLevel'} case study, GoHighLevel automation, GHL Prime case study`} />
-          <link rel="canonical" href={meta.canonical} />
-          <meta property="og:title" content={meta.title} />
-          <meta property="og:description" content={meta.description} />
-          <meta property="og:url" content={meta.canonical} />
-          <meta property="og:type" content="article" />
-          <meta property="og:image" content={meta.image || 'https://ghlprime.com/og-case-studies.png'} />
-          <meta name="twitter:image" content={meta.image || 'https://ghlprime.com/og-case-studies.png'} />
-          <meta name="last-modified" content="2026-05-24" />
-          <script type="application/ld+json">{JSON.stringify({
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
@@ -237,8 +228,8 @@ export default function ClientStudyDetailPage() {
               { '@type': 'ListItem', position: 2, name: 'Case Studies', item: 'https://ghlprime.com/case-studies' },
               { '@type': 'ListItem', position: 3, name: meta.title, item: meta.canonical },
             ],
-          })}</script>
-          <script type="application/ld+json">{JSON.stringify({
+          }) }} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Article',
             '@id': meta.canonical + '#article',
@@ -255,8 +246,8 @@ export default function ClientStudyDetailPage() {
             mainEntityOfPage: { '@type': 'WebPage', '@id': meta.canonical + '#webpage' },
             about: { '@id': 'https://ghlprime.com/#organization' },
             isPartOf: { '@id': 'https://ghlprime.com/#website' },
-          })}</script>
-          <script type="application/ld+json">{JSON.stringify({
+          }) }} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebPage',
             '@id': meta.canonical + '#webpage',
@@ -268,11 +259,11 @@ export default function ClientStudyDetailPage() {
             primaryImageOfPage: { '@type': 'ImageObject', url: study.image || 'https://ghlprime.com/ghl-prime-logo.png' },
             datePublished: '2024-08-01',
             dateModified: '2026-05-24',
-          })}</script>
-        </Helmet>
+          }) }} />
+        </>
       ) : null}
       <div className="container client-study-detail">
-        <Link to="/case-studies" className="text-link">← Back to Case Studies</Link>
+        <Link href="/case-studies" className="text-link">← Back to Case Studies</Link>
         <span className={`client-study-tag ${study.accent || 'emerald'}`}>{study.category}</span>
         <h1>{study.title}</h1>
         <p className="client-study-headline-result">{study.headline_result || study.outcome}</p>
@@ -359,8 +350,8 @@ export default function ClientStudyDetailPage() {
           <h2 id="closing-cta-heading">Want a system like this in your agency?</h2>
           <p>If this is the kind of build your operation is missing, GHL Prime can scope and ship something similar for your team in 1&ndash;2 weeks. No long sales cycle just a short scoping call and a clear plan.</p>
           <div className="client-study-closing-cta-actions">
-            <Link to="/booking" className="primary-pill large">Get a free consultation</Link>
-            <Link to="/case-studies" className="secondary-pill">See more case studies</Link>
+            <Link href="/booking" className="primary-pill large">Get a free consultation</Link>
+            <Link href="/case-studies" className="secondary-pill">See more case studies</Link>
           </div>
         </section>
 

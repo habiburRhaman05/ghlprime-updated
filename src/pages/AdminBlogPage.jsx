@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { ExternalLink, Pencil, Plus, Sparkles, Trash2, Eye, EyeOff } from 'lucide-react'
 import AdminShell from '../components/AdminShell'
 import ImageUrlField from '../components/admin/ImageUrlField'
@@ -225,7 +227,7 @@ export default function AdminBlogPage() {
           <p>Draft and publish GoHighLevel guides, automation playbooks, and case study articles with full SEO control.</p>
         </div>
         <div className="admin-top-actions">
-          <Link to="/blog" className="secondary-pill">View Public Page</Link>
+          <Link href="/blog" className="secondary-pill">View Public Page</Link>
         </div>
       </div>
 
@@ -270,7 +272,7 @@ export default function AdminBlogPage() {
                           {post.published ? <><EyeOff size={14} /> Unpublish</> : <><Eye size={14} /> Publish</>}
                         </button>
                         <button type="button" className="team-edit-btn danger" onClick={() => handleDelete(post)}><Trash2 size={14} /> Delete</button>
-                        <Link to={`/blog/${post.slug}`} className="text-link admin-open-link">Open <ExternalLink size={13} /></Link>
+                        <Link href={`/blog/${post.slug}`} className="text-link admin-open-link">Open <ExternalLink size={13} /></Link>
                       </div>
                     </td>
                   </tr>

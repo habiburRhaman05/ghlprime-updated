@@ -1,0 +1,120 @@
+/* [project]/src/styles/certifications.css [app-client] (css) */
+.certifications-section {
+  background: linear-gradient(#fcfdff 0%, #f7fbff 100%);
+}
+
+.certifications-title h2 {
+  max-width: 14ch;
+  margin-inline: auto;
+}
+
+.certifications-single-line {
+  white-space: nowrap;
+  max-width: none !important;
+  font-size: clamp(1.7rem, 3.2vw, 3rem) !important;
+}
+
+.certifications-title p {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.certifications-featured-card {
+  background: #ffffffe0;
+  border: 1px solid #d9e2ebf2;
+  border-radius: 999px;
+  align-items: center;
+  gap: 1rem;
+  max-width: 44rem;
+  margin: 2rem auto 1.5rem;
+  padding: 1.15rem 1.4rem;
+  display: flex;
+  box-shadow: 0 16px 34px #2b538a0f;
+}
+
+.certifications-featured-badge {
+  object-fit: contain;
+  flex: none;
+  width: 4rem;
+  height: 4rem;
+}
+
+.certifications-featured-card strong {
+  color: #16283f;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  display: block;
+}
+
+.certifications-featured-card p {
+  color: #647a93;
+  margin: .35rem 0 0;
+  font-size: 1.05rem;
+}
+
+.certifications-divider {
+  color: #5f7590;
+  align-items: center;
+  gap: 1rem;
+  max-width: 44rem;
+  margin: 0 auto 2rem;
+  font-weight: 700;
+  display: flex;
+}
+
+.certifications-divider:before, .certifications-divider:after {
+  content: "";
+  background: #d9e2ebf2;
+  flex: 1;
+  height: 1px;
+}
+
+.certifications-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.4rem 1rem;
+  display: grid;
+}
+
+.certification-item {
+  text-align: center;
+}
+
+.certification-badge-wrap {
+  justify-content: center;
+  align-items: center;
+  min-height: 8rem;
+  display: flex;
+}
+
+.certification-badge {
+  object-fit: contain;
+  max-width: 6rem;
+  max-height: 6rem;
+}
+
+.certification-item h3 {
+  color: #30455f;
+  margin: .6rem 0 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+@media (max-width: 980px) {
+  .certifications-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .certifications-featured-card {
+    border-radius: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .certifications-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/*# sourceMappingURL=src_styles_certifications_css_1igg3k2._.single.css.map*/

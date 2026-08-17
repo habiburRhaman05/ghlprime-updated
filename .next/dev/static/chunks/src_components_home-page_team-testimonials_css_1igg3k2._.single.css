@@ -1,0 +1,277 @@
+/* [project]/src/components/home-page/team-testimonials.css [app-client] (css) */
+.tt-section {
+  background: #f8fbffba;
+  position: relative;
+  overflow: hidden;
+}
+
+.tt-head {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.tt-head .eyebrow-label {
+  color: #2563eb;
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.tt-head h2 {
+  letter-spacing: normal;
+  color: var(--navy);
+  margin: 0;
+  font-size: clamp(1.85rem, 4.4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.14;
+}
+
+.tt-head h2 .hl {
+  color: #2563eb;
+}
+
+.tt-head p {
+  color: var(--muted);
+  margin: 1rem 0 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.tt-stage {
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  display: flex;
+}
+
+.tt-rail {
+  width: 200px;
+  height: var(--tt-viewport, 504px);
+  flex: none;
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(#0000, #000 16% 84%, #0000);
+  mask-image: linear-gradient(#0000, #000 16% 84%, #0000);
+}
+
+.tt-rail-track {
+  cursor: grab;
+  touch-action: pan-y;
+  position: absolute;
+  inset: 0;
+}
+
+.tt-rail-track:active {
+  cursor: grabbing;
+}
+
+.tt-rail-item {
+  height: var(--tt-pitch, 168px);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.tt-face {
+  cursor: grab;
+  background: var(--soft-slate);
+  transform-origin: center;
+  border: none;
+  border-radius: 20px;
+  width: 132px;
+  height: 148px;
+  padding: 0;
+  transition: filter .45s, opacity .45s, all .45s, transform .45s cubic-bezier(.22, 1, .36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tt-face img {
+  object-fit: cover;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tt-face:hover {
+  opacity: .8;
+  filter: grayscale(.35);
+}
+
+.tt-face:active {
+  cursor: grabbing;
+}
+
+.tt-face:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 4px;
+}
+
+.tt-face.is-active {
+  filter: none;
+  opacity: 1;
+  cursor: grab;
+  transform: scale(1.16);
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1684eacc, 0 22px 44px -18px #1c3d6e8c;
+}
+
+.tt-quote {
+  flex: 1;
+  min-width: 0;
+}
+
+.tt-badge {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #3da5ff);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  display: flex;
+  box-shadow: 0 14px 28px -10px #1684ea99;
+}
+
+.tt-text {
+  letter-spacing: normal;
+  color: var(--navy);
+  max-width: 56ch;
+  margin: 0;
+  font-size: clamp(1.15rem, 1.75vw, 1.65rem);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.tt-text .hl {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.tt-meta {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.tt-name {
+  color: var(--navy);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.tt-role {
+  color: var(--muted);
+  margin-top: .15rem;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.tt-nav {
+  flex-direction: column;
+  flex: none;
+  gap: .9rem;
+  display: flex;
+}
+
+.tt-arrow {
+  cursor: pointer;
+  width: 46px;
+  height: 46px;
+  color: var(--primary);
+  background: #ffffffe6;
+  border: 1.5px solid #1684ea47;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), background .25s, color .25s, box-shadow .25s;
+  display: flex;
+}
+
+.tt-arrow:hover {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #3da5ff);
+  border-color: #0000;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px -10px #1684eaa6;
+}
+
+.tt-arrow:active {
+  transform: translateY(0)scale(.94);
+}
+
+.tt-arrow:focus-visible {
+  outline: 2px solid var(--primary-dark);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .tt-stage {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1.75rem, 4vw, 2.5rem);
+  }
+
+  .tt-rail {
+    width: 100%;
+    height: var(--tt-pitch-h, 150px);
+    -webkit-mask-image: linear-gradient(90deg, #0000, #000 14% 86%, #0000);
+    mask-image: linear-gradient(90deg, #0000, #000 14% 86%, #0000);
+  }
+
+  .tt-rail-track {
+    touch-action: pan-x;
+  }
+
+  .tt-rail-item {
+    width: var(--tt-pitch-h, 150px);
+    height: auto;
+    inset: 0 auto 0 0;
+  }
+
+  .tt-face {
+    border-radius: 16px;
+    width: 108px;
+    height: 120px;
+  }
+
+  .tt-badge, .tt-text {
+    margin-inline: auto;
+  }
+
+  .tt-nav {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 640px) {
+  .tt-section {
+    padding: 3.5rem 0;
+  }
+
+  .tt-head {
+    margin-bottom: 2rem;
+  }
+
+  .tt-badge {
+    width: 46px;
+    height: 46px;
+  }
+
+  .tt-arrow {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tt-face, .tt-arrow {
+    transition: none;
+  }
+}
+
+/*# sourceMappingURL=src_components_home-page_team-testimonials_css_1igg3k2._.single.css.map*/

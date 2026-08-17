@@ -3,7 +3,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import HeroAutomationCore from './HeroAutomationCore'
 import { ArrowRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 const HeroBanner = ({activePill,rotatingPills}) => {
   return (
      <section className="hero container homepage-hero-v3">
@@ -56,7 +56,7 @@ const HeroBanner = ({activePill,rotatingPills}) => {
                 Hire Your Expert Team
                 <ArrowRight size={17} />
               </a>
-              <Link to="/services" className="secondary-pill hh-cta-ghost">
+              <Link href="/services" className="secondary-pill hh-cta-ghost">
                 See What We Do
                 <ArrowRight size={16} />
               </Link>

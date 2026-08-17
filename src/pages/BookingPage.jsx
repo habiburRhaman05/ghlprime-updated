@@ -1,5 +1,6 @@
+'use client'
+
 import { useEffect } from 'react'
-import { Helmet } from 'react-helmet-async'
 import MeetingGallerySection from '../components/MeetingGallerySection'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
@@ -12,19 +13,7 @@ export default function BookingPage() {
 
   return (
     <main className="booking-page">
-      <Helmet>
-        <title>Book a Free Call with GHL Prime Same-Day Reply</title>
-        <meta name="description" content="Tell us what your agency needs. We match you with a GHL-certified specialist within 24 hours. Hourly, project, or full-time no contract, no setup fee." />
-        <meta name="keywords" content="book GoHighLevel consultation, free GoHighLevel call, hire GoHighLevel expert, GHL Prime booking" />
-        <link rel="canonical" href="https://ghlprime.com/booking" />
-        <meta property="og:title" content="Book a Free Call with GHL Prime Same-Day Reply" />
-        <meta property="og:description" content="Tell us what your agency needs. We match you with a GHL-certified specialist within 24 hours. Hourly, project, or full-time no contract, no setup fee." />
-        <meta property="og:url" content="https://ghlprime.com/booking" />
-        <meta property="og:image" content="https://ghlprime.com/og-booking.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:image" content="https://ghlprime.com/og-booking.png" />
-              <meta name="last-modified" content="2026-05-24" />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           '@id': 'https://ghlprime.com/booking#breadcrumb',
@@ -32,8 +21,8 @@ export default function BookingPage() {
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com/' },
             { '@type': 'ListItem', position: 2, name: 'Book a Consultation', item: 'https://ghlprime.com/booking' },
           ],
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           '@id': 'https://ghlprime.com/booking#webpage',
@@ -46,8 +35,7 @@ export default function BookingPage() {
           datePublished: '2024-08-01',
           dateModified: '2026-05-24',
           potentialAction: { '@type': 'ReserveAction', target: 'https://ghlprime.com/booking', name: 'Book a free GHL Prime consultation' },
-        })}</script>
-      </Helmet>
+        }) }} />
       <section className="section section-white booking-calendar-section booking-calendar-section-first">
         <div className="container">
           <div className="booking-intro" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 2rem' }}>

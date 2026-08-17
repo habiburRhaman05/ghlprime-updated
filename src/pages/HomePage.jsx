@@ -1,5 +1,6 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { HOMEPAGE_FAQS } from '../data/faqs'
@@ -172,24 +173,8 @@ export default function HomePage() {
 
   return (
     <>
-      <Helmet>
-        <title>GoHighLevel Experts for Agencies | GHL Prime</title>
-        <meta name="description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents  built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
-        <meta name="keywords" content="GoHighLevel experts, hire GoHighLevel team, GoHighLevel agency, GHL automation, GoHighLevel CRM setup, white-label GoHighLevel support, AI agents, GHL Prime" />
-        <link rel="canonical" href="https://ghlprime.com/" />
-        <meta property="og:title" content="GoHighLevel Experts for Agencies | GHL Prime" />
-        <meta property="og:description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents  built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
-        <meta property="og:url" content="https://ghlprime.com/" />
-        <meta property="og:image" content="https://ghlprime.com/og-home.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:image" content="https://ghlprime.com/og-home.png" />
-        <meta name="twitter:title" content="GoHighLevel Experts for Agencies | GHL Prime" />
-        <meta name="twitter:description" content="Hire a dedicated GoHighLevel AI automation team to set up your CRM, automations, and AI agents  built for agencies and Local Businesses. GHL-certified, US-based, 24/7 support." />
-        <meta name="last-modified" content="2026-05-24" />
-        <script type="application/ld+json">{JSON.stringify(buildHomepageSchemas())}</script>
-      </Helmet>
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildHomepageSchemas()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'ProfessionalService',
           name: 'GHL Prime',
@@ -205,8 +190,7 @@ export default function HomePage() {
           },
           areaServed: 'US',
           priceRange: '$$',
-        })}</script>
-      </Helmet>
+        }) }} />
 
       <HomeSeoShell />
 

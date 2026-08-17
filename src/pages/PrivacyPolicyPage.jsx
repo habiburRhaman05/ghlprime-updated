@@ -1,28 +1,17 @@
-import { Helmet } from 'react-helmet-async'
 import SiteFooter from '../components/SiteFooter'
 
 export default function PrivacyPolicyPage() {
   return (
     <main className="section section-white">
-      <Helmet>
-        <title>Privacy Policy | GHL Prime</title>
-        <meta name="description" content="How GHL Prime LLC collects, uses, shares, and protects your personal information across our website, forms, CRM, automations, and SMS communications." />
-        <meta name="keywords" content="GHL Prime privacy policy, data protection, user privacy" />
-        <link rel="canonical" href="https://ghlprime.com/privacy-policy" />
-        <meta property="og:title" content="Privacy Policy | GHL Prime" />
-        <meta property="og:description" content="How GHL Prime LLC collects, uses, shares, and protects your personal information across our website, forms, CRM, automations, and SMS communications." />
-        <meta property="og:url" content="https://ghlprime.com/privacy-policy" />
-        <meta property="og:type" content="website" />
-        <meta name="last-modified" content="2026-06-02" />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com/' },
             { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: 'https://ghlprime.com/privacy-policy' },
           ],
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           url: 'https://ghlprime.com/privacy-policy',
@@ -31,8 +20,7 @@ export default function PrivacyPolicyPage() {
           isPartOf: { '@id': 'https://ghlprime.com/#website' },
           datePublished: '2024-08-01',
           dateModified: '2026-06-02',
-        })}</script>
-      </Helmet>
+        }) }} />
       <div className="container" style={{ maxWidth: '860px' }}>
         <span className="eyebrow-label">Privacy Policy</span>
         <h1>Privacy Policy</h1>

@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { Image as ImageIcon, Pencil, Plus, Sparkles, Trash2, X } from 'lucide-react'
 import AdminShell from '../components/AdminShell'

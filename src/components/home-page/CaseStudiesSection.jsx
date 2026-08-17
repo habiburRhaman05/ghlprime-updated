@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { fetchCaseStudies } from '../../lib/caseStudiesApi'
 
@@ -21,7 +21,7 @@ export default function CaseStudiesSection() {
     return (
       <Link
         key={`study-${(study && (study.id || study.slug || study.title)) || 'study'}-${index}`}
-        to={studyPath}
+        href={studyPath}
         className="case-study-slider-card clickable"
       >
         <div className="case-study-slider-visual">
@@ -56,7 +56,7 @@ export default function CaseStudiesSection() {
           {caseStudies.map((study, index) => renderCard(study, index))}
         </div>
 
-        <Link to="/case-studies" className="secondary-pill case-studies-reference-cta">View All Case Studies</Link>
+        <Link href="/case-studies" className="secondary-pill case-studies-reference-cta">View All Case Studies</Link>
       </div>
     </section>
   )

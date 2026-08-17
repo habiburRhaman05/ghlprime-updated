@@ -1,6 +1,11 @@
 /* Titles + section titles render in DM Sans; body text stays on the Inter
-   stack declared in :root below. */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+   stack declared in :root below. Both fonts are loaded via a <link
+   rel="stylesheet"> in app/layout.tsx's <head> rather than the @import this
+   file used to open with -- Next's Turbopack CSS bundler silently drops an
+   @import that isn't literally first in the merged output once this file is
+   combined with the other stylesheets layout.tsx imports, so the fonts never
+   downloaded. The <link> tag isn't subject to that and is what actually
+   loads them now; this file no longer needs to. */
 
 :root {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

@@ -1,6 +1,6 @@
 ﻿import ServiceDetailTemplate from '../components/ServiceDetailTemplate'
 
-const config = {
+export const config = {
   slug: '/services/vibe-coding',
   category: 'Vibe Coding & AI Dev',
   breadcrumbName: 'Vibe Coding & Custom Development',

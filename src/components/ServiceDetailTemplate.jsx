@@ -1,6 +1,7 @@
-﻿import { useState, Fragment, useMemo } from 'react'
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+﻿'use client'
+
+import { useState, Fragment, useMemo } from 'react'
+import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
   ArrowRight, ChevronRight, CheckCircle2, Check, Code2, Terminal, LayoutDashboard,
@@ -55,7 +56,7 @@ function rich(text) {
     if (m.index > last) parts.push(text.slice(last, m.index))
     const label = m[1]
     const href = m[2]
-    if (href.startsWith('/')) parts.push(<Link key={`l${key++}`} to={href}>{label}</Link>)
+    if (href.startsWith('/')) parts.push(<Link key={`l${key++}`} href={href}>{label}</Link>)
     else parts.push(<a key={`a${key++}`} href={href} target="_blank" rel="noopener noreferrer">{label}</a>)
     last = re.lastIndex
   }
@@ -525,37 +526,24 @@ export default function ServiceDetailTemplate({ config }) {
 
   return (
     <main className="svc-page" id="main-content">
-      <Helmet>
-        <html lang="en" />
-        <title>{config.seo.title}</title>
-        <meta name="description" content={config.seo.description} />
-        <meta name="keywords" content={`${config.breadcrumbName}, GoHighLevel services, GoHighLevel expert team, GHL Prime`} />
-        <meta name="robots" content="index, follow" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href={url} />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={config.seo.title} />
-        <meta property="og:description" content={config.seo.description} />
-        <meta property="og:url" content={url} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:site_name" content="GHL Prime" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={config.seo.title} />
-        <meta name="twitter:description" content={config.seo.description} />
-        <meta name="twitter:image" content={ogImage} />
-        <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-      </Helmet>
+      {/* title/description/keywords/robots/canonical/og:* and twitter:* now come
+          from each service route's page.tsx metadata export, built by
+          app/_lib/serviceMetadata.ts from this same `config` object. The 5
+          JSON-LD scripts stay here, computed exactly as before. html lang is
+          set once, statically, in the root layout -- no per-page equivalent
+          needed. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
 
       {/* Hero */}
       <section className="svc-hero">
         <div className="container">
           <nav className="svc-breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">Home</Link><ChevronRight size={13} aria-hidden="true" />
-            <Link to="/services">Services</Link><ChevronRight size={13} aria-hidden="true" />
+            <Link href="/">Home</Link><ChevronRight size={13} aria-hidden="true" />
+            <Link href="/services">Services</Link><ChevronRight size={13} aria-hidden="true" />
             <span>{config.category}</span><ChevronRight size={13} aria-hidden="true" />
             <span aria-current="page">{config.breadcrumbName}</span>
           </nav>
@@ -583,8 +571,8 @@ export default function ServiceDetailTemplate({ config }) {
                 <h1>{config.hero.h1}</h1>
                 <p className="svc-hero-sub">{config.hero.subhead}</p>
                 <div className="svc-hero-ctas">
-                  <Link to={config.hero.ctaPrimary.to} className="primary-pill large">{config.hero.ctaPrimary.label} <ArrowRight size={18} /></Link>
-                  <Link to={config.hero.ctaSecondary.to} className="secondary-pill">{config.hero.ctaSecondary.label}</Link>
+                  <Link href={config.hero.ctaPrimary.to} className="primary-pill large">{config.hero.ctaPrimary.label} <ArrowRight size={18} /></Link>
+                  <Link href={config.hero.ctaSecondary.to} className="secondary-pill">{config.hero.ctaSecondary.label}</Link>
                 </div>
                 {config.hero.badges ? (
                   <div className="svc-badges">
@@ -626,7 +614,7 @@ export default function ServiceDetailTemplate({ config }) {
                 {config.whatIs.paragraphs.map((p, i) => <p key={i}>{rich(p)}</p>)}
               </div>
               {config.whatIs.cta ? (
-                <Link to={config.whatIs.cta.to} className="primary-pill large" style={{ marginTop: '.4rem' }}>
+                <Link href={config.whatIs.cta.to} className="primary-pill large" style={{ marginTop: '.4rem' }}>
                   {config.whatIs.cta.label} <ArrowRight size={18} />
                 </Link>
               ) : null}
@@ -820,7 +808,7 @@ export default function ServiceDetailTemplate({ config }) {
             <h2>{config.cta.headline}</h2>
             <p>{config.cta.subtext}</p>
             <div className="svc-cta-actions">
-              <Link to="/booking" className="primary-pill large">{config.cta.primaryLabel} <ArrowRight size={18} /></Link>
+              <Link href="/booking" className="primary-pill large">{config.cta.primaryLabel} <ArrowRight size={18} /></Link>
               <a href={UPWORK} target="_blank" rel="noopener noreferrer" className="svc-cta-ghost">Hire via Upwork</a>
             </div>
           </motion.div>

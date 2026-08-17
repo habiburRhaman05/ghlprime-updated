@@ -1,6 +1,8 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Link from 'next/link'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Search } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
@@ -31,7 +33,7 @@ function BlogCard({ post }) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5 }}
     >
-      <Link to={`/blog/${post.slug}`} className="blog-card-link" aria-label={`Read ${post.title}`}>
+      <Link href={`/blog/${post.slug}`} className="blog-card-link" aria-label={`Read ${post.title}`}>
         {post.cover_image ? (
           <div className="blog-card-image-wrap">
             <img src={post.cover_image} alt={post.title} className="blog-card-image" loading="lazy" decoding="async" onError={(e) => { e.currentTarget.parentElement.style.display = 'none' }} />
@@ -59,7 +61,12 @@ function BlogCard({ post }) {
 }
 
 export default function BlogIndexPage() {
-  const [searchParams, setSearchParams] = useSearchParams()
+  // next/navigation's useSearchParams() is read-only, so the write half of
+  // react-router's [searchParams, setSearchParams] pair becomes a router.replace()
+  // below. scroll: false keeps the old behaviour of not jumping to the top.
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
   const [posts, setPosts] = useState(SEEDED_POSTS)
   const [loading, setLoading] = useState(SEEDED_POSTS.length === 0)
   const [activeCategory, setActiveCategory] = useState('All')
@@ -87,7 +94,8 @@ export default function BlogIndexPage() {
     const next = new URLSearchParams(searchParams)
     if (value.trim()) next.set('q', value)
     else next.delete('q')
-    setSearchParams(next, { replace: true })
+    const queryString = next.toString()
+    router.replace(queryString ? `${pathname}?${queryString}` : pathname, { scroll: false })
   }
 
   const normalizedQuery = query.trim().toLowerCase()
@@ -130,23 +138,11 @@ export default function BlogIndexPage() {
 
   return (
     <main className="blog-index-page">
-      <Helmet>
-        <title>GoHighLevel Blog Tips, Guides &amp; Case Studies | GHL Prime</title>
-        <meta name="description" content="Expert GoHighLevel tutorials, automation guides, AI agent setup walkthroughs, and GHL case studies from the GHL Prime team." />
-        <meta name="keywords" content="GoHighLevel blog, GoHighLevel tutorials, GHL automation guides, AI agent guides, GoHighLevel tips, white-label CRM blog" />
-        <link rel="canonical" href="https://ghlprime.com/blog" />
-        <meta name="last-modified" content="2026-05-24" />
-        {normalizedQuery ? <meta name="robots" content="noindex,follow" /> : null}
-        <meta property="og:title" content="GoHighLevel Blog Tips, Guides & Case Studies | GHL Prime" />
-        <meta property="og:description" content="Expert GoHighLevel tutorials, automation guides, AI agent setup walkthroughs, and GHL case studies from the GHL Prime team." />
-        <meta property="og:url" content="https://ghlprime.com/blog" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://ghlprime.com/og-blog.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="GoHighLevel Blog Tips, Guides & Case Studies | GHL Prime" />
-        <meta name="twitter:description" content="Expert GoHighLevel tutorials, automation guides, AI agent setup walkthroughs, and GHL case studies from the GHL Prime team." />
-        <meta name="twitter:image" content="https://ghlprime.com/og-blog.png" />
-        <script type="application/ld+json">{JSON.stringify({
+      {/* title/meta/canonical/robots moved to app/blog/page.tsx's metadata
+          export (generateMetadata reads the ?q= search param there for the
+          same conditional noindex this used to apply client-side). JSON-LD
+          stays here, unchanged. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           '@id': 'https://ghlprime.com/blog#collection',
@@ -155,16 +151,15 @@ export default function BlogIndexPage() {
           url: 'https://ghlprime.com/blog',
           isPartOf: { '@id': 'https://ghlprime.com/#website' },
           publisher: { '@id': 'https://ghlprime.com/#organization' },
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com/' },
             { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://ghlprime.com/blog' },
           ],
-        })}</script>
-      </Helmet>
+        }) }} />
 
       <section className="section section-white blog-hero">
         <div className="container">
@@ -210,7 +205,7 @@ export default function BlogIndexPage() {
           </div>
 
           {featuredPost ? (
-            <Link to={`/blog/${featuredPost.slug}`} className="blog-featured-card blog-card-link" aria-label={`Read ${featuredPost.title}`}>
+            <Link href={`/blog/${featuredPost.slug}`} className="blog-featured-card blog-card-link" aria-label={`Read ${featuredPost.title}`}>
               {featuredPost.cover_image ? (
                 <div className="blog-featured-image-wrap">
                   <img src={featuredPost.cover_image} alt={featuredPost.title} className="blog-featured-image" loading="eager" decoding="async" onError={(e) => { e.currentTarget.parentElement.style.display = 'none' }} />

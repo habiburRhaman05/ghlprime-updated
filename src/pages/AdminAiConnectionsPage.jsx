@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import {
   Bot, ChevronRight, ExternalLink, Loader2, Plug, RefreshCw, Trash2,
 } from 'lucide-react'
@@ -453,7 +455,7 @@ export default function AdminAiConnectionsPage() {
           <p>Blog-writing settings live on the Auto Blog page this page is only about connecting and testing accounts.</p>
         </div>
         <div className="admin-top-actions">
-          <Link to="/admin/blog-ai" className="secondary-pill">Auto Blog</Link>
+          <Link href="/admin/blog-ai" className="secondary-pill">Auto Blog</Link>
         </div>
       </div>
 

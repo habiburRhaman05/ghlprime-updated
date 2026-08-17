@@ -1,6 +1,7 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Link from 'next/link'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { TEAM_FAQS } from '../data/faqs'
@@ -25,27 +26,15 @@ export default function TeamPage() {
 
   return (
     <main className="about-page premium-about-page team-page mentor-team-page">
-      <Helmet>
-        <title>Meet the GHL Prime Team Certified GoHighLevel Specialists</title>
-        <meta name="description" content="Our GoHighLevel-certified team averages 4+ years of GHL experience. Meet the founders and specialists delivering backend execution under your agency's brand." />
-        <meta name="keywords" content="GHL Prime team, GoHighLevel specialists, certified GoHighLevel admins, GoHighLevel experts, automation engineers" />
-        <link rel="canonical" href="https://ghlprime.com/team" />
-        <meta property="og:title" content="Meet the GHL Prime Team Certified GoHighLevel Specialists" />
-        <meta property="og:description" content="Our GoHighLevel-certified team averages 4+ years of GHL experience. Meet the founders and specialists delivering backend execution under your agency's brand." />
-        <meta property="og:url" content="https://ghlprime.com/team" />
-        <meta property="og:image" content="https://ghlprime.com/og-team.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:image" content="https://ghlprime.com/og-team.png" />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com' },
             { '@type': 'ListItem', position: 2, name: 'Team', item: 'https://ghlprime.com/team' },
           ],
-        })}</script>
-              <meta name="last-modified" content="2026-05-24" />
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
           '@id': 'https://ghlprime.com/team#webpage',
@@ -58,8 +47,8 @@ export default function TeamPage() {
           datePublished: '2024-08-01',
           dateModified: '2026-05-24',
           speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.team-hero p', '.faq-question', '.faq-answer'] },
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify([
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([
           {
             '@context': 'https://schema.org',
             '@type': 'Person',
@@ -82,8 +71,7 @@ export default function TeamPage() {
             sameAs: ['https://www.linkedin.com/in/niyamulislam/', 'https://www.facebook.com/niaymul.islam.2025/', 'https://www.upwork.com/freelancers/~010f634a8b80365e7b'],
             knowsAbout: ['GoHighLevel', 'Workflow Automation', 'AI Agents', 'n8n', 'CRM Infrastructure', 'API Integrations'],
           },
-        ])}</script>
-      </Helmet>
+        ]) }} />
       <section className="about-hero-section">
         <div className="container about-hero-grid">
           <motion.div
@@ -100,8 +88,8 @@ export default function TeamPage() {
             </p>
 
             <div className="about-hero-actions">
-              <Link to="/about" className="secondary-pill">About GHL Prime</Link>
-              <Link to="/services" className="primary-pill large">Explore Services</Link>
+              <Link href="/about" className="secondary-pill">About GHL Prime</Link>
+              <Link href="/services" className="primary-pill large">Explore Services</Link>
             </div>
           </motion.div>
 
@@ -199,8 +187,8 @@ export default function TeamPage() {
               <h2>Explore the services and client systems shaped by the people behind GHL Prime.</h2>
             </div>
             <div className="final-cta-actions">
-              <Link to="/case-studies" className="primary-pill large">View Case Studies <ArrowRight size={16} /></Link>
-              <Link to="/services" className="secondary-pill">Explore Services</Link>
+              <Link href="/case-studies" className="primary-pill large">View Case Studies <ArrowRight size={16} /></Link>
+              <Link href="/services" className="secondary-pill">Explore Services</Link>
             </div>
           </motion.div>
         </div>

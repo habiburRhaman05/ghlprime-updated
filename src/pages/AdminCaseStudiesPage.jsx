@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { ExternalLink, Pencil, Plus, Sparkles, X } from 'lucide-react'
 import AdminShell from '../components/AdminShell'
 import ImageUrlField from '../components/admin/ImageUrlField'
@@ -153,7 +155,7 @@ export default function AdminCaseStudiesPage() {
           <p>Focused workflow for publishing, editing, and assigning team members without mixing it with other admin tools.</p>
         </div>
         <div className="admin-top-actions">
-          <Link to="/case-studies" className="secondary-pill">View Public Page</Link>
+          <Link href="/case-studies" className="secondary-pill">View Public Page</Link>
         </div>
       </div>
 
@@ -172,7 +174,7 @@ export default function AdminCaseStudiesPage() {
               <div className="admin-study-copy"><strong>{study.title}</strong><span>{study.category}</span><small>{study.published === false ? 'Draft' : 'Published'}</small></div>
               <div className="admin-study-actions">
                 <button type="button" className="team-edit-btn" onClick={() => startEditingStudy(study)}><Pencil size={15} /> Edit</button>
-                <Link to={`/case-studies/${study.slug}`} className="text-link admin-open-link">Open <ExternalLink size={14} /></Link>
+                <Link href={`/case-studies/${study.slug}`} className="text-link admin-open-link">Open <ExternalLink size={14} /></Link>
               </div>
             </article>
           ))}

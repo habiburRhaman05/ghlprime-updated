@@ -1,5 +1,6 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { X } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import { fetchGalleryCategories, fetchGalleryImages } from '../lib/galleryApi'
@@ -34,15 +35,7 @@ export default function GalleryPage() {
 
   return (
     <main className="gallery-page">
-      <Helmet>
-        <title>Gallery | GHL Prime</title>
-        <meta name="description" content="A look inside GHL Prime: our team, events, and the work behind the GoHighLevel builds we ship." />
-        <meta name="keywords" content="GHL Prime gallery, GoHighLevel agency team, GHL Prime culture, agency events" />
-        <link rel="canonical" href={`${SITE_URL}/gallery`} />
-        <meta property="og:title" content="Gallery | GHL Prime" />
-        <meta property="og:description" content="A look inside GHL Prime: our team, events, and the work behind the builds we ship." />
-        <meta property="og:url" content={`${SITE_URL}/gallery`} />
-      </Helmet>
+      
 
       <section className="gallery-hero">
         <div className="container">

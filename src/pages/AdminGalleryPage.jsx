@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { FolderPlus, Image as ImageIcon, Pencil, Plus, Sparkles, Trash2, X } from 'lucide-react'
 import AdminShell from '../components/AdminShell'
 import ImageUrlField from '../components/admin/ImageUrlField'
@@ -199,7 +201,7 @@ export default function AdminGalleryPage() {
           <p>Categories become the filter tabs on the public gallery. Add images by pasting an image URL and assigning a category.</p>
         </div>
         <div className="admin-top-actions">
-          <Link to="/gallery" className="secondary-pill">View Gallery</Link>
+          <Link href="/gallery" className="secondary-pill">View Gallery</Link>
         </div>
       </div>
 

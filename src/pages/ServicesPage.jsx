@@ -1,6 +1,7 @@
+'use client'
+
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Link from 'next/link'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { SERVICES_FAQS } from '../data/faqs'
@@ -109,28 +110,15 @@ function CompareCell({ value, highlight }) {
 export default function ServicesPage() {
   return (
     <main className="services-page services-page-redesign">
-      <Helmet>
-        <title>Hire GoHighLevel Experts Hourly, Project or Full-Time | GHL Prime</title>
-        <meta name="description" content="Trained GoHighLevel specialists for CRM setup, automation workflows, AI agents, vibe coding, and 24/7 white-label client support. Hire the way your agency needs." />
-        <meta name="keywords" content="GoHighLevel services, GoHighLevel setup, GHL automation, AI agents, white-label GoHighLevel support, SaaS mode setup, GoHighLevel integrations, GHL Prime" />
-        <link rel="canonical" href="https://ghlprime.com/services" />
-        <meta property="og:title" content="Hire GoHighLevel Experts Hourly, Project or Full-Time | GHL Prime" />
-        <meta property="og:description" content="Trained GoHighLevel specialists for CRM setup, automation workflows, AI agents, vibe coding, and 24/7 white-label client support. Hire the way your agency needs." />
-        <meta property="og:url" content="https://ghlprime.com/services" />
-        <meta property="og:image" content="https://ghlprime.com/og-services.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:image" content="https://ghlprime.com/og-services.png" />
-        <meta name="twitter:title" content="Hire GoHighLevel Experts Hourly, Project or Full-Time | GHL Prime" />
-        <meta name="twitter:description" content="Trained GoHighLevel specialists for CRM setup, automation workflows, AI agents, vibe coding, and 24/7 white-label client support. Hire the way your agency needs." />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com' },
             { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://ghlprime.com/services' },
           ],
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'HowTo',
           name: 'How to Hire a Dedicated GoHighLevel Expert Team',
@@ -142,9 +130,8 @@ export default function ServicesPage() {
             { '@type': 'HowToStep', position: 3, name: 'They get to work', text: 'Your expert plugs in immediately building automations, handling support, training your team all under your brand. Invisible to your clients. Daily status updates. Takes around 48 hours.' },
             { '@type': 'HowToStep', position: 4, name: 'You focus on growth', text: 'The tech is handled. You close clients, pitch new business, and scale without ever touching the back-end again. Most agencies see results from day 7 onwards.' },
           ],
-        })}</script>
-              <meta name="last-modified" content="2026-05-24" />
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           '@id': 'https://ghlprime.com/services#webpage',
@@ -157,8 +144,8 @@ export default function ServicesPage() {
           datePublished: '2024-08-01',
           dateModified: '2026-05-24',
           speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.services-hero p', '.faq-question', '.faq-answer'] },
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'ItemList',
           name: 'GoHighLevel Expert Services GHL Prime',
@@ -175,8 +162,8 @@ export default function ServicesPage() {
             { '@type': 'ListItem', position: 7, item: { '@type': 'Service', name: 'Sub-Account & SaaS Fulfillment', description: 'Behind-the-scenes support for your client sub-accounts configuration, troubleshooting, onboarding, and ongoing management so your SaaS or agency offer stays consistent and scalable.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#saas-fulfillment' } },
             { '@type': 'ListItem', position: 8, item: { '@type': 'Service', name: 'Training & SOP Support', description: 'System walkthrough and handoff sessions after every build. Technical deep-dive training on GHL, automations, and AI agents. SOP documentation so your team can run the system confidently.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#training' } },
           ],
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
           '@id': 'https://ghlprime.com/services#faq',
@@ -185,8 +172,7 @@ export default function ServicesPage() {
             name: f.q,
             acceptedAnswer: { '@type': 'Answer', text: f.a },
           })),
-        })}</script>
-      </Helmet>
+        }) }} />
 
       <section className="section section-white services-redesign-hero">
         <div className="container services-redesign-hero-grid">
@@ -204,7 +190,7 @@ export default function ServicesPage() {
             </div>
             <div className="services-redesign-hero-actions">
               <a href="https://www.upwork.com/agencies/ghlprime/" target="_blank" rel="noopener noreferrer" className="primary-pill large">Hire Our Expert Team</a>
-              <Link to="/case-studies" className="secondary-pill">See Case Studies</Link>
+              <Link href="/case-studies" className="secondary-pill">See Case Studies</Link>
             </div>
           </div>
           <div className="services-redesign-hero-visual">
@@ -302,7 +288,7 @@ export default function ServicesPage() {
             </div>
             <div className="how-it-works-footer">
               <p>Most agencies move through all four steps in <strong>under a week.</strong></p>
-              <Link to="/booking" className="primary-pill how-it-works-cta">
+              <Link href="/booking" className="primary-pill how-it-works-cta">
                 Book your call <ArrowRight size={16} />
               </Link>
             </div>
@@ -371,7 +357,7 @@ export default function ServicesPage() {
                 <span className="services-compare-info" aria-hidden="true">i</span>
                 No contract, no setup fee. Most agencies test us for 7 days before committing.
               </span>
-              <Link to="/booking" className="primary-pill services-compare-cta">
+              <Link href="/booking" className="primary-pill services-compare-cta">
                 Skip the comparison <ArrowRight size={16} />
               </Link>
             </div>
@@ -386,7 +372,7 @@ export default function ServicesPage() {
             <p>Tell us what you need hourly, project, or full-time. We’ll match you with the right expert and get started fast.</p>
             <div className="final-cta-actions">
               <a href="https://www.upwork.com/agencies/ghlprime/" target="_blank" rel="noopener noreferrer" className="primary-pill large">Hire via Upwork</a>
-              <Link to="/case-studies" className="secondary-pill">View Case Studies</Link>
+              <Link href="/case-studies" className="secondary-pill">View Case Studies</Link>
             </div>
           </div>
         </div>

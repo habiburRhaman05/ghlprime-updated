@@ -1,6 +1,6 @@
 ﻿import ServiceDetailTemplate from '../components/ServiceDetailTemplate'
 
-const config = {
+export const config = {
   slug: '/services/figma-to-code',
   category: 'Design & Build',
   breadcrumbName: 'Figma to Code',
