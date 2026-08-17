@@ -493,7 +493,7 @@ button { font: inherit; }
   display: inline-block; margin-bottom: .75rem; color: var(--primary); font-size: .82rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
 }
 .section-title h2 { margin: 0; font-size: clamp(1.8rem, 3.5vw, 2.95rem); line-height: 1.08; letter-spacing: -0.055em; color: #1b2d43; }
-.section-title p { margin: .8rem auto 0; max-width: 42rem; color: var(--muted); }
+.section-title p { margin: .8rem auto 0; max-width: 43rem; color: var(--muted); }
 
 /* Homepage section-header spec ---------------------------------------------
    Eyebrow: 14px / 600 / #2563eb. Title: up to 48px / 700, with a 2-3 word
@@ -761,6 +761,7 @@ button { font: inherit; }
   background: var(--tone-card);
   border: 1px solid var(--tone-line);
   transition: background-color .3s ease, border-color .3s ease, transform .3s cubic-bezier(.22,1,.36,1);
+  text-align: center;
 }
 .wwa-feature.tone-blue {
   --tone-a: #2e73f0; --tone-soft: #e3edff;
@@ -804,6 +805,7 @@ button { font: inherit; }
   color: #5a6478;
   font-size: .92rem;
   line-height: 1.55;
+  text-align: center;
 }
 
 .what-we-are-image-card {
@@ -3589,8 +3591,8 @@ button { font: inherit; }
 }
 .leader-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 360px));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 440px));
+  gap: clamp(1.25rem, 3vw, 2.25rem);
 }
 .leader-card-grid-centered {
   justify-content: center;
@@ -3598,69 +3600,227 @@ button { font: inherit; }
 }
 .leader-profile-card {
   width: 100%;
-  max-width: 360px;
-  border-radius: 1.6rem;
-  overflow: hidden;
-  border: 1px solid rgba(214,226,241,.92);
-  background: linear-gradient(180deg, #fff, #fbfdff);
-  box-shadow: 0 25px 45px rgba(23, 59, 108, 0.07);
+  max-width: 440px;
+  /* Padded white card rather than an edge-to-edge photo block: the badge and
+     experience overlays float against the card's own surface, so the card
+     needs interior margin for them to sit in. */
+  padding: 1.75rem 1.5rem 2rem;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(226, 234, 245, 0.9);
+  background: #ffffff;
+  box-shadow: 0 18px 44px rgba(23, 59, 108, 0.06);
+  transition: box-shadow .35s ease, transform .45s cubic-bezier(.22, 1, .36, 1);
+}
+.leader-profile-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 30px 64px rgba(23, 59, 108, 0.12);
+}
+
+/* Stage: the positioning context for the photo and its two floating
+   overlays. */
+.leader-profile-stage {
+  position: relative;
+  padding: .25rem 0 1.25rem;
 }
 .leader-profile-image-wrap {
-  min-height: 18rem;
-  background: linear-gradient(180deg, #edf6ff 0%, #dfefff 100%);
+  min-height: 16rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 .leader-profile-image {
   width: 100%;
-  height: 100%;
-  min-height: 18rem;
-  object-fit: cover;
+  max-width: 20rem;
+  height: auto;
+  min-height: 16rem;
+  object-fit: contain;
+  object-position: bottom center;
   display: block;
+  margin-inline: auto;
+  transform-origin: bottom center;
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1);
 }
+.leader-profile-card:hover .leader-profile-image {
+  transform: scale(1.035);
+}
+
+/* Top-left badge: circular icon with its label stacked underneath. */
+.leader-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  text-align: center;
+  pointer-events: none;
+}
+.leader-badge-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Solid, filled glyph in a bolder blue sitting on a cool-white disc. */
+  background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+  color: #0b5ed7;
+  border: 1px solid rgba(22, 132, 234, 0.4);
+  box-shadow: 0 8px 22px rgba(23, 59, 108, 0.14);
+  transition: transform .5s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease, border-color .3s ease;
+}
+.leader-badge-icon svg { width: 1.45rem; height: 1.45rem; display: block; }
+/* Springy pop + tilt on card hover. */
+.leader-profile-card:hover .leader-badge-icon {
+  transform: scale(1.14) rotate(-8deg);
+  border-color: rgba(22, 132, 234, 0.7);
+  box-shadow: 0 12px 30px rgba(22, 132, 234, 0.3);
+}
+.leader-badge-label {
+  font-size: .78rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #16283f;
+}
+
+/* Bottom-right experience stat. */
+.leader-exp {
+  position: absolute;
+  right: 0;
+  bottom: 2.75rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: .85rem 1.1rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(23, 59, 108, 0.14);
+  pointer-events: none;
+  transition: transform .45s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease;
+}
+/* The experience stat lifts and pops on card hover. */
+.leader-profile-card:hover .leader-exp {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 14px 34px rgba(23, 59, 108, 0.22);
+}
+.leader-exp-num {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+}
+.leader-exp-unit {
+  margin-top: .2rem;
+  font-size: .95rem;
+  font-weight: 700;
+  color: #16283f;
+}
+.leader-exp-caption {
+  font-size: .72rem;
+  font-weight: 600;
+  color: #7c8ca3;
+}
+
 .leader-profile-body {
-  padding: 1.25rem;
+  padding: 0;
   text-align: center;
 }
 .leader-profile-body h3 {
   margin: 0;
-  color: #19304d;
-  font-size: 1.55rem;
+  color: #0f2035;
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 .leader-profile-body strong {
   display: block;
-  margin-top: .45rem;
-  color: #51719a;
-  font-size: 1rem;
+  margin-top: .4rem;
+  color: var(--primary);
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+/* Short rule between role and bio, as in the reference. */
+.leader-divider {
+  display: block;
+  width: 3rem;
+  height: 3px;
+  border-radius: 999px;
+  margin: 1rem auto;
+  background: linear-gradient(90deg, rgba(22,132,234,.25), var(--primary), rgba(22,132,234,.25));
+  transition: width .45s cubic-bezier(.22, 1, .36, 1);
+}
+.leader-profile-card:hover .leader-divider {
+  width: 4.75rem;
 }
 .leader-profile-body p {
-  margin: .95rem 0 0;
-  color: #607892;
+  margin: 0;
+  color: #6b7c93;
+  font-size: .95rem;
+  line-height: 1.75;
 }
 .leader-social-links {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: .55rem;
-  margin-top: 1rem;
+  gap: .8rem;
+  margin-top: 1.5rem;
 }
 .leader-social-link {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.1rem;
+  height: 3.1rem;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(170,205,240,.74);
-  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(226, 234, 245, 0.95);
+  background: #ffffff;
+  /* Falls back to brand blue; the per-network colours below override it. */
   color: var(--primary);
-  box-shadow: 0 10px 24px rgba(74,114,167,.06);
+  --brand: var(--primary);
+  box-shadow: 0 6px 16px rgba(74,114,167,.08);
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease, border-color .3s ease, background .3s ease, color .3s ease;
 }
+/* Each network in its own brand colour, per the reference. --brand drives
+   the fill on hover so each button floods with its own colour. */
+.leader-social-link.brand-linkedin { color: #0a66c2; --brand: #0a66c2; }
+.leader-social-link.brand-facebook { color: #1877f2; --brand: #1877f2; }
+.leader-social-link.brand-instagram { color: #e1306c; --brand: #e1306c; }
+.leader-social-link.brand-twitter { color: #0f1419; --brand: #0f1419; }
+.leader-social-link.brand-upwork { color: #14a800; --brand: #14a800; }
+.leader-social-link.brand-website { color: #0d95a4; --brand: #0d95a4; }
 .leader-social-link svg {
-  width: 1rem;
-  height: 1rem;
+  width: 1.35rem;
+  height: 1.35rem;
   display: block;
 }
+/* Hover: the button floods with its brand colour and the icon inverts to
+   white, with a springy lift. */
 .leader-social-link:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.1);
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
+  box-shadow: 0 12px 26px rgba(74, 114, 167, 0.22);
+}
+/* Narrow cards: the two overlays sit on the photo's left/right edges, so
+   they need to shrink with the card or they start covering the face. */
+@media (max-width: 560px) {
+  .leader-profile-card { padding: 1.35rem 1.15rem 1.6rem; }
+  .leader-badge { width: 4.5rem; }
+  .leader-badge-icon { width: 2.75rem; height: 2.75rem; }
+  .leader-badge-icon svg { width: 1.25rem; height: 1.25rem; }
+  .leader-badge-label { font-size: .7rem; }
+  .leader-exp { padding: .65rem .85rem; bottom: 2.25rem; }
+  .leader-exp-num { font-size: 1.5rem; }
+  .leader-exp-unit { font-size: .85rem; }
+  .leader-profile-body h3 { font-size: 1.4rem; }
+  .leader-social-link { width: 2.8rem; height: 2.8rem; }
+  .leader-social-link svg { width: 1.25rem; height: 1.25rem; }
 }
 .refined-assignment-box {
   border-radius: 1rem;
@@ -5674,4 +5834,65 @@ body:has(.about-redesign-page) .navbar {
 }
 @media (max-width: 600px) {
   .case-studies-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Homepage — phone layout pass
+   --------------------------------------------------------------------------
+   One place for the phone rules that apply across the home sections, rather
+   than repeating them per component file. Scoped to each section's own
+   class (never bare element selectors) so nothing here can reach the
+   service, blog, or admin pages that share the same primitives.
+   ========================================================================== */
+
+@media (max-width: 720px) {
+  /* --- Gutters ---------------------------------------------------------- */
+  /* Guarantees a visible margin from both screen edges. .container already
+     provided 8px here; this makes the floor explicit and consistent so a
+     future container change can't quietly remove it. */
+  .container { width: min(1160px, calc(100% - 1.25rem)); }
+
+  /* --- Centre alignment -------------------------------------------------- */
+  /* Section headers are already centred; these are the blocks that are
+     deliberately left-aligned on desktop and need to centre on phone. */
+  .what-we-are-copy,
+  .what-we-are-layout,
+  .wwa-feature,
+  .vv2-card,
+  .why-choose-detail-card,
+  .agency-service-card,
+  .homepage-service-card,
+  .jr-outcome-copy {
+    text-align: center;
+  }
+  /* .align-left carries !important (set for the desktop card layout), so
+     overriding it needs the same weight. */
+  .modern-solution-stack-card .solution-copy.align-left { text-align: center !important; }
+
+  /* Icon tiles and rules are inline-flex/blocks -- text-align can't move
+     them, they need their own auto margins. */
+  .wwa-feature-icon,
+  .vv2-card-icon,
+  .why-choose-detail-card .homepage-service-icon,
+  .agency-service-card .homepage-service-icon,
+  .solution-icon-tile,
+  .jr-outcome-icon {
+    margin-inline: auto;
+  }
+  .wwa-eyebrow-row { justify-content: center; }
+  .what-we-are-heading .accent::after { left: 0; right: 0; }
+  .what-we-are-lede { margin-inline: auto; }
+
+  /* Rows that lay out icon-beside-text stack and centre instead. */
+  .vv2-card,
+  .jr-outcome {
+    flex-direction: column;
+    align-items: center;
+  }
+  .stack-tag-row,
+  .vv2-cta-row { justify-content: center; }
+
+  /* Cards whose content is bottom-pinned via margin-top:auto lose that
+     anchor once centred; keep the spacing without the stretch. */
+  .stack-tag-row { margin-top: 1rem; }
 }

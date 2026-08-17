@@ -8,9 +8,10 @@
    ========================================================================== */
 
 .section.vv2 {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #f8fbff;
 }
 .vv2-glow {
   position: absolute;

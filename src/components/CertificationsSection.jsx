@@ -49,7 +49,7 @@ export default function CertificationsSection() {
       <div className="container">
         <div className="section-title centered certifications-title">
           <span className="eyebrow-label">Certifications</span>
-          <h2 className="certifications-single-line">Certified Across Every Major GHL Specialty</h2>
+          <h2 className="certifications-single-line">Certified Across Every Major <br/> <span className='jr-heading-accent'>GHL Specialty</span> </h2>
           <p>Every badge below is an official GoHighLevel certification earned by our team, not just claimed.</p>
         </div>
 

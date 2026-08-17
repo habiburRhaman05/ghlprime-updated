@@ -3,7 +3,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react'
 import { fetchShowcaseForPage, fetchShowcaseStats } from '../lib/showcaseApi'
 import '../styles/shipped-evidence.css'
 import { div } from 'framer-motion/client'
-
+import { motion } from 'framer-motion'
 function isImageUrl(value) {
   return typeof value === 'string' && /^https?:\/\//i.test(value.trim())
 }
@@ -55,7 +55,7 @@ function OriginLogo({ icon, name }) {
 export default function ShippedEvidenceSection({
   pageKey,
   eyebrow = 'Shipped Evidence',
-  heading = 'Built in public. Adopted by enterprise.',
+  heading = ``,
   subheading = 'Consumer products running in production at scale each one the origin of an enterprise system. The same engine, two markets, both shipping.',
 }) {
   const [items, setItems] = useState([])
@@ -85,12 +85,24 @@ export default function ShippedEvidenceSection({
   return (
     <section className="section shipped-evidence-section">
       <div className="container shipped-evidence-inner">
-        <header className="shipped-evidence-head">
+        {/* <header className="shipped-evidence-head">
           <span className="eyebrow-label">{eyebrow}</span>
-          <h2 className="se-heading">{heading}</h2>
+          <h2 >Built in public. Adopted <br/> <span>Real Results.</span> </h2>
           {subheading ? <p className="se-subhead">{subheading}</p> : null}
-        </header>
+        </header> */}
 
+      <motion.div
+          className="section-title centered why-choose-reference-head"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="eyebrow-label">Why do agencies hire GHL Prime instead of a freelancer?</span>
+
+          <h2>Focused Expertise. Real <br/> <span>Delivery Power.</span></h2>
+          <p>GHL Prime is specialized team backed by Octopi Digital. We don’t do everything we go deep on GHL,automation, AI, and custom dev so your agency has the best possible team behind it.</p>
+        </motion.div>
         {stats.length > 0 ? (
           <div className="se-stat-bar">
             {stats.map((stat) => (

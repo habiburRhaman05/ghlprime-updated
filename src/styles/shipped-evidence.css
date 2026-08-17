@@ -3,10 +3,9 @@
    existing case-studies-reference/grid patterns. */
 
 .shipped-evidence-section {
-  background: linear-gradient(180deg, #f7fafd 0%, #eef4f8 100%);
+
   padding: clamp(3.5rem, 6vw, 6rem) 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+
 }
 
 .shipped-evidence-head {

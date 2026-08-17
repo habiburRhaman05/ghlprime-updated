@@ -195,8 +195,8 @@ export default function TrainingOnboarding() {
         >
           <span className="jr-eyebrow">Expert Training &amp; Onboarding</span>
           <h2 className="jr-heading">
-            <span className="jr-heading-dark">We Don’t Just Build. We Train You</span>{' '}
-            <span className="jr-heading-accent">to Win.</span>
+            <span className="jr-heading-dark">We Don’t Just Build. </span>{' '}
+            <span className="jr-heading-accent">We Train You to Win.</span>
           </h2>
           <p className="jr-lede">
             Our team trains you hands-on, technically  so you understand your own system, can serve clients better, and don’t depend on anyone to run your business.

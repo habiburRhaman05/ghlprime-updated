@@ -181,21 +181,20 @@
 }
 
 .hac-core-card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: 1.4cqw;
-  padding: 0 7%;
-  border-radius: clamp(12px, 2.5cqw, 20px);
-  background: linear-gradient(158deg, #ffffff 0%, #f6faff 62%, #eef5ff 100%);
-  border: 1px solid rgba(37, 99, 235, 0.16);
-  box-shadow:
-    0 22px 46px -22px rgba(23, 59, 108, 0.4),
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 1.4cqw;
+    padding: 0 7%;
+    border-radius: clamp(12px, 2.5cqw, 20px);
+    background: white;
+    /* border: 1px solid rgba(37, 99, 235, 0.16); */
+    /* box-shadow: 0 22px 46px -22px rgba(23, 59, 108, 0.4),
     0 0 34px -8px rgba(37, 99, 235, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    inset 0 1px 0 rgba(255, 255, 255, 0.95); */
 }
 .hac-core-logo {
   width: 82%;
@@ -359,6 +358,20 @@
   .hac-node-tile svg { width: 15px; height: 15px; }
   .hac-node-label { font-size: 12.5px; }
   .hac-node-dot { width: 5px; height: 5px; opacity: 1; animation: none; margin-left: auto; }
+
+  /* Motion off on phone. `.hac` animates in with fill `both`, so its
+     from-state (opacity 0) would stick if the animation were simply
+     removed -- opacity/transform are reset explicitly here. The nodes and
+     tiles above are already animation:none; this covers the three that
+     were still looping: the wrapper entrance, the breathing halo, and the
+     card's emit pulse. */
+  .hac {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .hac-halo,
+  .hac-core-emit { animation: none; }
 }
 
 @media (max-width: 380px) {

@@ -3,14 +3,18 @@
    illustration this was lifted out of (.hac-*). */
 
 .hero-stats-section {
-  position: relative;
-  z-index: 1;
-  /* Tight against the hero above it: this reads as the hero's footer line,
-     not as a section in its own right, so it doesn't take the full
-     5.5rem .section rhythm. */
-  padding: 0 0 clamp(2rem, 4vw, 3rem);
+    position: relative;
+    z-index: 1;
+    /* padding: 0 0 clamp(6rem, 8vw, 3rem); */
+    padding-top: 40px;
+    padding-bottom: 60px;
+}.hero-stats-section {
+    position: relative;
+    z-index: 1;
+    /* padding: 0 0 clamp(6rem, 8vw, 3rem); */
+    padding-top: 40px;
+    padding-bottom: 60px;
 }
-
 .hsb-bar {
   /* 20% narrower than the container, centred -- keeps the bar visibly
      inset from the copy above rather than running the full page width. */

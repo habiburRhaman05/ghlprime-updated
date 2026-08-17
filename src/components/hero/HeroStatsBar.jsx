@@ -81,7 +81,7 @@ function StatTile({ stat, started, reduced, delay }) {
     <div className="hsb-stat">
       <strong className="hsb-stat-value">{stat.format(value)}</strong>
       <span className="hsb-stat-label">
-        <span className="hsb-stat-dot" aria-hidden="true" />
+        {/* <span className="hsb-stat-dot" aria-hidden="true" /> */}
         {stat.label}
       </span>
     </div>

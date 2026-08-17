@@ -205,15 +205,14 @@ export default function VibeCoding() {
 
   return (
     <section className="section section-white vibe-coding-section vv2">
-      <span className="vv2-glow vv2-glow-a" aria-hidden="true" />
-      <span className="vv2-glow vv2-glow-b" aria-hidden="true" />
+    
 
       <div className="container vv2-inner">
         {/* 1. Copy, moved to the top -------------------------------------- */}
         <div className="vv2-head">
           {/* Soft light behind the headline. Keeps the top of the section
               from reading as a flat white band. */}
-          <span className="vv2-head-glow" aria-hidden="true" />
+          {/* <span className="vv2-head-glow" aria-hidden="true" /> */}
 
           <motion.span
             className="vv2-eyebrow"

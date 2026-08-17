@@ -54,12 +54,9 @@
 }
 
 .life-at-brand {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 600;
+  font-weight: 700;
   color: #2563eb;
-  /* Reset the heading's tight tracking -- a negative letter-spacing reads
-     fine on the bold sans text but pinches a serif italic. */
+
   letter-spacing: normal;
 }
 

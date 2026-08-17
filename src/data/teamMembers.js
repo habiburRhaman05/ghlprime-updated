@@ -1,10 +1,18 @@
+// `badge_label` / `badge_icon` / `years_experience` drive the two floating
+// overlays on the leader card (top-left pill, bottom-right stat). All three
+// are OPTIONAL -- LeaderCardGrid renders each overlay only when its field is
+// present, so records coming from the API without them simply show the card
+// without that overlay rather than breaking.
 export const teamMembers = [
   {
     id: 'jewel-rana',
     name: 'Jewel Rana',
     role: 'CEO & Co-Founder',
+    badge_label: 'Visionary Leader',
+    badge_icon: 'star',
+    years_experience: '10+',
     description:
-      'Jewel Rana is a business coach and agency leader who has helped freelancers and service providers build profitable careers and scalable service businesse',
+      'Jewel Rana is a business coach and agency leader who has helped freelancers and service providers build profitable careers and scalable service businesses. Scale your agency.',
     image_url: '/jewel-rana.png',
     sort_order: 1,
     linkedin_url: 'https://www.linkedin.com/in/thejewelrana/',
@@ -18,6 +26,9 @@ export const teamMembers = [
     id: 'niyamul-islam-sajal',
     name: 'Niyamul Islam Sajal',
     role: 'Co-Founder',
+    badge_label: 'Automation Expert',
+    badge_icon: 'rocket',
+    years_experience: '3+',
     description:
       'Niyamul Islam Sajal is a senior automation engineer with extensive experience building AI-powered systems, CRM infrastructures, and custom integrations for agencies and fast-growing businesses.',
     image_url: '/niyamul-islam-sajal.png',

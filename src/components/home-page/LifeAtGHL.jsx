@@ -154,7 +154,7 @@ export default function LifeAtGHL() {
     <section className="section life-at-ghl-section" ref={sectionRef}>
       <div className="container life-at-ghl-head">
         <motion.span
-          className="life-at-badge"
+          className="eyebrow-label"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
