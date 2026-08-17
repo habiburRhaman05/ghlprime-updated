@@ -69,7 +69,7 @@
   font-size: clamp(1.18rem, 1.5vw, 1.45rem);
   font-weight: 700;
   line-height: 1.26;
-  letter-spacing: -0.015em;
+  letter-spacing: normal;
   color: #10253f;
 }
 .modern-solution-stack-card .solution-copy p {
@@ -149,13 +149,13 @@
   margin: 0;
   font-size: clamp(2rem, 4vw, 3.45rem);
   line-height: 1.02;
-  letter-spacing: -0.065em;
+  letter-spacing: normal;
   color: #1b2d43;
 }
 .training-copy-redesign h2 {
   font-size: clamp(1.95rem, 3.5vw, 3rem);
   line-height: 1.12;
-  letter-spacing: -0.055em;
+  letter-spacing: normal;
 }
 .training-copy-redesign h2 span,
 .vibe-copy-redesign h2 span {
@@ -183,7 +183,7 @@
   margin: 0;
   font-size: clamp(2.35rem, 4.8vw, 4.25rem);
   line-height: 1.02;
-  letter-spacing: -0.06em;
+  letter-spacing: normal;
   color: #14263d;
 }
 .training-heading-line-accent {
@@ -576,7 +576,7 @@
   margin: 0;
   font-size: clamp(2.45rem, 4.15vw, 3.9rem);
   line-height: .94;
-  letter-spacing: -0.085em;
+  letter-spacing: normal;
   max-width: 9.6ch;
   color: #14263d;
 }
@@ -737,7 +737,7 @@
   font-size: clamp(1.85rem, 4.4vw, 3rem);
   font-weight: 700;
   line-height: 1.14;
-  letter-spacing: -0.045em;
+  letter-spacing: normal;
   color: #10253f;
 }
 .why-choose-reference-head h2 span {
@@ -871,7 +871,7 @@
   margin: 0;
   font-size: clamp(2.1rem, 3.6vw, 3.1rem);
   line-height: 1.1;
-  letter-spacing: -0.04em;
+  letter-spacing: normal;
   color: #10253f;
   white-space: nowrap;
 }

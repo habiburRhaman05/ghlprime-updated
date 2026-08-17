@@ -50,7 +50,7 @@
   font-size: clamp(1.3rem, 2.2vw, 1.75rem);
   font-weight: 800;
   color: var(--navy);
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
   line-height: 1;
   /* Tabular figures stop the number jittering horizontally while it counts
      -- proportional digits have different widths, so 0->550 would otherwise

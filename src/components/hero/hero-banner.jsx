@@ -33,7 +33,7 @@ const HeroBanner = ({activePill,rotatingPills}) => {
 
             <h1>
         
-              <span className="hh-line">Hire a Dedicated Team of{' '}</span>
+              <span className="hh-line">Hire a Dedicated Team of</span>
              
               <span className="hh-line">
                 <span className="homepage-hero-ghl-inline">

@@ -57,7 +57,7 @@
 .tm-brand-name {
   font-size: 2.05cqw;
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: normal;
   color: #fff;
   white-space: nowrap;
 }
@@ -103,7 +103,7 @@
 .tm-head-title {
   font-size: 2.1cqw;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: normal;
   color: #16294a;
 }
 
@@ -214,7 +214,7 @@
   font-size: 3.4cqw;
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
   color: #16294a;
 }
 .tm-stats-sub { font-size: 1.35cqw; color: #8497b0; }
@@ -425,7 +425,7 @@
   font-size: 2.9cqw;
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
   color: #16294a;
 }
 .tm-stat-delta { font-size: 1.15cqw; color: #10b981; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

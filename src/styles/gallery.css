@@ -26,7 +26,7 @@
   margin: 1rem 0 0;
   font-size: clamp(2rem, 4.5vw, 3.2rem);
   line-height: 1.08;
-  letter-spacing: -0.02em;
+  letter-spacing: normal;
   font-weight: 800;
   color: var(--navy, #10253f);
   max-width: 16ch;

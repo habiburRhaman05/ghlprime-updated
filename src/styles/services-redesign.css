@@ -11,7 +11,7 @@
   margin: 0;
   font-size: clamp(2.5rem, 5vw, 4.85rem);
   line-height: .98;
-  letter-spacing: -0.08em;
+  letter-spacing: normal;
   color: #16283f;
   max-width: 10ch;
 }

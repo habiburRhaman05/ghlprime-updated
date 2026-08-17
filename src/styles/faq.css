@@ -71,7 +71,7 @@
   font-size: 1.02rem;
   font-weight: 700;
   color: #0f2236;
-  letter-spacing: -0.005em;
+  letter-spacing: normal;
 }
 
 .faq-question:focus-visible {
