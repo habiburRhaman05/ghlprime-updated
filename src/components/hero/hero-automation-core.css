@@ -316,9 +316,12 @@
 }
 
 /* Below this the ring cannot hold eight nodes without them colliding, so
-   the grid is abandoned rather than shrunk into illegibility: the card sits
-   on top and the services become a plain two-column list under it. Same
-   content, same colours, no geometry left to break. */
+   the grid is abandoned rather than shrunk into illegibility: the services
+   become a plain two-column list under it. Same content, same colours, no
+   geometry left to break. On phone the GHL Prime logo card and the ambient
+   halo are dropped entirely -- the section is just the tinted service list,
+   so there is nothing left for the connectors to originate from or glow
+   around. */
 @media (max-width: 640px) {
   .hac-stage {
     aspect-ratio: auto;
@@ -330,17 +333,11 @@
   }
   .hac-wires,
   .hac-wash { display: none; }
-  .hac-halo { width: 72%; height: 7rem; top: 3.5rem; }
+  .hac-halo { display: none; }
 
-  .hac-core {
-    position: static;
-    grid-column: 1 / -1;
-    width: min(16rem, 82%) !important;
-    height: auto !important;
-    aspect-ratio: 222 / 108;
-    justify-self: center;
-    margin-bottom: 0.7rem;
-  }
+  /* Logo card + its emit pulse: hidden, not just resized -- the phone
+     layout is the service list on its own. */
+  .hac-core { display: none; }
 
   .hac-node {
     position: static;
@@ -375,7 +372,12 @@
 }
 
 @media (max-width: 380px) {
-  .hac-stage { grid-template-columns: 1fr; }
+  /* Stay 2-up even on the narrowest phones (the ask), but let the longer
+     labels wrap so "Software Development" / "24/7 Support System" don't
+     shove their node past the column edge. */
+  .hac-stage { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hac-node { white-space: normal; padding: 0.4rem 0.45rem; }
+  .hac-node-label { font-size: 11.5px; line-height: 1.15; }
 }
 
 /* --- Reduced motion ------------------------------------------------------ */

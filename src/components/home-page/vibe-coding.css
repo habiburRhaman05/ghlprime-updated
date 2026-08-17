@@ -271,7 +271,10 @@
      homepage-wide 14px/16px per the header spec. */
   .vv2-eyebrow { letter-spacing: 0.13em; }
   .section.vv2 .vv2-lede { line-height: 1.75; }
-  .vv2-cards { grid-template-columns: minmax(0, 1fr); }
+  /* Six capability cards: keep them 2-up on phone (3 tidy rows) instead of
+     stacking to one column -- with the icon-on-top phone layout from the
+     phone pass they read as a neat chip grid. */
+  .vv2-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .code-window.vv2-window .ide-editor { min-height: 17rem; }
 }
 

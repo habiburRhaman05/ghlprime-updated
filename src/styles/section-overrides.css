@@ -715,23 +715,7 @@
   overflow: hidden;
   background: #f8fbff;
 }
-/* Small dot-grid texture tucked in the top-right corner -- kept modest in
-   size and behind the container's own stacking context so it stays clear
-   of the (translucent, blurred) cards below rather than showing through
-   them. */
-.why-choose-dot-grid {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  right: 0;
-  width: 11rem;
-  height: 11rem;
-  background-image: radial-gradient(rgba(38, 120, 232, 0.22) 1.5px, transparent 1.5px);
-  background-size: 15px 15px;
-  mask-image: radial-gradient(circle at top right, #000 35%, transparent 72%);
-  -webkit-mask-image: radial-gradient(circle at top right, #000 35%, transparent 72%);
-  pointer-events: none;
-}
+
 /* Top: centered eyebrow/heading/paragraph block (reuses the site's shared
    .section-title.centered pattern, so this section's header sits/scales
    exactly like every other centered section header on the page). */
@@ -807,6 +791,11 @@
   }
   .why-choose-detail-card {
     padding: 1.5rem 1.35rem 1.6rem;
+  }
+  /* The shared .primary-pill rule goes width:100% under 560px; this section's
+     single CTA stays content-sized and centred by its flex row instead. */
+  .why-choose-reference-cta {
+    width: max-content;
   }
 }
 .why-choose-detail-card {
@@ -998,4 +987,15 @@
   }
   .modern-solution-stack-card:nth-child(-n+3),
   .modern-solution-stack-card.wide { grid-column: span 1; }
+}
+
+/* Homepage — phone pass for the case-study section. Lives here (not in
+   App.css's phone block) because this file loads after App.css and the
+   nowrap headline rule above would otherwise beat the override. */
+@media (max-width: 720px) {
+  /* The two-word headline is set white-space: nowrap so it stays on one
+     line on desktop; on a phone that overflows the container. */
+  .case-studies-reference-copy h2 {
+    white-space: normal;
+  }
 }

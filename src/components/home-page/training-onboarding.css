@@ -212,10 +212,10 @@
 }
 .section.jr .jr-title {
   margin: 0;
-  font-size: clamp(0.95rem, 1.25cqw, 1.2rem);
+  font-size: clamp(1.2rem, 1.25cqw, 1.2rem);
   line-height: 1.28;
   letter-spacing: -0.025em;
-  font-weight: 800;
+  font-weight: 700;
   color: #0f1f38;
 }
 .section.jr .jr-text {
@@ -263,10 +263,18 @@
 }
 .jr-outcomes-label {
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #2563eb;
+  
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #2563eb;
+
 }
 .jr-outcome-grid {
   width: 100%;
@@ -338,7 +346,7 @@
   font-size: 1rem;
   line-height: 1.35;
   letter-spacing: -0.022em;
-  font-weight: 800;
+  font-weight: 700;
   color: #0f1f38;
 }
 .jr-outcome-eyebrow {

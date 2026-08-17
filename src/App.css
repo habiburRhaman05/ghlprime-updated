@@ -505,7 +505,8 @@ button { font: inherit; }
 .trust-band-title .eyebrow-label,
 .replacement-solutions-title .eyebrow-label,
 .compact-team-title .eyebrow-label,
-.experts-section-title .eyebrow-label {
+.experts-section-title .eyebrow-label,
+.certifications-overview-title .eyebrow-label {
   font-size: .875rem;
   font-weight: 600;
   color: #2563eb;
@@ -513,21 +514,24 @@ button { font: inherit; }
 .trust-band-title h2,
 .replacement-solutions-title h2,
 .compact-team-title h2,
-.experts-section-title h2 {
+.experts-section-title h2,
+.certifications-overview-title h2 {
   font-size: clamp(1.85rem, 4.4vw, 3rem);
   font-weight: 700;
 }
 .trust-band-title p,
 .replacement-solutions-title p,
 .compact-team-title p,
-.experts-section-title p {
+.experts-section-title p,
+.certifications-overview-title p {
   font-size: 1rem;
   font-weight: 500;
 }
 .trust-band-title h2 .hl,
 .replacement-solutions-title h2 .hl,
 .compact-team-title h2 .hl,
-.experts-section-title h2 .hl {
+.experts-section-title h2 .hl,
+.certifications-overview-title h2 .hl {
   color: #2563eb;
 }
 /* Dark/"light"-variant section (Agency Needs, navy background): same sizes,
@@ -968,6 +972,12 @@ button { font: inherit; }
   .wwa-features {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem 1rem;
+  }
+  /* The third feature ("Client Growth") is the odd one out in a 2-up grid,
+     so on phone it takes the full row instead of sitting half-width under
+     the first card. Desktop/tablet (3-up) is unaffected. */
+  .wwa-features .wwa-feature:last-child {
+    grid-column: 1 / -1;
   }
   .wwa-dot-grid { width: 8rem; height: 6rem; }
 }
@@ -5895,4 +5905,45 @@ body:has(.about-redesign-page) .navbar {
   /* Cards whose content is bottom-pinned via margin-top:auto lose that
      anchor once centred; keep the spacing without the stretch. */
   .stack-tag-row { margin-top: 1rem; }
+
+  /* --- Case studies ----------------------------------------------------- */
+  /* Card bodies are left-aligned on desktop (title + excerpt + arrow); on
+     phone they centre to match the rest of the page's cards. The excerpt's
+     max-width was reserving space for the right-aligned arrow -- clear it
+     so the centred text can use the full card width. */
+  .case-study-slider-body,
+  .case-study-reference-body {
+    text-align: center;
+  }
+  .case-study-slider-body h3 {
+    padding-right: 0;
+  }
+  .case-study-slider-body p,
+  .case-study-reference-body p {
+    max-width: none;
+  }
+
+  /* --- Section rhythm --------------------------------------------------- */
+  /* 5.5rem of top/bottom padding is generous on a phone -- halve it so the
+     page doesn't scroll through empty space between sections. */
+  .what-we-are-section,
+  .life-at-ghl-section,
+  .tt-section,
+  .replacement-solutions-section,
+  .agency-needs-section,
+  .training-section,
+  .vibe-coding-section,
+  .why-choose-section,
+  .leader-card-section,
+  .certifications-section,
+  .certifications-overview-section,
+  .experts-section,
+  .case-studies-reference-section,
+  .shipped-evidence-section,
+  .final-cta-section,
+  .faq-section {
+    padding-top: 3.25rem;
+    padding-bottom: 3.25rem;
+  }
+  .trust-band { padding: 2.75rem 0 3rem; }
 }

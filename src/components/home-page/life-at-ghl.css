@@ -165,4 +165,10 @@
     mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent);
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 28px, #000 calc(100% - 28px), transparent);
   }
+  /* The shared .secondary-pill rule goes width:100% under 560px; this
+     section's single gallery link stays content-sized and centred by the
+     text-align:center row instead. */
+  .life-at-ghl-cta-row .secondary-pill {
+    width: max-content;
+  }
 }
