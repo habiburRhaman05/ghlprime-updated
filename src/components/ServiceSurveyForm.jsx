@@ -5,7 +5,7 @@ import './service-survey.css'
 
 const DIAL_CODES = ['+1', '+44', '+61', '+91', '+971', '+92', '+234', '+353', '+49', '+33', '+39', '+34', '+27', '+880', '+63']
 
-// GoHighLevel (LeadConnector) inbound webhook — every service-page form submission POSTs here.
+// GoHighLevel (LeadConnector) inbound webhook every service-page form submission POSTs here.
 const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/j53xn6YJHwIdPImV00rn/webhook-trigger/a325877a-48bf-4f92-8bf7-61aece1d7cb9'
 
 export default function ServiceSurveyForm({ form, slug }) {
@@ -42,24 +42,24 @@ export default function ServiceSurveyForm({ form, slug }) {
       if (s.textarea && d[s.textarea.name]) lines.push(`${s.textarea.label}: ${d[s.textarea.name]}`)
     }
     return {
-      // Contact — same on every form
+      // Contact same on every form
       name: v('name'),
       email: v('email'),
       phone: `${d.dialCode || ''} ${d.phone || ''}`.trim(),
       business: v('business'),
-      // "About you" — only one of these is filled per form, the rest stay empty
+      // "About you" only one of these is filled per form, the rest stay empty
       role: v('role'),
       business_type: v('bizType'),
       stage: v('stage'),
       app_type: v('appType'),
       // Free-text needs (all forms)
       needs: v('needsDetail'),
-      // Budget / scope — subset filled per form, rest empty
+      // Budget / scope subset filled per form, rest empty
       budget: v('budget'),
       sub_accounts: v('subaccounts'),
       lead_volume: v('leadVolume'),
       coverage: v('coverage'),
-      // Meta — same on every form
+      // Meta same on every form
       service: slug,
       source: 'Service page survey',
       details: lines.join('\n'),

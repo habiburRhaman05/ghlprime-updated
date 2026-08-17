@@ -1,4 +1,4 @@
-/* "Shipped Evidence" showcase — styled from the ghlprime brand system
+/* "Shipped Evidence" showcase styled from the ghlprime brand system
    (navy/blue palette + Inter body + JetBrains Mono labels), restyled from the
    existing case-studies-reference/grid patterns. */
 
@@ -11,26 +11,8 @@
 
 .shipped-evidence-head {
   max-width: 760px;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.se-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--primary);
-}
-.se-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 1px;
-  background: var(--primary);
+  margin: 0 auto clamp(2rem, 4vw, 3rem);
+  text-align: center;
 }
 
 .se-heading {

@@ -72,7 +72,7 @@ export default function SiteFooter() {
           <Link to="/" aria-label="Go to homepage" className="footer-brand-logo-link" onClick={handleFooterNavigate}>
             <img className="footer-logo footer-logo-external" src="/footer-logo.png" alt="GHL Prime" />
           </Link>
-          <p>Your dedicated GoHighLevel & automation expert team — 24/7, fully white-labeled.</p>
+          <p>Your dedicated GoHighLevel & automation expert team 24/7, fully white-labeled.</p>
           <div className="footer-social-row">
             {socialLinks.map((item) => (
               <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.label} className="footer-social-link">

@@ -176,7 +176,7 @@ export default function LifeAtGHL() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          GHL Prime isn&rsquo;t just a remote team &mdash; it&rsquo;s a group of builders, automators, and problem-solvers who show up for each other as much as for the work.
+          GHL Prime isn&rsquo;t just a remote team it&rsquo;s a group of builders, automators, and problem-solvers who show up for each other as much as for the work.
         </motion.p>
       </div>
 

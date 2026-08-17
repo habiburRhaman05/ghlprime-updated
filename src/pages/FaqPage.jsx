@@ -10,18 +10,18 @@ export default function FaqPage() {
   return (
     <main className="faq-page">
       <Helmet>
-        <title>GoHighLevel Expert FAQ — GHL Prime Answers Your Questions</title>
-        <meta name="description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime — pricing, process, white-label, AI agents, SaaS Mode, and more." />
+        <title>GoHighLevel Expert FAQ GHL Prime Answers Your Questions</title>
+        <meta name="description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime pricing, process, white-label, AI agents, SaaS Mode, and more." />
         <meta name="keywords" content="GoHighLevel FAQ, GHL Prime FAQ, GoHighLevel help, white-label support questions, GoHighLevel agency FAQ" />
         <link rel="canonical" href="https://ghlprime.com/faq" />
-        <meta property="og:title" content="GoHighLevel Expert FAQ — GHL Prime Answers Your Questions" />
-        <meta property="og:description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime — pricing, process, white-label, AI agents, SaaS Mode, and more." />
+        <meta property="og:title" content="GoHighLevel Expert FAQ GHL Prime Answers Your Questions" />
+        <meta property="og:description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime pricing, process, white-label, AI agents, SaaS Mode, and more." />
         <meta property="og:url" content="https://ghlprime.com/faq" />
         <meta property="og:image" content="https://ghlprime.com/og-faq.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:image" content="https://ghlprime.com/og-faq.png" />
-        <meta name="twitter:title" content="GoHighLevel Expert FAQ — GHL Prime Answers Your Questions" />
-        <meta name="twitter:description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime — pricing, process, white-label, AI agents, SaaS Mode, and more." />
+        <meta name="twitter:title" content="GoHighLevel Expert FAQ GHL Prime Answers Your Questions" />
+        <meta name="twitter:description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime pricing, process, white-label, AI agents, SaaS Mode, and more." />
         <meta name="last-modified" content="2026-05-31" />
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',

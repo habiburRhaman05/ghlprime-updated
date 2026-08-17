@@ -39,7 +39,7 @@ const hireModels = [
 
 const expertHandles = [
   { title: 'GoHighLevel Setup & SaaS Configuration', text: 'Launch sub-accounts, snapshots, whitelabel setup, settings, domains, calendars, pipelines, and full CRM structure.', icon: Settings2 },
-  { title: 'Workflow Automation', text: 'Build and optimize workflows that actually work — lead routing, nurture, onboarding, reactivation, reminders, and internal automations.', icon: Workflow },
+  { title: 'Workflow Automation', text: 'Build and optimize workflows that actually work lead routing, nurture, onboarding, reactivation, reminders, and internal automations.', icon: Workflow },
   { title: 'AI Agents & Call Center Setup', text: 'Deploy AI chat agents, voice agents, qualification systems, and AI call flows connected directly to your GHL workflows.', icon: Bot },
   { title: 'White-Labeled Client Support', text: 'Need support under your own brand? We provide invisible expert help that feels like part of your internal team.', icon: Headset },
   { title: 'API Integrations & Custom Connections', text: 'Connect GHL with third-party tools, internal systems, payment platforms, reporting dashboards, and custom workflows.', icon: Link2 },
@@ -52,28 +52,28 @@ const steps = [
   {
     number: '01',
     title: 'Tell us what you need',
-    text: 'Book a free call. We listen, map your setup, and figure out the right hire model — full-time, part-time, or task-based.',
+    text: 'Book a free call. We listen, map your setup, and figure out the right hire model full-time, part-time, or task-based.',
     pills: ['same-day reply', 'no commitment'],
     time: '~30 min',
   },
   {
     number: '02',
     title: 'We match you an expert',
-    text: "You're paired with a GHL-certified specialist from our team. No generalists, no guessing — and you interview them before saying yes.",
+    text: "You're paired with a GHL-certified specialist from our team. No generalists, no guessing and you interview them before saying yes.",
     pills: ['4+ yrs avg GHL experience', 'swap anytime'],
     time: '~24 hr',
   },
   {
     number: '03',
     title: 'They get to work',
-    text: 'Your expert plugs in immediately — building automations, handling support, training your team — all under your brand. Invisible to your clients.',
+    text: 'Your expert plugs in immediately building automations, handling support, training your team all under your brand. Invisible to your clients.',
     pills: ['white-labeled', 'daily status updates'],
     time: '~48 hr',
   },
   {
     number: '04',
     title: 'You focus on growth',
-    text: 'The tech is handled. You close clients, pitch new business, and scale — without ever touching the back-end again.',
+    text: 'The tech is handled. You close clients, pitch new business, and scale without ever touching the back-end again.',
     metric: 'avg +30% revenue at 90 days',
     time: 'day 7+',
   },
@@ -110,17 +110,17 @@ export default function ServicesPage() {
   return (
     <main className="services-page services-page-redesign">
       <Helmet>
-        <title>Hire GoHighLevel Experts — Hourly, Project or Full-Time | GHL Prime</title>
+        <title>Hire GoHighLevel Experts Hourly, Project or Full-Time | GHL Prime</title>
         <meta name="description" content="Trained GoHighLevel specialists for CRM setup, automation workflows, AI agents, vibe coding, and 24/7 white-label client support. Hire the way your agency needs." />
         <meta name="keywords" content="GoHighLevel services, GoHighLevel setup, GHL automation, AI agents, white-label GoHighLevel support, SaaS mode setup, GoHighLevel integrations, GHL Prime" />
         <link rel="canonical" href="https://ghlprime.com/services" />
-        <meta property="og:title" content="Hire GoHighLevel Experts — Hourly, Project or Full-Time | GHL Prime" />
+        <meta property="og:title" content="Hire GoHighLevel Experts Hourly, Project or Full-Time | GHL Prime" />
         <meta property="og:description" content="Trained GoHighLevel specialists for CRM setup, automation workflows, AI agents, vibe coding, and 24/7 white-label client support. Hire the way your agency needs." />
         <meta property="og:url" content="https://ghlprime.com/services" />
         <meta property="og:image" content="https://ghlprime.com/og-services.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:image" content="https://ghlprime.com/og-services.png" />
-        <meta name="twitter:title" content="Hire GoHighLevel Experts — Hourly, Project or Full-Time | GHL Prime" />
+        <meta name="twitter:title" content="Hire GoHighLevel Experts Hourly, Project or Full-Time | GHL Prime" />
         <meta name="twitter:description" content="Trained GoHighLevel specialists for CRM setup, automation workflows, AI agents, vibe coding, and 24/7 white-label client support. Hire the way your agency needs." />
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
@@ -134,13 +134,13 @@ export default function ServicesPage() {
           '@context': 'https://schema.org',
           '@type': 'HowTo',
           name: 'How to Hire a Dedicated GoHighLevel Expert Team',
-          description: 'Four steps to get started with GHL Prime — your dedicated GoHighLevel expert team for automation, AI agents, and white-label support.',
+          description: 'Four steps to get started with GHL Prime your dedicated GoHighLevel expert team for automation, AI agents, and white-label support.',
           url: 'https://ghlprime.com/services',
           step: [
-            { '@type': 'HowToStep', position: 1, name: 'Tell us what you need', text: 'Book a free call. We listen, map your setup, and figure out the right hire model — full-time, part-time, or task-based. Same-day reply, no commitment. Takes around 30 minutes.' },
-            { '@type': 'HowToStep', position: 2, name: 'We match you an expert', text: 'You are paired with a GHL-certified specialist from our team. No generalists, no guessing — and you interview them before saying yes. Average 4+ years GHL experience. Takes around 24 hours.' },
-            { '@type': 'HowToStep', position: 3, name: 'They get to work', text: 'Your expert plugs in immediately — building automations, handling support, training your team — all under your brand. Invisible to your clients. Daily status updates. Takes around 48 hours.' },
-            { '@type': 'HowToStep', position: 4, name: 'You focus on growth', text: 'The tech is handled. You close clients, pitch new business, and scale — without ever touching the back-end again. Most agencies see results from day 7 onwards.' },
+            { '@type': 'HowToStep', position: 1, name: 'Tell us what you need', text: 'Book a free call. We listen, map your setup, and figure out the right hire model full-time, part-time, or task-based. Same-day reply, no commitment. Takes around 30 minutes.' },
+            { '@type': 'HowToStep', position: 2, name: 'We match you an expert', text: 'You are paired with a GHL-certified specialist from our team. No generalists, no guessing and you interview them before saying yes. Average 4+ years GHL experience. Takes around 24 hours.' },
+            { '@type': 'HowToStep', position: 3, name: 'They get to work', text: 'Your expert plugs in immediately building automations, handling support, training your team all under your brand. Invisible to your clients. Daily status updates. Takes around 48 hours.' },
+            { '@type': 'HowToStep', position: 4, name: 'You focus on growth', text: 'The tech is handled. You close clients, pitch new business, and scale without ever touching the back-end again. Most agencies see results from day 7 onwards.' },
           ],
         })}</script>
               <meta name="last-modified" content="2026-05-24" />
@@ -149,7 +149,7 @@ export default function ServicesPage() {
           '@type': 'WebPage',
           '@id': 'https://ghlprime.com/services#webpage',
           url: 'https://ghlprime.com/services',
-          name: 'Hire GoHighLevel Experts — Hourly, Project or Full-Time | GHL Prime',
+          name: 'Hire GoHighLevel Experts Hourly, Project or Full-Time | GHL Prime',
           description: 'Trained GoHighLevel specialists for CRM setup, automation workflows, AI agents, vibe coding, and 24/7 white-label client support. Hire the way your agency needs.',
           inLanguage: 'en-US',
           isPartOf: { '@id': 'https://ghlprime.com/#website' },
@@ -161,18 +161,18 @@ export default function ServicesPage() {
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'ItemList',
-          name: 'GoHighLevel Expert Services — GHL Prime',
+          name: 'GoHighLevel Expert Services GHL Prime',
           description: 'Specialist GoHighLevel services for marketing agencies and SaaS founders.',
           url: 'https://ghlprime.com/services',
           numberOfItems: 8,
           itemListElement: [
             { '@type': 'ListItem', position: 1, item: { '@type': 'Service', name: 'GoHighLevel Setup & SaaS Configuration', description: 'Full GHL sub-account setup including pipelines, automations, calendars, funnels, Stripe integration, Twilio config, A2P compliance, and complete SaaS Mode white-labeling.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, areaServed: ['US', 'CA', 'GB', 'AU'], url: 'https://ghlprime.com/services#ghl-setup' } },
-            { '@type': 'ListItem', position: 2, item: { '@type': 'Service', name: 'Workflow Automation', description: 'End-to-end GHL workflow builds — lead routing, nurture sequences, appointment reminders, missed call text-back, review requests, reactivation campaigns, and onboarding automations.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#automation' } },
+            { '@type': 'ListItem', position: 2, item: { '@type': 'Service', name: 'Workflow Automation', description: 'End-to-end GHL workflow builds lead routing, nurture sequences, appointment reminders, missed call text-back, review requests, reactivation campaigns, and onboarding automations.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#automation' } },
             { '@type': 'ListItem', position: 3, item: { '@type': 'Service', name: 'AI Agents & Call Center Setup', description: 'Design and deployment of GoHighLevel Conversation AI bots, Voice AI receptionists, SimpleTalk AI agents, and VAPI voice agents for lead qualification, appointment booking, and 24/7 call handling.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#ai-agents' } },
             { '@type': 'ListItem', position: 4, item: { '@type': 'Service', name: 'White-Labeled Client Support', description: '24/7 GoHighLevel expert support delivered under your agency brand name. Covers US, UK, Canada, and Australia time zones. Clients never see the GHL Prime name.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#whitelabel' } },
             { '@type': 'ListItem', position: 5, item: { '@type': 'Service', name: 'API Integrations & Custom Connections', description: 'Connect GoHighLevel with Zapier, Slack, Stripe, Twilio, Google Workspace, custom CRMs, and any platform with an API. Custom webhook handlers and data sync scripts where native integrations do not exist.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#integrations' } },
             { '@type': 'ListItem', position: 6, item: { '@type': 'Service', name: 'Vibe Coding & Custom Development', description: 'AI-assisted custom development for features GoHighLevel cannot do natively. Custom dashboards, client portals, bespoke automation logic, and lightweight software tools built production-ready.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#vibe-coding' } },
-            { '@type': 'ListItem', position: 7, item: { '@type': 'Service', name: 'Sub-Account & SaaS Fulfillment', description: 'Behind-the-scenes support for your client sub-accounts — configuration, troubleshooting, onboarding, and ongoing management so your SaaS or agency offer stays consistent and scalable.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#saas-fulfillment' } },
+            { '@type': 'ListItem', position: 7, item: { '@type': 'Service', name: 'Sub-Account & SaaS Fulfillment', description: 'Behind-the-scenes support for your client sub-accounts configuration, troubleshooting, onboarding, and ongoing management so your SaaS or agency offer stays consistent and scalable.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#saas-fulfillment' } },
             { '@type': 'ListItem', position: 8, item: { '@type': 'Service', name: 'Training & SOP Support', description: 'System walkthrough and handoff sessions after every build. Technical deep-dive training on GHL, automations, and AI agents. SOP documentation so your team can run the system confidently.', provider: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, url: 'https://ghlprime.com/services#training' } },
           ],
         })}</script>
@@ -193,7 +193,7 @@ export default function ServicesPage() {
           <div className="services-redesign-hero-copy">
             <span className="eyebrow-label">Hire Experts</span>
             <h1>Hire the expert team your agency actually needs.</h1>
-            <p>GHL Prime gives you access to trained GoHighLevel specialists you can hire hourly, per project, or full-time — without hiring in-house, onboarding freelancers, or managing the tech yourself.</p>
+            <p>GHL Prime gives you access to trained GoHighLevel specialists you can hire hourly, per project, or full-time without hiring in-house, onboarding freelancers, or managing the tech yourself.</p>
             <div className="services-redesign-hero-pills">
               <span className="negative">No expensive hires</span>
               <span className="negative">No random freelancers</span>
@@ -270,7 +270,7 @@ export default function ServicesPage() {
             <div className="how-it-works-head">
               <span className="eyebrow-label">How it works</span>
               <h2>Four moves <span className="how-it-works-accent">from hello to handled.</span></h2>
-              <p>The whole process — what we do, when we do it, what you do instead.</p>
+              <p>The whole process what we do, when we do it, what you do instead.</p>
             </div>
             <div className="how-it-works-list">
               {steps.map((step) => (
@@ -383,7 +383,7 @@ export default function ServicesPage() {
         <div className="container">
           <div className="services-redesign-final-cta">
             <h2>Ready to hire your expert team?</h2>
-            <p>Tell us what you need — hourly, project, or full-time. We’ll match you with the right expert and get started fast.</p>
+            <p>Tell us what you need hourly, project, or full-time. We’ll match you with the right expert and get started fast.</p>
             <div className="final-cta-actions">
               <a href="https://www.upwork.com/agencies/ghlprime/" target="_blank" rel="noopener noreferrer" className="primary-pill large">Hire via Upwork</a>
               <Link to="/case-studies" className="secondary-pill">View Case Studies</Link>
@@ -397,31 +397,31 @@ export default function ServicesPage() {
           <div className="section-title">
             <span className="eyebrow-label">Inside The Team</span>
             <h2 id="day-to-day-heading">What GoHighLevel Experts Actually Do Day to Day</h2>
-            <p>A GoHighLevel expert is not just someone who can click around the platform. A trained GHL specialist understands the logic of how automations connect &mdash; how a trigger fires, how a condition routes a contact, how a workflow interacts with a pipeline stage, and how to diagnose the exact point where a lead fell through the cracks. At GHL Prime, our specialists spend their days doing things like:</p>
+            <p>A GoHighLevel expert is not just someone who can click around the platform. A trained GHL specialist understands the logic of how automations connect how a trigger fires, how a condition routes a contact, how a workflow interacts with a pipeline stage, and how to diagnose the exact point where a lead fell through the cracks. At GHL Prime, our specialists spend their days doing things like:</p>
           </div>
           <div className="services-day-to-day-grid">
             <article id="ghl-setup" className="services-day-card">
-              <h3>GHL Setup &mdash; Sub-Account Infrastructure</h3>
-              <p>Building sub-account infrastructure from scratch &mdash; configuring calendars, pipelines, custom fields, tags, triggers, and user permissions for a new agency client. Setting up Twilio for SMS, configuring A2P compliance, wiring in Stripe for payment flows.</p>
+              <h3>GHL Setup Sub-Account Infrastructure</h3>
+              <p>Building sub-account infrastructure from scratch configuring calendars, pipelines, custom fields, tags, triggers, and user permissions for a new agency client. Setting up Twilio for SMS, configuring A2P compliance, wiring in Stripe for payment flows.</p>
             </article>
             <article id="automation" className="services-day-card">
-              <h3>Automation &mdash; Auditing &amp; Fixing Broken Workflows</h3>
-              <p>Auditing broken automations &mdash; following the logic of a workflow that is silently failing, identifying the condition that is never evaluating to true, fixing it, and documenting what changed so it never breaks the same way again.</p>
+              <h3>Automation Auditing &amp; Fixing Broken Workflows</h3>
+              <p>Auditing broken automations following the logic of a workflow that is silently failing, identifying the condition that is never evaluating to true, fixing it, and documenting what changed so it never breaks the same way again.</p>
             </article>
             <article id="ai-agents" className="services-day-card">
-              <h3>AI Agents &mdash; Prompting, Testing, Deploying</h3>
+              <h3>AI Agents Prompting, Testing, Deploying</h3>
               <p>Prompting, testing, and refining conversational AI flows inside GoHighLevel&apos;s AI Employee module, or connecting external AI APIs to GHL via webhook and custom code to build more sophisticated agents than the native module supports.</p>
             </article>
             <article id="training" className="services-day-card">
-              <h3>Training &amp; SOPs &mdash; Snapshots and Documentation</h3>
+              <h3>Training &amp; SOPs Snapshots and Documentation</h3>
               <p>Packaging a complete sub-account configuration (workflows, pipelines, funnels, settings, forms) into a deployable snapshot so an agency can onboard a new client in twenty minutes instead of twenty hours. Documenting SOPs so your team can run the system confidently.</p>
             </article>
             <article id="whitelabel" className="services-day-card">
-              <h3>Whitelabel &mdash; 24/7 Client Support</h3>
+              <h3>Whitelabel 24/7 Client Support</h3>
               <p>Responding to GoHighLevel support tickets submitted by your clients, under your brand name, within your SLA, using your communication tone. Your clients never know we are involved.</p>
             </article>
             <article id="vibe-coding" className="services-day-card">
-              <h3>Vibe Coding &mdash; Writing Custom Code</h3>
+              <h3>Vibe Coding Writing Custom Code</h3>
               <p>When GoHighLevel cannot do something natively, writing lightweight JavaScript, TypeScript, or Python to build around the limitation. Custom webhook handlers, data transformation logic, third-party sync scripts, and mini-applications.</p>
             </article>
           </div>

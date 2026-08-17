@@ -50,14 +50,14 @@ export default function CertificationsSection() {
         <div className="section-title centered certifications-title">
           <span className="eyebrow-label">Certifications</span>
           <h2 className="certifications-single-line">Certified Across Every Major GHL Specialty</h2>
-          <p>Every badge below is an official GoHighLevel certification — earned by our team, not just claimed.</p>
+          <p>Every badge below is an official GoHighLevel certification earned by our team, not just claimed.</p>
         </div>
 
         <motion.div className="certifications-featured-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45 }}>
           <img src="https://directory.gohighlevel.com/objects/uploads/284cf43c-3358-4259-8aee-6e43855333a6" alt="Certified Admin Badge" className="certifications-featured-badge" loading="lazy" decoding="async" />
           <div>
             <strong>Certified Admin</strong>
-            <p>Highest-level GHL certification — full platform mastery</p>
+            <p>Highest-level GHL certification full platform mastery</p>
           </div>
         </motion.div>
 

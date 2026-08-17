@@ -74,7 +74,7 @@ const Q = {
   situation: {
     label: 'Where are you right now with GoHighLevel?',
     options: [
-      'Just getting started — need a full setup',
+      'Just getting started need a full setup',
       'Already have GHL but not using it properly',
       'Need to migrate from another CRM',
       'Set up but automations are broken or incomplete',
@@ -209,17 +209,17 @@ export default function ContactPage() {
   return (
     <main className="contact-page">
       <Helmet>
-        <title>Contact GHL Prime — Hire a GoHighLevel Expert Team</title>
+        <title>Contact GHL Prime Hire a GoHighLevel Expert Team</title>
         <meta name="description" content="Contact GHL Prime to hire a dedicated GoHighLevel expert for CRM setup, automation, AI agents, and white-label support. Based in Albuquerque, NM." />
         <meta name="keywords" content="contact GHL Prime, hire GoHighLevel expert, GoHighLevel agency contact, GoHighLevel support" />
         <link rel="canonical" href="https://ghlprime.com/contact" />
-        <meta property="og:title" content="Contact GHL Prime — Hire a GoHighLevel Expert Team" />
+        <meta property="og:title" content="Contact GHL Prime Hire a GoHighLevel Expert Team" />
         <meta property="og:description" content="Contact GHL Prime to hire a dedicated GoHighLevel expert for CRM setup, automation, AI agents, and white-label support. Based in Albuquerque, NM." />
         <meta property="og:url" content="https://ghlprime.com/contact" />
         <meta property="og:image" content="https://ghlprime.com/og-contact.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:image" content="https://ghlprime.com/og-contact.png" />
-        <meta name="twitter:title" content="Contact GHL Prime — Hire a GoHighLevel Expert Team" />
+        <meta name="twitter:title" content="Contact GHL Prime Hire a GoHighLevel Expert Team" />
         <meta name="twitter:description" content="Contact GHL Prime to hire a dedicated GoHighLevel expert for CRM setup, automation, AI agents, and white-label support. Based in Albuquerque, NM." />
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
@@ -252,7 +252,7 @@ export default function ContactPage() {
           '@type': 'ContactPage',
           '@id': 'https://ghlprime.com/contact#webpage',
           url: 'https://ghlprime.com/contact',
-          name: 'Contact GHL Prime — Talk to a GoHighLevel Expert',
+          name: 'Contact GHL Prime Talk to a GoHighLevel Expert',
           description: 'Reach the GHL Prime team in Albuquerque, NM. Book a free discovery call, email info@ghlprime.com, or hire us directly on Upwork. Same-day reply guaranteed.',
           inLanguage: 'en-US',
           isPartOf: { '@id': 'https://ghlprime.com/#website' },
@@ -293,8 +293,8 @@ export default function ContactPage() {
         <div className="container contact-page-grid contact-page-grid-embed">
           <div className="contact-page-copy">
             <span className="eyebrow-label">Contact</span>
-            <h1>Tell us about your GHL setup — get a free consultation.</h1>
-            <p>A few quick questions so we know exactly how to help. Takes under a minute — no sales pitch.</p>
+            <h1>Tell us about your GHL setup get a free consultation.</h1>
+            <p>A few quick questions so we know exactly how to help. Takes under a minute no sales pitch.</p>
             <address style={{ fontStyle: 'normal', lineHeight: 1.7 }}>
               GHL Prime LLC<br />
               4801 Lang Ave NE, Suite 110<br />
@@ -333,7 +333,7 @@ export default function ContactPage() {
               <div className="contact-survey-form" onKeyDown={blockEnter}>
                 {step === 1 && (
                   <fieldset className="contact-survey-fieldset">
-                    <legend className="contact-survey-heading">Step 1 — Who are you?</legend>
+                    <legend className="contact-survey-heading">Step 1 Who are you?</legend>
                     <label className="contact-survey-field">
                       <span>Your name <em className="contact-survey-required">*</em></span>
                       <input type="text" required value={form.name} onChange={(e) => update('name', e.target.value)} autoComplete="name" />
@@ -378,14 +378,14 @@ export default function ContactPage() {
 
                 {step === 2 && (
                   <fieldset className="contact-survey-fieldset">
-                    <legend className="contact-survey-heading">Step 2 — Your current GHL situation</legend>
+                    <legend className="contact-survey-heading">Step 2 Your current GHL situation</legend>
                     <RadioGroup name="situation" question={Q.situation} value={form.situation} onChange={(v) => update('situation', v)} />
                   </fieldset>
                 )}
 
                 {step === 3 && (
                   <fieldset className="contact-survey-fieldset">
-                    <legend className="contact-survey-heading">Step 3 — Scope & timeline</legend>
+                    <legend className="contact-survey-heading">Step 3 Scope & timeline</legend>
                     <RadioGroup name="clients" question={Q.clients} value={form.clients} onChange={(v) => update('clients', v)} />
                     <RadioGroup name="budget" question={Q.budget} value={form.budget} onChange={(v) => update('budget', v)} />
                     <RadioGroup name="timeline" question={Q.timeline} value={form.timeline} onChange={(v) => update('timeline', v)} />
@@ -394,7 +394,7 @@ export default function ContactPage() {
 
                 {step === 4 && (
                   <fieldset className="contact-survey-fieldset">
-                    <legend className="contact-survey-heading">Step 4 — Anything else?</legend>
+                    <legend className="contact-survey-heading">Step 4 Anything else?</legend>
                     <label className="contact-survey-field">
                       <span>Briefly describe your biggest challenge right now <em>(optional)</em></span>
                       <textarea

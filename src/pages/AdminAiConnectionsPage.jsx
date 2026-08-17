@@ -27,7 +27,7 @@ import {
 } from '../lib/aiConnectionsApi'
 import '../styles/admin-extras.css'
 
-// AI Connections — every Claude/Codex account-connection concern lives here
+// AI Connections every Claude/Codex account-connection concern lives here
 // now, split off of AdminBlogAiPage.jsx (which keeps only the blog-writing
 // settings, Run Now, and Recent Runs) per the customer's "can we put this
 // under a different menu, maybe in settings?" request.
@@ -46,9 +46,9 @@ const CONNECT_POLL_INTERVAL_MS = 1500
 // `--model` entirely so the CLI/plan picks its own default.
 const CLAUDE_MODEL_OPTIONS = [
   { value: '', label: 'Default (let the plan choose)' },
-  { value: 'sonnet', label: 'Sonnet — fast, balanced (recommended)' },
-  { value: 'opus', label: 'Opus — most capable, best for complex posts' },
-  { value: 'haiku', label: 'Haiku — fastest and cheapest' },
+  { value: 'sonnet', label: 'Sonnet fast, balanced (recommended)' },
+  { value: 'opus', label: 'Opus most capable, best for complex posts' },
+  { value: 'haiku', label: 'Haiku fastest and cheapest' },
 ]
 
 function mapSettingsToClaudeForm(settings) {
@@ -67,9 +67,9 @@ function mapSettingsToCodexForm(settings) {
 }
 
 function formatDateTime(iso) {
-  if (!iso) return '—'
+  if (!iso) return ''
   const date = new Date(iso)
-  if (Number.isNaN(date.getTime())) return '—'
+  if (Number.isNaN(date.getTime())) return ''
   return date.toLocaleString('en-US', {
     year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
   })
@@ -94,7 +94,7 @@ function TestResultNote({ result }) {
   const { ok, message } = result.data
   return (
     <span className="char-counter" style={{ color: ok ? '#8df0c7' : '#ffb0b0' }}>
-      {ok ? 'OK' : 'Failed'}{message ? ` — ${message}` : ''}
+      {ok ? 'OK' : 'Failed'}{message ? ` ${message}` : ''}
     </span>
   )
 }
@@ -163,7 +163,7 @@ export default function AdminAiConnectionsPage() {
     return () => clearInterval(interval)
   }, [claudeConnect.sessionId, claudeConnect.status])
 
-  // Same idea for the Codex device-auth session — no code to submit back,
+  // Same idea for the Codex device-auth session no code to submit back,
   // just poll until it resolves on its own.
   useEffect(() => {
     if (!codexConnect.sessionId) return undefined
@@ -450,7 +450,7 @@ export default function AdminAiConnectionsPage() {
         <div>
           <span className="auth-kicker"><Plug size={16} /> AI Connections</span>
           <h1>Connect and manage the Claude / Codex logins Auto Blog writes with.</h1>
-          <p>Blog-writing settings live on the Auto Blog page — this page is only about connecting and testing accounts.</p>
+          <p>Blog-writing settings live on the Auto Blog page this page is only about connecting and testing accounts.</p>
         </div>
         <div className="admin-top-actions">
           <Link to="/admin/blog-ai" className="secondary-pill">Auto Blog</Link>
@@ -464,7 +464,7 @@ export default function AdminAiConnectionsPage() {
           <h2>Claude connector</h2>
         </div>
         <p className="admin-empty-note">
-          No primary account — connect one or more Claude accounts and the system uses them all equally, one after
+          No primary account connect one or more Claude accounts and the system uses them all equally, one after
           another (serial rotation), moving to the next whenever one is busy or hits its limit.
         </p>
 
@@ -485,7 +485,7 @@ export default function AdminAiConnectionsPage() {
         <div className="connector-howto-box">
           <strong>How to connect an account</strong>
           <ul>
-            <li>Easiest: click Connect in browser below, sign into the account, approve, and paste the code back — nothing to install.</li>
+            <li>Easiest: click Connect in browser below, sign into the account, approve, and paste the code back nothing to install.</li>
             <li>Or on any computer run <code>claude setup-token</code> logged into that account, copy the token, and paste it in the token box.</li>
             <li>
               Accounts are used in rotation; a failing or exhausted account is parked in cooldown for about 20
@@ -498,7 +498,7 @@ export default function AdminAiConnectionsPage() {
         <div className="admin-card-head admin-section-head connector-accounts-head">
           <div>
             <h2>Claude accounts</h2>
-            <span className="admin-list-meta">every account is used in turn — the system auto-switches when one hits its limit</span>
+            <span className="admin-list-meta">every account is used in turn the system auto-switches when one hits its limit</span>
           </div>
           <button type="button" className="team-edit-btn" onClick={handleTestAllAccounts} disabled={testingAll}>
             {testingAll ? <><Loader2 size={14} className="admin-spin" /> Testing all...</> : <><RefreshCw size={14} /> Test all (say hi)</>}
@@ -594,7 +594,7 @@ export default function AdminAiConnectionsPage() {
           <div className="connector-advanced-body connector-advanced-apikey">
             <p className="admin-empty-note">
               Every account above uses your Claude Code subscription login. This is an additional, opt-in path for
-              an account authenticated with a plain <strong>Anthropic API key</strong> instead — not a Claude Code
+              an account authenticated with a plain <strong>Anthropic API key</strong> instead not a Claude Code
               token.
             </p>
             <form className="connector-inline-row connector-inline-row-muted" onSubmit={handleAddApiKeyAccount}>
@@ -686,7 +686,7 @@ export default function AdminAiConnectionsPage() {
 
           {claudeConnect.status === 'success' ? (
             <>
-              <p className="form-status">Connected — account added.</p>
+              <p className="form-status">Connected account added.</p>
               <div className="team-edit-actions admin-form-actions">
                 <button type="button" className="primary-pill large auth-submit" onClick={handleCloseClaudeConnectModal}>
                   Done
@@ -726,7 +726,7 @@ export default function AdminAiConnectionsPage() {
               <span>Enable Codex as a fallback</span>
             </label>
             <p className="admin-empty-note">
-              Codex uses a single ambient <code>codex login --device-auth</code> session — there&rsquo;s no per-account
+              Codex uses a single ambient <code>codex login --device-auth</code> session there&rsquo;s no per-account
               token to paste here. Connect from this browser below, or run <code>codex login --device-auth</code> over
               SSH yourself. Use Test Connection to check whether the login is still valid.
             </p>
@@ -744,7 +744,7 @@ export default function AdminAiConnectionsPage() {
 
         <p className="admin-empty-note">
           <strong>Connect from this browser:</strong> sign in with your ChatGPT plan using a one-time code. No SSH,
-          and nothing to paste back — approve it in your browser and this page notices on its own.
+          and nothing to paste back approve it in your browser and this page notices on its own.
         </p>
         <div className="admin-study-actions">
           <button type="button" className="admin-add-trigger" onClick={handleStartCodexConnect}>

@@ -14,18 +14,18 @@ function findSeededStudy(slug) {
 const CASE_STUDY_META = {
   'monkeyman-tree-service-automation': {
     title: 'Voice AI Case Study: Monkeyman Tree Service | GHL Prime',
-    description: 'How GHL Prime deployed a 24/7 Voice AI agent and GoHighLevel automation for Monkeyman Tree Service — stopping missed calls and capturing thousands in lost revenue.',
+    description: 'How GHL Prime deployed a 24/7 Voice AI agent and GoHighLevel automation for Monkeyman Tree Service stopping missed calls and capturing thousands in lost revenue.',
     canonical: 'https://ghlprime.com/case-studies/monkeyman-tree-service-automation',
     image: 'https://ghlprime.com/og-cs-monkeyman.png',
   },
   'b2b-saas-onboarding-n8n': {
-    title: 'SaaS Onboarding Automation via n8n — Case Study | GHL Prime',
+    title: 'SaaS Onboarding Automation via n8n Case Study | GHL Prime',
     description: 'How we used n8n to untangle a broken SaaS onboarding flow, delivering a frictionless automated experience that eliminated churn at the point of activation.',
     canonical: 'https://ghlprime.com/case-studies/b2b-saas-onboarding-n8n',
     image: 'https://ghlprime.com/og-cs-saas-onboarding.png',
   },
   'hvac-voice-ai-dispatch-automation': {
-    title: 'HVAC Voice AI & Dispatch Automation — Case Study | GHL Prime',
+    title: 'HVAC Voice AI & Dispatch Automation Case Study | GHL Prime',
     description: 'How a 24/7 Voice AI agent bridged the gap between off-hours HVAC emergencies and morning dispatch, capturing thousands in previously lost revenue.',
     canonical: 'https://ghlprime.com/case-studies/hvac-voice-ai-dispatch-automation',
     image: 'https://ghlprime.com/og-cs-hvac.png',
@@ -37,20 +37,20 @@ const CASE_STUDY_META = {
     image: 'https://ghlprime.com/og-cs-re-qualification.png',
   },
   'ai-ghostwriting-style-replication': {
-    title: 'AI Content Generation & Style Replication — Case Study | GHL Prime',
+    title: 'AI Content Generation & Style Replication Case Study | GHL Prime',
     description: 'An advanced Make.com pipeline that analyzes existing articles to extract a style guide, then uses AI to generate perfectly on-brand drafts at scale.',
     canonical: 'https://ghlprime.com/case-studies/ai-ghostwriting-style-replication',
     image: 'https://ghlprime.com/og-cs-ghostwriting.png',
   },
   'ai-data-enrichment-pipeline': {
     title: 'AI Company Data Enrichment Pipeline (n8n) | GHL Prime',
-    description: 'An automated n8n pipeline that enriches company records from Google Sheets — finding verified Facebook pages using an AI agent with confidence scoring.',
+    description: 'An automated n8n pipeline that enriches company records from Google Sheets finding verified Facebook pages using an AI agent with confidence scoring.',
     canonical: 'https://ghlprime.com/case-studies/ai-data-enrichment-pipeline',
     image: 'https://ghlprime.com/og-cs-enrichment.png',
   },
   'automated-real-estate-lead-pipeline': {
     title: 'Automated Real Estate Lead Generation Pipeline | GHL Prime',
-    description: 'An n8n workflow that scrapes Propwire for new listings, filters for first-time appearances, and syncs fresh leads to Google Sheets — fully hands-free.',
+    description: 'An n8n workflow that scrapes Propwire for new listings, filters for first-time appearances, and syncs fresh leads to Google Sheets fully hands-free.',
     canonical: 'https://ghlprime.com/case-studies/automated-real-estate-lead-pipeline',
     image: 'https://ghlprime.com/og-cs-leadpipeline.png',
   },
@@ -62,31 +62,31 @@ const CASE_STUDY_META = {
   },
   'automated-pdf-generation': {
     title: 'Automated PDF Application Generator (Veritas Pathways) | GHL Prime',
-    description: 'An n8n workflow that captures student application data, generates branded HTML documents, converts to PDF, and emails to admissions — zero manual work.',
+    description: 'An n8n workflow that captures student application data, generates branded HTML documents, converts to PDF, and emails to admissions zero manual work.',
     canonical: 'https://ghlprime.com/case-studies/automated-pdf-generation',
     image: 'https://ghlprime.com/og-cs-pdf.png',
   },
   'stateless-ai-internal-operations': {
     title: 'Stateless AI Assistant for Internal Operations | GHL Prime',
-    description: 'An internal AI assistant with forced live data tool calls and strict ID-resolution protocols — delivering accurate, secure natural-language access to company data.',
+    description: 'An internal AI assistant with forced live data tool calls and strict ID-resolution protocols delivering accurate, secure natural-language access to company data.',
     canonical: 'https://ghlprime.com/case-studies/stateless-ai-internal-operations',
     image: 'https://ghlprime.com/og-cs-stateless.png',
   },
   'ai-support-dynamic-verification': {
     title: 'AI Customer Support with OTP Verification (OptimalMD) | GHL Prime',
-    description: 'A dual-mode AI support agent with secure OTP authentication — general info for guests and personalized automated actions for verified users.',
+    description: 'A dual-mode AI support agent with secure OTP authentication general info for guests and personalized automated actions for verified users.',
     canonical: 'https://ghlprime.com/case-studies/ai-support-dynamic-verification',
     image: 'https://ghlprime.com/og-cs-optimalmd.png',
   },
   'gohighlevel-and-cinc-ai-agent-integration': {
     title: 'GoHighLevel + CINC AI Agent Integration | GHL Prime',
-    description: 'Connecting GoHighLevel with CINC to create a fully automated real estate pipeline — AI qualification, instant GHL sync, and 80% accuracy rate on lead routing.',
+    description: 'Connecting GoHighLevel with CINC to create a fully automated real estate pipeline AI qualification, instant GHL sync, and 80% accuracy rate on lead routing.',
     canonical: 'https://ghlprime.com/case-studies/gohighlevel-and-cinc-ai-agent-integration',
     image: 'https://ghlprime.com/og-cs-cinc.png',
   },
   'property-developer-ghl-nurture-automation': {
     title: 'Property Developer Lead Nurture Automation | GHL Prime',
-    description: 'How a mid-sized development firm stopped losing after-hours inquiries with a custom GoHighLevel nurture sequence — a 40% lift in lead conversion in 90 days.',
+    description: 'How a mid-sized development firm stopped losing after-hours inquiries with a custom GoHighLevel nurture sequence a 40% lift in lead conversion in 90 days.',
     canonical: 'https://ghlprime.com/case-studies/property-developer-ghl-nurture-automation',
     image: 'https://ghlprime.com/ghl-prime-logo.png',
   },
@@ -101,7 +101,7 @@ export default function ClientStudyDetailPage() {
 
   // Re-seed synchronously during render when the slug changes (SPA navigation)
   // so real snapshot content is present on the first frame. This is React's
-  // documented "adjust state while rendering" pattern — it never wipes a
+  // documented "adjust state while rendering" pattern it never wipes a
   // snapshot match to a loading/empty state.
   const [renderedSlug, setRenderedSlug] = useState(slug)
   if (renderedSlug !== slug) {
@@ -113,7 +113,7 @@ export default function ClientStudyDetailPage() {
     if (slug && CASE_STUDY_META[slug]) return CASE_STUDY_META[slug]
     if (study && slug) {
       const canonical = `https://ghlprime.com/case-studies/${slug}`
-      const baseTitle = study.title ? `${study.title} — GoHighLevel Case Study | GHL Prime` : 'Case Study | GHL Prime'
+      const baseTitle = study.title ? `${study.title} GoHighLevel Case Study | GHL Prime` : 'Case Study | GHL Prime'
       const baseDescription = study.excerpt || study.challenge || 'Real GoHighLevel implementation built by GHL Prime.'
       return { title: baseTitle, description: baseDescription, canonical }
     }
@@ -176,7 +176,7 @@ export default function ClientStudyDetailPage() {
           {meta ? <link rel="canonical" href={meta.canonical} /> : null}
         </Helmet>
         <div className="container client-study-notfound">
-          <span className="eyebrow-label">404 — Case Study</span>
+          <span className="eyebrow-label">404 Case Study</span>
           <h1>Case study not found</h1>
           <p className="client-study-notfound-intro">
             The case study you're looking for doesn't exist, may have been moved, or isn't
@@ -357,7 +357,7 @@ export default function ClientStudyDetailPage() {
 
         <section className="client-study-closing-cta" aria-labelledby="closing-cta-heading">
           <h2 id="closing-cta-heading">Want a system like this in your agency?</h2>
-          <p>If this is the kind of build your operation is missing, GHL Prime can scope and ship something similar for your team in 1&ndash;2 weeks. No long sales cycle &mdash; just a short scoping call and a clear plan.</p>
+          <p>If this is the kind of build your operation is missing, GHL Prime can scope and ship something similar for your team in 1&ndash;2 weeks. No long sales cycle just a short scoping call and a clear plan.</p>
           <div className="client-study-closing-cta-actions">
             <Link to="/booking" className="primary-pill large">Get a free consultation</Link>
             <Link to="/case-studies" className="secondary-pill">See more case studies</Link>

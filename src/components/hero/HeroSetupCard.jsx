@@ -99,7 +99,7 @@ export default function HeroSetupCard() {
           <span className="hsetup-progress-label">5 of 8 complete</span>
         </div>
         <div className="hsetup-footer-right">
-          <span className="hsetup-cert-text">GHL Prime — Certified Setup</span>
+          <span className="hsetup-cert-text">GHL Prime Certified Setup</span>
           <svg className="hsetup-cert-badge" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path
               d="M12 2l2.39 1.74 2.95-.02 1.16 2.71 2.71 1.16-.02 2.95L23 12l-1.74 2.39.02 2.95-2.71 1.16-1.16 2.71-2.95-.02L12 22l-2.39-1.74-2.95.02-1.16-2.71L2.79 16.4l.02-2.95L1 12l1.81-2.45-.02-2.95 2.71-1.16 1.16-2.71 2.95.02L12 2z"

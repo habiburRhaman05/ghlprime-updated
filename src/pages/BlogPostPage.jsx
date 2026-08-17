@@ -27,7 +27,7 @@ export default function BlogPostPage() {
 
   // Re-seed synchronously during render when the slug changes (SPA navigation)
   // so real snapshot content is present on the first frame. This is React's
-  // documented "adjust state while rendering" pattern — it never wipes a
+  // documented "adjust state while rendering" pattern it never wipes a
   // snapshot match to a loading/empty state.
   const [renderedSlug, setRenderedSlug] = useState(slug)
   if (renderedSlug !== slug) {
@@ -94,7 +94,7 @@ export default function BlogPostPage() {
           <meta name="robots" content="noindex, follow" />
         </Helmet>
         <div className="container client-study-notfound">
-          <span className="eyebrow-label">404 — Blog</span>
+          <span className="eyebrow-label">404 Blog</span>
           <h1>Post not found</h1>
           <p className="client-study-notfound-intro">
             The blog post you're looking for doesn't exist, may have been moved, or isn't

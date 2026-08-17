@@ -353,7 +353,7 @@ function SupportDesk() {
       <div className="wsd" role="img" aria-label="White-label support inbox branded as YourBrand Support, resolving GoHighLevel tickets fast while GHL Prime stays invisible">
         <div className="wsd-head">
           <div className="wsd-brand"><span className="wsd-avatar">Y</span><span className="wsd-brand-name">YourBrand Support</span></div>
-          <div className="wsd-status"><span className="wsd-online" /> Online — 3 agents active</div>
+          <div className="wsd-status"><span className="wsd-online" /> Online 3 agents active</div>
         </div>
         <div className="wsd-list">
           {WSD_TICKETS.map((t) => (
@@ -372,7 +372,7 @@ function SupportDesk() {
           <span>Avg response: 47 min</span><span>Resolved today: 23</span><span>CSAT: 98%</span><span>Agents: 3 online</span>
         </div>
       </div>
-      <p className="wsd-annot">↑ Your clients see your brand name here — never GHL Prime</p>
+      <p className="wsd-annot">↑ Your clients see your brand name here never GHL Prime</p>
     </div>
   )
 }

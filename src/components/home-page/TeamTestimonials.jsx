@@ -98,7 +98,7 @@ import './team-testimonials.css'
 // Slot pitch = face size + gap. Kept in JS as the single source of truth and
 // pushed into CSS as custom properties, so the drag math and the layout can
 // never drift apart.
-const PITCH_V = 168
+const PITCH_V = 184
 const PITCH_H = 150
 const VISIBLE = 3
 
@@ -275,12 +275,7 @@ export default function TeamTestimonials({ testimonials = TESTIMONIALS, autoPlay
           <p>The people building GHL Prime, in their own words.</p>
         </motion.div>
 
-        {/* Pause-on-hover lives on the stage, NOT the section: the section is
-            a full-bleed band, so hovering it meant "cursor anywhere on screen
-            while this is scrolled into view", which left autoplay paused
-            almost permanently. The stage is the actual content -- rail, quote
-            and arrows -- so pausing there still does what it's meant to
-            (don't advance mid-read) without swallowing the whole page. */}
+    
         <div
           className="tt-stage"
           onMouseEnter={() => setPaused(true)}

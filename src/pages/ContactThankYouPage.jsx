@@ -17,7 +17,7 @@ export default function ContactThankYouPage() {
           <div className="contact-thank-you-card">
             <div className="contact-thank-you-icon"><CheckCircle2 size={30} /></div>
             <span className="eyebrow-label contact-thank-you-eyebrow"><Sparkles size={14} /> Inquiry Sent</span>
-            <h1>Thank you — we received your message.</h1>
+            <h1>Thank you we received your message.</h1>
             <p>Our team will review your inquiry and get back to you soon with the next best step.</p>
             <div className="contact-thank-you-actions">
               <Link to="/" className="primary-pill large">Back to Home</Link>

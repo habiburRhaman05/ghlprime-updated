@@ -131,19 +131,19 @@ export default function BlogIndexPage() {
   return (
     <main className="blog-index-page">
       <Helmet>
-        <title>GoHighLevel Blog — Tips, Guides &amp; Case Studies | GHL Prime</title>
+        <title>GoHighLevel Blog Tips, Guides &amp; Case Studies | GHL Prime</title>
         <meta name="description" content="Expert GoHighLevel tutorials, automation guides, AI agent setup walkthroughs, and GHL case studies from the GHL Prime team." />
         <meta name="keywords" content="GoHighLevel blog, GoHighLevel tutorials, GHL automation guides, AI agent guides, GoHighLevel tips, white-label CRM blog" />
         <link rel="canonical" href="https://ghlprime.com/blog" />
         <meta name="last-modified" content="2026-05-24" />
         {normalizedQuery ? <meta name="robots" content="noindex,follow" /> : null}
-        <meta property="og:title" content="GoHighLevel Blog — Tips, Guides & Case Studies | GHL Prime" />
+        <meta property="og:title" content="GoHighLevel Blog Tips, Guides & Case Studies | GHL Prime" />
         <meta property="og:description" content="Expert GoHighLevel tutorials, automation guides, AI agent setup walkthroughs, and GHL case studies from the GHL Prime team." />
         <meta property="og:url" content="https://ghlprime.com/blog" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://ghlprime.com/og-blog.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="GoHighLevel Blog — Tips, Guides & Case Studies | GHL Prime" />
+        <meta name="twitter:title" content="GoHighLevel Blog Tips, Guides & Case Studies | GHL Prime" />
         <meta name="twitter:description" content="Expert GoHighLevel tutorials, automation guides, AI agent setup walkthroughs, and GHL case studies from the GHL Prime team." />
         <meta name="twitter:image" content="https://ghlprime.com/og-blog.png" />
         <script type="application/ld+json">{JSON.stringify({
@@ -173,7 +173,7 @@ export default function BlogIndexPage() {
             <h1>GoHighLevel Insights &amp; Guides</h1>
             <p className="blog-hero-intro">
               Tutorials, automation playbooks, AI agent walkthroughs, and real GoHighLevel case
-              studies from the GHL Prime team — written to help agencies build faster and scale.
+              studies from the GHL Prime team written to help agencies build faster and scale.
             </p>
             {!loading ? (
               <p className="blog-post-count">

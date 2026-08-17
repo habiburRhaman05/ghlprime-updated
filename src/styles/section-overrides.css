@@ -54,6 +54,12 @@
 .modern-solution-stack-card .solution-copy {
   display: block;
   width: 100%;
+  /* The base .solution-copy caps the block at 32rem and centres it with
+     auto margins, which on the wide cards (span 3) pushes the copy off
+     the left edge. Clear both so every card's title/body lines up with
+     its icon; the card padding keeps the global spacing. */
+  max-width: none;
+  margin: 0;
 }
 .modern-solution-stack-card .solution-copy h3 {
   margin: 0 0 .6rem;
@@ -855,24 +861,35 @@
 }
 .case-studies-reference-head {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
 .case-studies-reference-copy h2 {
   margin: 0;
-  font-size: clamp(2.45rem, 4.2vw, 3.8rem);
-  line-height: .98;
-  letter-spacing: -0.08em;
+  font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
   color: #10253f;
-  max-width: 8.5ch;
+  white-space: nowrap;
 }
 .case-studies-reference-copy h2 span {
   color: #2678e8;
 }
+.case-studies-reference-copy p {
+  margin: .85rem auto 0;
+  max-width: 46rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #607895;
+}
 .case-studies-reference-cta {
+  display: flex;
+  width: fit-content;
   min-width: 15rem;
+  margin: 2rem auto 0;
   background: rgba(255,255,255,.92);
 }
 .case-studies-reference-grid {
@@ -966,7 +983,7 @@
   }
   .case-studies-reference-head {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
   .modern-solution-stack-card:nth-child(-n+3),
   .modern-solution-stack-card.wide { grid-column: span 1; }

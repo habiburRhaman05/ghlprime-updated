@@ -8,7 +8,7 @@ import '../styles/admin-extras.css'
 
 // Blog-writing settings + Run Now + Recent Runs only. The Claude/Codex
 // account-connection UI (accounts list, "connect in browser" flows, Codex
-// panel) lives on its own page now — see AdminAiConnectionsPage.jsx — since
+// panel) lives on its own page now see AdminAiConnectionsPage.jsx since
 // the customer asked for the two concerns to be split apart.
 
 const initialSettingsForm = {
@@ -32,9 +32,9 @@ function mapSettingsToForm(settings) {
 }
 
 function formatDateTime(iso) {
-  if (!iso) return '—'
+  if (!iso) return ''
   const date = new Date(iso)
-  if (Number.isNaN(date.getTime())) return '—'
+  if (Number.isNaN(date.getTime())) return ''
   return date.toLocaleString('en-US', {
     year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
   })
@@ -117,7 +117,7 @@ export default function AdminBlogAiPage() {
     }
 
     if (data.success) {
-      setStatus({ type: 'status', message: `Generated "${data.post?.title}" — saved as ${data.post?.published ? 'published' : 'a draft'}.` })
+      setStatus({ type: 'status', message: `Generated "${data.post?.title}" saved as ${data.post?.published ? 'published' : 'a draft'}.` })
     } else {
       setStatus({ type: 'error', message: data.error || 'Run failed' })
     }
@@ -148,7 +148,7 @@ export default function AdminBlogAiPage() {
       <form className="admin-form-card futuristic-card refined-admin-card" onSubmit={handleSaveSettings}>
         <div className="admin-card-head">
           <h2>Generation Settings</h2>
-          <span>Shared by every run — manual or scheduled</span>
+          <span>Shared by every run manual or scheduled</span>
         </div>
 
         <div className="admin-form-grid">
@@ -174,7 +174,7 @@ export default function AdminBlogAiPage() {
             <span>Advanced instructions</span>
             <textarea
               rows="4"
-              placeholder="Anything else to steer the model — internal linking rules, formatting preferences, topics to avoid, etc."
+              placeholder="Anything else to steer the model internal linking rules, formatting preferences, topics to avoid, etc."
               value={settingsForm.advanced_instructions}
               onChange={(event) => setSettingsForm((current) => ({ ...current, advanced_instructions: event.target.value }))}
             />
@@ -214,7 +214,7 @@ export default function AdminBlogAiPage() {
             <p className="admin-empty-note">
               {settingsForm.auto_publish
                 ? 'On: new posts publish automatically as soon as they generate.'
-                : 'Off (default): new posts save as drafts for review in the Blog Library — nothing goes live automatically.'}
+                : 'Off (default): new posts save as drafts for review in the Blog Library nothing goes live automatically.'}
             </p>
           </div>
         </div>
@@ -246,7 +246,7 @@ export default function AdminBlogAiPage() {
                 <tr key={run.id}>
                   <td>{formatDateTime(run.started_at)}</td>
                   <td><RunStatusBadge status={run.status} /></td>
-                  <td>{run.provider || '—'}{run.account_label ? ` · ${run.account_label}` : ''}</td>
+                  <td>{run.provider || ''}{run.account_label ? ` · ${run.account_label}` : ''}</td>
                   <td>
                     {run.blog_post_id && run.blog_post_published ? (
                       <Link to={`/blog/${run.blog_post_slug}`} className="text-link admin-open-link">
@@ -254,10 +254,10 @@ export default function AdminBlogAiPage() {
                       </Link>
                     ) : run.blog_post_id ? (
                       <Link to="/admin/blog" className="text-link admin-open-link">
-                        {run.blog_post_title || 'Draft saved'} (draft — review in Blog Library)
+                        {run.blog_post_title || 'Draft saved'} (draft review in Blog Library)
                       </Link>
                     ) : (
-                      <span style={{ color: run.error ? '#ffb0b0' : undefined }}>{run.error || '—'}</span>
+                      <span style={{ color: run.error ? '#ffb0b0' : undefined }}>{run.error || ''}</span>
                     )}
                   </td>
                 </tr>

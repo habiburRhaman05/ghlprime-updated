@@ -481,7 +481,7 @@ button { font: inherit; }
 .section { padding: 5.5rem 0; }
 .section-white { background: #fff; }
 .section-dark { background: radial-gradient(circle at top, rgba(32, 89, 160, 0.48), rgba(15, 31, 51, 0.98) 36%, #0b1f35 100%); }
-.section-title { max-width: 50rem; margin-bottom: 2rem; }
+.section-title { max-width: 52rem; margin-bottom: 2rem; }
 .section-title.centered { margin-inline: auto; text-align: center; }
 .section-title.light h2, .section-title.light p, .section-title.light .eyebrow-label { color: #f8fbff; }
 .eyebrow-label {
@@ -809,7 +809,7 @@ button { font: inherit; }
   position: absolute;
   left: 0;
   right: 0;
-  bottom: .95rem;
+  bottom: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -888,7 +888,7 @@ button { font: inherit; }
 }
 
 @media (max-width: 560px) {
-  .wwa-dots { bottom: .7rem; }
+  .wwa-dots { bottom: 7px; }
   .wwa-dot.is-active { width: 1.2rem; }
   .wwa-arrow { width: 2rem; height: 2rem; bottom: .6rem; }
   .wwa-arrow.prev { left: .6rem; }

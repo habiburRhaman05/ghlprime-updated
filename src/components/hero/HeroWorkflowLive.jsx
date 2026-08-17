@@ -77,9 +77,9 @@ export default function HeroWorkflowLive() {
   )
 
   const feed = [
-    { dot: 'green', text: 'Sarah M. — SMS sent, tag added, opportunity created', time: '2s ago' },
-    { dot: 'green', text: 'James K. — Booking link sent, call scheduled', time: '14s ago' },
-    { dot: 'blue', text: 'Marcus T. — Entered workflow, in progress...', time: '31s ago' },
+    { dot: 'green', text: 'Sarah M. SMS sent, tag added, opportunity created', time: '2s ago' },
+    { dot: 'green', text: 'James K. Booking link sent, call scheduled', time: '14s ago' },
+    { dot: 'blue', text: 'Marcus T. Entered workflow, in progress...', time: '31s ago' },
   ]
 
   const stats = ['47 leads today', '100% delivered', '3 booking links sent', '0 errors']
@@ -101,7 +101,7 @@ export default function HeroWorkflowLive() {
         </div>
         <div className="hwflow-live-badge">
           <span className="hwflow-pulse-dot" />
-          <span className="hwflow-live-text">Live — Running</span>
+          <span className="hwflow-live-text">Live Running</span>
         </div>
       </div>
 

@@ -26,11 +26,11 @@ export default function TeamPage() {
   return (
     <main className="about-page premium-about-page team-page mentor-team-page">
       <Helmet>
-        <title>Meet the GHL Prime Team — Certified GoHighLevel Specialists</title>
+        <title>Meet the GHL Prime Team Certified GoHighLevel Specialists</title>
         <meta name="description" content="Our GoHighLevel-certified team averages 4+ years of GHL experience. Meet the founders and specialists delivering backend execution under your agency's brand." />
         <meta name="keywords" content="GHL Prime team, GoHighLevel specialists, certified GoHighLevel admins, GoHighLevel experts, automation engineers" />
         <link rel="canonical" href="https://ghlprime.com/team" />
-        <meta property="og:title" content="Meet the GHL Prime Team — Certified GoHighLevel Specialists" />
+        <meta property="og:title" content="Meet the GHL Prime Team Certified GoHighLevel Specialists" />
         <meta property="og:description" content="Our GoHighLevel-certified team averages 4+ years of GHL experience. Meet the founders and specialists delivering backend execution under your agency's brand." />
         <meta property="og:url" content="https://ghlprime.com/team" />
         <meta property="og:image" content="https://ghlprime.com/og-team.png" />
@@ -50,7 +50,7 @@ export default function TeamPage() {
           '@type': 'AboutPage',
           '@id': 'https://ghlprime.com/team#webpage',
           url: 'https://ghlprime.com/team',
-          name: 'Meet the GHL Prime Team — Certified GoHighLevel Specialists',
+          name: 'Meet the GHL Prime Team Certified GoHighLevel Specialists',
           description: 'Our GoHighLevel-certified team averages 4+ years of GHL experience. Meet the founders and specialists delivering backend execution under your agency\'s brand.',
           inLanguage: 'en-US',
           isPartOf: { '@id': 'https://ghlprime.com/#website' },
@@ -214,9 +214,9 @@ export default function TeamPage() {
           <div className="team-hiring-prose">
             <p>Every specialist who joins GHL Prime goes through a structured qualification process before working on client accounts. We do not hire generalists and train them on GoHighLevel. We hire people who already have hands-on GHL experience and then deepen their specialization within our team.</p>
             <p>Our hiring standards require demonstrated GoHighLevel platform experience, completion of official GHL certification modules in the relevant specialty area, and a technical assessment covering automation logic, workflow debugging, and platform configuration. For AI and development roles, we additionally assess prompt engineering, API integration, and code quality.</p>
-            <p>Once onboarded, specialists are matched to client accounts based on their primary specialty &mdash; automation, AI, development, support, or training. No specialist is spread across skill areas where they lack depth. If a client account requires expertise across multiple areas, we assign the relevant specialists rather than expecting one person to do everything.</p>
+            <p>Once onboarded, specialists are matched to client accounts based on their primary specialty automation, AI, development, support, or training. No specialist is spread across skill areas where they lack depth. If a client account requires expertise across multiple areas, we assign the relevant specialists rather than expecting one person to do everything.</p>
             <p>Our leadership team reviews all major deliverables before they reach clients. The COO, Niyamul Islam Sajal, oversees technical delivery across all accounts. The CEO, Jewel Rana, oversees strategy and client relationships. This two-layer oversight is what lets us make the guarantee that our work is strategy-led, not just task-executed.</p>
-            <p>We are also a learning organization. When GoHighLevel ships new features &mdash; and they ship them constantly &mdash; our team trains on them before client accounts do. When a better way to build something emerges from one project, we document it and share it across the team. Our SOPs evolve with the platform, which means you are never getting advice based on how GHL worked six months ago.</p>
+            <p>We are also a learning organization. When GoHighLevel ships new features and they ship them constantly our team trains on them before client accounts do. When a better way to build something emerges from one project, we document it and share it across the team. Our SOPs evolve with the platform, which means you are never getting advice based on how GHL worked six months ago.</p>
           </div>
         </div>
       </section>

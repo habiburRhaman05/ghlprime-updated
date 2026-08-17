@@ -348,13 +348,12 @@ function WhatWeAreSlider() {
           <motion.div
             key={active.id || active.image_url}
             className="wwa-slide"
-            initial={{ opacity: 0, scale: reducedMotion ? 1 : 1.06 }}
+            initial={{ opacity: 0, scale: 1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{
               opacity: { duration: reducedMotion ? 0 : 0.85, ease: 'easeInOut' },
-              // Slow, continuous drift while the slide is on screen -- runs
-              // far longer than the fade so it never looks like a zoom effect.
+          
               scale: { duration: reducedMotion ? 0 : 7, ease: 'linear' },
             }}
           >
@@ -746,14 +745,16 @@ function CaseStudiesSection() {
         <div className="case-studies-reference-head">
           <div className="case-studies-reference-copy">
             <span className="eyebrow-label">Case Studies</span>
-            <h2>Real Work.<br /><span>Real Results.</span></h2>
+            <h2>Real Work. <span>Real Results.</span></h2>
+            <p>Real client wins from agencies, SaaS founders, and businesses that shipped with the GHL Prime team working behind the scenes.</p>
           </div>
-          <Link to="/case-studies" className="secondary-pill case-studies-reference-cta">View All Case Studies</Link>
         </div>
 
         <div className="case-studies-grid">
           {caseStudies.map((study, index) => renderCard(study, index))}
         </div>
+
+        <Link to="/case-studies" className="secondary-pill case-studies-reference-cta">View All Case Studies</Link>
       </div>
     </section>
   )
@@ -937,30 +938,26 @@ export default function HomePage() {
                   exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
                   transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <span className="hh-pill-dot" aria-hidden="true" />
                   {rotatingPills[activePill]}
                 </motion.div>
               </AnimatePresence>
             </div>
 
             <h1>
-              {/* Trailing {' '} on each line: whitespace-with-newline between
-                  JSX siblings is stripped, so without these the accessible
-                  name (and any text extraction) would read
-                  "...Team ofGoHighLevelAutomation...". */}
+        
               <span className="hh-line">Hire a Dedicated Team of{' '}</span>
-              {/* The wordmark gets a line to itself -- the tri-colour lockup
-                  is the strongest visual moment in the headline. */}
+             
               <span className="hh-line">
                 <span className="homepage-hero-ghl-inline">
                   <span className="homepage-hero-ghl-word"><span className="ghl-go">Go</span><span className="ghl-high">High</span><span className="ghl-level">Level</span></span>
+                  <span className="hh-accent-word">Automation<span className="hh-accent-sweep" aria-hidden="true" /></span>{' '}
                 </span>
               </span>
               <span className="hh-line">
-                <span className="hh-accent-word">Automation<span className="hh-accent-sweep" aria-hidden="true" /></span>{' '}
-                Experts for
+               
+                Experts for Your Agency
               </span>
-              <span className="hh-line">Your Agency and Local Business.</span>
+              <span className="hh-line"> and Local Business.</span>
 
             </h1>
 

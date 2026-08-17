@@ -13,12 +13,12 @@ export default function BookingPage() {
   return (
     <main className="booking-page">
       <Helmet>
-        <title>Book a Free Call with GHL Prime — Same-Day Reply</title>
-        <meta name="description" content="Tell us what your agency needs. We match you with a GHL-certified specialist within 24 hours. Hourly, project, or full-time — no contract, no setup fee." />
+        <title>Book a Free Call with GHL Prime Same-Day Reply</title>
+        <meta name="description" content="Tell us what your agency needs. We match you with a GHL-certified specialist within 24 hours. Hourly, project, or full-time no contract, no setup fee." />
         <meta name="keywords" content="book GoHighLevel consultation, free GoHighLevel call, hire GoHighLevel expert, GHL Prime booking" />
         <link rel="canonical" href="https://ghlprime.com/booking" />
-        <meta property="og:title" content="Book a Free Call with GHL Prime — Same-Day Reply" />
-        <meta property="og:description" content="Tell us what your agency needs. We match you with a GHL-certified specialist within 24 hours. Hourly, project, or full-time — no contract, no setup fee." />
+        <meta property="og:title" content="Book a Free Call with GHL Prime Same-Day Reply" />
+        <meta property="og:description" content="Tell us what your agency needs. We match you with a GHL-certified specialist within 24 hours. Hourly, project, or full-time no contract, no setup fee." />
         <meta property="og:url" content="https://ghlprime.com/booking" />
         <meta property="og:image" content="https://ghlprime.com/og-booking.png" />
         <meta property="og:type" content="website" />
@@ -38,7 +38,7 @@ export default function BookingPage() {
           '@type': 'WebPage',
           '@id': 'https://ghlprime.com/booking#webpage',
           url: 'https://ghlprime.com/booking',
-          name: 'Book a Free Call with GHL Prime — Same-Day Reply',
+          name: 'Book a Free Call with GHL Prime Same-Day Reply',
           description: 'Tell us what your agency needs. We\'ll match you with a GoHighLevel expert within 24 hours.',
           inLanguage: 'en-US',
           isPartOf: { '@id': 'https://ghlprime.com/#website' },

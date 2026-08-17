@@ -45,7 +45,7 @@ function DownArrow({ size = 11, color = '#22C55E' }) {
 }
 
 /* ================================================================== */
-/* TAB 1 — Mobile Apps                                                 */
+/* TAB 1 Mobile Apps                                                 */
 /* ================================================================== */
 function MobilePanel() {
   return (
@@ -215,7 +215,7 @@ function MobilePanel() {
 }
 
 /* ================================================================== */
-/* TAB 2 — Web Apps                                                    */
+/* TAB 2 Web Apps                                                    */
 /* ================================================================== */
 function WebPanel() {
   return (
@@ -375,7 +375,7 @@ function WebPanel() {
 }
 
 /* ================================================================== */
-/* TAB 3 — Tablet Apps                                                 */
+/* TAB 3 Tablet Apps                                                 */
 /* ================================================================== */
 function TabletPanel() {
   return (
@@ -448,7 +448,7 @@ function TabletPanel() {
                 <span className="happtabs-ttask-label">Auth &amp; RLS setup</span>
                 <span className="happtabs-tavatar">JK</span>
               </div>
-              {/* In Progress — amber half/spinner */}
+              {/* In Progress amber half/spinner */}
               <div className="happtabs-ttask">
                 <svg className="happtabs-ttask-check" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" stroke="#FCD34D" strokeWidth="3" fill="none" />
@@ -457,7 +457,7 @@ function TabletPanel() {
                 <span className="happtabs-ttask-label">Dashboard UI</span>
                 <span className="happtabs-tavatar">SM</span>
               </div>
-              {/* Pending — empty gray circle */}
+              {/* Pending empty gray circle */}
               <div className="happtabs-ttask">
                 <svg className="happtabs-ttask-check" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" stroke="#CBD5E1" strokeWidth="2" fill="none" />
@@ -467,7 +467,7 @@ function TabletPanel() {
               </div>
             </div>
 
-            <div className="happtabs-tmilestone">Next milestone: Client review &mdash; June 15</div>
+            <div className="happtabs-tmilestone">Next milestone: Client review June 15</div>
           </div>
         </div>
       </div>

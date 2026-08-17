@@ -61,9 +61,9 @@ function mapPostToForm(post) {
 }
 
 function formatBlogDate(iso) {
-  if (!iso) return '—'
+  if (!iso) return ''
   const date = new Date(iso)
-  if (Number.isNaN(date.getTime())) return '—'
+  if (Number.isNaN(date.getTime())) return ''
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
 }
 
@@ -311,7 +311,7 @@ export default function AdminBlogPage() {
             </label>
             <ImageUrlField label="Cover Image URL" value={form.cover_image} onChange={(url) => setForm((current) => ({ ...current, cover_image: url }))} />
             <label className="full-width">
-              <span>Post content — paste HTML here. You can use any HTML editor (Notion export, Google Docs HTML, or a rich text editor) to generate the HTML first.</span>
+              <span>Post content paste HTML here. You can use any HTML editor (Notion export, Google Docs HTML, or a rich text editor) to generate the HTML first.</span>
               <textarea rows="16" value={form.content} onChange={(event) => setForm((current) => ({ ...current, content: event.target.value }))} />
             </label>
             <label className="full-width">

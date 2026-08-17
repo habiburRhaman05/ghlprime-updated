@@ -113,7 +113,7 @@ export default function HeroPhoneAgent() {
 
             <div className="hphone-msg hphone-msg-out">
               <div className="hphone-bubble">
-                <span className="hphone-text">Great &mdash; you&apos;re a great fit! I&apos;m booking a discovery call for you now.</span>
+                <span className="hphone-text">Great you&apos;re a great fit! I&apos;m booking a discovery call for you now.</span>
                 <span className="hphone-meta">
                   <span className="hphone-msg-time">10:44 AM</span>
                   <svg className="hphone-ticks" width="16" height="11" viewBox="0 0 18 11" fill="none" aria-hidden="true">

@@ -56,7 +56,7 @@ export default function ShippedEvidenceSection({
   pageKey,
   eyebrow = 'Shipped Evidence',
   heading = 'Built in public. Adopted by enterprise.',
-  subheading = 'Consumer products running in production at scale — each one the origin of an enterprise system. The same engine, two markets, both shipping.',
+  subheading = 'Consumer products running in production at scale each one the origin of an enterprise system. The same engine, two markets, both shipping.',
 }) {
   const [items, setItems] = useState([])
   const [stats, setStats] = useState([])
@@ -86,7 +86,7 @@ export default function ShippedEvidenceSection({
     <section className="section shipped-evidence-section">
       <div className="container shipped-evidence-inner">
         <header className="shipped-evidence-head">
-          <span className="se-eyebrow">{eyebrow}</span>
+          <span className="eyebrow-label">{eyebrow}</span>
           <h2 className="se-heading">{heading}</h2>
           {subheading ? <p className="se-subhead">{subheading}</p> : null}
         </header>

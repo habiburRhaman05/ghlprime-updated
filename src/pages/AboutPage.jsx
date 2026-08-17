@@ -71,17 +71,17 @@ export default function AboutPage() {
   return (
     <main className="about-page about-redesign-page">
       <Helmet>
-        <title>About GHL Prime — Your GoHighLevel Backend Team</title>
+        <title>About GHL Prime Your GoHighLevel Backend Team</title>
         <meta name="description" content="GHL Prime is a dedicated GoHighLevel agency built to serve other agencies. Strategy-led delivery, GHL-certified specialists, and fully white-labeled execution." />
         <meta name="keywords" content="about GHL Prime, GoHighLevel expert team, GoHighLevel certified agency, GoHighLevel specialists, white-label CRM team" />
         <link rel="canonical" href="https://ghlprime.com/about" />
-        <meta property="og:title" content="About GHL Prime — Your GoHighLevel Backend Team" />
+        <meta property="og:title" content="About GHL Prime Your GoHighLevel Backend Team" />
         <meta property="og:description" content="GHL Prime is a dedicated GoHighLevel agency built to serve other agencies. Strategy-led delivery, GHL-certified specialists, and fully white-labeled execution." />
         <meta property="og:url" content="https://ghlprime.com/about" />
         <meta property="og:image" content="https://ghlprime.com/og-about.png" />
         <meta property="og:type" content="website" />
         <meta name="twitter:image" content="https://ghlprime.com/og-about.png" />
-        <meta name="twitter:title" content="About GHL Prime — Your GoHighLevel Backend Team" />
+        <meta name="twitter:title" content="About GHL Prime Your GoHighLevel Backend Team" />
         <meta name="twitter:description" content="GHL Prime is a dedicated GoHighLevel agency built to serve other agencies. Strategy-led delivery, GHL-certified specialists, and fully white-labeled execution." />
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
@@ -101,7 +101,7 @@ export default function AboutPage() {
           '@type': 'AboutPage',
           '@id': 'https://ghlprime.com/about#webpage',
           url: 'https://ghlprime.com/about',
-          name: 'About GHL Prime — Your GoHighLevel Backend Team',
+          name: 'About GHL Prime Your GoHighLevel Backend Team',
           description: 'GHL Prime is a dedicated GoHighLevel agency built to serve other agencies. Strategy-led delivery, GHL-certified specialists, and fully white-labeled execution.',
           inLanguage: 'en-US',
           isPartOf: { '@id': 'https://ghlprime.com/#website' },
@@ -170,7 +170,7 @@ export default function AboutPage() {
             transition={{ duration: 0.55 }}
           >
             <span className="eyebrow-label">Powered By A Stronger Ecosystem</span>
-            <h2>Backed by Octopi Digital — a broader digital growth and technology company.</h2>
+            <h2>Backed by Octopi Digital a broader digital growth and technology company.</h2>
             <p>
               While GHL Prime focuses specifically on GoHighLevel, AI, and automation, it is supported by the broader execution strength of Octopi Digital.
               That means more operational support, more implementation depth, and a stronger environment for delivering real systems work.
@@ -288,9 +288,9 @@ export default function AboutPage() {
             <h2 id="why-agencies-trust-heading">Why Agencies Trust GHL Prime</h2>
           </div>
           <div className="about-trust-prose">
-            <p>GHL Prime is built on a simple premise: agencies should not have to choose between technical depth and business growth. Most agency owners are strong at sales, client relationships, and strategy &mdash; but the backend of a GoHighLevel operation is a full-time job on its own. CRM configuration, automation logic, AI agent deployment, client support, and custom development all require specialized expertise that is expensive to hire in-house and unreliable to source from freelancers.</p>
-            <p>GHL Prime was founded to solve exactly that. We are a GHL-only team &mdash; we do not generalize across platforms or dilute our expertise across fifty different tools. Every specialist on our team works exclusively in the GoHighLevel ecosystem, which means we build faster, troubleshoot better, and deliver results that a generalist freelancer simply cannot match.</p>
-            <p>Our Certified Admin badge is the highest-level GoHighLevel certification available. Combined with our 10 specialty certifications &mdash; including HIPAA Compliance, A2P, AI Employee, and SaaS Mode &mdash; we carry the formal credentials to back every claim we make about our capabilities.</p>
+            <p>GHL Prime is built on a simple premise: agencies should not have to choose between technical depth and business growth. Most agency owners are strong at sales, client relationships, and strategy but the backend of a GoHighLevel operation is a full-time job on its own. CRM configuration, automation logic, AI agent deployment, client support, and custom development all require specialized expertise that is expensive to hire in-house and unreliable to source from freelancers.</p>
+            <p>GHL Prime was founded to solve exactly that. We are a GHL-only team we do not generalize across platforms or dilute our expertise across fifty different tools. Every specialist on our team works exclusively in the GoHighLevel ecosystem, which means we build faster, troubleshoot better, and deliver results that a generalist freelancer simply cannot match.</p>
+            <p>Our Certified Admin badge is the highest-level GoHighLevel certification available. Combined with our 10 specialty certifications including HIPAA Compliance, A2P, AI Employee, and SaaS Mode we carry the formal credentials to back every claim we make about our capabilities.</p>
             <p>We operate fully white-labeled, which means your clients never know we exist. Your agency is the front door. We are the engine room. That is how it is supposed to work.</p>
           </div>
         </div>

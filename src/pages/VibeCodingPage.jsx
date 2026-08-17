@@ -5,8 +5,8 @@ const config = {
   category: 'Vibe Coding & AI Dev',
   breadcrumbName: 'Vibe Coding & Custom Development',
   seo: {
-    title: 'Hire a Vibe Coder — AI-First Custom Dev | GHL Prime',
-    description: `Hire GHL Prime's vibe coding team to build custom dashboards, tools, and integrations GoHighLevel can't do natively — Claude Code & Supabase. Book a free call.`,
+    title: 'Hire a Vibe Coder AI-First Custom Dev | GHL Prime',
+    description: `Hire GHL Prime's vibe coding team to build custom dashboards, tools, and integrations GoHighLevel can't do natively Claude Code & Supabase. Book a free call.`,
   },
   serviceSchema: {
     name: 'Vibe Coding & AI-Assisted Custom Development',
@@ -16,7 +16,7 @@ const config = {
   hero: {
     eyebrow: 'Vibe Coding & Custom Dev',
     h1: 'Hire a Vibe Coding Team That Actually Ships',
-    subhead: `Most dev teams slow you down. GHL Prime's vibe coding specialists build custom tools, dashboards, integrations, and AI-powered apps using Claude Code, Cursor, and modern AI-first workflows — and ship production-ready builds in days, not weeks.`,
+    subhead: `Most dev teams slow you down. GHL Prime's vibe coding specialists build custom tools, dashboards, integrations, and AI-powered apps using Claude Code, Cursor, and modern AI-first workflows and ship production-ready builds in days, not weeks.`,
     ctaPrimary: { label: 'Book a Free Call', to: '/booking' },
     ctaSecondary: { label: 'See Our Work', to: '/case-studies' },
     badges: ['Claude Code', 'Cursor', 'Lovable', 'Supabase', 'Vercel', 'Next.js'],
@@ -31,8 +31,8 @@ const config = {
     eyebrow: 'How it works',
     h2: 'What Is Vibe Coding?',
     paragraphs: [
-      `Vibe coding is AI-assisted development — a skilled developer using tools like Claude Code, Cursor, and Lovable to build production software dramatically faster than traditional cycles. When you hire a vibe coder from GHL Prime, you are not betting on someone who prompts an AI and hopes the output works.`,
-      `It is not just prompting and hoping. Real vibe coding requires technical judgment — knowing when the AI output is wrong and being able to fix it. Our specialists average 4+ years of hands-on GoHighLevel and development experience, pairing genuine front-end and back-end fluency with AI-first workflows to ship custom features in days rather than weeks.`,
+      `Vibe coding is AI-assisted development a skilled developer using tools like Claude Code, Cursor, and Lovable to build production software dramatically faster than traditional cycles. When you hire a vibe coder from GHL Prime, you are not betting on someone who prompts an AI and hopes the output works.`,
+      `It is not just prompting and hoping. Real vibe coding requires technical judgment knowing when the AI output is wrong and being able to fix it. Our specialists average 4+ years of hands-on GoHighLevel and development experience, pairing genuine front-end and back-end fluency with AI-first workflows to ship custom features in days rather than weeks.`,
       `That means we build things most agencies cannot: live dashboards, [AI agents for GoHighLevel](/services/ai-agent-builder), and full [custom SaaS development](/services/custom-saas-development) projects wired into your existing stack. Have a build in mind? [Book a free consultation](/booking) and we will scope it, price it, and give you a realistic timeline on the call.`,
     ],
     cta: { label: 'Book a Free Call', to: '/booking' },
@@ -74,7 +74,7 @@ const result = await claude.build({
   who: {
     h2: 'Who Hires Us for Vibe Coding?',
     cards: [
-      { icon: 'Briefcase', title: 'Marketing Agencies', text: 'You need custom tools GoHighLevel cannot do natively — dashboards, portals, integrations. Built fast, under your brand.' },
+      { icon: 'Briefcase', title: 'Marketing Agencies', text: 'You need custom tools GoHighLevel cannot do natively dashboards, portals, integrations. Built fast, under your brand.' },
       { icon: 'Rocket', title: 'SaaS Founders', text: 'You have a product idea and need it validated or built fast. We move at founder speed, not slow agency speed.' },
       { icon: 'Users', title: 'In-House Teams Without Dev Resources', text: 'Your team knows what it wants but has no developer. We plug in as your on-demand technical partner.' },
       { icon: 'Network', title: 'Businesses Scaling Their Tech Stack', text: 'You are connecting GoHighLevel, Supabase, Stripe, Twilio, and five other tools and need someone to make them talk properly.' },
@@ -82,22 +82,22 @@ const result = await claude.build({
   },
   why: {
     h2: 'Why Hire GHL Prime for Vibe Coding?',
-    intro: `Freelancers give you one person and one skill set. In-house hiring takes weeks and a salary. GHL Prime gives you a vetted vibe coder available the same day — and because the work is white-labeled, your clients only ever see your brand on the output.`,
+    intro: `Freelancers give you one person and one skill set. In-house hiring takes weeks and a salary. GHL Prime gives you a vetted vibe coder available the same day and because the work is white-labeled, your clients only ever see your brand on the output.`,
     points: [
-      'Available the same day — not weeks of hiring and interviews',
+      'Available the same day not weeks of hiring and interviews',
       'AI-first workflow ships 3–5x faster than traditional development',
-      'White-labeled — your brand on every deliverable',
-      'GHL-native context — we understand the platform your stack runs on',
+      'White-labeled your brand on every deliverable',
+      'GHL-native context we understand the platform your stack runs on',
       'Daily updates with no project-management overhead for you',
-      'No contract, no setup fee — hire by the hour or by the project',
+      'No contract, no setup fee hire by the hour or by the project',
     ],
   },
   faqIntro: 'What vibe coding is, the tools we use, how fast we ship, and how it is priced.',
   faqs: [
-    { q: 'What is vibe coding and how is it different from normal development?', a: 'Vibe coding uses AI coding tools like Claude Code and Cursor to dramatically accelerate software development. A skilled developer directs the AI, reviews its output, fixes mistakes, and ships working code far faster than traditional methods. It is not just prompting — it requires real technical judgment. GHL Prime has shipped production builds this way across dozens of client projects.' },
+    { q: 'What is vibe coding and how is it different from normal development?', a: 'Vibe coding uses AI coding tools like Claude Code and Cursor to dramatically accelerate software development. A skilled developer directs the AI, reviews its output, fixes mistakes, and ships working code far faster than traditional methods. It is not just prompting it requires real technical judgment. GHL Prime has shipped production builds this way across dozens of client projects.' },
     { q: `What tools does GHL Prime's vibe coding team use?`, a: 'Our team primarily builds with Claude Code, Cursor, and Lovable for AI-assisted development. For infrastructure we use Supabase for databases and auth, Vercel for deployment, and Next.js 15 for full-stack applications. We also build integrations with GoHighLevel, Stripe, Twilio, n8n, Zapier, and most major third-party APIs your business runs on.' },
     { q: 'How fast can GHL Prime build a custom tool or integration?', a: 'Most simple integrations and custom automations are delivered in 2–5 days. Full-stack applications like client portals or internal dashboards typically take 1–3 weeks depending on scope. Rapid prototypes can be turned around in 24–72 hours. We give you a clear timeline on your discovery call before any work begins.' },
-    { q: 'Can you build something if I only have a rough idea and no technical spec?', a: 'Yes. Many clients come to us with a problem, not a spec. We run a scoping call, translate your business requirement into a technical plan, and confirm the approach before building. You do not need to know the stack — that is our job.' },
+    { q: 'Can you build something if I only have a rough idea and no technical spec?', a: 'Yes. Many clients come to us with a problem, not a spec. We run a scoping call, translate your business requirement into a technical plan, and confirm the approach before building. You do not need to know the stack that is our job.' },
     { q: 'How much does vibe coding work cost?', a: 'GHL Prime offers hourly, project-based, and retainer models with no setup fees and no contracts. Hourly rates vary by project complexity. Most project-based builds are scoped and priced on your discovery call. You can also hire via our Upwork agency profile at upwork.com/agencies/ghlprime.' },
   ],
   cta: {

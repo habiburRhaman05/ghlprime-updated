@@ -51,16 +51,16 @@ export default function ClientStudiesPage() {
   return (
     <main className="client-studies-page">
       <Helmet>
-        <title>GoHighLevel Case Studies — Real Agency Results | GHL Prime</title>
+        <title>GoHighLevel Case Studies Real Agency Results | GHL Prime</title>
         <meta name="description" content="See how GHL Prime built Voice AI systems, CRM migrations, n8n automations, and AI agents for agencies across home services, SaaS, real estate, and e-commerce." />
         <meta name="keywords" content="GoHighLevel case studies, GHL automation results, agency case studies, GoHighLevel success stories, automation case studies" />
         <link rel="canonical" href="https://ghlprime.com/case-studies" />
-        <meta property="og:title" content="GoHighLevel Case Studies — Real Agency Results | GHL Prime" />
+        <meta property="og:title" content="GoHighLevel Case Studies Real Agency Results | GHL Prime" />
         <meta property="og:description" content="See how GHL Prime built Voice AI systems, CRM migrations, n8n automations, and AI agents for agencies across home services, SaaS, real estate, and e-commerce." />
         <meta property="og:url" content="https://ghlprime.com/case-studies" />
         <meta property="og:image" content="https://ghlprime.com/og-case-studies.png" />
         <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="GoHighLevel Case Studies — Real Agency Results | GHL Prime" />
+        <meta name="twitter:title" content="GoHighLevel Case Studies Real Agency Results | GHL Prime" />
         <meta name="twitter:description" content="See how GHL Prime built Voice AI systems, CRM migrations, n8n automations, and AI agents for agencies across home services, SaaS, real estate, and e-commerce." />
         <meta name="twitter:image" content="https://ghlprime.com/og-case-studies.png" />
         <script type="application/ld+json">{JSON.stringify({
@@ -77,7 +77,7 @@ export default function ClientStudiesPage() {
           '@type': 'CollectionPage',
           '@id': 'https://ghlprime.com/case-studies#webpage',
           url: 'https://ghlprime.com/case-studies',
-          name: 'GoHighLevel Case Studies — Real Agency Results | GHL Prime',
+          name: 'GoHighLevel Case Studies Real Agency Results | GHL Prime',
           description: 'See how GHL Prime built Voice AI systems, CRM migrations, n8n automations, and AI agents for agencies across home services, SaaS, real estate, and e-commerce.',
           inLanguage: 'en-US',
           isPartOf: { '@id': 'https://ghlprime.com/#website' },

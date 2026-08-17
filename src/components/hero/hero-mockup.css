@@ -7,7 +7,7 @@
 .hero-mockup--wide { max-width: 720px; }
 .hero-mockup--phone { max-width: 340px; }
 .hero-mockup--apptabs { max-width: 760px; }
-/* tab mockup is interactive — no continuous float so tabs are easy to click */
+/* tab mockup is interactive no continuous float so tabs are easy to click */
 .hero-mockup--apptabs .hero-mockup-float { animation: none; }
 .hero-mockup-in { opacity: 0; animation: hmIn .6s ease .15s forwards; }
 .hero-mockup-float { animation: hmFloat 4s ease-in-out infinite; will-change: transform; }

@@ -470,7 +470,7 @@
   .wfg { min-width: 470px; }
 }
 
-/* Mobile nav: the expanded Services menu is long — cap it to the viewport and
+/* Mobile nav: the expanded Services menu is long cap it to the viewport and
    let it scroll internally so every item stays reachable on a phone. */
 .mobile-menu-panel {
   max-height: calc(100vh - 5.5rem);

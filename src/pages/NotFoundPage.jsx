@@ -25,11 +25,11 @@ export default function NotFoundPage() {
         </p>
         <p>Here are the places people usually want:</p>
         <ul>
-          <li><Link to="/services">GoHighLevel services</Link> &mdash; setup, automation, AI agents, and white-label support</li>
-          <li><Link to="/case-studies">Case studies</Link> &mdash; real builds and what they changed</li>
-          <li><Link to="/blog">Blog</Link> &mdash; guides on GoHighLevel, automation, and AI</li>
-          <li><Link to="/faq">FAQ</Link> &mdash; common questions before working with us</li>
-          <li><Link to="/contact">Contact</Link> &mdash; talk to the team</li>
+          <li><Link to="/services">GoHighLevel services</Link> setup, automation, AI agents, and white-label support</li>
+          <li><Link to="/case-studies">Case studies</Link> real builds and what they changed</li>
+          <li><Link to="/blog">Blog</Link> guides on GoHighLevel, automation, and AI</li>
+          <li><Link to="/faq">FAQ</Link> common questions before working with us</li>
+          <li><Link to="/contact">Contact</Link> talk to the team</li>
         </ul>
         <div className="team-edit-actions" style={{ marginTop: '1.5rem' }}>
           <Link to="/" className="primary-pill large">Back to homepage</Link>
