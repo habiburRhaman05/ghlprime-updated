@@ -462,7 +462,14 @@ function SiteHeader() {
               </div>
             ) : null}
             {secondaryNav.map((item) => (
-              <Link key={item.label} to={item.href} onClick={() => setMobileMenuOpen(false)}>{item.label}</Link>
+              <Link
+                key={item.label}
+                to={item.href}
+                className={location.pathname === item.href ? 'is-active' : undefined}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
             ))}
           </nav>
           <div className="mobile-menu-actions">

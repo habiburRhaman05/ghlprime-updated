@@ -105,25 +105,40 @@ button { font: inherit; }
 .mobile-menu-panel {
   grid-column: 1 / -1;
   margin-top: .75rem;
-  padding: 1rem;
+  padding: .5rem;
   border-radius: 1.35rem;
   border: 1px solid rgba(198,218,242,.78);
-  background: rgba(255,255,255,.96);
+  background: #ffffff;
   box-shadow: 0 18px 38px rgba(33,73,130,.08);
 }
 .mobile-menu-links,
 .mobile-menu-actions {
   display: grid;
-  gap: .8rem;
+  gap: .15rem;
 }
+/* Nav rows: full-width tap targets with their own hover/active surface,
+   rather than bare centred text. */
 .mobile-menu-links a,
 .mobile-menu-actions a {
   min-height: 2.9rem;
   display: inline-flex;
   align-items: center;
 }
+.mobile-menu-links > a {
+  padding: 0 .75rem;
+  border-radius: .75rem;
+  font-weight: 600;
+  color: #3f536d;
+  transition: background-color .2s ease, color .2s ease;
+}
+.mobile-menu-links > a:hover { background: var(--soft-blue); color: var(--primary-dark); }
+.mobile-menu-links > a.is-active { background: var(--soft-blue); color: var(--primary-dark); font-weight: 700; }
+/* Actions sit in their own footer block, separated by a rule. */
 .mobile-menu-actions {
-  margin-top: .9rem;
+  gap: .5rem;
+  margin-top: .5rem;
+  padding: .75rem .25rem .25rem;
+  border-top: 1px solid rgba(198,218,242,.7);
 }
 .brand-logo {
   height: 2.85rem; width: auto; max-width: 14rem; display: block; object-fit: contain; filter: drop-shadow(0 10px 18px rgba(22, 132, 234, 0.12));
@@ -4159,19 +4174,35 @@ button { font: inherit; }
     display: block;
     width: 100%;
     margin-top: .9rem;
-    padding: 1rem;
+    padding: .5rem;
     border-radius: 1.25rem;
   }
   .mobile-menu-links,
   .mobile-menu-actions {
     justify-items: stretch;
   }
-  .mobile-menu-links a,
+  /* Nav links read left-to-right like a list. They were centred, which made
+     the drawer hard to scan -- the eye had no consistent left edge to
+     follow down. */
+  .mobile-menu-links a {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  /* The two footer buttons stay centred -- they're buttons, not list rows. */
   .mobile-menu-actions a,
   .mobile-menu-actions .login-link {
     width: 100%;
     justify-content: center;
     text-align: center;
+  }
+  .mobile-menu-actions .login-link {
+    min-height: 2.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(22,132,234,.28);
+    background: #fff;
+    color: var(--primary-dark);
+    font-weight: 700;
   }
   .navbar {
     grid-template-columns: auto auto;
