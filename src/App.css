@@ -2068,7 +2068,7 @@ button { font: inherit; }
   .cta-glow.two { display: none; }
 }
 .site-footer { padding: 2rem 0 1.5rem; background: #0f2036; color: #dbe7f5; }
-.footer-grid { display: grid; grid-template-columns: 1.2fr .8fr .8fr; gap: 1.5rem; }
+.footer-grid { display: grid; grid-template-columns: 1.2fr -1fr .8fr; gap: 1.5rem; }
 .footer-mark { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 1rem; background: rgba(255,255,255,.08); font-weight: 800; margin-bottom: .8rem; }
 .footer-logo {
   height: 2.2rem;
