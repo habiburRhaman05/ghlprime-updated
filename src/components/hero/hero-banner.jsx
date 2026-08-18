@@ -38,7 +38,11 @@ const HeroBanner = ({activePill,rotatingPills}) => {
               <span className="hh-line">
                 <span className="homepage-hero-ghl-inline">
                   <span className="homepage-hero-ghl-word"><span className="ghl-go">Go</span><span className="ghl-high">High</span><span className="ghl-level">Level</span></span>
-                  <span className="hh-accent-word">Automation<span className="hh-accent-sweep" aria-hidden="true" /></span>{' '}
+                  <span className="hh-accent-word">Automation
+                    
+                    {/* <span className="hh-accent-sweep" aria-hidden="true" /> */}
+                    
+                    </span>{' '}
                 </span>
               </span>
               <span className="hh-line">

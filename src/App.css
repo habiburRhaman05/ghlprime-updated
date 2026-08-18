@@ -116,6 +116,12 @@ button { font: inherit; }
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  /* The drawer below is a full-width grid item on its own row, and its
+     content widens the navbar's auto columns while open. Without this the
+     toggle sits at the START of its (inflated) cell and visibly slides
+     left the moment the menu opens. Anchoring it to the cell's end keeps
+     it pinned to the bar's right edge in both states. */
+  justify-self: end;
 }
 .mobile-menu-panel {
   grid-column: 1 / -1;
