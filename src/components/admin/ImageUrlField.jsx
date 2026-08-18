@@ -4,7 +4,7 @@ import '../../styles/admin-extras.css'
 
 // Shared image field for every admin form: lets the admin either paste an
 // external image URL directly (existing behaviour) or upload a file straight
-// to our own server, side by side. Uploading calls POST /api/admin/uploads
+// to our own server, side by side. Uploading calls POST /api/uploads/image
 // and, on success, feeds the returned relative "/uploads/<file>" path back
 // through onChange exactly like typing a URL would.
 export default function ImageUrlField({ label, value, onChange, required = false, placeholder }) {

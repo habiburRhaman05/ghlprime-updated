@@ -43,20 +43,20 @@ export async function fetchMeetingGallery() {
 }
 
 export async function fetchAdminMeetingGallery() {
-  const { data, error } = await apiGet('/api/admin/meeting-gallery', { auth: true })
+  const { data, error } = await apiGet('/api/meeting-gallery/admin', { auth: true })
   if (error || !data) return sortItems(fallbackMeetingGallery)
   return sortItems(data)
 }
 
 export async function createMeetingGalleryItem(payload) {
-  return apiPost('/api/admin/meeting-gallery', payload, { auth: true })
+  return apiPost('/api/meeting-gallery', payload, { auth: true })
 }
 
 export async function updateMeetingGalleryItem(id, payload) {
-  return apiPut(`/api/admin/meeting-gallery/${encodeURIComponent(id)}`, payload, { auth: true })
+  return apiPut(`/api/meeting-gallery/${encodeURIComponent(id)}`, payload, { auth: true })
 }
 
 export async function deleteMeetingGalleryItem(id) {
-  const { error } = await apiDelete(`/api/admin/meeting-gallery/${encodeURIComponent(id)}`, { auth: true })
+  const { error } = await apiDelete(`/api/meeting-gallery/${encodeURIComponent(id)}`, { auth: true })
   return { error }
 }

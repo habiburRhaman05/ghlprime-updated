@@ -77,7 +77,11 @@ async function request(path, { method = 'GET', body, auth = false } = {}) {
     return { data: null, error: new Error(errorMessageFrom(payload, `Request failed (${response.status})`)) }
   }
 
-  return { data: payload, error: null }
+  // The Express API wraps every success in a `{ success, message, data }`
+  // envelope. Unwrap it here so callers keep receiving the Supabase-style
+  // `{ data, error }` contract every *Api.js helper was written against --
+  // `data` is the envelope's `data`, not the envelope itself.
+  return { data: payload?.data !== undefined ? payload.data : payload, error: null }
 }
 
 export const apiGet = (path, options) => request(path, { ...options, method: 'GET' })
@@ -100,7 +104,7 @@ export async function uploadImage(file) {
 
   let response
   try {
-    response = await fetch(`${API_BASE_URL}/api/admin/uploads`, {
+    response = await fetch(`${API_BASE_URL}/api/uploads/image`, {
       method: 'POST',
       headers,
       body: formData,
@@ -115,5 +119,5 @@ export async function uploadImage(file) {
     return { data: null, error: new Error(errorMessageFrom(payload, `Upload failed (${response.status})`)) }
   }
 
-  return { data: payload, error: null }
+  return { data: payload?.data !== undefined ? payload.data : payload, error: null }
 }

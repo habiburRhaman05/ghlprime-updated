@@ -32,20 +32,20 @@ export async function fetchTechnologyLogos() {
 }
 
 export async function fetchAdminTechnologyLogos() {
-  const { data, error } = await apiGet('/api/admin/technology-logos', { auth: true })
+  const { data, error } = await apiGet('/api/technology-logos/admin', { auth: true })
   if (error || !data) return sortItems(fallbackTechnologyLogos)
   return sortItems(data)
 }
 
 export async function createTechnologyLogo(payload) {
-  return apiPost('/api/admin/technology-logos', payload, { auth: true })
+  return apiPost('/api/technology-logos', payload, { auth: true })
 }
 
 export async function updateTechnologyLogo(id, payload) {
-  return apiPut(`/api/admin/technology-logos/${encodeURIComponent(id)}`, payload, { auth: true })
+  return apiPut(`/api/technology-logos/${encodeURIComponent(id)}`, payload, { auth: true })
 }
 
 export async function deleteTechnologyLogo(id) {
-  const { error } = await apiDelete(`/api/admin/technology-logos/${encodeURIComponent(id)}`, { auth: true })
+  const { error } = await apiDelete(`/api/technology-logos/${encodeURIComponent(id)}`, { auth: true })
   return { error }
 }

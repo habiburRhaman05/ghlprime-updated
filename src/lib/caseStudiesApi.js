@@ -64,7 +64,7 @@ export async function fetchCaseStudies() {
 }
 
 export async function fetchCaseStudyBySlug(slug) {
-  const { data, error } = await apiGet(`/api/case-studies/${encodeURIComponent(slug)}`)
+  const { data, error } = await apiGet(`/api/case-studies/slug/${encodeURIComponent(slug)}`)
 
   if (error || !data) {
     return mapFallbackStudy(FALLBACK_STUDIES.find((item) => item.slug === slug) ?? null)
@@ -74,13 +74,13 @@ export async function fetchCaseStudyBySlug(slug) {
 }
 
 export async function fetchAdminCaseStudies() {
-  const { data, error } = await apiGet('/api/admin/case-studies', { auth: true })
+  const { data, error } = await apiGet('/api/case-studies/admin', { auth: true })
   if (error || !data) return FALLBACK_STUDIES.map(mapFallbackStudy)
   return data
 }
 
 export async function createCaseStudy(payload) {
-  const { data, error } = await apiPost('/api/admin/case-studies', payload, { auth: true })
+  const { data, error } = await apiPost('/api/case-studies', payload, { auth: true })
   if (error) return { data: null, error }
 
   await refreshSitemap()
@@ -88,7 +88,7 @@ export async function createCaseStudy(payload) {
 }
 
 export async function updateCaseStudy(id, payload) {
-  const { data, error } = await apiPut(`/api/admin/case-studies/${encodeURIComponent(id)}`, payload, { auth: true })
+  const { data, error } = await apiPut(`/api/case-studies/${encodeURIComponent(id)}`, payload, { auth: true })
   if (error) return { data: null, error }
 
   await refreshSitemap()

@@ -35,13 +35,13 @@ function fallbackPublishedPosts() {
 }
 
 export async function fetchBlogPosts() {
-  const { data, error } = await apiGet('/api/blog-posts')
+  const { data, error } = await apiGet('/api/blog')
   if (error || !data) return fallbackPublishedPosts()
   return data
 }
 
 export async function fetchBlogPostBySlug(slug) {
-  const { data, error } = await apiGet(`/api/blog-posts/${encodeURIComponent(slug)}`)
+  const { data, error } = await apiGet(`/api/blog/slug/${encodeURIComponent(slug)}`)
 
   if (error || !data) {
     return FALLBACK_POSTS.find((post) => post.slug === slug) ?? null
@@ -51,8 +51,8 @@ export async function fetchBlogPostBySlug(slug) {
 }
 
 export async function fetchRelatedPosts(category, excludeSlug, limit = 3) {
-  const params = new URLSearchParams({ category: category || '', excludeSlug: excludeSlug || '', limit: String(limit) })
-  const { data, error } = await apiGet(`/api/blog-posts/related?${params.toString()}`)
+  const params = new URLSearchParams({ category: category || '', exclude: excludeSlug || '', limit: String(limit) })
+  const { data, error } = await apiGet(`/api/blog/related?${params.toString()}`)
 
   if (error || !data) {
     return fallbackPublishedPosts()
@@ -64,7 +64,7 @@ export async function fetchRelatedPosts(category, excludeSlug, limit = 3) {
 }
 
 export async function fetchAdminBlogPosts() {
-  const { data, error } = await apiGet('/api/admin/blog-posts', { auth: true })
+  const { data, error } = await apiGet('/api/blog/admin', { auth: true })
 
   if (error || !data) {
     return [...FALLBACK_POSTS].sort((a, b) => {
@@ -83,7 +83,7 @@ export async function createBlogPost(payload) {
     blogPayload.published_at = new Date().toISOString()
   }
 
-  const { data, error } = await apiPost('/api/admin/blog-posts', blogPayload, { auth: true })
+  const { data, error } = await apiPost('/api/blog', blogPayload, { auth: true })
 
   if (!error) await refreshSitemap()
   return { data, error }
@@ -95,14 +95,14 @@ export async function updateBlogPost(id, payload) {
     blogPayload.published_at = new Date().toISOString()
   }
 
-  const { data, error } = await apiPut(`/api/admin/blog-posts/${encodeURIComponent(id)}`, blogPayload, { auth: true })
+  const { data, error } = await apiPut(`/api/blog/${encodeURIComponent(id)}`, blogPayload, { auth: true })
 
   if (!error) await refreshSitemap()
   return { data, error }
 }
 
 export async function deleteBlogPost(id) {
-  const { error } = await apiDelete(`/api/admin/blog-posts/${encodeURIComponent(id)}`, { auth: true })
+  const { error } = await apiDelete(`/api/blog/${encodeURIComponent(id)}`, { auth: true })
 
   if (!error) await refreshSitemap()
   return { error }

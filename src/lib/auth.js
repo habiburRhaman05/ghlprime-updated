@@ -50,12 +50,14 @@ function notify(session) {
 export async function signInWithPassword({ email, password }) {
   const { data, error } = await apiPost('/api/auth/login', { email, password })
 
-  if (error || !data?.token) {
+  // The API returns the token as `access_token` (see API.md) -- the old
+  // Supabase-style `token` field no longer exists.
+  if (error || !data?.access_token) {
     return { data: null, error: error || new Error('Login failed') }
   }
 
-  setToken(data.token)
-  const session = buildSession(data.token)
+  setToken(data.access_token)
+  const session = buildSession(data.access_token)
   notify(session)
 
   return { data: { session, user: session?.user ?? null }, error: null }

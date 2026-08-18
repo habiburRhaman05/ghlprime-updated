@@ -43,7 +43,7 @@ export async function fetchPartnerLogos() {
 }
 
 export async function fetchAdminPartnerLogos() {
-  const { data, error } = await apiGet('/api/admin/partner-logos', { auth: true })
+  const { data, error } = await apiGet('/api/partner-logos/admin', { auth: true })
   if (error || !data) return sortLogos(normalizeLogos(fallbackLogos))
   return sortLogos((data || []).map(mapLogoRecord))
 }
@@ -57,7 +57,7 @@ export async function createPartnerLogo(payload) {
     published: payload.published,
   }
 
-  const result = await apiPost('/api/admin/partner-logos', dbPayload, { auth: true })
+  const result = await apiPost('/api/partner-logos', dbPayload, { auth: true })
   return {
     ...result,
     data: result.data ? mapLogoRecord(result.data) : result.data,
@@ -73,7 +73,7 @@ export async function updatePartnerLogo(id, payload) {
     published: payload.published,
   }
 
-  const result = await apiPut(`/api/admin/partner-logos/${encodeURIComponent(id)}`, dbPayload, { auth: true })
+  const result = await apiPut(`/api/partner-logos/${encodeURIComponent(id)}`, dbPayload, { auth: true })
   return {
     ...result,
     data: result.data ? mapLogoRecord(result.data) : result.data,
@@ -81,6 +81,6 @@ export async function updatePartnerLogo(id, payload) {
 }
 
 export async function deletePartnerLogo(id) {
-  const { error } = await apiDelete(`/api/admin/partner-logos/${encodeURIComponent(id)}`, { auth: true })
+  const { error } = await apiDelete(`/api/partner-logos/${encodeURIComponent(id)}`, { auth: true })
   return { error }
 }

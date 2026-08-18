@@ -35,7 +35,7 @@ export default async function handler(req, res) {
 
     if (apiBaseUrl) {
       try {
-        const leadResponse = await fetch(`${apiBaseUrl}/api/contact-leads`, {
+        const leadResponse = await fetch(`${apiBaseUrl}/api/contact/submit`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

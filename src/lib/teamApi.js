@@ -22,7 +22,7 @@ function fallbackExperts() {
 }
 
 export async function fetchTeamMembers() {
-  const { data, error } = await apiGet('/api/team-members')
+  const { data, error } = await apiGet('/api/team/members')
   // `data` can resolve to a valid, empty array (API reachable, but the
   // team_members table has nothing in it) -- `!data` alone doesn't catch
   // that since `![]` is false, so the section silently rendered nothing
@@ -34,33 +34,33 @@ export async function fetchTeamMembers() {
 }
 
 export async function createTeamMember(payload) {
-  return apiPost('/api/admin/team-members', payload, { auth: true })
+  return apiPost('/api/team/members', payload, { auth: true })
 }
 
 export async function updateTeamMember(id, payload) {
-  return apiPut(`/api/admin/team-members/${encodeURIComponent(id)}`, payload, { auth: true })
+  return apiPut(`/api/team/members/${encodeURIComponent(id)}`, payload, { auth: true })
 }
 
 export async function deleteTeamMember(id) {
-  const { error } = await apiDelete(`/api/admin/team-members/${encodeURIComponent(id)}`, { auth: true })
+  const { error } = await apiDelete(`/api/team/members/${encodeURIComponent(id)}`, { auth: true })
   return { error }
 }
 
 export async function fetchTeamPageExperts() {
-  const { data, error } = await apiGet('/api/team-page-members')
+  const { data, error } = await apiGet('/api/team/experts')
   if (error || !data) return fallbackExperts()
   return sortByDisplayOrder(data)
 }
 
 export async function createTeamPageExpert(payload) {
-  return apiPost('/api/admin/team-page-members', payload, { auth: true })
+  return apiPost('/api/team/experts', payload, { auth: true })
 }
 
 export async function updateTeamPageExpert(id, payload) {
-  return apiPut(`/api/admin/team-page-members/${encodeURIComponent(id)}`, payload, { auth: true })
+  return apiPut(`/api/team/experts/${encodeURIComponent(id)}`, payload, { auth: true })
 }
 
 export async function deleteTeamPageExpert(id) {
-  const { error } = await apiDelete(`/api/admin/team-page-members/${encodeURIComponent(id)}`, { auth: true })
+  const { error } = await apiDelete(`/api/team/experts/${encodeURIComponent(id)}`, { auth: true })
   return { error }
 }
