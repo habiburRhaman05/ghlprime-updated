@@ -2,7 +2,13 @@
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 1.2rem;
 }
-.modern-solution-stack-card {
+/* Double-classed with the base card name: App.css loads after this file, so
+   a plain .modern-solution-stack-card rule would lose the tie against
+   .replacement-solution-card's stale min-height (25rem / 28rem) and every
+   card would be forced taller than its content -- leaving dead space between
+   the description and the pinned tag row. The extra class makes this rule
+   win regardless of stylesheet order. */
+.replacement-solution-card.modern-solution-stack-card {
   min-height: auto;
   padding: 1.7rem 1.6rem 1.6rem;
   border-radius: 1.5rem;
@@ -45,19 +51,27 @@
 .modern-solution-stack-card.tone-violet .solution-icon-tile { background: rgba(109, 83, 220, 0.1); color: #5f47c9; }
 .modern-solution-stack-card.tone-red .solution-icon-tile { background: rgba(213, 93, 93, 0.1); color: #c04f4f; }
 .modern-solution-stack-card:nth-child(-n+3) { grid-column: span 2; }
-.modern-solution-stack-card.wide { grid-column: span 3; min-height: auto; }
+/* Only the min-height needs the specificity bump here: the wide card's
+   grid-column (span 3 on desktop, span 1 on phone) already comes from the
+   base and media rules. Repeating span 3 here would beat the phone media
+   rule too, and span 3 against the single phone column forces the browser
+   to create implicit extra columns, breaking the mobile layout. */
+.replacement-solution-card.wide.modern-solution-stack-card { min-height: auto; }
 .align-left { text-align: left !important; }
 .single-line-heading {
   white-space: nowrap;
   font-size: clamp(1.5rem, 2.7vw, 2.45rem) !important;
 }
-.modern-solution-stack-card .solution-copy {
+.replacement-solution-card.modern-solution-stack-card .solution-copy {
   display: block;
   width: 100%;
   /* The base .solution-copy caps the block at 32rem and centres it with
      auto margins, which on the wide cards (span 3) pushes the copy off
      the left edge. Clear both so every card's title/body lines up with
-     its icon; the card padding keeps the global spacing. */
+     its icon; the card padding keeps the global spacing.
+     Double-classed with .replacement-solution-card: App.css loads after
+     this file, so the single-class rule below loses the specificity tie
+     and the base centring would stick. */
   max-width: none;
   margin: 0;
 }
@@ -72,11 +86,13 @@
   letter-spacing: normal;
   color: #10253f;
 }
-.modern-solution-stack-card .solution-copy p {
-  margin: 0;
-  font-size: .97rem;
+.replacement-solution-card.modern-solution-stack-card .solution-copy p {
+  /* The base rule also centres the paragraph (max-width 31rem + auto
+     margins); clear the horizontal centring and keep the current
+     title-to-body spacing and typography. */
+  max-width: none;
+  margin: .9rem 0 0;
   line-height: 1.62;
-  color: #4a5b70;
 }
 .modern-solution-stack-card .abstract-visual-card {
   min-height: 2.3rem;
