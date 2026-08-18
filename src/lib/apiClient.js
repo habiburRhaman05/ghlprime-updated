@@ -8,9 +8,8 @@
 // need an absolute URL. In production the API is always reverse-proxied
 // through the same Nginx host that serves the static site, so a relative
 // path works on any domain it's deployed to (dev/stg/prod) with no rebuild.
-export const API_BASE_URL = (
-  import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5013' : '')
-).replace(/\/$/, '')
+export const API_BASE_URL = 
+  process.env.VITE_API_URL || 'http://localhost:5013' 
 
 const TOKEN_STORAGE_KEY = 'ghlprime_admin_token'
 

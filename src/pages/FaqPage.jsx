@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+'use client'
+
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
@@ -9,21 +10,7 @@ import { PAGE_FAQS } from '../data/faqs'
 export default function FaqPage() {
   return (
     <main className="faq-page">
-      <Helmet>
-        <title>GoHighLevel Expert FAQ GHL Prime Answers Your Questions</title>
-        <meta name="description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime pricing, process, white-label, AI agents, SaaS Mode, and more." />
-        <meta name="keywords" content="GoHighLevel FAQ, GHL Prime FAQ, GoHighLevel help, white-label support questions, GoHighLevel agency FAQ" />
-        <link rel="canonical" href="https://ghlprime.com/faq" />
-        <meta property="og:title" content="GoHighLevel Expert FAQ GHL Prime Answers Your Questions" />
-        <meta property="og:description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime pricing, process, white-label, AI agents, SaaS Mode, and more." />
-        <meta property="og:url" content="https://ghlprime.com/faq" />
-        <meta property="og:image" content="https://ghlprime.com/og-faq.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:image" content="https://ghlprime.com/og-faq.png" />
-        <meta name="twitter:title" content="GoHighLevel Expert FAQ GHL Prime Answers Your Questions" />
-        <meta name="twitter:description" content="Answers to the most common questions agencies and SaaS founders ask before hiring GHL Prime pricing, process, white-label, AI agents, SaaS Mode, and more." />
-        <meta name="last-modified" content="2026-05-31" />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           '@id': 'https://ghlprime.com/faq#breadcrumb',
@@ -31,8 +18,7 @@ export default function FaqPage() {
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com/' },
             { '@type': 'ListItem', position: 2, name: 'FAQ', item: 'https://ghlprime.com/faq' },
           ],
-        })}</script>
-      </Helmet>
+        }) }} />
 
       <section className="section section-white faq-hero">
         <div className="container">
@@ -44,8 +30,8 @@ export default function FaqPage() {
               If your question is not here, book a free call and ask us directly.
             </p>
             <div className="faq-hero-actions">
-              <Link to="/booking" className="primary-pill">Get a free consultation <ArrowRight size={16} /></Link>
-              <Link to="/services" className="secondary-pill">See services</Link>
+              <Link href="/booking" className="primary-pill">Get a free consultation <ArrowRight size={16} /></Link>
+              <Link href="/services" className="secondary-pill">See services</Link>
             </div>
           </motion.div>
         </div>
@@ -64,8 +50,8 @@ export default function FaqPage() {
             <h2>Still have questions?</h2>
             <p>Book a free discovery call and ask us anything. Same-day reply, no commitment.</p>
             <div className="final-cta-actions">
-              <Link to="/booking" className="primary-pill large">Book a free discovery call <ArrowRight size={16} /></Link>
-              <Link to="/contact" className="secondary-pill">Contact us</Link>
+              <Link href="/booking" className="primary-pill large">Book a free discovery call <ArrowRight size={16} /></Link>
+              <Link href="/contact" className="secondary-pill">Contact us</Link>
             </div>
           </div>
         </div>

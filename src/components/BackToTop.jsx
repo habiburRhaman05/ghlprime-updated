@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { usePathname } from 'next/navigation'
 import { ArrowUp } from 'lucide-react'
 import './back-to-top.css'
 
@@ -37,8 +39,8 @@ function usePrefersReducedMotion() {
 }
 
 export default function BackToTop() {
-  const location = useLocation()
-  const isAuthLayout = location.pathname === '/login' || location.pathname.startsWith('/admin')
+  const pathname = usePathname()
+  const isAuthLayout = pathname === '/login' || pathname.startsWith('/admin')
   const reduced = usePrefersReducedMotion()
   const [visible, setVisible] = useState(false)
   const [progress, setProgress] = useState(0)

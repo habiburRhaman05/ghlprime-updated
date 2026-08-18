@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { ArrowDown, ArrowUp, BarChart3, FilePlus2, Layers3, Link2, LogOut, Pencil, Plus, Save, Users, X } from 'lucide-react'
 import AdminShell from '../components/AdminShell'
 import ImageUrlField from '../components/admin/ImageUrlField'
@@ -357,7 +359,7 @@ export default function AdminTeamPage({ defaultTab = 'leaders' }) {
             <p>Leaders now support card-style profile info with social media links, while experts remain simple role cards.</p>
           </div>
           <div className="admin-top-actions">
-            <Link to="/admin/case-studies" className="secondary-pill">Back to Dashboard</Link>
+            <Link href="/admin/case-studies" className="secondary-pill">Back to Dashboard</Link>
           </div>
         </div>
 

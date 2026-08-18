@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { Bot, CheckCircle2, ExternalLink, Loader2, Play, XCircle } from 'lucide-react'
 import AdminShell from '../components/AdminShell'
 import { getSession, signOut } from '../lib/auth'
@@ -135,8 +137,8 @@ export default function AdminBlogAiPage() {
           <p>Generated posts save as drafts for review by default. Enable auto-publish below if you want them to go live automatically.</p>
         </div>
         <div className="admin-top-actions">
-          <Link to="/admin/blog" className="secondary-pill">Blog Library</Link>
-          <Link to="/admin/ai-connections" className="secondary-pill">AI Connections</Link>
+          <Link href="/admin/blog" className="secondary-pill">Blog Library</Link>
+          <Link href="/admin/ai-connections" className="secondary-pill">AI Connections</Link>
           <button type="button" className="primary-pill" onClick={handleRunNow} disabled={runningNow}>
             {runningNow ? <><Loader2 size={16} className="admin-spin" /> Running...</> : <><Play size={16} /> Run Now</>}
           </button>
@@ -249,11 +251,11 @@ export default function AdminBlogAiPage() {
                   <td>{run.provider || ''}{run.account_label ? ` · ${run.account_label}` : ''}</td>
                   <td>
                     {run.blog_post_id && run.blog_post_published ? (
-                      <Link to={`/blog/${run.blog_post_slug}`} className="text-link admin-open-link">
+                      <Link href={`/blog/${run.blog_post_slug}`} className="text-link admin-open-link">
                         {run.blog_post_title || 'View post'} <ExternalLink size={13} />
                       </Link>
                     ) : run.blog_post_id ? (
-                      <Link to="/admin/blog" className="text-link admin-open-link">
+                      <Link href="/admin/blog" className="text-link admin-open-link">
                         {run.blog_post_title || 'Draft saved'} (draft review in Blog Library)
                       </Link>
                     ) : (

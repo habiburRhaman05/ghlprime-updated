@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { ArrowRight, CalendarCheck2, Clock3, Code2, Contact, ShieldCheck, TrendingUp, Users } from 'lucide-react'
 
 export default function WhyChooseSection() {
@@ -89,7 +89,7 @@ export default function WhyChooseSection() {
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.45, delay: 0.15 }}
         >
-          <Link to="/booking" className="primary-pill large why-choose-reference-cta">
+          <Link href="/booking" className="primary-pill large why-choose-reference-cta">
             <CalendarCheck2 size={18} />
             Book a Free Call
             <ArrowRight size={16} />

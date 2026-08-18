@@ -1,7 +1,8 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Helmet } from 'react-helmet-async'
 import { ArrowRight, Bot, CheckCircle2, LayoutGrid, ShieldCheck, Sparkles, Workflow } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
@@ -70,33 +71,19 @@ export default function AboutPage() {
 
   return (
     <main className="about-page about-redesign-page">
-      <Helmet>
-        <title>About GHL Prime Your GoHighLevel Backend Team</title>
-        <meta name="description" content="GHL Prime is a dedicated GoHighLevel agency built to serve other agencies. Strategy-led delivery, GHL-certified specialists, and fully white-labeled execution." />
-        <meta name="keywords" content="about GHL Prime, GoHighLevel expert team, GoHighLevel certified agency, GoHighLevel specialists, white-label CRM team" />
-        <link rel="canonical" href="https://ghlprime.com/about" />
-        <meta property="og:title" content="About GHL Prime Your GoHighLevel Backend Team" />
-        <meta property="og:description" content="GHL Prime is a dedicated GoHighLevel agency built to serve other agencies. Strategy-led delivery, GHL-certified specialists, and fully white-labeled execution." />
-        <meta property="og:url" content="https://ghlprime.com/about" />
-        <meta property="og:image" content="https://ghlprime.com/og-about.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:image" content="https://ghlprime.com/og-about.png" />
-        <meta name="twitter:title" content="About GHL Prime Your GoHighLevel Backend Team" />
-        <meta name="twitter:description" content="GHL Prime is a dedicated GoHighLevel agency built to serve other agencies. Strategy-led delivery, GHL-certified specialists, and fully white-labeled execution." />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com' },
             { '@type': 'ListItem', position: 2, name: 'About', item: 'https://ghlprime.com/about' },
           ],
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify([
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([
           { '@context': 'https://schema.org', '@type': 'Person', name: 'Jewel Rana', image: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69a7daecb701feb9ee7f20f7.png', jobTitle: 'CEO & Co-Founder', worksFor: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, sameAs: ['https://www.linkedin.com/in/thejewelrana/','https://www.facebook.com/thenewjewel','https://www.bokaboss.com/'] },
           { '@context': 'https://schema.org', '@type': 'Person', name: 'Niyamul Islam Sajal', image: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69a7daec618c8d0100ae531c.png', jobTitle: 'COO & Co-Founder', worksFor: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, sameAs: ['https://www.linkedin.com/in/niyamulislam/','https://www.facebook.com/niaymul.islam.2025/'] },
-        ])}</script>
-              <meta name="last-modified" content="2026-05-24" />
-        <script type="application/ld+json">{JSON.stringify({
+        ]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
           '@id': 'https://ghlprime.com/about#webpage',
@@ -109,8 +96,7 @@ export default function AboutPage() {
           datePublished: '2024-08-01',
           dateModified: '2026-05-24',
           speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.about-redesign-hero-copy p', '.faq-question', '.faq-answer'] },
-        })}</script>
-      </Helmet>
+        }) }} />
       <section className="about-redesign-hero">
         <div className="container about-redesign-hero-inner">
           <motion.div
@@ -126,8 +112,8 @@ export default function AboutPage() {
               and a more premium backend growth system powered by GoHighLevel.
             </p>
             <div className="about-redesign-hero-actions">
-              <Link to="/services" className="primary-pill large">Explore Services</Link>
-              <Link to="/booking" className="secondary-pill about-secondary-pill">Get a free consultation</Link>
+              <Link href="/services" className="primary-pill large">Explore Services</Link>
+              <Link href="/booking" className="secondary-pill about-secondary-pill">Get a free consultation</Link>
             </div>
           </motion.div>
         </div>
@@ -274,8 +260,8 @@ export default function AboutPage() {
               <h2>Explore the services, systems, and backend strategy behind GHL Prime.</h2>
             </div>
             <div className="final-cta-actions">
-              <Link to="/services" className="primary-pill large">Explore Services <ArrowRight size={16} /></Link>
-              <Link to="/booking" className="secondary-pill">Get a free consultation</Link>
+              <Link href="/services" className="primary-pill large">Explore Services <ArrowRight size={16} /></Link>
+              <Link href="/booking" className="secondary-pill">Get a free consultation</Link>
             </div>
           </motion.div>
         </div>

@@ -1,6 +1,11 @@
 /* Titles + section titles render in DM Sans; body text stays on the Inter
-   stack declared in :root below. */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+   stack declared in :root below. Both fonts are loaded via a <link
+   rel="stylesheet"> in app/layout.tsx's <head> rather than the @import this
+   file used to open with -- Next's Turbopack CSS bundler silently drops an
+   @import that isn't literally first in the merged output once this file is
+   combined with the other stylesheets layout.tsx imports, so the fonts never
+   downloaded. The <link> tag isn't subject to that and is what actually
+   loads them now; this file no longer needs to. */
 
 :root {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -111,6 +116,12 @@ button { font: inherit; }
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  /* The drawer below is a full-width grid item on its own row, and its
+     content widens the navbar's auto columns while open. Without this the
+     toggle sits at the START of its (inflated) cell and visibly slides
+     left the moment the menu opens. Anchoring it to the cell's end keeps
+     it pinned to the bar's right edge in both states. */
+  justify-self: end;
 }
 .mobile-menu-panel {
   grid-column: 1 / -1;
@@ -2057,7 +2068,7 @@ button { font: inherit; }
   .cta-glow.two { display: none; }
 }
 .site-footer { padding: 2rem 0 1.5rem; background: #0f2036; color: #dbe7f5; }
-.footer-grid { display: grid; grid-template-columns: 1.2fr .8fr .8fr; gap: 1.5rem; }
+.footer-grid { display: grid; grid-template-columns: 1.2fr -1fr .8fr; gap: 1.5rem; }
 .footer-mark { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 1rem; background: rgba(255,255,255,.08); font-weight: 800; margin-bottom: .8rem; }
 .footer-logo {
   height: 2.2rem;

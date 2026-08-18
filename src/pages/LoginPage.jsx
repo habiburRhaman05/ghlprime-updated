@@ -1,10 +1,12 @@
+'use client'
+
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { ArrowRight, LockKeyhole, ShieldCheck, Sparkles, UserCircle2 } from 'lucide-react'
 import { signInWithPassword } from '../lib/auth'
 
 export default function LoginPage() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -23,7 +25,7 @@ export default function LoginPage() {
     }
 
     setLoading(false)
-    navigate('/admin/case-studies')
+    router.push('/admin/case-studies')
   }
 
   return (

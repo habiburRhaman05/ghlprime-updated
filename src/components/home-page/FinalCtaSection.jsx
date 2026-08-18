@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 export default function FinalCtaSection() {
@@ -27,11 +27,11 @@ export default function FinalCtaSection() {
             <h2>You Close the Clients. We Handle Everything Else.</h2>
 
             <div className="final-cta-actions homepage-final-cta-actions">
-              <Link to="/booking" className="primary-pill large homepage-cta-btn">
+              <Link href="/booking" className="primary-pill large homepage-cta-btn">
                 Get a free consultation
                 <ArrowRight size={17} />
               </Link>
-              <Link to="/services" className="secondary-pill homepage-cta-btn secondary-homepage-cta-btn">See What We Do</Link>
+              <Link href="/services" className="secondary-pill homepage-cta-btn secondary-homepage-cta-btn">See What We Do</Link>
             </div>
           </div>
         </motion.div>

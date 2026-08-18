@@ -1,9 +1,12 @@
-﻿import { Link, useLocation } from 'react-router-dom'
+﻿'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 
 // Build date is injected by Vite (see define in vite.config.js) so this
 // never drifts from reality the way the old hand-edited constant did.
-const SITE_LAST_UPDATED = typeof __BUILD_DATE__ === 'string' ? __BUILD_DATE__ : new Date().toISOString().slice(0, 10)
+const SITE_LAST_UPDATED = typeof process.env.NEXT_PUBLIC_BUILD_DATE === 'string' ? process.env.NEXT_PUBLIC_BUILD_DATE : new Date().toISOString().slice(0, 10)
 const SITE_LAST_UPDATED_LABEL = new Date(SITE_LAST_UPDATED + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
 const CURRENT_YEAR = new Date().getFullYear()
 
@@ -57,7 +60,7 @@ const socialLinks = [
 ]
 
 export default function SiteFooter() {
-  const location = useLocation()
+  const pathname = usePathname()
 
   const handleFooterNavigate = () => {
     requestAnimationFrame(() => {
@@ -69,7 +72,7 @@ export default function SiteFooter() {
     <footer className="site-footer redesigned-footer">
       <div className="container footer-grid redesigned-footer-grid">
         <div className="footer-brand redesigned-footer-brand">
-          <Link to="/" aria-label="Go to homepage" className="footer-brand-logo-link" onClick={handleFooterNavigate}>
+          <Link href="/" aria-label="Go to homepage" className="footer-brand-logo-link" onClick={handleFooterNavigate}>
             <img className="footer-logo footer-logo-external" src="/footer-logo.png" alt="GHL Prime" />
           </Link>
           <p>Your dedicated GoHighLevel & automation expert team 24/7, fully white-labeled.</p>
@@ -87,13 +90,13 @@ export default function SiteFooter() {
           <ul>
             {footerCompany.map((item) => {
               const isHash = item.to.startsWith('/#')
-              const isSamePage = location.pathname === '/' && isHash
+              const isSamePage = pathname === '/' && isHash
               return (
                 <li key={item.label}>
                   {isSamePage ? (
                     <a href={item.to} onClick={handleFooterNavigate}>{item.label}</a>
                   ) : (
-                    <Link to={item.to} onClick={handleFooterNavigate}>{item.label}</Link>
+                    <Link href={item.to} onClick={handleFooterNavigate}>{item.label}</Link>
                   )}
                 </li>
               )
@@ -106,13 +109,13 @@ export default function SiteFooter() {
           <ul>
             {footerServices.map((item) => {
               const isHash = item.to.includes('#')
-              const isSamePage = location.pathname === '/services' && isHash
+              const isSamePage = pathname === '/services' && isHash
               return (
                 <li key={item.label}>
                   {isSamePage ? (
                     <a href={item.to.slice(item.to.indexOf('#'))} onClick={handleFooterNavigate}>{item.label}</a>
                   ) : (
-                    <Link to={item.to} onClick={handleFooterNavigate}>{item.label}</Link>
+                    <Link href={item.to} onClick={handleFooterNavigate}>{item.label}</Link>
                   )}
                 </li>
               )
@@ -151,8 +154,8 @@ export default function SiteFooter() {
         </div>
         <div className="footer-bottom-right">
           <div className="footer-legal-links">
-            <Link to="/privacy-policy" onClick={handleFooterNavigate}>Privacy Policy</Link>
-            <Link to="/terms" onClick={handleFooterNavigate}>Terms &amp; Conditions</Link>
+            <Link href="/privacy-policy" onClick={handleFooterNavigate}>Privacy Policy</Link>
+            <Link href="/terms" onClick={handleFooterNavigate}>Terms &amp; Conditions</Link>
             <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap</a>
             <a href="/robots.txt" target="_blank" rel="noopener noreferrer">Robots</a>
             <a href="/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a>

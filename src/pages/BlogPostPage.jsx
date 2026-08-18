@@ -1,6 +1,8 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import SiteFooter from '../components/SiteFooter'
 import { fetchBlogPostBySlug, fetchRelatedPosts } from '../lib/blogApi'
 import contentSnapshot from '../data/contentSnapshot.json'
@@ -73,10 +75,11 @@ export default function BlogPostPage() {
   if (status === 'loading' || isStalePost) {
     return (
       <main className="section section-white blog-post-page">
-        <Helmet>
-          <title>Loading post… | GHL Prime</title>
-          <meta name="robots" content="noindex" />
-        </Helmet>
+        {/* This transient loading title/robots was set via Helmet; it never
+            reaches a crawler (build-time generateMetadata in
+            app/blog/[slug]/page.tsx renders the real post metadata directly
+            for known slugs, or the not-found metadata otherwise) so it is not
+            ported. */}
         <div className="container client-study-state" role="status" aria-live="polite">
           <span className="client-study-state-spinner" aria-hidden="true" />
           <p className="client-study-state-text">Loading post…</p>
@@ -88,11 +91,8 @@ export default function BlogPostPage() {
   if (status === 'notfound' || !post) {
     return (
       <main className="section section-white blog-post-page">
-        <Helmet>
-          <title>Post not found | GHL Prime</title>
-          <meta name="description" content="The blog post you're looking for could not be found. Browse all GHL Prime GoHighLevel guides, tutorials, and case studies." />
-          <meta name="robots" content="noindex, follow" />
-        </Helmet>
+        {/* Not-found title/description/robots ported to app/blog/[slug]/page.tsx's
+            generateMetadata fallback branch. */}
         <div className="container client-study-notfound">
           <span className="eyebrow-label">404 Blog</span>
           <h1>Post not found</h1>
@@ -101,8 +101,8 @@ export default function BlogPostPage() {
             published yet. Explore our other GoHighLevel guides and case studies instead.
           </p>
           <div className="client-study-notfound-actions">
-            <Link to="/blog" className="primary-pill large">Browse all posts</Link>
-            <Link to="/booking" className="secondary-pill">Book a free consultation</Link>
+            <Link href="/blog" className="primary-pill large">Browse all posts</Link>
+            <Link href="/booking" className="secondary-pill">Book a free consultation</Link>
           </div>
         </div>
         <SiteFooter />
@@ -119,23 +119,10 @@ export default function BlogPostPage() {
 
   return (
     <main className="section section-white blog-post-page">
-      <Helmet>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDescription} />
-        <meta name="keywords" content={post.seo_keywords || [post.category, 'GoHighLevel', 'GHL Prime'].filter(Boolean).join(', ')} />
-        <link rel="canonical" href={canonical} />
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:url" content={canonical} />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content={shareImage} />
-        <meta property="article:published_time" content={post.published_at} />
-        <meta property="article:modified_time" content={post.updated_at || post.published_at} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metaTitle} />
-        <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:image" content={shareImage} />
-        <script type="application/ld+json">{JSON.stringify({
+      {/* title/description/keywords/canonical/og:* and twitter:* now come from
+          app/blog/[slug]/page.tsx's generateMetadata (same values, computed
+          the same way). JSON-LD stays here, unchanged. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BlogPosting',
           '@id': canonical + '#article',
@@ -154,8 +141,8 @@ export default function BlogPostPage() {
           articleSection: post.category,
           inLanguage: 'en-US',
           isPartOf: { '@id': 'https://ghlprime.com/#website' },
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
@@ -163,14 +150,13 @@ export default function BlogPostPage() {
             { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://ghlprime.com/blog' },
             { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
           ],
-        })}</script>
-      </Helmet>
+        }) }} />
 
       <article className="container blog-article">
         <nav className="blog-breadcrumb" aria-label="Breadcrumb">
-          <Link to="/">Home</Link>
+          <Link href="/">Home</Link>
           <span aria-hidden="true">/</span>
-          <Link to="/blog">Blog</Link>
+          <Link href="/blog">Blog</Link>
           <span aria-hidden="true">/</span>
           <span className="blog-breadcrumb-current">{post.title}</span>
         </nav>
@@ -204,7 +190,7 @@ export default function BlogPostPage() {
             <div className="blog-grid">
               {relatedPosts.map((related) => (
                 <article key={related.slug} className="blog-card">
-                  <Link to={`/blog/${related.slug}`} className="blog-card-link" aria-label={`Read ${related.title}`}>
+                  <Link href={`/blog/${related.slug}`} className="blog-card-link" aria-label={`Read ${related.title}`}>
                     {related.cover_image ? (
                       <div className="blog-card-image-wrap">
                         <img src={related.cover_image} alt={related.title} className="blog-card-image" loading="lazy" decoding="async" onError={(e) => { e.currentTarget.parentElement.style.display = 'none' }} />
@@ -234,7 +220,7 @@ export default function BlogPostPage() {
         <section className="blog-cta-box">
           <h2>Need help implementing this in GoHighLevel?</h2>
           <p>Our team builds, automates, and scales GoHighLevel systems for agencies every day. Book a free call and we'll map out exactly what to ship next.</p>
-          <Link to="/booking" className="primary-pill large">Book a free call</Link>
+          <Link href="/booking" className="primary-pill large">Book a free call</Link>
         </section>
       </article>
 

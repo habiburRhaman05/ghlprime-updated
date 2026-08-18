@@ -1,6 +1,6 @@
 ﻿import ServiceDetailTemplate from '../components/ServiceDetailTemplate'
 
-const config = {
+export const config = {
   slug: '/services/ghl-setup',
   category: 'GoHighLevel',
   breadcrumbName: 'GHL Setup & Configuration',

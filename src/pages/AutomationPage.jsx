@@ -1,6 +1,6 @@
 ﻿import ServiceDetailTemplate from '../components/ServiceDetailTemplate'
 
-const config = {
+export const config = {
   slug: '/services/automation',
   category: 'GoHighLevel',
   breadcrumbName: 'Workflow Automation',

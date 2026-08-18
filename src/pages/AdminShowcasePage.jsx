@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { BarChart3, Boxes, Pencil, Plus, Sparkles, Trash2, X } from 'lucide-react'
 import AdminShell from '../components/AdminShell'
 import Modal from '../components/admin/Modal'
@@ -271,7 +273,7 @@ export default function AdminShowcasePage() {
           <p>Add origin-to-enterprise pairs, then choose which pages show them (Homepage and each service page) and in what order.</p>
         </div>
         <div className="admin-top-actions">
-          <Link to="/" className="secondary-pill">View Homepage</Link>
+          <Link href="/" className="secondary-pill">View Homepage</Link>
         </div>
       </div>
 

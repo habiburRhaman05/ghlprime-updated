@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import './life-at-ghl.css'
 
 // TODO: swap for real team/culture photos via the Admin > Gallery manager
@@ -188,7 +188,7 @@ export default function LifeAtGHL() {
       </div>
 
       <div className="container life-at-ghl-cta-row">
-        <Link to="/gallery" className="secondary-pill">See Full Gallery</Link>
+        <Link href="/gallery" className="secondary-pill">See Full Gallery</Link>
       </div>
     </section>
   )

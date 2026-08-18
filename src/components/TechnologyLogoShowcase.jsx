@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { CalendarCheck2, ShieldCheck, TrendingUp, Users, Zap } from 'lucide-react'
 import { fetchTechnologyLogos } from '../lib/technologyLogosApi'

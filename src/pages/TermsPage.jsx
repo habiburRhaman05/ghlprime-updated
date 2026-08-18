@@ -1,28 +1,17 @@
-import { Helmet } from 'react-helmet-async'
 import SiteFooter from '../components/SiteFooter'
 
 export default function TermsPage() {
   return (
     <main className="section section-white">
-      <Helmet>
-        <title>Terms &amp; Conditions | GHL Prime</title>
-        <meta name="description" content="The Terms & Conditions governing your use of the GHL Prime LLC website and engagement of our GoHighLevel, automation, AI, and custom development services." />
-        <meta name="keywords" content="GHL Prime terms and conditions, service terms, terms of use" />
-        <link rel="canonical" href="https://ghlprime.com/terms" />
-        <meta property="og:title" content="Terms &amp; Conditions | GHL Prime" />
-        <meta property="og:description" content="The Terms & Conditions governing your use of the GHL Prime LLC website and engagement of our GoHighLevel, automation, AI, and custom development services." />
-        <meta property="og:url" content="https://ghlprime.com/terms" />
-        <meta property="og:type" content="website" />
-        <meta name="last-modified" content="2026-06-02" />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com/' },
             { '@type': 'ListItem', position: 2, name: 'Terms & Conditions', item: 'https://ghlprime.com/terms' },
           ],
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           url: 'https://ghlprime.com/terms',
@@ -31,8 +20,7 @@ export default function TermsPage() {
           isPartOf: { '@id': 'https://ghlprime.com/#website' },
           datePublished: '2024-08-01',
           dateModified: '2026-06-02',
-        })}</script>
-      </Helmet>
+        }) }} />
       <div className="container" style={{ maxWidth: '860px' }}>
         <span className="eyebrow-label">Terms &amp; Conditions</span>
         <h1>Terms &amp; Conditions</h1>

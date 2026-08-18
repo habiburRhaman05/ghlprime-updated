@@ -1,4 +1,8 @@
-import { Link, Navigate, useLocation } from 'react-router-dom'
+'use client'
+
+import { useEffect } from 'react'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { BarChart3, Bot, Boxes, Images, FilePlus2, Image as ImageIcon, Layers3, Link2, LogOut, Newspaper, Plug, Users, Wrench } from 'lucide-react'
 
 const navGroups = [
@@ -27,7 +31,7 @@ const navGroups = [
 ]
 
 function AdminSidebar({ email, onSignOut }) {
-  const location = useLocation()
+  const pathname = usePathname()
 
   return (
     <aside className="admin-sidebar-panel refined-admin-sidebar">
@@ -46,9 +50,9 @@ function AdminSidebar({ email, onSignOut }) {
             <div className="admin-nav-stack">
               {group.items.map((item) => {
                 const Icon = item.icon
-                const isActive = location.pathname === item.to
+                const isActive = pathname === item.to
                 return (
-                  <Link key={item.label} to={item.to} className={`admin-nav-item ${isActive ? 'active' : ''}`}>
+                  <Link key={item.label} href={item.to} className={`admin-nav-item ${isActive ? 'active' : ''}`}>
                     <Icon size={17} /> {item.label}
                   </Link>
                 )
@@ -67,13 +71,24 @@ function AdminSidebar({ email, onSignOut }) {
   )
 }
 
+// react-router's <Navigate replace /> redirected on mount without pushing a
+// history entry; router.replace() in an effect is the next/navigation
+// equivalent inside a client component.
+function RedirectToLogin() {
+  const router = useRouter()
+  useEffect(() => {
+    router.replace('/login')
+  }, [router])
+  return null
+}
+
 export default function AdminShell({ session, onSignOut, children, loadingText = 'Loading admin panel...' }) {
   if (session === undefined) {
     return <main className="admin-shell"><div className="admin-loading">{loadingText}</div></main>
   }
 
   if (!session) {
-    return <Navigate to="/login" replace />
+    return <RedirectToLogin />
   }
 
   return (

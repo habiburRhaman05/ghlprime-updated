@@ -1,5 +1,4 @@
-import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import SiteFooter from '../components/SiteFooter'
 
 // Rendered for any route the router does not match. Carries noindex so search
@@ -9,12 +8,7 @@ import SiteFooter from '../components/SiteFooter'
 export default function NotFoundPage() {
   return (
     <main className="section section-white">
-      <Helmet>
-        <title>Page Not Found (404) | GHL Prime</title>
-        <meta name="description" content="This page does not exist. Browse GoHighLevel services, case studies, and guides from the GHL Prime team instead." />
-        <meta name="robots" content="noindex,follow" />
-        <meta name="googlebot" content="noindex,follow" />
-      </Helmet>
+      
 
       <div className="container" style={{ paddingTop: '4rem', paddingBottom: '4rem', maxWidth: '46rem' }}>
         <span className="eyebrow-label">404</span>
@@ -25,15 +19,15 @@ export default function NotFoundPage() {
         </p>
         <p>Here are the places people usually want:</p>
         <ul>
-          <li><Link to="/services">GoHighLevel services</Link> setup, automation, AI agents, and white-label support</li>
-          <li><Link to="/case-studies">Case studies</Link> real builds and what they changed</li>
-          <li><Link to="/blog">Blog</Link> guides on GoHighLevel, automation, and AI</li>
-          <li><Link to="/faq">FAQ</Link> common questions before working with us</li>
-          <li><Link to="/contact">Contact</Link> talk to the team</li>
+          <li><Link href="/services">GoHighLevel services</Link> setup, automation, AI agents, and white-label support</li>
+          <li><Link href="/case-studies">Case studies</Link> real builds and what they changed</li>
+          <li><Link href="/blog">Blog</Link> guides on GoHighLevel, automation, and AI</li>
+          <li><Link href="/faq">FAQ</Link> common questions before working with us</li>
+          <li><Link href="/contact">Contact</Link> talk to the team</li>
         </ul>
         <div className="team-edit-actions" style={{ marginTop: '1.5rem' }}>
-          <Link to="/" className="primary-pill large">Back to homepage</Link>
-          <Link to="/booking" className="secondary-pill">Get a free consultation</Link>
+          <Link href="/" className="primary-pill large">Back to homepage</Link>
+          <Link href="/booking" className="secondary-pill">Get a free consultation</Link>
         </div>
       </div>
 

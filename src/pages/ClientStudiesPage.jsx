@@ -1,6 +1,7 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import Link from 'next/link'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { CASE_STUDIES_FAQS } from '../data/faqs'
@@ -50,29 +51,15 @@ export default function ClientStudiesPage() {
 
   return (
     <main className="client-studies-page">
-      <Helmet>
-        <title>GoHighLevel Case Studies Real Agency Results | GHL Prime</title>
-        <meta name="description" content="See how GHL Prime built Voice AI systems, CRM migrations, n8n automations, and AI agents for agencies across home services, SaaS, real estate, and e-commerce." />
-        <meta name="keywords" content="GoHighLevel case studies, GHL automation results, agency case studies, GoHighLevel success stories, automation case studies" />
-        <link rel="canonical" href="https://ghlprime.com/case-studies" />
-        <meta property="og:title" content="GoHighLevel Case Studies Real Agency Results | GHL Prime" />
-        <meta property="og:description" content="See how GHL Prime built Voice AI systems, CRM migrations, n8n automations, and AI agents for agencies across home services, SaaS, real estate, and e-commerce." />
-        <meta property="og:url" content="https://ghlprime.com/case-studies" />
-        <meta property="og:image" content="https://ghlprime.com/og-case-studies.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="GoHighLevel Case Studies Real Agency Results | GHL Prime" />
-        <meta name="twitter:description" content="See how GHL Prime built Voice AI systems, CRM migrations, n8n automations, and AI agents for agencies across home services, SaaS, real estate, and e-commerce." />
-        <meta name="twitter:image" content="https://ghlprime.com/og-case-studies.png" />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com' },
             { '@type': 'ListItem', position: 2, name: 'Case Studies', item: 'https://ghlprime.com/case-studies' },
           ],
-        })}</script>
-              <meta name="last-modified" content="2026-05-24" />
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           '@id': 'https://ghlprime.com/case-studies#webpage',
@@ -84,8 +71,7 @@ export default function ClientStudiesPage() {
           about: { '@id': 'https://ghlprime.com/#organization' },
           datePublished: '2024-08-01',
           dateModified: '2026-05-24',
-        })}</script>
-      </Helmet>
+        }) }} />
       <section className="section section-white client-studies-hero">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
@@ -113,7 +99,7 @@ export default function ClientStudiesPage() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
               >
-                <Link to={`/case-studies/${safeSlug(study.slug)}`} className="client-study-card-link" aria-label={`Read the ${study.title} case study`}>
+                <Link href={`/case-studies/${safeSlug(study.slug)}`} className="client-study-card-link" aria-label={`Read the ${study.title} case study`}>
                   <div className="client-study-image-wrap compact">
                     <img src={study.image} alt={study.title} className="client-study-image" loading="lazy" decoding="async" />
                   </div>
@@ -139,8 +125,8 @@ export default function ClientStudiesPage() {
             <h2>Want a similar system for your business?</h2>
             <p>Let's discuss how GHL Prime can transform your workflows, automate your processes, and scale your operations.</p>
             <div className="final-cta-actions">
-              <Link to="/booking" className="primary-pill large">Get a free consultation</Link>
-              <Link to="/team" className="secondary-pill">Meet the Team</Link>
+              <Link href="/booking" className="primary-pill large">Get a free consultation</Link>
+              <Link href="/team" className="secondary-pill">Meet the Team</Link>
             </div>
           </div>
         </div>

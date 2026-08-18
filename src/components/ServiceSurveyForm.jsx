@@ -1,5 +1,7 @@
+'use client'
+
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { ArrowRight, ArrowLeft, Check } from 'lucide-react'
 import './service-survey.css'
 
@@ -99,7 +101,7 @@ export default function ServiceSurveyForm({ form, slug }) {
           <div className="svf-success-icon"><Check size={26} /></div>
           <h3 className="svf-success-title">{form.success.title}</h3>
           <p className="svf-success-sub">{form.success.subtitle}</p>
-          <Link to={form.success.ctaTo || '/booking'} className="svf-cal-btn">
+          <Link href={form.success.ctaTo || '/booking'} className="svf-cal-btn">
             {form.success.ctaLabel} <ArrowRight size={16} />
           </Link>
         </div>

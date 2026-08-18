@@ -9,8 +9,8 @@ import { fetchGalleryImages } from '../../lib/galleryApi'
 // the section looks identical to before on its opening frame.
 const WHAT_WE_ARE_FALLBACK_SLIDES = [
 
-  { id: 'wwa-ph-1', image_url: '/GHL Organized FIle (1).png', title: 'The GHL Prime team' },
   { id: 'wwa-ph-2', image_url: '/GHL Organized FIle (2).png', title: 'The GHL Prime team' },
+  { id: 'wwa-ph-1', image_url: '/GHL Organized FIle (1).png', title: 'The GHL Prime team' },
   { id: 'wwa-ph-3', image_url: '/GHL Organized FIle (3).png', title: 'The GHL Prime team' },
 ]
 
@@ -92,10 +92,27 @@ function WhatWeAreSlider() {
 
   // Apply a cached ratio the moment the slide changes, so a revisited image
   // resizes the frame instantly rather than waiting on another load event.
+  // When nothing is cached yet (the FIRST slide on a fresh page load) the
+  // <img> onLoad can be missed: a cache-served image can finish loading
+  // before React attaches the listener, leaving the frame stuck on the
+  // default ratio. Probing with a fresh Image() -- listener attached before
+  // src is set -- measures the file independently so the frame still snaps
+  // to the photo's real shape.
   useEffect(() => {
-    const cached = ratioCache.current[active?.image_url]
-    if (cached) setRatio(cached)
-  }, [active])
+    const url = active?.image_url
+    if (!url) return
+    const cached = ratioCache.current[url]
+    if (cached) {
+      setRatio(cached)
+      return
+    }
+    const probe = new Image()
+    probe.onload = () => {
+      const measured = rememberRatio(url, probe.naturalWidth, probe.naturalHeight)
+      if (measured) setRatio(measured)
+    }
+    probe.src = url
+  }, [active, rememberRatio])
 
   return (
     <div

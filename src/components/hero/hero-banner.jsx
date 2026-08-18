@@ -3,7 +3,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import HeroAutomationCore from './HeroAutomationCore'
 import { ArrowRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 const HeroBanner = ({activePill,rotatingPills}) => {
   return (
      <section className="hero container homepage-hero-v3">
@@ -38,7 +38,11 @@ const HeroBanner = ({activePill,rotatingPills}) => {
               <span className="hh-line">
                 <span className="homepage-hero-ghl-inline">
                   <span className="homepage-hero-ghl-word"><span className="ghl-go">Go</span><span className="ghl-high">High</span><span className="ghl-level">Level</span></span>
-                  <span className="hh-accent-word">Automation<span className="hh-accent-sweep" aria-hidden="true" /></span>{' '}
+                  <span className="hh-accent-word">Automation
+                    
+                    {/* <span className="hh-accent-sweep" aria-hidden="true" /> */}
+                    
+                    </span>{' '}
                 </span>
               </span>
               <span className="hh-line">
@@ -56,7 +60,7 @@ const HeroBanner = ({activePill,rotatingPills}) => {
                 Hire Your Expert Team
                 <ArrowRight size={17} />
               </a>
-              <Link to="/services" className="secondary-pill hh-cta-ghost">
+              <Link href="/services" className="secondary-pill hh-cta-ghost">
                 See What We Do
                 <ArrowRight size={16} />
               </Link>

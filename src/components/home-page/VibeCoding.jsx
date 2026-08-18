@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { LayoutDashboard, RefreshCw, Share2, Sparkles, Webhook, Zap } from 'lucide-react'
 import './vibe-coding.css'
 
@@ -256,7 +256,7 @@ export default function VibeCoding() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.28, ease: EASE }}
           >
-            <Link to="/booking" className="primary-pill large vibe-cta-premium" onClick={handleCtaRipple}>
+            <Link href="/booking" className="primary-pill large vibe-cta-premium" onClick={handleCtaRipple}>
               Talk to Our Dev Team
               {rippleStyle ? <span className="vibe-cta-ripple" style={rippleStyle} aria-hidden="true" /> : null}
             </Link>

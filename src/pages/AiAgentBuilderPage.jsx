@@ -1,6 +1,6 @@
 ﻿import ServiceDetailTemplate from '../components/ServiceDetailTemplate'
 
-const config = {
+export const config = {
   slug: '/services/ai-agent-builder',
   category: 'Vibe Coding & AI Dev',
   breadcrumbName: 'AI Agent Builder',

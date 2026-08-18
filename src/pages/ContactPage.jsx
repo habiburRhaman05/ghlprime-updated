@@ -1,6 +1,7 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
+import { useRouter } from 'next/navigation'
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 
@@ -120,7 +121,7 @@ function RadioGroup({ name, question, value, onChange }) {
 }
 
 export default function ContactPage() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [step, setStep] = useState(1)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
@@ -189,7 +190,7 @@ export default function ContactPage() {
           biggest_challenge: form.challenge || null,
         }),
       })
-      navigate('/contact/thank-you')
+      router.push('/contact/thank-you')
     } catch (err) {
       setSubmitError('Something went wrong sending your request. Please try again or email info@ghlprime.com.')
       setSubmitting(false)
@@ -208,28 +209,15 @@ export default function ContactPage() {
 
   return (
     <main className="contact-page">
-      <Helmet>
-        <title>Contact GHL Prime Hire a GoHighLevel Expert Team</title>
-        <meta name="description" content="Contact GHL Prime to hire a dedicated GoHighLevel expert for CRM setup, automation, AI agents, and white-label support. Based in Albuquerque, NM." />
-        <meta name="keywords" content="contact GHL Prime, hire GoHighLevel expert, GoHighLevel agency contact, GoHighLevel support" />
-        <link rel="canonical" href="https://ghlprime.com/contact" />
-        <meta property="og:title" content="Contact GHL Prime Hire a GoHighLevel Expert Team" />
-        <meta property="og:description" content="Contact GHL Prime to hire a dedicated GoHighLevel expert for CRM setup, automation, AI agents, and white-label support. Based in Albuquerque, NM." />
-        <meta property="og:url" content="https://ghlprime.com/contact" />
-        <meta property="og:image" content="https://ghlprime.com/og-contact.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:image" content="https://ghlprime.com/og-contact.png" />
-        <meta name="twitter:title" content="Contact GHL Prime Hire a GoHighLevel Expert Team" />
-        <meta name="twitter:description" content="Contact GHL Prime to hire a dedicated GoHighLevel expert for CRM setup, automation, AI agents, and white-label support. Based in Albuquerque, NM." />
-        <script type="application/ld+json">{JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ghlprime.com' },
             { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://ghlprime.com/contact' },
           ],
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'ProfessionalService',
           name: 'GHL Prime',
@@ -245,9 +233,8 @@ export default function ContactPage() {
           },
           areaServed: 'US',
           priceRange: '$$',
-        })}</script>
-              <meta name="last-modified" content="2026-05-24" />
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'ContactPage',
           '@id': 'https://ghlprime.com/contact#webpage',
@@ -260,8 +247,8 @@ export default function ContactPage() {
           datePublished: '2024-08-01',
           dateModified: '2026-05-24',
           mainEntity: { '@id': 'https://ghlprime.com/#localbusiness' },
-        })}</script>
-        <script type="application/ld+json">{JSON.stringify({
+        }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'LocalBusiness',
           '@id': 'https://ghlprime.com/#localbusiness',
@@ -286,8 +273,7 @@ export default function ContactPage() {
           },
           priceRange: '$$',
           areaServed: ['US', 'CA', 'GB', 'AU'],
-        })}</script>
-      </Helmet>
+        }) }} />
 
       <section className="section section-white contact-page-section">
         <div className="container contact-page-grid contact-page-grid-embed">

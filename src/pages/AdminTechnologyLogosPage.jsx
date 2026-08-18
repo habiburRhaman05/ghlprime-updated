@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { Pencil, Plus, Trash2, Wrench, X } from 'lucide-react'
 import AdminShell from '../components/AdminShell'
