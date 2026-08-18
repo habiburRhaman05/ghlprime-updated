@@ -25,7 +25,7 @@ export const teamMembers = [
   {
     id: 'niyamul-islam-sajal',
     name: 'Niyamul Islam Sajal',
-    role: 'Co-Founder',
+    role: 'COO & Co-Founder',
     badge_label: 'Automation Expert',
     badge_icon: 'rocket',
     years_experience: '3+',
