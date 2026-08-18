@@ -10,37 +10,31 @@ export default function WhyChooseSection() {
       title: 'GHL-Only Specialists',
       text: 'We don’t do everything. We focus exclusively on GHL and automation  which means you get depth, not breadth.',
       icon: ShieldCheck,
-      tone: 'blue',
     },
     {
       title: '24/7 Availability',
       text: 'Your agency doesn’t sleep. Neither do we. Expert support available around the clock for you and your clients.',
       icon: Clock3,
-      tone: 'green',
     },
     {
       title: 'Fully White-Labeled',
       text: 'We stay invisible. Your clients see your brand, your team, your expertise. We’re the engine room  you’re the front door.',
       icon: Contact,
-      tone: 'purple',
     },
     {
       title: 'Strategy-Led, Not Just Setup',
       text: 'We don’t just click buttons. We design workflows around your sales process and build systems that actually perform.',
       icon: TrendingUp,
-      tone: 'amber',
     },
     {
       title: 'We Train Your Team',
       text: 'We don’t keep you in the dark. We train you so you own your system, can speak to it confidently, and aren’t dependent on us forever.',
       icon: Users,
-      tone: 'teal',
     },
     {
       title: 'Vibe Coding Capability',
       text: 'When GHL can’t do it natively, we build it. Custom dev, API integrations, bespoke tools  no other GHL team offers this.',
       icon: Code2,
-      tone: 'pink',
     },
   ]
 
@@ -67,14 +61,14 @@ export default function WhyChooseSection() {
             return (
               <motion.div
                 key={item.title}
-                className={`why-choose-detail-card tone-${item.tone}`}
+                className="why-choose-detail-card"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -6 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: index * 0.05 }}
               >
-                <div className={`homepage-service-icon ${item.tone}`}><Icon size={19} /></div>
+                <div className="homepage-service-icon"><Icon size={19} /></div>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </motion.div>

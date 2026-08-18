@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Evidence visuals (.ev-*)  —  What We Handle cards
+   --------------------------------------------------------------------------
+   Small authentic UI fragments that sit at the head of each card, replacing
+   the generic icon tile. Same approach as TrainingMockups (.tm-*): DOM, not
+   images, with internal sizing in cqw off the frame so each visual scales as
+   one object rather than reflowing.
+   ========================================================================== */
+
+.ev-frame {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.15rem;
+  padding: 3.2cqw;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.ev-stack { display: grid; gap: 1.9cqw; }
+
+/* --- Header bar ----------------------------------------------------------- */
+.ev-bar { display: flex; align-items: center; justify-content: space-between; gap: 2cqw; }
+.ev-bar-title {
+  font-size: 3.1cqw;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+}
+.ev-live {
+  display: inline-flex; align-items: center; gap: 1.2cqw;
+  font-size: 2.6cqw; font-weight: 600; color: #15803d;
+}
+.ev-live i { width: 1.6cqw; height: 1.6cqw; border-radius: 50%; background: #16a34a; }
+.ev-pill-ok {
+  font-size: 2.5cqw; font-weight: 700; color: #15803d;
+  background: rgba(22, 163, 74, 0.1); border-radius: 999px; padding: 0.7cqw 2cqw;
+}
+
+/* --- Support queue rows --------------------------------------------------- */
+.ev-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2.2cqw;
+  padding: 1.9cqw 2cqw;
+  border-radius: 7px;
+  background: #f7f9fc;
+}
+.ev-av {
+  display: grid; place-items: center;
+  width: 6.4cqw; height: 6.4cqw; border-radius: 50%;
+  background: var(--navy); color: #fff;
+  font-size: 2.4cqw; font-weight: 700; letter-spacing: 0.02em;
+}
+.ev-av.lg { width: 8.2cqw; height: 8.2cqw; font-size: 2.8cqw; }
+.ev-av.ghost { background: #e6edf6; color: #5f7391; }
+.ev-row-copy { display: grid; gap: 0.5cqw; min-width: 0; }
+.ev-row-name { font-size: 2.8cqw; font-weight: 700; color: var(--navy); }
+.ev-row-sub {
+  font-size: 2.6cqw; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ev-time { font-size: 2.5cqw; font-weight: 700; color: var(--muted); }
+.ev-time.is-ok { color: #15803d; }
+
+/* --- Roster --------------------------------------------------------------- */
+.ev-avatars { display: flex; align-items: center; gap: 1.4cqw; }
+.ev-chips { display: flex; flex-wrap: wrap; gap: 1.4cqw; }
+.ev-chip {
+  font-size: 2.5cqw; font-weight: 600; color: #41546e;
+  background: #f1f5fa; border-radius: 999px; padding: 0.8cqw 2.2cqw;
+}
+
+/* --- Plans ---------------------------------------------------------------- */
+.ev-plan {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.9cqw 2.2cqw; border-radius: 7px;
+  background: #f7f9fc; border: 1px solid transparent;
+}
+/* One highlighted tier so the block reads as a real configured product
+   rather than three inert rows. */
+.ev-plan.is-on {
+  background: rgba(22, 132, 234, 0.07);
+  border-color: rgba(22, 132, 234, 0.28);
+}
+.ev-plan-name { font-size: 2.8cqw; font-weight: 700; color: var(--navy); }
+.ev-plan-price { font-size: 2.9cqw; font-weight: 700; color: var(--navy); }
+.ev-plan-price i { font-style: normal; font-weight: 600; color: var(--muted); font-size: 2.4cqw; }
+
+/* --- Repair steps --------------------------------------------------------- */
+.ev-step {
+  position: relative;
+  display: flex; align-items: center; gap: 2.2cqw;
+  padding: 1.7cqw 2.2cqw; border-radius: 7px; background: #f7f9fc;
+}
+.ev-step-dot { width: 2.4cqw; height: 2.4cqw; border-radius: 50%; flex-shrink: 0; background: #16a34a; }
+.ev-step.is-bad .ev-step-dot { background: #e0463c; }
+.ev-step.is-bad { background: rgba(224, 70, 60, 0.07); }
+.ev-step-label { font-size: 2.7cqw; font-weight: 600; color: var(--navy); }
+.ev-step.is-bad .ev-step-label { color: #b3352c; }
+
+/* --- Footer note ---------------------------------------------------------- */
+.ev-foot {
+  display: flex; align-items: center; gap: 1.4cqw;
+  margin-top: 0.4cqw;
+  font-size: 2.5cqw; font-weight: 600; color: var(--muted);
+}
+.ev-foot svg { flex-shrink: 0; color: #16a34a; }
+
+/* The frames sit inside cards that are already narrow on phones; shrinking
+   the frame padding keeps the fragment legible rather than letting the
+   internal cqw sizing collapse everything at once. */
+@media (max-width: 560px) {
+  .ev-frame { padding: 4cqw; }
+}
+
+/* --- Agent thread + dark variant ------------------------------------------
+   Used on the navy feature card, so the frame inverts: transparent shell,
+   light rules, message bubbles in two directions. */
+.ev-frame.is-dark {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.ev-frame.is-dark .ev-bar-title { color: #ffffff; }
+.ev-frame.is-dark .ev-live { color: #6ee7a8; }
+.ev-frame.is-dark .ev-live i { background: #34d399; }
+
+.ev-msg {
+  max-width: 74%;
+  padding: 2cqw 2.6cqw;
+  border-radius: 9px 9px 9px 3px;
+  font-size: 2.7cqw;
+  line-height: 1.45;
+  background: rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.82);
+}
+/* Agent replies align right and take the brand blue, so the exchange reads
+   as two participants rather than one list. */
+.ev-msg.is-agent {
+  margin-left: auto;
+  border-radius: 9px 9px 3px 9px;
+  background: var(--primary);
+  color: #ffffff;
+}
+.ev-agent-foot {
+  display: flex; flex-wrap: wrap; gap: 2cqw;
+  margin-top: 0.6cqw;
+}
+.ev-tick {
+  display: inline-flex; align-items: center; gap: 1.1cqw;
+  font-size: 2.5cqw; font-weight: 700;
+  color: #6ee7a8;
+}
+.ev-tick svg { flex-shrink: 0; }

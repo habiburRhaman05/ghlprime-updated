@@ -13,15 +13,11 @@ export default function FinalCtaSection() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55 }}
         >
-          {/* Decorative light sources -- see .premium-final-cta in App.css. */}
-          <span className="cta-glow one" aria-hidden="true" />
-          <span className="cta-glow two" aria-hidden="true" />
 
           <div className="premium-cta-inner">
-            {/* Primary mark (navy lettering) -- the one that reads on the
-                light panel. The /footer-logo.png variant is the light-text
-                version reserved for dark surfaces. */}
-            <img src="/ghl-prime-logo.png" alt="GHL Prime" className="premium-cta-logo" />
+            {/* Light-lettering variant -- the panel is navy, so the primary
+                /ghl-prime-logo.png (navy lettering) would be invisible on it. */}
+            <img src="/footer-logo.png" alt="GHL Prime" className="premium-cta-logo" />
 
             <span className="cta-label">Ready to scale delivery without doing it all yourself?</span>
             <h2>You Close the Clients. We Handle Everything Else.</h2>

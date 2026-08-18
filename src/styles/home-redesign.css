@@ -1,0 +1,673 @@
+/* ==========================================================================
+   Homepage redesign — agency-grade pass
+   --------------------------------------------------------------------------
+   WHY THIS FILE EXISTS
+   The homepage shares its primitives (.section, cards, icon tiles, shadows)
+   with /services, /about, /blog and the admin screens via App.css. The brief
+   is homepage-only, so nothing here may reach those routes: every selector
+   below is scoped under a section class that is rendered ONLY by
+   src/pages/HomePage.jsx (verified — see the plan). Editing the shared base
+   rules directly would have restyled half the site.
+
+   Imported last from HomePage.jsx. Selectors are also written section-scoped
+   (2+ classes) so they beat the single-class base rules on specificity, not
+   just on source order — Next's CSS chunking does not guarantee order across
+   separately-imported stylesheets.
+
+   THE DESIGN SYSTEM
+   Flat surfaces, hairline borders, no shadow at rest. One navy icon system —
+   never per-card hues. Amber (--accent) appears at most once per section.
+   Background rhythm runs white -> slate -> navy so the page has cadence when
+   scrolled rather than reading as one continuous white sheet.
+   ========================================================================== */
+
+:root {
+  /* The single approved addition: a lighter navy for layering INSIDE dark
+     bands (hover states, nested surfaces). Amber stays the only warm hue. */
+  --navy-700: #16304f;
+}
+
+/* --------------------------------------------------------------------------
+   1. Section rhythm
+   Every homepage section gets an explicit surface so no two adjacent
+   sections share one. Order down the page:
+     hero white / stats NAVY / trust slate / what-we-are white /
+     life slate / testimonials white / handle white+grid / needs NAVY /
+     training slate / vibe white / why-choose slate / mentors white /
+     certs slate / experts white / final-cta white(navy panel)
+   -------------------------------------------------------------------------- */
+
+.trust-band.premium-trust-band { background: var(--slate); }
+.what-we-are-section { background: #ffffff; }
+.life-at-ghl-section { background: var(--slate); }
+.tt-section { background: #ffffff; }
+.section.jr { background: var(--slate); }
+.section.vv2 { background: #ffffff; }
+.why-choose-reference-section { background: var(--slate); }
+.mentor-showcase-section.leader-card-section { background: #ffffff; }
+.experts-section { background: #ffffff; }
+.final-cta-section { background: #ffffff; }
+
+/* --------------------------------------------------------------------------
+   2. Resting-shadow purge
+   The single biggest "template" tell: every card floating on a soft shadow.
+   Cards sit flat on a hairline border instead; a tight shadow is allowed on
+   hover only (declared per-section below where it's wanted).
+   -------------------------------------------------------------------------- */
+
+.trust-band.premium-trust-band [class*="card"],
+.what-we-are-section [class*="card"],
+.life-at-ghl-section [class*="card"],
+.tt-section [class*="card"],
+.section.jr [class*="card"],
+.section.vv2 [class*="card"],
+.why-choose-reference-section [class*="card"],
+.mentor-showcase-section [class*="card"],
+.experts-section [class*="card"] {
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. Trust logos — flat marks on slate
+   The logos were each boxed in a white card with its own border and shadow,
+   which turned a row of mixed-shape marks into mismatched chips and put
+   white boxes on a white-ish band. Marks now sit directly on the slate,
+   desaturated, so the row reads as one continuous strip.
+   -------------------------------------------------------------------------- */
+
+.trust-band.premium-trust-band .logo-marquee-card {
+  min-width: 0;
+  min-height: 0;
+  padding: 0.5rem 2rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.trust-band.premium-trust-band .logo-marquee-image-only {
+  height: 2.15rem;
+  max-width: 9rem;
+  width: auto;
+  filter: grayscale(1);
+  opacity: 0.5;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.trust-band.premium-trust-band .logo-marquee-link:hover .logo-marquee-image-only {
+  filter: grayscale(0);
+  opacity: 1;
+}
+/* Slower marquee — the brief asks for an unhurried drift, and at the old
+   speed a short logo set reads as a ticker rather than a client roster. */
+.trust-band.premium-trust-band .logo-marquee-track {
+  animation-duration: 54s;
+}
+
+/* --------------------------------------------------------------------------
+   4. Testimonials — quote-led
+   Replaces the small filled quote-badge with an oversized typographic
+   quotation mark set behind the text: the editorial signal the brief asks
+   for, and it removes the last piece of "chip" chrome from the section.
+   -------------------------------------------------------------------------- */
+
+.tt-section .tt-quote { position: relative; }
+.tt-section .tt-badge {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: rgba(16, 37, 63, 0.07);
+  margin-bottom: 0;
+  /* Pulled out of flow so the quote text keeps its own rhythm and the mark
+     sits behind it rather than pushing it down the column. */
+  position: absolute;
+  top: -2.75rem;
+  left: -1.25rem;
+  z-index: 0;
+  pointer-events: none;
+}
+.tt-section .tt-badge svg {
+  width: clamp(5rem, 8vw, 7.5rem);
+  height: clamp(5rem, 8vw, 7.5rem);
+}
+.tt-section .tt-text,
+.tt-section .tt-meta { position: relative; z-index: 1; }
+
+/* --------------------------------------------------------------------------
+   5. Mentors — flat, photo-forward
+   Tighter radius and a hairline instead of the soft float. The photo runs
+   to the card's edges so the person leads, not the frame.
+   -------------------------------------------------------------------------- */
+
+.mentor-showcase-section .leader-profile-card {
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  box-shadow: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.mentor-showcase-section .leader-profile-card:hover {
+  border-color: rgba(16, 37, 63, 0.16);
+  /* Tight shadow on hover only — the one place a shadow is allowed. */
+  box-shadow: 0 10px 24px -12px rgba(16, 37, 63, 0.28);
+  transform: none;
+}
+.mentor-showcase-section .leader-badge-icon,
+.mentor-showcase-section .leader-exp {
+  box-shadow: none;
+  border: 1px solid var(--line);
+}
+.mentor-showcase-section .leader-social-link {
+  border-radius: 10px;
+  box-shadow: none;
+  border: 1px solid var(--line);
+}
+
+/* --------------------------------------------------------------------------
+   6. Life at GHL — editorial photo strip
+   The rows already vary card WIDTH (size-sm/md/lg/xl). What made them read
+   as a uniform tile band was equal HEIGHT plus a rounded, shadowed frame on
+   every one. Staggering height per size tier and dropping the float turns
+   the strip into an editorial contact sheet.
+   -------------------------------------------------------------------------- */
+
+.life-at-ghl-section .life-at-card {
+  border-radius: 10px;
+  box-shadow: none;
+  border: 1px solid var(--line-soft);
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+.life-at-ghl-section .life-at-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(16, 37, 63, 0.16);
+  box-shadow: none;
+}
+/* Staggered heights — the tiers already exist for width, so reusing them
+   costs no markup and guarantees the variation lands on the same cards the
+   width pattern already varies. */
+.life-at-ghl-section .life-at-card.size-sm { height: clamp(150px, 18vw, 210px); }
+.life-at-ghl-section .life-at-card.size-md { height: clamp(178px, 22vw, 264px); }
+.life-at-ghl-section .life-at-card.size-lg { height: clamp(160px, 19.5vw, 232px); }
+.life-at-ghl-section .life-at-card.size-xl { height: clamp(190px, 23.5vw, 280px); }
+/* Rows align to their own baseline so the uneven heights read as deliberate
+   stagger rather than as items failing to line up. */
+.life-at-ghl-section .life-at-row { align-items: flex-end; }
+.life-at-ghl-section .life-at-row-viewport:nth-child(2) .life-at-row { align-items: flex-start; }
+
+/* --------------------------------------------------------------------------
+   7. What We Are — navy offset frame
+   The slider sat in a soft-shadowed rounded card. It now sits flush against
+   a solid navy block offset behind it: the section's structural moment, and
+   the reason the photo no longer needs chrome of its own.
+   -------------------------------------------------------------------------- */
+
+.what-we-are-section .what-we-are-slider {
+  position: relative;
+  /* The base .what-we-are-image-card sets overflow:hidden, which clipped the
+     offset frame below (it deliberately extends past the slider on two
+     sides). Clipping now happens on .wwa-stage instead, which is what
+     actually needs it to round the photo. */
+  overflow: visible;
+  border-radius: 14px;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+/* The frame is a POSITIVE-z sibling layer, not a negative-z pseudo. A
+   negative z-index would paint behind .what-we-are-section`s own
+   background (set above), which is exactly where it disappeared to on the
+   first attempt -- it only works when the ancestor has no background. */
+.what-we-are-section .what-we-are-slider::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 1.15rem -1.15rem -1.15rem 1.15rem;
+  border-radius: 14px;
+  background: var(--navy);
+}
+.what-we-are-section .wwa-stage {
+  position: relative;
+  z-index: 1;
+  border-radius: 14px;
+  overflow: hidden;
+}
+/* Controls sit above the stage. */
+.what-we-are-section .wwa-dots,
+.what-we-are-section .wwa-arrow { z-index: 2; }
+
+/* Feature trio: one navy system. These were blue/green/purple tinted --
+   the clearest remaining rule-1 violation on the page. The .tone-* classes
+   still arrive from the component; they simply no longer carry a hue. */
+.what-we-are-section .wwa-feature {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: none;
+}
+.what-we-are-section .wwa-feature-icon {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--navy);
+}
+/* The section`s single amber moment. */
+.what-we-are-section .wwa-feature:first-child .wwa-feature-icon {
+  border-color: rgba(255, 122, 26, 0.5);
+  color: var(--accent);
+}
+.what-we-are-section .wwa-feature:hover {
+  border-color: rgba(16, 37, 63, 0.16);
+  transform: none;
+  background: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   8. Training + Vibe Coding — de-rainbowed, de-floated
+   These two keep their bespoke compositions (the scroll-drawn diagonal climb
+   and the full-width editor). They are already the least template-like
+   sections on the page; flattening them into generic left/right splits would
+   have made the page MORE uniform, not less — the opposite of the brief's
+   intent. What they did share with the template look was per-card hues and
+   floating chrome, and that is what changes here.
+   -------------------------------------------------------------------------- */
+
+/* One navy system: every outcome tile drops its own hue. */
+.section.jr .jr-outcome.tone-blue,
+.section.jr .jr-outcome.tone-indigo,
+.section.jr .jr-outcome.tone-sky,
+.section.jr .jr-outcome.tone-violet { --tone: var(--navy); }
+
+.section.jr .jr-outcome {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  box-shadow: none;
+}
+.section.jr .jr-outcome-icon {
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--navy);
+  box-shadow: none;
+}
+/* The section's single amber: the last outcome, which is the payoff line. */
+.section.jr .jr-outcome:last-child .jr-outcome-icon {
+  border-color: rgba(255, 122, 26, 0.5);
+  color: var(--accent);
+}
+
+.section.vv2 .vv2-card {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+.section.vv2 .vv2-card-icon {
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--navy);
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   9. Remaining resting shadows
+   Found by auditing computed styles on the rendered page
+   (scripts/audit-home.cjs) rather than by reading CSS, so this covers the
+   elements whose shadows came from shared base rules.
+
+   DELIBERATELY NOT TOUCHED, and why:
+   - the code editor's red/amber/green window dots (.section.vv2) and the
+     dashboard status dots (.tm-node-dot) are DEPICTING a product UI. They
+     are not decorative per-card hues, so rule 1 does not apply to them —
+     recolouring them navy would make the mockups look broken.
+   -------------------------------------------------------------------------- */
+
+/* Testimonial avatar rail */
+.tt-section .tt-face { box-shadow: none; }
+.tt-section .tt-face.is-active {
+  /* Active face keeps a ring, but as a flat outline rather than a glow. */
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary);
+}
+
+/* What We Handle — the bento cards must be flat for the deep-navy feature
+   card to be the only raised-feeling thing in the section. */
+.replacement-solutions-section .replacement-solution-card,
+.replacement-solutions-section .solution-icon-tile { box-shadow: none; }
+
+/* Training mockups: the frame is a product screenshot, so it keeps a defined
+   edge — as a hairline, not a drop shadow. */
+.section.jr .tm-frame {
+  box-shadow: none;
+  border: 1px solid var(--line);
+}
+.section.jr .tm-node,
+.section.jr .tm-stat { box-shadow: none; }
+
+/* Vibe Coding editor: same treatment — an object with an edge, not a float. */
+.section.vv2 .code-window.vv2-window {
+  box-shadow: none;
+  border: 1px solid rgba(148, 178, 214, 0.22);
+}
+
+/* CTA pills: the amber Final-CTA button is already flat, so the blue pills
+   elsewhere on the page match it rather than each carrying a coloured glow. */
+.section.vv2 .primary-pill,
+.why-choose-reference-section .primary-pill { box-shadow: none; }
+
+/* The bento feature card and its amber tile carried the page's heaviest
+   shadows (0 30px 60px / an amber glow). Their own selectors are 3-4 classes
+   deep, so matching that weight is required to flatten them -- the navy fill
+   already separates the card from the four white ones beside it without a
+   float. */
+.replacement-solutions-section .replacement-solution-card.modern-solution-stack-card.feature,
+.replacement-solutions-section .replacement-solution-card.modern-solution-stack-card.feature .solution-icon-tile {
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   10. Certifications — rhythm + flat badges
+   This component is ALSO rendered on /team, so it cannot be styled by its
+   own class. `.leader-card-section + .certifications-section` only matches
+   on the homepage, where Certifications follows Mentors — verified false on
+   /team. That keeps the rule homepage-only without touching the component.
+
+   Without this, Mentors -> Certifications -> Overview -> Experts ran four
+   white sections back to back, which is exactly the flat, rhythm-less scroll
+   the brief calls out.
+   -------------------------------------------------------------------------- */
+
+.leader-card-section + .certifications-section {
+  background: var(--slate);
+}
+.leader-card-section + .certifications-section .certifications-featured-card,
+.leader-card-section + .certifications-section .certification-item {
+  box-shadow: none;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+/* The overview band that follows returns to white, so the pair alternates
+   rather than doubling up. */
+.leader-card-section + .certifications-section + .certifications-overview-section {
+  background: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   11. Closing the remaining rhythm gaps
+   Measured with scripts/tmp-rhythm.cjs: three pairs of adjacent sections
+   still shared a surface. What We Handle keeps its faint grid texture — only
+   the surface under it moves to slate.
+
+   ShippedEvidence and Faq are rendered on other routes too, so they are
+   reached through a homepage-only sibling chain rather than by their own
+   class, the same technique used for Certifications above.
+   -------------------------------------------------------------------------- */
+
+/* Double-classed to match .section.replacement-solutions-section in
+   section-overrides.css, which sets the faint grid at (0,2,0). The grid
+   layers are preserved verbatim -- only the base colour under them moves
+   to slate, so the section still gets its texture but stops matching the
+   Testimonials band above it. */
+.section.replacement-solutions-section {
+  background:
+    linear-gradient(rgba(16, 37, 63, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 37, 63, 0.04) 1px, transparent 1px),
+    var(--slate);
+  background-size: 34px 34px, 34px 34px, auto;
+}
+.experts-section { background: var(--slate); }
+.case-studies-reference-section { background: #ffffff; }
+.case-studies-reference-section + .shipped-evidence-section { background: var(--slate); }
+.final-cta-section + .faq-section { background: var(--slate); }
+
+/* --------------------------------------------------------------------------
+   12. Agency Needs — card text on the navy surface
+   The cards moved from white to navy, but .homepage-service-card h3/p still
+   carried the dark ink they were written for (#0f2035 / #4a5b70), leaving
+   the copy all but invisible. Caught in the section screenshot, not in CSS
+   review — the contrast failure is only obvious once rendered.
+   -------------------------------------------------------------------------- */
+
+.agency-needs-section .homepage-service-card h3 { color: #ffffff; }
+.agency-needs-section .homepage-service-card p { color: rgba(255, 255, 255, 0.66); }
+
+/* --------------------------------------------------------------------------
+   13. What We Are — editorial upgrade
+   The three outlined boxes were the page's THIRD grid of small bordered
+   tiles (Why Choose and Agency Needs already use that shape), and they left
+   the copy column short against a tall image. They become a divided list
+   instead: icon, title, supporting line, separated by hairlines. No boxes,
+   no third repeat of the tile recipe, and the column now runs to a height
+   that balances the photo beside it.
+
+   Restructured in CSS only -- the markup is
+   .wwa-feature > (.wwa-feature-icon, strong, p) with no wrapper, so grid
+   areas do the two-column arrangement without touching the component.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 721px) {
+  .what-we-are-section .what-we-are-layout {
+    /* Slight asymmetry: the photograph leads. An exact 50/50 split is the
+       most default composition available and reads as a wireframe. */
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .what-we-are-section .wwa-features {
+    display: block;
+    margin-top: clamp(2rem, 3.5vw, 2.75rem);
+    border-top: 1px solid var(--line);
+  }
+  .what-we-are-section .wwa-feature {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1.1rem;
+    align-items: start;
+    padding: 1.15rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    text-align: left;
+  }
+  .what-we-are-section .wwa-feature:hover { background: transparent; }
+  .what-we-are-section .wwa-feature-icon {
+    /* Spans both text rows so the icon aligns to the block, not the title. */
+    grid-row: 1 / 3;
+    grid-column: 1;
+    margin: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+  }
+  .what-we-are-section .wwa-feature strong {
+    grid-column: 2;
+    align-self: end;
+    font-size: 1.02rem;
+  }
+  .what-we-are-section .wwa-feature p {
+    grid-column: 2;
+    margin-top: 0.25rem;
+    /* The base .wwa-feature p carries text-align:center from when these
+       were centred boxes; in a left-aligned list that pushed every
+       supporting line off under nothing. */
+    text-align: left;
+  }
+}
+
+/* The heading's hand-drawn swoosh was the one genuinely "fancy" flourish in
+   the section. The italic blue phrase already carries the emphasis. */
+.what-we-are-section .what-we-are-heading .accent::after { display: none; }
+
+/* Phone: three features in a two-column grid leaves the third orphaned in a
+   half-width cell. Spanning it full-width reads as a deliberate 2+1 rather
+   than a grid that ran out of items. */
+@media (max-width: 560px) {
+  .what-we-are-section .wwa-feature:last-child { grid-column: 1 / -1; }
+}
+
+/* ==========================================================================
+   14. BREAKING THE REPEATED CARD RECIPE
+   --------------------------------------------------------------------------
+   The real reason the page still read as AI-generated. Five sections all
+   used ONE anatomy: small rounded-square icon tile top-left -> bold title ->
+   muted line -> rounded rectangle with a hairline border. Removing the
+   shadows and the rainbow left that SHAPE intact, so every section still
+   rhymed with every other.
+
+   Reference check (linear.app): each of their sections uses a genuinely
+   different structure -- a status list, a timeline, a message feed, a code
+   diff, a dashboard. The variation is structural, not decorative.
+
+   So each section below now gets its own anatomy:
+     What We Handle -> index-led, top-rule only (no enclosing box)
+     Agency Needs   -> text-only numbered list, no icons at all
+     Training       -> divided horizontal band, no boxes
+     Vibe Coding    -> inline label row, no boxes
+     Why Choose     -> numbered editorial entries, no icon tiles
+   ========================================================================== */
+
+/* --- 14a. What We Handle: index-led, open cards ---------------------------
+   Keeps the bento proportions and the icons (this is the section's hero
+   moment) but drops the enclosing rounded box for a single top rule, so the
+   cards read as columns in a table rather than as tiles. */
+.replacement-solutions-section .replacement-solution-card.modern-solution-stack-card {
+  border: 0;
+  border-top: 2px solid var(--navy);
+  border-radius: 0;
+  background: transparent;
+  padding: 1.35rem 1.25rem 1.5rem 0;
+}
+.replacement-solutions-section .replacement-solution-card.modern-solution-stack-card.feature {
+  border-top-color: var(--accent);
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 2rem 1.9rem;
+}
+/* The index becomes the leading editorial mark, not a corner detail. */
+.replacement-solutions-section .replacement-solution-card.modern-solution-stack-card:not(.feature)::before {
+  position: static;
+  display: block;
+  margin-bottom: 0.9rem;
+  font-family: 'DM Sans', Inter, sans-serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: rgba(16, 37, 63, 0.22);
+}
+.replacement-solutions-section .replacement-solution-card:not(.feature) .solution-icon-tile {
+  display: none;
+}
+
+/* --- 14b. Agency Needs: text-only numbered list --------------------------
+   No icons at all here. Six near-identical icon tiles were adding nothing
+   the titles didn't already say; a numbered list in white on navy is
+   quieter and more confident. */
+.agency-needs-section .homepage-services-grid {
+  counter-reset: needs;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0;
+  gap: 0;
+}
+.agency-needs-section .homepage-service-card {
+  counter-increment: needs;
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 1.5rem 1.25rem 1.5rem 0;
+}
+.agency-needs-section .homepage-service-card::before {
+  content: "0" counter(needs);
+  grid-row: 1 / 3;
+  font-family: 'DM Sans', Inter, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.32);
+  padding-top: 0.28rem;
+}
+.agency-needs-section .homepage-service-icon { display: none; }
+.agency-needs-section .homepage-service-card h3,
+.agency-needs-section .homepage-service-card p { grid-column: 2; }
+
+/* --- 14c. Training outcomes: divided band --------------------------------
+   Four boxes become one band split by vertical rules. */
+.section.jr .jr-outcome {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.25rem 1.35rem;
+}
+.section.jr .jr-outcome-grid > .jr-outcome + .jr-outcome {
+  border-left: 1px solid var(--line);
+}
+.section.jr .jr-outcome-icon {
+  width: auto;
+  height: auto;
+  border: 0;
+  background: transparent;
+  margin-bottom: 0.65rem;
+}
+
+/* --- 14d. Vibe Coding: inline label row ----------------------------------
+   These are one-word capability labels. Six bordered boxes for six words was
+   the most obviously template-ish block on the page. */
+.section.vv2 .vv2-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.6rem 0;
+  gap: 0.6rem;
+}
+.section.vv2 .vv2-card-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+}
+.section.vv2 .vv2-card-glow { display: none; }
+
+/* --- 14e. Why Choose: numbered editorial entries -------------------------
+   No icon tiles, no boxes. A rule above each entry and an oversized index. */
+.why-choose-reference-section .why-choose-reference-card-grid { counter-reset: why; }
+.why-choose-reference-section .why-choose-detail-card {
+  counter-increment: why;
+  position: relative;
+  border: 0;
+  border-top: 1px solid rgba(16, 37, 63, 0.14);
+  border-radius: 0;
+  background: transparent;
+  padding: 1.4rem 1.5rem 1.6rem 0;
+}
+.why-choose-reference-section .why-choose-detail-card::before {
+  content: "0" counter(why);
+  display: block;
+  margin-bottom: 0.85rem;
+  font-family: 'DM Sans', Inter, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: rgba(16, 37, 63, 0.2);
+}
+.why-choose-reference-section .why-choose-detail-card .homepage-service-icon { display: none; }
+.why-choose-reference-section .why-choose-detail-card:hover {
+  border-top-color: var(--navy);
+  background: transparent;
+}
+
+/* --- 14f. Anatomy pass, polish ------------------------------------------- */
+
+/* The bento feature card was carrying TWO ambers (top rule + icon tile).
+   The tile is the accent; the navy fill already separates the card. */
+.replacement-solutions-section .replacement-solution-card.modern-solution-stack-card.feature {
+  border-top-color: transparent;
+}
+
+/* Navy list: the title/description gap inherited .homepage-service-card h3's
+   bottom margin on top of the grid row, which read as a dropped line. */
+.agency-needs-section .homepage-service-card h3 { margin-bottom: 0.4rem; }
+.agency-needs-section .homepage-service-card p { margin-top: 0; }

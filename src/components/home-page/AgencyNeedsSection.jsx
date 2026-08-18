@@ -15,8 +15,6 @@ export default function AgencyNeedsSection() {
 
   return (
     <section className="section homepage-services-redesign agency-needs-section" id="platform">
-      <div className="agency-needs-glow a" aria-hidden="true" />
-      <div className="agency-needs-glow b" aria-hidden="true" />
       <div className="container">
         <div className="section-title centered light homepage-services-title">
           <span className="eyebrow-label">Everything Your Agency Needs, Done by Experts</span>

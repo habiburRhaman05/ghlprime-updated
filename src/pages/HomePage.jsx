@@ -23,6 +23,10 @@ import FinalCtaSection from '../components/home-page/FinalCtaSection'
 import CertificationsOverviewSection from '../components/home-page/CertificationsOverviewSection'
 import HeroStatsBar from '../components/hero/HeroStatsBar'
 import HeroBanner from '../components/hero/hero-banner'
+// Last import on purpose: the homepage-only redesign layer. Scoped under
+// homepage section classes so it cannot reach /services, /about or /blog,
+// which share the same card/shadow primitives from App.css.
+import '../styles/home-redesign.css'
 
 const SITE_URL = 'https://ghlprime.com'
 const HOMEPAGE_LAST_MODIFIED = '2026-05-24'

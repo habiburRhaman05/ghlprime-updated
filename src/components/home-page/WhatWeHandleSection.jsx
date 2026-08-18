@@ -1,68 +1,47 @@
 import { motion } from 'framer-motion'
-import { Bot, Headphones, Rocket, UserPlus, Workflow } from 'lucide-react'
+import EvidenceVisual from './EvidenceVisuals'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 34 },
   show: { opacity: 1, y: 0, transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] } },
 }
 
-function SolutionVisual({ variant }) {
-  // Each icon now matches what its card is actually about. The previous map
-  // paired "no expert on your team" with a grid glyph and "no support" with
-  // a wrench, which told the reader nothing.
-  const iconMap = {
-    crm: UserPlus,        // hire specialists on demand
-    support: Rocket,      // launch your SaaS
-    backend: Workflow,    // build / fix automations
-    ai: Bot,              // AI agents
-    team: Headphones,     // 24/7 client support
-  }
-
-  const Icon = iconMap[variant] || Workflow
-
-  return (
-    <div className="solution-icon-tile">
-      <Icon size={22} />
-    </div>
-  )
-}
 
 export default function WhatWeHandleSection() {
+  // Ordered for the bento layout: the two content-heavy cards (AI agents,
+  // white-label support) lead as the feature + tall card, the three compact
+  // ones tile underneath. Content itself is unchanged -- this is placement.
   const items = [
-    {
-      title: 'No GHL Expert on Your Team',
-      text: 'Stop paying for a full-time hire you barely need. Tap certified GHL specialists on demand for builds, fixes, strategy, or anything in between.',
-      variant: 'crm',
-      tags: ['Hire GHL Experts'],
-      tone: 'blue',
-    },
-    {
-      title: "Can't Launch Your SaaS Fast Enough",
-      text: 'We set up your fully white-labeled CRM from scratch: branded, configured, and client-ready. You own the product. We do the build.',
-      variant: 'support',
-      tags: ['White-Label Launch'],
-      tone: 'green',
-    },
-    {
-      title: 'Broken or Half-Built Automations',
-      text: 'Leaking leads, missed follow-ups, workflows that randomly break. We build, audit, and fix automations end-to-end, so every lead is handled perfectly.',
-      variant: 'backend',
-      tags: ['Full Automation Builds'],
-      tone: 'amber',
-    },
     {
       title: 'AI Agents That Actually Work for Your Agency',
       text: 'We design, build, and deploy AI agents tailored to your agency\'s workflow. Qualify leads, handle inquiries, run AI call centers, and book meetings 24/7, without you touching a thing.',
       variant: 'ai',
       tags: ['AI Agent Deployment', 'AI Call Centers', 'Lead Qualification'],
-      tone: 'violet',
+      feature: true,
     },
     {
       title: 'No Support = Clients Leave Your Platform',
       text: 'Your clients expect fast answers. We provide round-the-clock GHL expert support, fully under your brand. They think it\'s your team; we make you look like a well-staffed operation.',
       variant: 'team',
       tags: ['24/7 White-Label Support', 'GHL-Certified Team'],
-      tone: 'red',
+    },
+    {
+      title: 'No GHL Expert on Your Team',
+      text: 'Stop paying for a full-time hire you barely need. Tap certified GHL specialists on demand for builds, fixes, strategy, or anything in between.',
+      variant: 'crm',
+      tags: ['Hire GHL Experts'],
+    },
+    {
+      title: "Can't Launch Your SaaS Fast Enough",
+      text: 'We set up your fully white-labeled CRM from scratch: branded, configured, and client-ready. You own the product. We do the build.',
+      variant: 'support',
+      tags: ['White-Label Launch'],
+    },
+    {
+      title: 'Broken or Half-Built Automations',
+      text: 'Leaking leads, missed follow-ups, workflows that randomly break. We build, audit, and fix automations end-to-end, so every lead is handled perfectly.',
+      variant: 'backend',
+      tags: ['Full Automation Builds'],
     },
   ]
 
@@ -75,11 +54,18 @@ export default function WhatWeHandleSection() {
           <p>From white-label launch support to automation builds, AI deployment, and client support, we become the technical team your agency can rely on.</p>
         </div>
         <div className="replacement-solutions-grid modern-stack-grid">
-          {items.map((item, index) => (
-            <motion.article key={item.title} className={`replacement-solution-card modern-solution-stack-card tone-${item.tone} ${index > 2 ? 'wide' : ''}`} initial="hidden" whileInView="show" whileHover={{ y: -8 }} viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
-              {/* Icon leads the card. It sat below the body copy before,
-                  which put the one scannable element last. */}
-              <SolutionVisual variant={item.variant} />
+          {items.map((item) => (
+            <motion.article key={item.title} className={`replacement-solution-card modern-solution-stack-card${item.feature ? ' feature' : ''}`} initial="hidden" whileInView="show" whileHover={item.feature ? { y: -4 } : { y: -6 }} viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
+              {/* The feature card keeps the icon tile -- it is the one
+                  enclosed navy card and reads fine with a mark. Every other
+                  card leads with an evidence visual instead: a small, real UI
+                  fragment showing the thing the copy describes, rather than a
+                  generic glyph that only names it. */}
+              {/* Every card leads with an evidence visual: a small, real UI
+                  fragment showing the thing the copy describes, rather than a
+                  generic glyph that only names it. The feature card takes the
+                  dark variant since it sits on navy. */}
+              <EvidenceVisual variant={item.variant} dark={item.feature} />
               <div className="solution-copy align-left">
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
