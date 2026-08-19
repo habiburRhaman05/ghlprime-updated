@@ -205,20 +205,20 @@ export default function HomePage() {
       <TrustedLogosSection />
       <WhatWeAreSection />
       <LifeAtGHL/>
-      <TeamTestimonials />
+      {/* <TeamTestimonials /> */}
       <WhatWeHandleSection />
       <AgencyNeedsSection />
       <TrainingOnboarding />
       <VibeCoding />
       <OurStackSection />
-      <WhyChooseSection />
+      {/* <WhyChooseSection /> */}
      
       <LeadersSection />
       <CertificationsSection />
       <CertificationsOverviewSection />
       <ExpertsSection />
       <CaseStudiesSection />
-      <ShippedEvidenceSection pageKey="home" />
+      {/* <ShippedEvidenceSection pageKey="home" /> */}
       <FinalCtaSection />
       <FaqSection faqs={HOMEPAGE_FAQS} intro="Common questions from agencies and founders before they engage GHL Prime." />
       <SiteFooter />
