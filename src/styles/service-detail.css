@@ -30,7 +30,7 @@
 .svc-prose { margin-top: 1.1rem; }
 .svc-prose p { margin: 0 0 1.05rem; color: var(--svc-body); font-size: 1.05rem; line-height: 1.75; max-width: 52rem; }
 .svc-prose a { color: var(--svc-blue); font-weight: 600; border-bottom: 1px solid rgba(22,132,234,.32); }
-.svc-prose a:hover { border-bottom-color: var(--svc-blue); }
+.svc-prose a:hover { border-bottom-color: #0e437f; }
 
 /* ---------- Eyebrow pill + plain eyebrow ---------- */
 .svc-eyebrow-pill {
@@ -54,6 +54,18 @@
 .svc-eyebrow {
   display: inline-block; font-size: .76rem; font-weight: 700; letter-spacing: .09em;
   text-transform: uppercase; color: var(--svc-blue); margin-bottom: .85rem;
+}
+/* Section eyebrows and inline prose links take the primary button's ramp as
+   their text fill. The solid --svc-blue above stays the fallback wherever
+   background-clip is unavailable, so the text can never render invisible. */
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .svc-eyebrow,
+  .svc-prose a {
+    background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 /* ---------- Breadcrumb ---------- */
@@ -83,31 +95,25 @@
 .svc-hero-ctas { display: flex; flex-wrap: wrap; gap: .85rem; justify-content: center; margin-top: 2rem; }
 .svc-hero-ctas .primary-pill, .svc-hero-ctas .secondary-pill { min-height: 3.1rem; padding-inline: 1.6rem; font-size: .98rem; }
 .svc-badges { display: flex; flex-wrap: wrap; gap: .55rem; justify-content: center; margin-top: 1.9rem; }
-/* Each pill owns a hue via --pill / --pill-soft / --pill-line, cycling every
-   6, so the row reads as a set of distinct credentials rather than one
-   repeated chip. The hue lives in the resting border and marker dot; hover
-   only lifts the pill and deliberately changes no colour at all. */
+/* Each pill owns a hue via --pill-line, cycling every 6, so the row reads as
+   a set of distinct credentials rather than one repeated chip. The hue lives
+   entirely in the resting border; hover only lifts the pill and deliberately
+   changes no colour at all. */
 .svc-badge {
-  --pill: #1684ea; --pill-soft: rgba(22,132,234,.11); --pill-line: rgba(22,132,234,.55);
-  display: inline-flex; align-items: center; gap: .5rem;
+  --pill-line: rgba(22,132,234,.55);
+  display: inline-flex; align-items: center;
   font-size: .82rem; font-weight: 600; color: #3d5169;
   background: linear-gradient(180deg, #ffffff, #f7fafe);
   border: 1px solid var(--pill-line); border-radius: 50px; padding: .45rem .95rem;
   box-shadow: 0 1px 2px rgba(15,31,53,.05);
   transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s ease;
 }
-.svc-badge:nth-child(6n+2) { --pill: #16a34a; --pill-soft: rgba(22,163,74,.11); --pill-line: rgba(22,163,74,.55); }
-.svc-badge:nth-child(6n+3) { --pill: #8b5cf6; --pill-soft: rgba(139,92,246,.11); --pill-line: rgba(139,92,246,.55); }
-.svc-badge:nth-child(6n+4) { --pill: #f59e0b; --pill-soft: rgba(245,158,11,.14); --pill-line: rgba(245,158,11,.6); }
-.svc-badge:nth-child(6n+5) { --pill: #ec4899; --pill-soft: rgba(236,72,153,.11); --pill-line: rgba(236,72,153,.55); }
-.svc-badge:nth-child(6n+6) { --pill: #06b6d4; --pill-soft: rgba(6,182,212,.13); --pill-line: rgba(6,182,212,.6); }
+.svc-badge:nth-child(6n+2) { --pill-line: rgba(22,163,74,.55); }
+.svc-badge:nth-child(6n+3) { --pill-line: rgba(139,92,246,.55); }
+.svc-badge:nth-child(6n+4) { --pill-line: rgba(245,158,11,.6); }
+.svc-badge:nth-child(6n+5) { --pill-line: rgba(236,72,153,.55); }
+.svc-badge:nth-child(6n+6) { --pill-line: rgba(6,182,212,.6); }
 .svc-badge:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -10px rgba(15,31,53,.5); }
-.svc-badge-dot {
-  width: .44rem; height: .44rem; border-radius: 50%; flex: none;
-  background: var(--pill); box-shadow: 0 0 0 3px var(--pill-soft);
-  transition: transform .28s cubic-bezier(.22,1,.36,1);
-}
-.svc-badge:hover .svc-badge-dot { transform: scale(1.15); }
 
 /* ---------- Stats bar ---------- */
 .svc-stats {
@@ -222,28 +228,43 @@
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .svc-card { position: relative; overflow: hidden; }
-/* Corner wash on hover -- sits under the content, never intercepts clicks. */
-.svc-card::after {
-  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-  background: radial-gradient(120% 90% at 0% 0%, rgba(22,132,234,.08), transparent 62%);
-  opacity: 0; transition: opacity .32s ease;
+/* Spotlight that follows the cursor. --mx/--my are written by trackPointer in
+   ServiceDetailTemplate; the 50%/0% fallbacks cover the frames before the
+   first mousemove and any pointer-less device. Sits under the content and
+   never intercepts clicks. */
+.svc-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0;
+  background: radial-gradient(15rem 15rem at var(--mx, 50%) var(--my, 0%), rgba(24,149,255,.16), transparent 62%);
+  opacity: 0; transition: opacity .35s ease;
 }
-.svc-card:hover::after { opacity: 1; }
+.svc-card:hover::before { opacity: 1; }
+/* Brand rule that draws across the top edge on hover. */
+.svc-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; pointer-events: none; z-index: 1;
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.svc-card:hover::after { transform: scaleX(1); }
 .svc-card > * { position: relative; z-index: 1; }
 .svc-card:hover {
-  transform: translateY(-3px); border-color: rgba(22,132,234,.3);
-  box-shadow: 0 20px 42px -24px rgba(22,132,234,.55), 0 2px 6px rgba(15,31,53,.05);
+  transform: translateY(-4px); border-color: rgba(24,149,255,.36);
+  box-shadow: 0 24px 46px -26px rgba(22,132,234,.6), 0 2px 6px rgba(15,31,53,.05);
 }
 .svc-card-icon {
   width: 2.75rem; height: 2.75rem; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center;
   margin-bottom: 1.15rem; background: var(--svc-blue-light); color: var(--svc-blue);
-  transition: background .32s ease, color .32s ease, transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s ease;
+  transition: background .32s ease, color .32s ease, transform .38s cubic-bezier(.22,1,.36,1), box-shadow .32s ease;
 }
 .svc-card:hover .svc-card-icon {
   background: var(--primary-gradient); color: #fff;
-  transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(2,38,70,.6);
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 12px 22px -9px rgba(2,38,70,.7);
 }
-.svc-card h3 { margin: 0 0 .55rem; font-size: 1.12rem; color: var(--svc-heading); font-weight: 600; }
+.svc-card h3 {
+  margin: 0 0 .55rem; font-size: 1.12rem; color: var(--svc-heading); font-weight: 700;
+  text-wrap: balance; transition: color .28s ease;
+}
 .svc-card p { margin: 0; color: var(--svc-body); font-size: .96rem; line-height: 1.65; }
 
 /* ---------- Format tabs (figma) ---------- */
@@ -293,6 +314,14 @@
 }
 .svc-tl-step { position: relative; padding-bottom: 1.5rem; }
 .svc-tl-step:last-child { padding-bottom: 0; }
+/* Short arm joining the rail's node to the card, so the two read as one
+   object instead of a line with cards floating beside it. */
+.svc-tl-step::before {
+  content: ''; position: absolute; z-index: 0;
+  left: calc(var(--rail-x) - var(--pad)); width: calc(var(--pad) - var(--rail-x));
+  top: calc(1.75rem + var(--node) / 2); height: 1px;
+  background: linear-gradient(90deg, rgba(22,132,234,.45), rgba(22,132,234,.06));
+}
 .svc-tl-node {
   position: absolute; top: 1.75rem; left: calc(var(--rail-x) - var(--pad) - var(--node) / 2);
   width: var(--node); height: var(--node); border-radius: 50%;
@@ -300,8 +329,14 @@
   border: 2px solid var(--svc-border); box-sizing: border-box; z-index: 1;
 }
 .svc-tl-node-core { width: .38rem; height: .38rem; border-radius: 50%; background: var(--svc-blue); }
+/* Two columns: the step's label on the left, its detail on the right. A
+   single stacked column left most of the card's width empty, which is what
+   made the row read as unbalanced. */
 .svc-tl-card {
-  background: #fff; border: 1px solid var(--svc-border-card); border-radius: 16px; padding: 1.5rem 1.7rem;
+  display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.35fr);
+  gap: 1.1rem 2.6rem; align-items: start;
+  background: #fff; border: 1px solid var(--svc-border-card); border-radius: 16px;
+  padding: 1.7rem 1.9rem;
   box-shadow: 0 1px 3px rgba(15,31,53,.04), 0 12px 30px -20px rgba(15,31,53,.35);
   transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s ease, border-color .28s ease;
 }
@@ -309,17 +344,41 @@
   transform: translateY(-2px); border-color: rgba(22,132,234,.3);
   box-shadow: 0 18px 38px -22px rgba(22,132,234,.55), 0 2px 6px rgba(15,31,53,.05);
 }
+.svc-tl-head { min-width: 0; }
 .svc-tl-num {
-  display: inline-block; margin-bottom: .55rem;
-  font-family: "JetBrains Mono", Menlo, Consolas, monospace; font-size: .74rem; font-weight: 700;
-  letter-spacing: .08em; color: var(--svc-blue);
+  display: block; margin-bottom: .5rem;
+  font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+  font-size: 1.5rem; font-weight: 700; line-height: 1; letter-spacing: .02em;
+  color: var(--svc-blue);
 }
-.svc-tl-card h3 { margin: 0 0 .5rem; font-size: 1.2rem; color: var(--svc-heading); font-weight: 600; }
-.svc-tl-card p { margin: 0; font-size: 1rem; color: var(--svc-body); line-height: 1.65; max-width: 46rem; }
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .svc-tl-num {
+    background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+}
+.svc-tl-card h3 {
+  margin: 0; font-size: 1.16rem; line-height: 1.3; color: var(--svc-heading); font-weight: 700;
+  text-wrap: balance;
+}
+/* Hairline down the column gutter, tying the two halves together. Offset by
+   half the 2.6rem gap so it sits dead centre regardless of card width. */
+.svc-tl-body { min-width: 0; position: relative; }
+.svc-tl-body::before {
+  content: ''; position: absolute; left: -1.3rem; top: .2rem; bottom: .2rem;
+  width: 1px; pointer-events: none;
+  background: linear-gradient(180deg, transparent, var(--svc-border) 14%, var(--svc-border) 86%, transparent);
+}
+.svc-tl-card p { margin: 0; font-size: .98rem; color: var(--svc-body); line-height: 1.7; }
 .svc-tl-meta {
-  display: inline-block; margin-top: .85rem; padding: .3rem .65rem; border-radius: 50px;
-  font-size: .78rem; font-weight: 500; color: var(--svc-muted);
+  display: inline-flex; align-items: center; gap: .45rem;
+  margin-top: .9rem; padding: .32rem .7rem .32rem .6rem; border-radius: 50px;
+  font-size: .77rem; font-weight: 500; color: var(--svc-body);
   background: #f4f7fb; border: 1px solid var(--svc-border);
+}
+.svc-tl-meta::before {
+  content: ''; width: .36rem; height: .36rem; border-radius: 50%; flex: none;
+  background: var(--svc-blue); box-shadow: 0 0 0 3px rgba(22,132,234,.14);
 }
 
 /* ---------- Why GHL Prime ---------- */
@@ -331,13 +390,22 @@
 }
 .svc-why-row:nth-child(odd) { border-right: 1px solid var(--svc-border); }
 .svc-why-row:hover { background: #f7fbff; }
-.svc-why-check {
+/* Check tile carries the primary button's fill, with the tick reversed to
+   white the same way the button's label is. Scoped to the row because
+   `.svc-why-row > span` would otherwise outrank a bare class here and
+   repaint the tick in the body colour. */
+.svc-why-row .svc-why-check {
   display: inline-flex; align-items: center; justify-content: center; flex: none;
   width: 1.9rem; height: 1.9rem; border-radius: 9px; margin-top: -.1rem;
-  background: #e8f7ee; color: #16a34a;
-  transition: background .28s ease, transform .28s cubic-bezier(.22,1,.36,1);
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+  color: #fff;
+  box-shadow: 0 4px 10px -5px rgba(2,38,70,.6);
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s ease, filter .28s ease;
 }
-.svc-why-row:hover .svc-why-check { background: #d7f0e1; transform: scale(1.07); }
+.svc-why-row:hover .svc-why-check {
+  transform: scale(1.07); filter: brightness(1.12);
+  box-shadow: 0 7px 15px -5px rgba(2,38,70,.65);
+}
 .svc-why-check svg { flex: none; }
 .svc-why-row > span { color: #3a4d63; font-size: 1rem; line-height: 1.5; font-weight: 500; }
 
@@ -680,7 +748,9 @@
   .svc-grid, .svc-grid.two { grid-template-columns: 1fr; }
   .svc-hero { padding: 2rem 0 3rem; }
   .svc-timeline { --rail-x: 1.05rem; --pad: 3rem; }
-  .svc-tl-card { padding: 1.25rem 1.3rem; }
+  .svc-tl-card { grid-template-columns: 1fr; gap: .85rem; padding: 1.35rem 1.4rem; }
+  .svc-tl-body::before { display: none; }
+  .svc-tl-num { font-size: 1.25rem; }
   .svc-tl-node { top: 1.5rem; }
   .svc-badges { gap: .45rem; }
   .svc-badge { font-size: .78rem; padding: .4rem .8rem; }
