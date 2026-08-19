@@ -204,7 +204,6 @@ function HeroBadges({ badges }) {
     <motion.div className="svc-badges" {...groupProps}>
       {badges.map((b) => (
         <motion.span className="svc-badge" key={b} variants={revealItem}>
-          <span className="svc-badge-dot" aria-hidden="true" />
           {b}
         </motion.span>
       ))}
@@ -725,7 +724,7 @@ export default function ServiceDetailTemplate({ config }) {
                 <h1>{config.hero.h1}</h1>
                 <p className="svc-hero-sub">{formConfig.heroSubhead || config.hero.subhead}</p>
                 <HeroBadges badges={config.hero.badges} />
-                <a className="svc-hero-upwork" href={UPWORK} target="_blank" rel="noopener noreferrer">Or hire via Upwork &rarr;</a>
+                <a className="primary-pill svc-hero-upwork" href={UPWORK} target="_blank" rel="noopener noreferrer">Or hire via Upwork &rarr;</a>
               </motion.div>
               <motion.div className="svc-hero-form-col" {...fade} transition={{ duration: 0.5, delay: 0.08 }}>
                 <ServiceSurveyForm form={formConfig} slug={config.slug} />

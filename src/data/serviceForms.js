@@ -2,11 +2,27 @@
 // Local only: ServiceSurveyForm logs submissions to console.log().
 // 4 steps each: contact -> about you -> needs (free-text) -> budget/scope.
 
+// Sample value per custom business label, so the hint matches what is asked.
+const BUSINESS_HINTS = {
+  'Business / product name': 'Acme Analytics',
+  'Your SaaS / agency name': 'Acme CRM',
+  'Business / app name': 'Acme Fitness',
+}
+
+// Step 1 is identical on every form, so the placeholders live here once.
+// businessLabel is the only part that varies per service (agency name, app
+// name, and so on), and its placeholder follows whatever label it is given.
 const CONTACT = (businessLabel) => [
-  { name: 'name', label: 'Your name', type: 'text', required: true },
-  { name: 'email', label: 'Email address', type: 'email', required: true },
+  { name: 'name', label: 'Your name', type: 'text', required: true, placeholder: 'Jane Doe' },
+  { name: 'email', label: 'Email address', type: 'email', required: true, placeholder: 'jane@youragency.com' },
   { name: 'phone', label: 'Phone number', type: 'phone', required: true },
-  { name: 'business', label: businessLabel || 'Business name', type: 'text', required: true },
+  {
+    name: 'business',
+    label: businessLabel || 'Business name',
+    type: 'text',
+    required: true,
+    placeholder: businessLabel ? `e.g. ${BUSINESS_HINTS[businessLabel] || 'Acme Co.'}` : 'Acme Marketing',
+  },
 ]
 
 export const SERVICE_FORMS = {

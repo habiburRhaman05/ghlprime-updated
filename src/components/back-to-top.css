@@ -24,9 +24,9 @@
   border-radius: 999px;
   cursor: pointer;
   color: #fff;
-  background: var(--primary);
+  background: var(--primary-gradient, var(--primary));
   border: 1px solid rgba(255, 255, 255, .28);
-  box-shadow: 0 18px 36px -16px rgba(22, 132, 234, .55), inset 0 1px 0 rgba(255, 255, 255, .35);
+  box-shadow: 0 18px 36px -16px rgba(2, 38, 70, .55), inset 0 1px 0 rgba(255, 255, 255, .35);
   opacity: 0;
   transform: translateY(14px) scale(.9);
   pointer-events: none;
@@ -42,7 +42,7 @@
 }
 .btt:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 24px 44px -18px rgba(22, 132, 234, .65), inset 0 1px 0 rgba(255, 255, 255, .4);
+  box-shadow: 0 24px 44px -18px rgba(2, 38, 70, .65), inset 0 1px 0 rgba(255, 255, 255, .4);
   
 }
 .btt:active { transform: translateY(-1px) scale(.98); }

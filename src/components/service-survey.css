@@ -16,24 +16,9 @@
 .svc-hero-2col .svc-hero-inner--left h1 { text-align: left; }
 .svc-hero-2col .svc-hero-inner--left .svc-hero-sub { text-align: left; margin-left: 0; margin-right: 0; }
 .svc-hero-2col .svc-badges { justify-content: flex-start; }
-/* Carries the primary button's own gradient as its text fill. The solid
-   colour below is the fallback for anything without background-clip, where
-   transparent text would otherwise vanish. */
-.svc-hero-upwork {
-  display: inline-block; margin-top: 1.1rem; font-size: .92rem; font-weight: 700;
-  color: #14498b; text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color .2s ease, opacity .2s ease;
-}
-@supports ((background-clip: text) or (-webkit-background-clip: text)) {
-  .svc-hero-upwork {
-    background: var(--primary-gradient, linear-gradient(90deg, #022646, #1b4f97));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-}
-.svc-hero-upwork:hover { border-bottom-color: #1b4f97; opacity: .85; }
+/* Renders as a standard primary pill -- .primary-pill carries the fill,
+   this only positions it under the badge row. */
+.svc-hero-upwork { margin-top: 1.35rem; font-size: .92rem; }
 .svc-hero-form-col { width: 100%; display: flex; justify-content: flex-end; }
 
 /* Form card */
@@ -69,11 +54,10 @@
   border-radius: 50px; padding: 4px 11px; margin-bottom: 9px;
   box-shadow: 0 2px 6px rgba(2,20,40,.18);
 }
-/* Body copy on the band stays white, but gains weight and a soft dark
-   shadow so it separates from the light end of the gradient too. */
+/* Body copy on the band is plain solid white -- no text-shadow. Weight
+   carries it against the light end of the gradient instead. */
 .svf-subtitle {
   font-size: 12.5px; font-weight: 500; color: #fff; line-height: 1.45; margin: 0 0 15px;
-  text-shadow: 0 1px 3px rgba(2,20,40,.45);
 }
 
 /* Step indicator -- a static row of segments that fill as the user advances,
@@ -83,8 +67,8 @@
 .svf-progress-meta {
   display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 7px;
 }
-.svf-progress-name { font-size: 12px; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(2,20,40,.45); }
-.svf-progress-count { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.9); font-variant-numeric: tabular-nums; text-shadow: 0 1px 3px rgba(2,20,40,.4); }
+.svf-progress-name { font-size: 12px; font-weight: 700; color: #fff; }
+.svf-progress-count { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.9); font-variant-numeric: tabular-nums; }
 .svf-progress-segments { display: flex; gap: 5px; }
 .svf-progress-segment {
   flex: 1; height: 4px; border-radius: 999px; background: rgba(255,255,255,.22);
