@@ -238,14 +238,6 @@
   opacity: 0; transition: opacity .35s ease;
 }
 .svc-card:hover::before { opacity: 1; }
-/* Brand rule that draws across the top edge on hover. */
-.svc-card::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; pointer-events: none; z-index: 1;
-  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
-  transform: scaleX(0); transform-origin: left center;
-  transition: transform .5s cubic-bezier(.22,1,.36,1);
-}
-.svc-card:hover::after { transform: scaleX(1); }
 .svc-card > * { position: relative; z-index: 1; }
 .svc-card:hover {
   transform: translateY(-4px); border-color: rgba(24,149,255,.36);

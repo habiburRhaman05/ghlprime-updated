@@ -274,28 +274,15 @@ button { font: inherit; }
 .primary-pill.nav-cta svg { transition: transform .25s ease; }
 .primary-pill.nav-cta:hover svg { transform: translateX(3px); }
 
-/* ── Home-page & header CTA gradient ─────────────────────────────────
-   Deep navy-to-blue gradient applied only to the header CTA and the
-   primary CTA buttons that live on the landing page (hero, final CTA,
-   why-choose, vibe-coding).  Other pages keep the default .primary-pill
-   gradient untouched. */
-.primary-pill.nav-cta,
+/* ── Home-page & header CTA transition ────────────────────────────────
+   Shared transition for the header CTA and the primary CTA buttons
+   that live on the landing page (hero, final CTA, why-choose,
+   vibe-coding).  Background uses the default .primary-pill gradient. */
 .primary-pill.hh-cta-primary,
 .primary-pill.homepage-cta-btn,
 .primary-pill.why-choose-reference-cta,
 .primary-pill.vibe-cta-premium {
-  background: linear-gradient(90deg, #022646, #022c51, #03325c, #053768, #093d73, #0e437f, #14498b, #1b4f97);
-  box-shadow: 0 14px 30px rgba(2, 38, 70, 0.35);
   transition: transform .25s ease, box-shadow .25s ease, background .25s ease, filter .25s ease;
-}
-.primary-pill.nav-cta:hover,
-.primary-pill.hh-cta-primary:hover,
-.primary-pill.homepage-cta-btn:hover,
-.primary-pill.why-choose-reference-cta:hover,
-.primary-pill.vibe-cta-premium:hover {
-  background: linear-gradient(90deg, #042e52, #05345e, #063a6a, #084076, #0c4682, #114c8e, #17529a, #1d58a5);
-  box-shadow: 0 18px 38px rgba(2, 38, 70, 0.45);
-  filter: brightness(1.12);
 }
 
 .primary-pill, .secondary-pill, .platform-tabs button, .dashboard-tabs button, .dashboard-cta, .banner-settings, .widget-preview-card button, .sidebar-link {

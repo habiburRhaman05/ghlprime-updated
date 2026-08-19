@@ -706,7 +706,6 @@
 }
 .vibe-cta-premium:hover {
   transform: scale(1.03);
-  background: linear-gradient(135deg, #0f73df, #3f97ef);
   box-shadow: 0 20px 40px rgba(45, 116, 217, 0.28), 0 0 0 6px rgba(45, 116, 217, 0.08);
 }
 .vibe-cta-ripple {
