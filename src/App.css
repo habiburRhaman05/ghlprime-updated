@@ -558,8 +558,8 @@ button { font: inherit; }
 .section-title p { margin: .8rem auto 0; max-width: 43rem; color: var(--muted); }
 
 /* Homepage section-header spec ---------------------------------------------
-   Eyebrow: 14px / 600 / #2563eb. Title: up to 48px / 700, with a 2-3 word
-   highlighted phrase (.hl) in the same #2563eb. Description: 16px / 500.
+   Eyebrow: 14px / 600 / #1895ff. Title: up to 48px / 700, with a 2-3 word
+   highlighted phrase (.hl) in the same #1895ff. Description: 16px / 500.
 
    Scoped to each homepage section's own title-container class (never to the
    bare .section-title/.eyebrow-label above) so this can't leak onto any
@@ -571,7 +571,7 @@ button { font: inherit; }
 .certifications-overview-title .eyebrow-label {
   font-size: .875rem;
   font-weight: 600;
-  color: #2563eb;
+  color: #1895ff;
 }
 .trust-band-title h2,
 .replacement-solutions-title h2,
@@ -594,7 +594,7 @@ button { font: inherit; }
 .compact-team-title h2 .hl,
 .experts-section-title h2 .hl,
 .certifications-overview-title h2 .hl {
-  color: #2563eb;
+  color: #1895ff;
 }
 /* Dark/"light"-variant section (Agency Needs, navy background): same sizes,
    but the highlight stays the same blue rather than switching to white with
@@ -613,7 +613,7 @@ button { font: inherit; }
   font-weight: 500;
 }
 .homepage-services-title h2 .hl {
-  color: #2563eb;
+  color: #1895ff;
 }
 .logo-grid, .solutions-grid, .services-grid, .outcomes-grid, .founders-grid, .reasons-grid, .awards-grid, .case-study-cards-grid { display: grid; gap: 1rem; }
 .logo-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 50rem; margin: 0 auto; }
@@ -741,9 +741,9 @@ button { font: inherit; }
   margin-bottom: 1.1rem;
 }
 .what-we-are-copy .eyebrow-label {
-  /* Homepage section-header spec: 14px / 600 / #2563eb, consistent across
+  /* Homepage section-header spec: 14px / 600 / #1895ff, consistent across
      every top-of-section eyebrow on the homepage. */
-  color: #2563eb;
+  color: #1895ff;
   font-size: .875rem;
   font-weight: 600;
   margin-bottom: 0;
@@ -779,7 +779,7 @@ button { font: inherit; }
 }
 .what-we-are-heading .accent {
   position: relative;
-  color: #2563eb;
+  color: #1895ff;
   font-style: italic;
   font-weight: 500;
 }
@@ -794,7 +794,7 @@ button { font: inherit; }
   bottom: -.06em;
   height: .09em;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(37, 99, 235, 0), #2563eb 22%, #2563eb 72%, rgba(37, 99, 235, 0));
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0), #1895ff 22%, #1895ff 72%, rgba(37, 99, 235, 0));
 }
 .what-we-are-lede {
   max-width: 32rem;
@@ -1211,7 +1211,7 @@ button { font: inherit; }
 /* Superseded by .replacement-solutions-title h2 .hl (homepage-header spec,
    above) -- left as a fallback in case a future span here isn't .hl. */
 .replacement-solutions-title h2 span {
-  color: #2563eb;
+  color: #1895ff;
 }
 .replacement-pill-row {
   display: flex;

@@ -740,14 +740,14 @@
   z-index: 1;
   max-width: 46rem;
 }
-/* Homepage section-header spec: 14px/600/#2563eb eyebrow, up to 48px/700
+/* Homepage section-header spec: 14px/600/#1895ff eyebrow, up to 48px/700
    title with the highlighted phrase in the same blue, 16px/500 description.
    Scoped here (not the shared .eyebrow-label/.section-title h2/p) so it
    can't reach any other page. */
 .why-choose-reference-head .eyebrow-label {
   font-size: .875rem;
   font-weight: 600;
-  color: #2563eb;
+  color: #1895ff;
 }
 .why-choose-reference-head h2 {
   font-size: clamp(1.85rem, 4.4vw, 3rem);
@@ -757,14 +757,14 @@
   color: #10253f;
 }
 .why-choose-reference-head h2 span {
-  color: #2563eb;
+  color: #1895ff;
 }
 .why-choose-eyebrow-rule {
   display: block;
   width: 2.9rem;
   height: 3px;
   border-radius: 2px;
-  background: #2563eb;
+  background: #1895ff;
   margin: .85rem auto 1.35rem;
 }
 .why-choose-reference-head p {

@@ -83,7 +83,7 @@
 }
 .tm-nav-item.is-active {
   color: #fff;
-  background: #2563eb;
+  background: #1895ff;
 }
 
 /* --- Body ---------------------------------------------------------------- */
@@ -120,7 +120,7 @@
   color: #8497b0;
   white-space: nowrap;
 }
-.tm-tab.is-active { color: #2563eb; font-weight: 700; }
+.tm-tab.is-active { color: #1895ff; font-weight: 700; }
 .tm-tab.is-active::after {
   content: "";
   position: absolute;
@@ -128,7 +128,7 @@
   bottom: -1.05cqw;
   height: 2px;
   border-radius: 999px;
-  background: #2563eb;
+  background: #1895ff;
 }
 
 /* --- 01. Workflow -------------------------------------------------------- */
@@ -402,7 +402,7 @@
   font-size: 1.28cqw;
   color: #9fb2c9;
 }
-.tm-send { color: #2563eb; display: inline-grid; place-items: center; }
+.tm-send { color: #1895ff; display: inline-grid; place-items: center; }
 .tm-send svg { width: 1.5cqw; height: 1.5cqw; }
 
 /* --- 03. Overview -------------------------------------------------------- */
@@ -481,7 +481,7 @@
   min-height: 14px;
   flex-shrink: 0;
   border-radius: 5px;
-  color: #2563eb;
+  color: #1895ff;
   background: #e8f0ff;
 }
 .tm-training-icon svg { width: 1.5cqw; height: 1.5cqw; }
@@ -495,7 +495,7 @@
   font-size: 1.25cqw;
   font-weight: 700;
   color: #fff;
-  background: #2563eb;
+  background: #1895ff;
 }
 
 .tm-update { display: flex; align-items: center; gap: 1.1cqw; }

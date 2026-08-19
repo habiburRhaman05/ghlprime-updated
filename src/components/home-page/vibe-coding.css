@@ -63,7 +63,7 @@
 
 /* Eyebrow as a proper badge rather than loose uppercase text: hairline
    border, soft lift, and a lit dot. Homepage section-header spec:
-   14px/600/#2563eb -- was var(--primary) (#1684ea), the site's other blue;
+   14px/600/#1895ff -- was var(--primary) (#1684ea), the site's other blue;
    switched to match the rest of the homepage's headers exactly. */
 .vv2-eyebrow {
   display: inline-flex;
@@ -75,11 +75,11 @@
   font-weight: 600;
   letter-spacing: 0.17em;
   text-transform: uppercase;
-  color: #2563eb;
+  color: #1895ff;
 }
 
 /* Homepage section-header spec: up to 48px/700 title, highlighted phrase
-   (already this exact blue) in #2563eb. */
+   (already this exact blue) in #1895ff. */
 .vv2-heading {
   margin: 1.15rem 0 0;
   font-size: clamp(1.85rem, 4.4vw, 3rem);
@@ -92,7 +92,7 @@
 }
 .vv2-heading-dark { color: #0f1f38; }
 .vv2-heading-accent {
-  color: #2563eb;
+  color: #1895ff;
 }
 
 /* Homepage section-header spec: 16px/500 description. */

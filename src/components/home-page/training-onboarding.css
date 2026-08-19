@@ -40,16 +40,16 @@
   margin-inline: auto;
   text-align: center;
 }
-/* Homepage section-header spec: 14px/600/#2563eb eyebrow, up to 48px/700
+/* Homepage section-header spec: 14px/600/#1895ff eyebrow, up to 48px/700
    title with the highlighted phrase (already this exact blue) in
-   #2563eb, 16px/500 description. */
+   #1895ff, 16px/500 description. */
 .jr-eyebrow {
   display: inline-block;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #2563eb;
+  color: #1895ff;
 }
 .jr-heading {
   margin: 0.85rem 0 0;
@@ -60,7 +60,7 @@
   text-wrap: balance;
 }
 .jr-heading-dark { color: #0f1f38; }
-.jr-heading-accent { color: #2563eb; }
+.jr-heading-accent { color: #1895ff; }
 
 .section.jr .jr-lede {
   max-width: 36rem;
@@ -102,7 +102,7 @@
   stroke-width: 2;
 }
 .jr-stair {
-  stroke: #2563eb;
+  stroke: #1895ff;
   stroke-width: 2.5;
 }
 
@@ -146,7 +146,7 @@
   min-height: 26px;
   transform: translate(-50%, -50%) scale(0.7);
   border-radius: 50%;
-  color: #2563eb;
+  color: #1895ff;
   background: #fff;
   border: 1px solid rgba(37, 99, 235, 0.2);
   box-shadow: 0 6px 16px -8px rgba(23, 59, 108, 0.5);
@@ -179,7 +179,7 @@
   font-size: 1.28cqw;
   font-weight: 800;
   letter-spacing: normal;
-  color: #2563eb;
+  color: #1895ff;
   background: #fff;
   border: 1.5px solid rgba(37, 99, 235, 0.3);
   box-shadow: 0 8px 20px -10px rgba(23, 59, 108, 0.55);
@@ -191,7 +191,7 @@
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
   color: #fff;
-  background: linear-gradient(135deg, #2563eb, #6d5cf5);
+  background: linear-gradient(135deg, #1895ff, #6d5cf5);
   border-color: transparent;
   box-shadow:
     0 12px 26px -10px rgba(37, 99, 235, 0.85),
@@ -266,14 +266,14 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #2563eb;
+  color: #1895ff;
   
     display: inline-block;
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #2563eb;
+    color: #1895ff;
 
 }
 .jr-outcome-grid {
@@ -297,7 +297,7 @@
   box-shadow: 0 16px 36px -30px rgba(23, 59, 108, 0.55);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.jr-outcome.tone-blue { --tone: #2563eb; }
+.jr-outcome.tone-blue { --tone: #1895ff; }
 .jr-outcome.tone-indigo { --tone: #4f46e5; }
 .jr-outcome.tone-sky { --tone: #0ea5e9; }
 .jr-outcome.tone-violet { --tone: #8b5cf6; }
@@ -421,7 +421,7 @@
     height: 2.6rem;
     font-size: 0.85rem;
     color: #fff;
-    background: linear-gradient(135deg, #2563eb, #6d5cf5);
+    background: linear-gradient(135deg, #1895ff, #6d5cf5);
     border-color: transparent;
   }
   .jr-copy {

@@ -801,14 +801,14 @@
 .crmd-nav { display: flex; flex-direction: column; }
 .crmd-nav-item { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; font-size: 13px; color: #475569; border-left: 3px solid transparent; }
 .crmd-nav-item svg { color: #94a3b8; flex: none; }
-.crmd-nav-item.active { background: #eff6ff; color: #2563eb; border-left-color: #2563eb; font-weight: 600; }
-.crmd-nav-item.active svg { color: #2563eb; }
+.crmd-nav-item.active { background: #eff6ff; color: #1895ff; border-left-color: #1895ff; font-weight: 600; }
+.crmd-nav-item.active svg { color: #1895ff; }
 .crmd-main { flex: 1; min-width: 0; background: #f8fafc; padding: 18px; }
 .crmd-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 8px; }
 .crmd-title { font-size: 18px; font-weight: 700; color: #0f172a; }
 .crmd-head-r { display: flex; align-items: center; gap: 8px; }
 .crmd-pill { font-size: 11px; color: #475569; background: #fff; border: 1px solid #e2e8f0; border-radius: 50px; padding: 4px 10px; white-space: nowrap; }
-.crmd-btn { font-size: 11px; color: #fff; background: #2563eb; border-radius: 6px; padding: 5px 10px; white-space: nowrap; }
+.crmd-btn { font-size: 11px; color: #fff; background: #1895ff; border-radius: 6px; padding: 5px 10px; white-space: nowrap; }
 .crmd-row { display: flex; gap: 12px; margin-bottom: 12px; }
 .crmd-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; }
 .crmd-card-title { font-size: 12px; color: #64748b; display: block; margin-bottom: 8px; }
@@ -834,7 +834,7 @@
 .wsd { border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 20px 44px rgba(33,73,130,.08); }
 .wsd-head { display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 0 16px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; gap: 8px; }
 .wsd-brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.wsd-avatar { width: 24px; height: 24px; border-radius: 50%; background: #2563eb; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; }
+.wsd-avatar { width: 24px; height: 24px; border-radius: 50%; background: #1895ff; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; }
 .wsd-brand-name { font-size: 13px; font-weight: 700; color: #0f172a; white-space: nowrap; }
 .wsd-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #64748b; white-space: nowrap; }
 .wsd-online { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; flex: none; }

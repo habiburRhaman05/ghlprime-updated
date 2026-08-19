@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import './life-at-ghl.css'
 
-// Real team/culture photos from public/life-at-images/
 const LIFE_AT_IMAGES = [
   'DSC00041 (1).jpg',
   'DSC00043 (1).jpg',
@@ -25,33 +24,14 @@ const DUMMY_IMAGES = LIFE_AT_IMAGES.map((file, i) => ({
   title: 'Life at GHL Prime',
 }))
 
-// Repeating width pattern so each row reads as an uneven, hand-picked photo
-// strip (like the reference) instead of a uniform grid.
 const CARD_SIZES = ['sm', 'lg', 'md', 'xl', 'sm', 'lg', 'md', 'xl', 'sm', 'lg']
 
-// How much horizontal travel per pixel of vertical scroll. Row 2 uses the
-// negative of this so the two rows drift apart as you scroll down.
 const SCROLL_SPEED = 0.2
-
-// How quickly the displayed position eases toward the scroll target each
-// frame (0-1). Lower = smoother/laggier glide, higher = snappier/closer to
-// an instant jump. This is what turns raw scroll-delta jumps into a smooth
-// glide instead of a snap.
-const EASE = 0.055
-
-// Start tracking scroll this many px before the section actually reaches
-// the viewport, so the rows are already gliding by the time it's in view
-// instead of visibly kicking off mid-scroll.
+const EASE = 0.12
 const ACTIVATE_MARGIN = 200
-
-// Below this distance-to-target (px) we treat the row as settled and stop
-// nudging it, so it comes to a firm rest shortly after scrolling stops
-// instead of drifting forever on tiny fractions.
-const SETTLE_THRESHOLD = 0.05
+const SETTLE_THRESHOLD = 0.5
 
 function GalleryRow({ images, trackRef, sizeOffset = 0 }) {
-  // Duplicate the set so the strip can loop seamlessly once the transform
-  // wraps past one full copy's width.
   const trackItems = [...images, ...images]
 
   return (
@@ -78,21 +58,19 @@ export default function LifeAtGHL() {
   const sectionRef = useRef(null)
   const row1Ref = useRef(null)
   const row2Ref = useRef(null)
-  // target = where scrolling wants the row (raw, unbounded accumulator).
-  // current = what's actually on screen, eased toward target every frame.
   const state = useRef({
     target1: 0, target2: 0,
     current1: 0, current2: 0,
     width1: 0, width2: 0,
     lastY: 0,
     active: false,
+    running: false,
+    lastWrite1: null,
+    lastWrite2: null,
   })
 
   useEffect(() => {
     if (!rowOne.length && !rowTwo.length) return undefined
-
-    // Respect the OS-level motion preference -- leave the rows static
-    // instead of drifting them for people who've asked for less motion.
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return undefined
 
     const measure = () => {
@@ -100,8 +78,6 @@ export default function LifeAtGHL() {
       state.current.width2 = row2Ref.current ? row2Ref.current.scrollWidth / 2 : 0
     }
 
-    // Wrapping only happens at render time (never on the raw accumulator),
-    // so easing math never has to deal with a wrap boundary mid-glide.
     const wrap = (value, width) => {
       if (!width) return 0
       let m = value % width
@@ -114,34 +90,64 @@ export default function LifeAtGHL() {
       const delta = currentY - state.current.lastY
       state.current.lastY = currentY
 
-      // Only fold scroll motion into the target while the section is (or is
-      // about to be, within ACTIVATE_MARGIN) in view -- keeps lastY current
-      // the whole time so there's no jump when it activates.
       if (!state.current.active) return
       state.current.target1 += delta * SCROLL_SPEED
       state.current.target2 -= delta * SCROLL_SPEED
     }
 
     let frameId
+
+    const setWillChange = (on) => {
+      const v = on ? 'transform' : 'auto'
+      if (row1Ref.current) row1Ref.current.style.willChange = v
+      if (row2Ref.current) row2Ref.current.style.willChange = v
+    }
+
     const tick = () => {
       const s = state.current
       s.current1 += (s.target1 - s.current1) * EASE
       s.current2 += (s.target2 - s.current2) * EASE
 
-      // Snap the last tiny fraction so it comes to a clean, motionless rest
-      // instead of an imperceptible-but-technically-forever creep.
       if (Math.abs(s.target1 - s.current1) < SETTLE_THRESHOLD) s.current1 = s.target1
       if (Math.abs(s.target2 - s.current2) < SETTLE_THRESHOLD) s.current2 = s.target2
 
-      if (row1Ref.current) row1Ref.current.style.transform = `translate3d(${wrap(s.current1, s.width1)}px,0,0)`
-      if (row2Ref.current) row2Ref.current.style.transform = `translate3d(${wrap(s.current2, s.width2)}px,0,0)`
+      const w1 = wrap(s.current1, s.width1)
+      const w2 = wrap(s.current2, s.width2)
 
+      if (row1Ref.current && w1 !== s.lastWrite1) {
+        row1Ref.current.style.transform = `translate3d(${w1}px,0,0)`
+        s.lastWrite1 = w1
+      }
+      if (row2Ref.current && w2 !== s.lastWrite2) {
+        row2Ref.current.style.transform = `translate3d(${w2}px,0,0)`
+        s.lastWrite2 = w2
+      }
+
+      const settled1 = s.current1 === s.target1
+      const settled2 = s.current2 === s.target2
+
+      if (s.active || !settled1 || !settled2) {
+        frameId = window.requestAnimationFrame(tick)
+      } else {
+        s.running = false
+        setWillChange(false)
+      }
+    }
+
+    const startLoop = () => {
+      if (state.current.running) return
+      state.current.running = true
+      state.current.lastWrite1 = null
+      state.current.lastWrite2 = null
+      setWillChange(true)
       frameId = window.requestAnimationFrame(tick)
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        const wasActive = state.current.active
         state.current.active = entry.isIntersecting
+        if (!wasActive && entry.isIntersecting) startLoop()
       },
       { rootMargin: `${ACTIVATE_MARGIN}px 0px ${ACTIVATE_MARGIN}px 0px`, threshold: 0 },
     )
@@ -149,7 +155,6 @@ export default function LifeAtGHL() {
 
     measure()
     state.current.lastY = window.scrollY
-    frameId = window.requestAnimationFrame(tick)
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('resize', measure)
@@ -193,8 +198,6 @@ export default function LifeAtGHL() {
         </motion.p>
       </div>
 
-      {/* Decorative photo strip -- duplicated images and no unique captions,
-          so it's noise for screen readers rather than content. */}
       <div className="life-at-ghl-rows" aria-hidden="true">
         {rowOne.length ? <GalleryRow images={rowOne} trackRef={row1Ref} sizeOffset={0} /> : null}
         {rowTwo.length ? <GalleryRow images={rowTwo} trackRef={row2Ref} sizeOffset={3} /> : null}

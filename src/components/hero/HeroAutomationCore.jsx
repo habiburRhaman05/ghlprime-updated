@@ -11,7 +11,7 @@ const CARD = { x: 249, y: 176, w: 222, h: 108 }
 
 const NODES = [
   {
-    key: 'automation', label: 'Automation', color: '#2563eb', Icon: Settings,
+    key: 'automation', label: 'Automation', color: '#1895ff', Icon: Settings,
     anchor: 'center', x: 360, y: 40,
     hub: { x: 360, y: 168 },
     d: 'M 360 168 L 360 70',
@@ -23,7 +23,7 @@ const NODES = [
     d: 'M 416 168 C 416 142, 434 122, 488 122',
   },
   {
-    key: 'email', label: 'Email Campaign ', color: '#2563eb', Icon: Mail,
+    key: 'email', label: 'Email Campaign ', color: '#1895ff', Icon: Mail,
     anchor: 'left', x: 575, y: 230,
     hub: { x: 479, y: 230 },
     d: 'M 479 230 L 575 230',

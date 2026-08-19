@@ -22,14 +22,14 @@
   margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
   text-align: center;
 }
-/* Homepage section-header spec: 14px/600/#2563eb eyebrow (below), up to
+/* Homepage section-header spec: 14px/600/#1895ff eyebrow (below), up to
    48px/700 title with a highlighted phrase in the same blue, 16px/500
    description. Scoped to .tt-head so it never reaches .eyebrow-label /
    .section-title on any other page. */
 .tt-head .eyebrow-label {
   font-size: .875rem;
   font-weight: 600;
-  color: #2563eb;
+  color: #1895ff;
 }
 .tt-head h2 {
   margin: 0;
@@ -40,7 +40,7 @@
   font-weight: 700;
 }
 .tt-head h2 .hl {
-  color: #2563eb;
+  color: #1895ff;
 }
 .tt-head p {
   margin: 1rem 0 0;

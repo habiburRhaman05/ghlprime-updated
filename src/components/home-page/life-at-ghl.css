@@ -24,7 +24,7 @@
   text-align: center;
 }
 
-/* Homepage section-header spec: 14px/600/#2563eb eyebrow (the badge shell
+/* Homepage section-header spec: 14px/600/#1895ff eyebrow (the badge shell
    -- background/border/padding -- is this section's own decoration, kept
    as-is), up to 48px/700 title (already exactly 48px at its ceiling, no
    change needed) with the highlighted phrase in the same blue, and
@@ -37,7 +37,7 @@
   border-radius: 999px;
   border: 1px solid rgba(22, 132, 234, 0.28);
   background: var(--soft-blue);
-  color: #2563eb;
+  color: #1895ff;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -55,7 +55,7 @@
 
 .life-at-brand {
   font-weight: 700;
-  color: #2563eb;
+  color: #1895ff;
 
   letter-spacing: normal;
 }
@@ -84,6 +84,7 @@
 
 .life-at-row-viewport {
   overflow: hidden;
+  contain: layout style;
 }
 
 .life-at-row {
@@ -91,7 +92,7 @@
   align-items: center;
   gap: clamp(0.6rem, 1.2vw, 0.9rem);
   width: max-content;
-  will-change: transform;
+  /* will-change is toggled by JS (set while active, auto when idle) */
 }
 
 .life-at-card {
@@ -102,7 +103,7 @@
   overflow: hidden;
   background: var(--soft-slate);
   box-shadow: var(--shadow-soft);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  will-change: transform;
 }
 .life-at-card:hover {
   transform: translateY(-4px);
@@ -113,7 +114,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.35s ease;
 }
 .life-at-card:hover img {
   transform: scale(1.06);
