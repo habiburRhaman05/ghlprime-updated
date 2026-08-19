@@ -721,7 +721,7 @@ export default function ServiceDetailTemplate({ config }) {
           {formConfig ? (
             <div className="svc-hero-2col">
               <motion.div className="svc-hero-inner svc-hero-inner--left" {...fade} transition={{ duration: 0.5 }}>
-                <span className="svc-eyebrow-pill">{config.hero.eyebrow}</span>
+                <span className="svc-eyebrow-pill"><span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span></span>
                 <h1>{config.hero.h1}</h1>
                 <p className="svc-hero-sub">{formConfig.heroSubhead || config.hero.subhead}</p>
                 <HeroBadges badges={config.hero.badges} />
@@ -734,7 +734,7 @@ export default function ServiceDetailTemplate({ config }) {
           ) : (
             <>
               <motion.div className="svc-hero-inner" {...fade} transition={{ duration: 0.5 }}>
-                <span className="svc-eyebrow-pill">{config.hero.eyebrow}</span>
+                <span className="svc-eyebrow-pill"><span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span></span>
                 <h1>{config.hero.h1}</h1>
                 <p className="svc-hero-sub">{config.hero.subhead}</p>
                 <div className="svc-hero-ctas">

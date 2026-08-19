@@ -35,9 +35,21 @@
 /* ---------- Eyebrow pill + plain eyebrow ---------- */
 .svc-eyebrow-pill {
   display: inline-flex; align-items: center; gap: .4rem;
-  font-size: .8rem; font-weight: 600; letter-spacing: .02em; color: var(--svc-blue);
+  font-size: .8rem; font-weight: 700; letter-spacing: .02em; color: var(--svc-blue);
   background: var(--svc-blue-light); border: 1px solid rgba(22,132,234,.22);
   border-radius: 50px; padding: .35rem 1rem; margin-bottom: 1.3rem;
+}
+/* The label takes the primary button's gradient as its text fill. It has to
+   be a separate element: background-clip:text on the pill itself would clip
+   the pill's own light fill away along with it. The inherited colour above
+   is the fallback wherever background-clip is unavailable. */
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .svc-eyebrow-pill-text {
+    background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 .svc-eyebrow {
   display: inline-block; font-size: .76rem; font-weight: 700; letter-spacing: .09em;
