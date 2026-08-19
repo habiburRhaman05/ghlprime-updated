@@ -88,8 +88,8 @@
 
 .life-at-row {
   display: flex;
-  align-items: stretch;
-  gap: clamp(0.7rem, 1.4vw, 1rem);
+  align-items: center;
+  gap: clamp(0.6rem, 1.2vw, 0.9rem);
   width: max-content;
   will-change: transform;
 }
@@ -97,8 +97,8 @@
 .life-at-card {
   position: relative;
   flex-shrink: 0;
-  height: clamp(170px, 21vw, 250px);
-  border-radius: 18px;
+  height: clamp(220px, 24vw, 300px);
+  border-radius: 14px;
   overflow: hidden;
   background: var(--soft-slate);
   box-shadow: var(--shadow-soft);
@@ -119,10 +119,10 @@
   transform: scale(1.06);
 }
 
-.life-at-card.size-sm { width: clamp(130px, 13vw, 190px); }
-.life-at-card.size-md { width: clamp(190px, 17vw, 250px); }
-.life-at-card.size-lg { width: clamp(270px, 25vw, 370px); }
-.life-at-card.size-xl { width: clamp(330px, 31vw, 450px); }
+.life-at-card.size-sm { width: clamp(160px, 15vw, 220px); }
+.life-at-card.size-md { width: clamp(220px, 20vw, 300px); }
+.life-at-card.size-lg { width: clamp(300px, 27vw, 400px); }
+.life-at-card.size-xl { width: clamp(360px, 32vw, 480px); }
 
 .life-at-ghl-cta-row {
   text-align: center;
@@ -144,7 +144,7 @@
   /* The generic .section rhythm (5.5rem top/bottom) is too roomy once the
      head text and rows are already stacked tight on a phone. */
   .life-at-ghl-section { padding: 3.5rem 0; gap: 2rem; }
-  .life-at-card { height: clamp(130px, 32vw, 190px); border-radius: 14px; }
+  .life-at-card { height: clamp(170px, 28vw, 230px); border-radius: 12px; }
   .life-at-ghl-rows { gap: 0.9rem; }
   .life-at-row { gap: 0.6rem; }
 }
@@ -154,6 +154,7 @@
      every size tier was bottoming out at its desktop-oriented min width --
      an "xl" card alone could span ~90% of a phone screen. Give phones their
      own, tighter min/preferred widths so a couple of cards always peek. */
+  .life-at-card { height: clamp(150px, 40vw, 200px); }
   .life-at-card.size-sm { width: clamp(108px, 34vw, 150px); }
   .life-at-card.size-md { width: clamp(140px, 42vw, 190px); }
   .life-at-card.size-lg { width: clamp(168px, 52vw, 225px); }

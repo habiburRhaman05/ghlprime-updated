@@ -3,18 +3,31 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import './life-at-ghl.css'
 
-// TODO: swap for real team/culture photos via the Admin > Gallery manager
-// (src/lib/galleryApi.js -> fetchGalleryImages) once they're uploaded.
-// Placeholder set for now so the section is visible during dev/preview.
-const DUMMY_IMAGES = Array.from({ length: 14 }, (_, i) => ({
-  id: `dummy-${i}`,
-  image_url: `https://picsum.photos/seed/ghlprime-life-${i}/600/450`,
+// Real team/culture photos from public/life-at-images/
+const LIFE_AT_IMAGES = [
+  'DSC00041 (1).jpg',
+  'DSC00043 (1).jpg',
+  'DSC00056 (1).jpg',
+  'DSC00061 (1).jpg',
+  'DSC00064 (1).jpg',
+  'DSC00071 (1).jpg',
+  'DSC00072 (1).jpg',
+  'DSC00082 (1).jpg',
+  'DSC00110 (1).jpg',
+  'DSC00111 (1).jpg',
+  'DSC00353 (1).jpg',
+  'DSC00361 (1).jpg',
+  'DSC00382 (1).jpg',
+]
+const DUMMY_IMAGES = LIFE_AT_IMAGES.map((file, i) => ({
+  id: `life-${i}`,
+  image_url: `/life-at-images/${file.replace(/ /g, '%20')}`,
   title: 'Life at GHL Prime',
 }))
 
 // Repeating width pattern so each row reads as an uneven, hand-picked photo
 // strip (like the reference) instead of a uniform grid.
-const CARD_SIZES = ['md', 'lg', 'sm', 'xl', 'md', 'sm', 'lg']
+const CARD_SIZES = ['sm', 'lg', 'md', 'xl', 'sm', 'lg', 'md', 'xl', 'sm', 'lg']
 
 // How much horizontal travel per pixel of vertical scroll. Row 2 uses the
 // negative of this so the two rows drift apart as you scroll down.

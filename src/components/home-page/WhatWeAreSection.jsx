@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight, GraduationCap, Headphones, Users } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { fetchGalleryImages } from '../../lib/galleryApi'
 
 // TODO: slides are pulled from Admin > Gallery (fetchGalleryImages). The list
@@ -193,9 +193,9 @@ function WhatWeAreSlider() {
 }
 
 const WHAT_WE_ARE_FEATURES = [
-  { title: '24/7 Support', text: 'Always available when you need us', icon: Headphones, tone: 'blue' },
-  { title: 'Expert Team', text: 'Specialists in GHL & automation', icon: Users, tone: 'green' },
-  { title: 'Client Growth', text: 'We train, support & help you scale', icon: GraduationCap, tone: 'purple' },
+  { title: '24/7 Support', text: 'Always available when you need us.', tone: 'blue', icon: '/what-we-are-card-1-icon.png' },
+  { title: 'Expert Team', text: 'Specialists in GHL & automation.', tone: 'green', icon: '/what-we-are-card-2-icon.png' },
+  { title: 'Client Growth', text: 'We train, support & help you scale.', tone: 'yellow', icon: '/what-we-are-card-3-icon.png' },
 ]
 
 export default function WhatWeAreSection() {
@@ -252,7 +252,7 @@ export default function WhatWeAreSection() {
                 }}
               >
                 <div className="wwa-feature-icon">
-                  <feature.icon size={22} />
+                  <img src={feature.icon} alt="" aria-hidden="true" />
                 </div>
                 <strong>{feature.title}</strong>
                 <p>{feature.text}</p>

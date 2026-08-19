@@ -138,23 +138,7 @@ export default function AgencyNeedsSection() {
           ))}
         </motion.div>
 
-        <motion.div
-          className="an-trust"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {TRUST.map(({ a, b, Icon, tone }) => (
-            <div className={`an-trust-item tone-${tone}`} key={a}>
-              <span className="an-trust-icon"><Icon size={20} /></span>
-              <span className="an-trust-copy">
-                <span className="an-trust-a">{a}</span>
-                <span className="an-trust-b">{b}</span>
-              </span>
-            </div>
-          ))}
-        </motion.div>
+ 
       </div>
     </section>
   )

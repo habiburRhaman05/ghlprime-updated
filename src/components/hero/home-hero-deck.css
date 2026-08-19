@@ -18,12 +18,12 @@
    text-align at (0,0,1,0), and App.css loads AFTER this file, so a plain
    `.homepage-hero-v3` would lose the tie and silently keep .hero's padding. */
 .hero.homepage-hero-v3 {
-  position: relative;
-  isolation: isolate;
-  padding: clamp(3.2rem, 6.5vw, 5.2rem) 0 clamp(2.8rem, 5.5vw, 4.2rem);
-  text-align: left;
+    isolation: isolate;
+    text-align: left;
+    padding: clamp(3.2rem, 6.5vw, 5.2rem) 0 clamp(2.8rem, 5.5vw, 5.2rem);
+    position: relative;
+    height: 690px;
 }
-
 .hh-grid {
   display: grid;
   /* Visual column takes the larger share: the power-grid illustration has
