@@ -4,12 +4,13 @@
 // pages, which already destructure `{ data, error }` from Supabase calls)
 // don't need to change how they consume the result.
 
-// In dev (Vite dev server on :5173) the API runs separately on :5013, so we
-// need an absolute URL. In production the API is always reverse-proxied
-// through the same Nginx host that serves the static site, so a relative
-// path works on any domain it's deployed to (dev/stg/prod) with no rebuild.
-export const API_BASE_URL = 
-  process.env.VITE_API_URL || 'http://localhost:5013' 
+// In dev the Next server (:3000) and the Express API (:4000) are separate
+// origins, so we need an absolute URL -- set VITE_API_URL in .env to override.
+// In production the API is always reverse-proxied through the same Nginx host
+// that serves the site, so the deployed value works on any domain (dev/stg/
+// prod) with no rebuild. The origin only: every path below adds its own /api.
+export const API_BASE_URL =
+  process.env.VITE_API_URL || 'http://localhost:4000'
 
 const TOKEN_STORAGE_KEY = 'ghlprime_admin_token'
 

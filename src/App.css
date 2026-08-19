@@ -22,6 +22,9 @@
   --muted: #60738b;
   --line: rgba(16, 37, 63, 0.08);
   --primary: #1684ea;
+  /* Flat brand blue sampled from the logo mark -- primary buttons use this
+     solid fill rather than a gradient so they read as the logo blue. */
+  --primary-solid: #0f7be5;
   --primary-dark: #0a66cc;
   --soft-blue: #edf5ff;
   --soft-slate: #eef4f8;
@@ -276,7 +279,7 @@ button { font: inherit; }
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: 0 1rem; border-radius: 999px; font-weight: 700; transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
 }
 .primary-pill:hover, .secondary-pill:hover, .platform-tabs button:hover, .dashboard-tabs button:hover, .dashboard-cta:hover, .banner-settings:hover, .widget-preview-card button:hover, .sidebar-link:hover { transform: translateY(-2px); }
-.primary-pill { color: #fff; background: linear-gradient(135deg, var(--primary), #3da5ff); box-shadow: 0 14px 30px rgba(22, 132, 234, 0.2); border: 0; cursor: pointer; }
+.primary-pill { color: #fff; background: var(--primary-solid); box-shadow: 0 14px 30px rgba(15, 123, 229, 0.22); border: 0; cursor: pointer; }
 .primary-pill.large, .secondary-pill { min-height: 3rem; padding-inline: 1.25rem; }
 .secondary-pill { border: 1px solid rgba(22, 132, 234, 0.16); color: var(--primary); background: rgba(255,255,255,.92); }
 

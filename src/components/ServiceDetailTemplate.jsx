@@ -702,7 +702,7 @@ export default function ServiceDetailTemplate({ config }) {
           </div>
           <div className="svc-grid two">
             {config.who.cards.map((card, i) => (
-              <motion.article className="svc-card accent" key={card.title} {...fade} transition={{ duration: 0.4, delay: (i % 2) * 0.06 }}>
+              <motion.article className="svc-card" key={card.title} {...fade} transition={{ duration: 0.4, delay: (i % 2) * 0.06 }}>
                 <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>

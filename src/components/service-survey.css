@@ -37,23 +37,21 @@
 }
 .svf-subtitle { font-size: 12.5px; color: #475569; line-height: 1.45; margin: 0 0 14px; }
 
-/* Progress bar */
-.svf-progress { display: flex; align-items: flex-start; justify-content: space-between; position: relative; margin-bottom: 20px; }
-.svf-progress-track, .svf-progress-fill {
-  position: absolute; top: 14px; height: 2px;
-  left: calc(50% / var(--steps)); right: calc(50% / var(--steps));
+/* Step indicator -- a static row of segments that fill as the user advances,
+   plus a "Step n of N" / step-name line. Nothing moves between steps, so the
+   header stays put instead of sliding or renumbering. */
+.svf-progress { margin-bottom: 20px; }
+.svf-progress-meta {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 7px;
 }
-.svf-progress-track { background: #E2E8F0; z-index: 0; }
-.svf-progress-fill { right: auto; background: #2563EB; z-index: 1; transition: width .3s ease; }
-.svf-step { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; flex: 1; }
-.svf-step-circle {
-  width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 600; background: #fff; border: 2px solid #E2E8F0; color: #94A3B8;
-  transition: background .2s, border-color .2s, color .2s;
+.svf-progress-name { font-size: 12px; font-weight: 600; color: #0F172A; }
+.svf-progress-count { font-size: 11px; font-weight: 600; color: #94A3B8; font-variant-numeric: tabular-nums; }
+.svf-progress-segments { display: flex; gap: 5px; }
+.svf-progress-segment {
+  flex: 1; height: 4px; border-radius: 999px; background: #E2E8F0;
+  transition: background .3s ease;
 }
-.svf-step.completed .svf-step-circle, .svf-step.active .svf-step-circle { background: #2563EB; border-color: #2563EB; color: #fff; }
-.svf-step-label { font-size: 10.5px; color: #94A3B8; font-weight: 500; margin-top: 6px; text-align: center; line-height: 1.15; }
-.svf-step.active .svf-step-label { color: #0F172A; }
+.svf-progress-segment.is-filled { background: #2563EB; }
 
 /* Step heading */
 .svf-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: #2563EB; margin-bottom: 5px; }

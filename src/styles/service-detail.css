@@ -183,7 +183,6 @@
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .svc-card:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(15,31,53,.1); }
-.svc-card.accent { border-left: 3px solid var(--svc-blue); }
 .svc-card-icon { width: 2.75rem; height: 2.75rem; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.15rem; background: var(--svc-blue-light); color: var(--svc-blue); }
 .svc-card h3 { margin: 0 0 .55rem; font-size: 1.12rem; color: var(--svc-heading); font-weight: 600; }
 .svc-card p { margin: 0; color: var(--svc-body); font-size: .96rem; line-height: 1.65; }

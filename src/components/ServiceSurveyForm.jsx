@@ -109,26 +109,28 @@ export default function ServiceSurveyForm({ form, slug }) {
     )
   }
 
-  const fillWidth = `${((step - 1) / totalSteps) * 100}%`
 
   return (
     <div className="svf-card">
       {form.titlePill ? <span className="svf-pill">{form.titlePill}</span> : null}
       {form.titleSub ? <p className="svf-subtitle">{form.titleSub}</p> : null}
 
-      <div className="svf-progress" style={{ '--steps': totalSteps }}>
-        <span className="svf-progress-track" />
-        <span className="svf-progress-fill" style={{ width: fillWidth }} />
-        {form.stepLabels.map((label, i) => {
-          const n = i + 1
-          const cls = n < step ? 'completed' : n === step ? 'active' : ''
-          return (
-            <div className={`svf-step ${cls}`} key={label}>
-              <span className="svf-step-circle">{n < step ? <Check size={15} /> : n}</span>
-              <span className="svf-step-label">{label}</span>
-            </div>
-          )
-        })}
+      {/* Step indicator: one static segment per step, filled left-to-right.
+          Nothing slides or renumbers between steps -- only the fill changes. */}
+      <div className="svf-progress">
+        <div className="svf-progress-meta">
+          <span className="svf-progress-name">{form.stepLabels[step - 1]}</span>
+          <span className="svf-progress-count">{step} / {totalSteps}</span>
+        </div>
+        <div className="svf-progress-segments">
+          {form.stepLabels.map((label, i) => (
+            <span
+              className={`svf-progress-segment${i < step ? ' is-filled' : ''}`}
+              key={label}
+              aria-hidden="true"
+            />
+          ))}
+        </div>
       </div>
 
       <div className="svf-eyebrow">{current.eyebrow}</div>
