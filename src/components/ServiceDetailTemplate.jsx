@@ -135,11 +135,21 @@ const groupProps = {
 // time the card comes back into view. `cols` only staggers within a row, so
 // the delay never accumulates down the grid.
 const cardReveal = (i, cols) => ({
-  initial: { opacity: 0, y: 26, scale: 0.97 },
-  whileInView: { opacity: 1, y: 0, scale: 1 },
+  initial: { opacity: 0, y: 28, scale: 0.965, filter: 'blur(6px)' },
+  whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
   viewport: { once: false, amount: 0.25 },
-  transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: (i % cols) * 0.05 },
+  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: (i % cols) * 0.06 },
 })
+
+// Feeds the pointer's position inside a card to CSS as --mx/--my, which is
+// what the spotlight gradient in .svc-card::before follows. Writing a custom
+// property is cheap enough to do straight from mousemove.
+const trackPointer = (e) => {
+  const el = e.currentTarget
+  const r = el.getBoundingClientRect()
+  el.style.setProperty('--mx', `${e.clientX - r.left}px`)
+  el.style.setProperty('--my', `${e.clientY - r.top}px`)
+}
 
 // The process section as a vertical timeline: a rail down the left whose
 // coloured fill tracks scroll position through the section, and a node per
@@ -185,10 +195,14 @@ function ProcessSteps({ steps }) {
             <span className="svc-tl-node-core" />
           </motion.span>
           <div className="svc-tl-card">
-            <span className="svc-tl-num">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
-            {step.meta ? <span className="svc-tl-meta">{step.meta}</span> : null}
+            <div className="svc-tl-head">
+              <span className="svc-tl-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{step.title}</h3>
+            </div>
+            <div className="svc-tl-body">
+              <p>{step.text}</p>
+              {step.meta ? <span className="svc-tl-meta">{step.meta}</span> : null}
+            </div>
           </div>
         </motion.div>
       ))}
@@ -614,7 +628,7 @@ function Deliverables({ deliver }) {
             cards that just swapped in, instead of showing them flat. */}
         <div className="svc-grid" key={tab || 'all'}>
           {cards.map((card, i) => (
-            <motion.article className="svc-card" key={card.title} {...cardReveal(i, 3)}>
+            <motion.article className="svc-card" key={card.title} onMouseMove={trackPointer} {...cardReveal(i, 3)}>
               <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
               <h3>{card.title}</h3>
               <p>{card.text}</p>
@@ -853,7 +867,7 @@ export default function ServiceDetailTemplate({ config }) {
           </div>
           <div className="svc-grid two">
             {config.who.cards.map((card, i) => (
-              <motion.article className="svc-card" key={card.title} {...cardReveal(i, 2)}>
+              <motion.article className="svc-card" key={card.title} onMouseMove={trackPointer} {...cardReveal(i, 2)}>
                 <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
