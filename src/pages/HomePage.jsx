@@ -12,6 +12,7 @@ import TeamTestimonials from '../components/home-page/TeamTestimonials'
 import TrainingOnboarding from '../components/home-page/TrainingOnboarding'
 import VibeCoding from '../components/home-page/VibeCoding'
 import TrustedLogosSection from '../components/home-page/TrustedLogosSection'
+import OurStackSection from '../components/home-page/OurStackSection'
 import WhatWeAreSection from '../components/home-page/WhatWeAreSection'
 import WhatWeHandleSection from '../components/home-page/WhatWeHandleSection'
 import AgencyNeedsSection from '../components/home-page/AgencyNeedsSection'
@@ -209,6 +210,7 @@ export default function HomePage() {
       <AgencyNeedsSection />
       <TrainingOnboarding />
       <VibeCoding />
+      <OurStackSection />
       <WhyChooseSection />
      
       <LeadersSection />

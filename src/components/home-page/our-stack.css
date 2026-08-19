@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Our Stack  (.our-stack-*)
+   --------------------------------------------------------------------------
+   Three logo rows on a soft grey band, each scrolling on its own loop and
+   fading out at both edges. Cards are a fixed size so the rows stay on a
+   shared rhythm no matter how long a brand name is.
+   ========================================================================== */
+
+.our-stack-section {
+  position: relative;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.our-stack-title {
+  margin-bottom: 2.75rem;
+}
+.our-stack-title h2 {
+  font-size: clamp(1.85rem, 4.4vw, 3rem);
+  font-weight: 700;
+  color: #1b2d43;
+}
+.our-stack-title p {
+  max-width: 46rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.75;
+  color: #64748b;
+}
+
+.our-stack-rows {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* --- Row ----------------------------------------------------------------- */
+
+.our-stack-row {
+  --gap: 20px;
+  position: relative;
+  overflow: hidden;
+  /* Same edge treatment as the reference: fully faded at the rim, solid by
+     an eighth of the way in. */
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, #000 12.5%, #000 87.5%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, #000 12.5%, #000 87.5%, rgba(0, 0, 0, 0) 100%);
+}
+
+.our-stack-track {
+  display: flex;
+  gap: var(--gap);
+  width: max-content;
+  will-change: transform;
+  animation-name: our-stack-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.our-stack-row.is-reverse .our-stack-track {
+  animation-direction: reverse;
+}
+.our-stack-row:hover .our-stack-track,
+.our-stack-row:focus-within .our-stack-track {
+  animation-play-state: paused;
+}
+
+.our-stack-group {
+  display: flex;
+  gap: var(--gap);
+}
+
+@keyframes our-stack-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  /* Half the track puts the second group where the first started, but the two
+     groups are themselves one gap apart -- hence the extra half-gap. */
+  to { transform: translate3d(calc(-50% - var(--gap) / 2), 0, 0); }
+}
+
+/* --- Card ---------------------------------------------------------------- */
+
+.our-stack-card {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  width: 205px;
+  height: 68px;
+  padding: 0 1.1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(16, 37, 63, 0.05);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(16, 37, 63, 0.05);
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease, border-color .3s ease;
+}
+.our-stack-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(22, 132, 234, 0.18);
+  box-shadow: 0 14px 30px rgba(16, 37, 63, 0.1);
+}
+
+.our-stack-mark {
+  width: auto;
+  height: 26px;
+  max-width: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.our-stack-word {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  white-space: nowrap;
+  color: #0f172a;
+}
+
+.our-stack-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: .3rem .7rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: #fff;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .our-stack-row { --gap: 14px; }
+  .our-stack-card {
+    width: 168px;
+    height: 60px;
+    padding: 0 .85rem;
+    border-radius: 12px;
+  }
+  .our-stack-mark { height: 22px; max-width: 28px; }
+  .our-stack-word { font-size: 1rem; }
+  .our-stack-chip { font-size: .95rem; }
+}
+
+/* Motion is the whole point of the section, so when it's turned off the rows
+   become a plain scrollable strip rather than a frozen, half-clipped one. */
+@media (prefers-reduced-motion: reduce) {
+  .our-stack-row {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .our-stack-track { animation: none; }
+  .our-stack-group + .our-stack-group { display: none; }
+}
