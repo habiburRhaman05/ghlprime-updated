@@ -75,10 +75,15 @@ export default function OurStackSection() {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeUp}
         >
-          <h2>Our Stack</h2>
-          <p>We combine powerful design tools, modern development frameworks, &amp; smart automation platforms to build digital systems that perform, scale, and convert.</p>
+          <h2></h2>
         </motion.div>
 
+  <div className="section-title centered certifications-overview-title">
+          <span className="eyebrow-label">OUR STACK</span>
+          <h2>Enterprise Tech Delivered By <span className="hl">Our Expert Teams</span></h2>
+                  <p>We combine powerful design tools, modern development frameworks, &amp; smart automation platforms to build digital systems that perform, scale, and convert.</p>
+
+        </div>
         <motion.div
           className="our-stack-rows"
           initial="hidden"
