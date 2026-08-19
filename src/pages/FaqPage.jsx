@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
@@ -19,23 +18,6 @@ export default function FaqPage() {
             { '@type': 'ListItem', position: 2, name: 'FAQ', item: 'https://ghlprime.com/faq' },
           ],
         }) }} />
-
-      <section className="section section-white faq-hero">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-            <span className="eyebrow-label">FAQ</span>
-            <h1>GoHighLevel Expert FAQ</h1>
-            <p className="faq-page-intro">
-              Everything you want to know before hiring a GoHighLevel expert team.
-              If your question is not here, book a free call and ask us directly.
-            </p>
-            <div className="faq-hero-actions">
-              <Link href="/booking" className="primary-pill">Get a free consultation <ArrowRight size={16} /></Link>
-              <Link href="/services" className="secondary-pill">See services</Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       <FaqSection
         eyebrow="GHL Prime FAQ"

@@ -16,47 +16,85 @@
 .svc-hero-2col .svc-hero-inner--left h1 { text-align: left; }
 .svc-hero-2col .svc-hero-inner--left .svc-hero-sub { text-align: left; margin-left: 0; margin-right: 0; }
 .svc-hero-2col .svc-badges { justify-content: flex-start; }
+/* Carries the primary button's own gradient as its text fill. The solid
+   colour below is the fallback for anything without background-clip, where
+   transparent text would otherwise vanish. */
 .svc-hero-upwork {
-  display: inline-block; margin-top: 1.1rem; font-size: .92rem; font-weight: 600;
-  color: #2563EB; text-decoration: none;
+  display: inline-block; margin-top: 1.1rem; font-size: .92rem; font-weight: 700;
+  color: #14498b; text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease, opacity .2s ease;
 }
-.svc-hero-upwork:hover { text-decoration: underline; }
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .svc-hero-upwork {
+    background: var(--primary-gradient, linear-gradient(90deg, #022646, #1b4f97));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+.svc-hero-upwork:hover { border-bottom-color: #1b4f97; opacity: .85; }
 .svc-hero-form-col { width: 100%; display: flex; justify-content: flex-end; }
 
 /* Form card */
 .svf-card {
-  background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 18px; padding: 22px 24px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+  position: relative; overflow: hidden;
+  background: #FFFFFF; border: 1px solid #E3EAF3; border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(15,31,53,.05), 0 12px 28px -14px rgba(15,31,53,.22), 0 36px 64px -40px rgba(15,31,53,.32);
   width: 100%; max-width: 460px; box-sizing: border-box;
   font-family: Inter, system-ui, sans-serif; text-align: left;
 }
-.svf-pill {
-  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em;
-  color: #1D4ED8; background: #EFF6FF; border: 1px solid #BFDBFE;
-  border-radius: 50px; padding: 4px 11px; margin-bottom: 7px;
-}
-.svf-subtitle { font-size: 12.5px; color: #475569; line-height: 1.45; margin: 0 0 14px; }
 
-/* Progress bar */
-.svf-progress { display: flex; align-items: flex-start; justify-content: space-between; position: relative; margin-bottom: 20px; }
-.svf-progress-track, .svf-progress-fill {
-  position: absolute; top: 14px; height: 2px;
-  left: calc(50% / var(--steps)); right: calc(50% / var(--steps));
+/* Header band. Carries the brand fill so the card reads as a product panel
+   rather than a plain boxed form, and holds everything that does not change
+   between steps. The soft radial is what stops the navy going flat. */
+.svf-head {
+  position: relative; overflow: hidden;
+  padding: 20px 24px 18px;
+  background: var(--primary-gradient, linear-gradient(90deg, #022646, #1b4f97));
+  color: #fff;
 }
-.svf-progress-track { background: #E2E8F0; z-index: 0; }
-.svf-progress-fill { right: auto; background: #2563EB; z-index: 1; transition: width .3s ease; }
-.svf-step { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; flex: 1; }
-.svf-step-circle {
-  width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 600; background: #fff; border: 2px solid #E2E8F0; color: #94A3B8;
-  transition: background .2s, border-color .2s, color .2s;
+.svf-head::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 140% at 88% -20%, rgba(122, 190, 255, .34), transparent 58%);
 }
-.svf-step.completed .svf-step-circle, .svf-step.active .svf-step-circle { background: #2563EB; border-color: #2563EB; color: #fff; }
-.svf-step-label { font-size: 10.5px; color: #94A3B8; font-weight: 500; margin-top: 6px; text-align: center; line-height: 1.15; }
-.svf-step.active .svf-step-label { color: #0F172A; }
+.svf-head > * { position: relative; z-index: 1; }
+.svf-body { padding: 20px 24px 22px; }
+/* The band's gradient starts light (#1895ff), where white-on-translucent
+   only reaches ~3:1. Solid white with navy ink puts the pill at ~16:1 and
+   keeps it readable across the whole width without touching the fill. */
+.svf-pill {
+  display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  color: #06305c; background: #fff; border: 1px solid rgba(255,255,255,.9);
+  border-radius: 50px; padding: 4px 11px; margin-bottom: 9px;
+  box-shadow: 0 2px 6px rgba(2,20,40,.18);
+}
+/* Body copy on the band stays white, but gains weight and a soft dark
+   shadow so it separates from the light end of the gradient too. */
+.svf-subtitle {
+  font-size: 12.5px; font-weight: 500; color: #fff; line-height: 1.45; margin: 0 0 15px;
+  text-shadow: 0 1px 3px rgba(2,20,40,.45);
+}
+
+/* Step indicator -- a static row of segments that fill as the user advances,
+   plus a "Step n of N" / step-name line. Nothing moves between steps, so the
+   header stays put instead of sliding or renumbering. */
+.svf-progress { margin-bottom: 0; }
+.svf-progress-meta {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 7px;
+}
+.svf-progress-name { font-size: 12px; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(2,20,40,.45); }
+.svf-progress-count { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.9); font-variant-numeric: tabular-nums; text-shadow: 0 1px 3px rgba(2,20,40,.4); }
+.svf-progress-segments { display: flex; gap: 5px; }
+.svf-progress-segment {
+  flex: 1; height: 4px; border-radius: 999px; background: rgba(255,255,255,.22);
+  transition: background .35s ease, box-shadow .35s ease;
+}
+.svf-progress-segment.is-filled { background: #fff; box-shadow: 0 0 10px rgba(255,255,255,.5); }
 
 /* Step heading */
-.svf-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: #2563EB; margin-bottom: 5px; }
+.svf-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--primary, #1684EA); margin-bottom: 5px; }
+.svf-body .svf-group:first-of-type { margin-top: 2px; }
 .svf-title { font-size: 15px; font-weight: 600; color: #0F172A; margin: 0 0 12px; }
 
 /* Fields */
@@ -64,11 +102,12 @@
 .svf-label { display: block; font-size: 12.5px; font-weight: 500; color: #0F172A; margin-bottom: 5px; }
 .svf-req { color: #EF4444; margin-left: 2px; }
 .svf-input {
-  width: 100%; height: 40px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 9px;
-  padding: 0 13px; font-size: 14px; font-family: inherit; color: #0F172A; outline: none; box-sizing: border-box;
+  width: 100%; height: 44px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px;
+  padding: 0 14px; font-size: 14px; font-family: inherit; color: #0F172A; outline: none; box-sizing: border-box;
   transition: border-color .2s, background .2s, box-shadow .2s;
 }
-.svf-input:focus { border-color: #2563EB; background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+.svf-input:hover { border-color: #CBD8E8; background: #FCFDFF; }
+.svf-input:focus { border-color: var(--primary, #1684EA); background: #fff; box-shadow: 0 0 0 3px rgba(22,132,234,.14), 0 6px 16px -10px rgba(22,132,234,.7); }
 .svf-input::placeholder { color: #94A3B8; }
 .svf-phone-row { display: flex; gap: 8px; }
 .svf-phone-row .svf-input { flex: 1; }
@@ -84,7 +123,7 @@
   padding: 10px 13px; font-size: 14px; font-family: inherit; color: #0F172A; outline: none; resize: none; box-sizing: border-box;
   transition: border-color .2s, background .2s, box-shadow .2s;
 }
-.svf-textarea:focus { border-color: #2563EB; background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+.svf-textarea:focus { border-color: var(--primary, #1684EA); background: #fff; box-shadow: 0 0 0 3px rgba(22,132,234,.13); }
 .svf-textarea::placeholder { color: #94A3B8; }
 
 /* Radio options */
@@ -95,11 +134,17 @@
   font-size: 13.5px; font-family: inherit; color: #0F172A; text-align: left; user-select: none; line-height: 1.3;
   transition: border-color .2s, background .2s, color .2s;
 }
-.svf-radio:hover { border-color: #BFDBFE; background: #F8FAFC; }
-.svf-radio.selected { border-color: #2563EB; background: #EFF6FF; color: #1D4ED8; }
-.svf-radio-dot { width: 17px; height: 17px; border-radius: 50%; border: 2px solid #E2E8F0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: border-color .2s; }
-.svf-radio.selected .svf-radio-dot { border-color: #2563EB; }
-.svf-radio.selected .svf-radio-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #2563EB; }
+.svf-radio { transition: border-color .2s, background .2s, color .2s, transform .2s cubic-bezier(.22,1,.36,1); }
+.svf-radio:hover { border-color: #BFDBFE; background: #F8FAFC; transform: translateX(2px); }
+.svf-radio.selected { border-color: var(--primary, #1684EA); background: #EFF6FF; color: #0A66CC; }
+.svf-radio-dot {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid #E2E8F0; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  transition: border-color .2s, background .2s, transform .2s cubic-bezier(.22,1,.36,1);
+}
+.svf-radio.selected .svf-radio-dot {
+  border-color: var(--primary, #1684EA); background: var(--primary, #1684EA); transform: scale(1.06);
+}
 
 /* Navigation */
 .svf-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; gap: 12px; }
@@ -110,21 +155,25 @@
   transition: color .2s, border-color .2s;
 }
 .svf-back:hover { color: #0F172A; border-color: #CBD5E1; }
+/* Matches the site's primary pill so the form's main action reads as the
+   same button as every other CTA on the page. */
 .svf-next {
   display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #fff;
-  background: #2563EB; border: none; border-radius: 50px; padding: 11px 24px; cursor: pointer; font-family: inherit;
-  box-shadow: 0 2px 8px rgba(37,99,235,.25); transition: background .2s, box-shadow .2s;
+  background: var(--primary-gradient, #0f7be5); border: none; border-radius: 50px; padding: 12px 24px;
+  cursor: pointer; font-family: inherit;
+  box-shadow: 0 10px 22px -12px rgba(2,38,70,.75);
+  transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s ease, filter .2s ease;
 }
-.svf-next:hover:not(:disabled) { background: #1D4ED8; box-shadow: 0 4px 16px rgba(37,99,235,.35); }
-.svf-next:disabled { background: #94A3B8; box-shadow: none; cursor: not-allowed; }
+.svf-next:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.12); box-shadow: 0 14px 26px -12px rgba(2,38,70,.8); }
+.svf-next:disabled { background: #94A3B8; box-shadow: none; cursor: not-allowed; transform: none; filter: none; }
 
 /* Success */
 .svf-success { text-align: center; padding: 14px 0; }
 .svf-success-icon { width: 52px; height: 52px; background: #DCFCE7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #16A34A; }
 .svf-success-title { font-size: 19px; font-weight: 700; color: #0F172A; margin: 0 0 9px; }
 .svf-success-sub { font-size: 13.5px; color: #475569; line-height: 1.55; margin: 0 0 20px; }
-.svf-cal-btn { display: inline-flex; align-items: center; gap: 8px; background: #2563EB; color: #fff; border-radius: 50px; padding: 11px 24px; font-size: 14px; font-weight: 600; text-decoration: none; box-shadow: 0 2px 8px rgba(37,99,235,.25); }
-.svf-cal-btn:hover { background: #1D4ED8; }
+.svf-cal-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--primary-gradient, #0f7be5); color: #fff; border-radius: 50px; padding: 12px 24px; font-size: 14px; font-weight: 600; text-decoration: none; box-shadow: 0 10px 22px -12px rgba(2,38,70,.75); transition: filter .2s ease; }
+.svf-cal-btn:hover { filter: brightness(1.12); }
 
 /* Responsive: stack on tablet/mobile */
 @media (max-width: 900px) {

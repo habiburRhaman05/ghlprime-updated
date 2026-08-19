@@ -1,8 +1,8 @@
 ﻿'use client'
 
-import { useState, Fragment, useMemo } from 'react'
+import { useState, Fragment, useMemo, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useSpring, useInView } from 'framer-motion'
 import {
   ArrowRight, ChevronRight, CheckCircle2, Check, Code2, Terminal, LayoutDashboard,
   Plug, Users, Webhook, Workflow, Rocket, Bot, MessageSquare, Phone, Mail,
@@ -110,16 +110,185 @@ const fade = {
   viewport: { once: true, amount: 0.2 },
 }
 
-function CodeCard({ filename, code }) {
-  const lines = code.replace(/\n+$/, '').split('\n')
+// Staggered reveal for card grids and checklists. staggerChildren only works
+// when both ends of the tree use variants, so the parent carries the timing
+// and the child carries the actual transition.
+const revealGroup = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } },
+}
+const revealItem = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+}
+const groupProps = {
+  variants: revealGroup,
+  initial: 'hidden',
+  whileInView: 'show',
+  viewport: { once: true, amount: 0.15 },
+}
+
+// Card grids animate per card rather than as one group: a grid two or three
+// rows deep is taller than the viewport, so a container-level trigger makes
+// the top row sit and wait for the container's threshold. Each card watching
+// its own position removes that lag. `once: false` replays the reveal every
+// time the card comes back into view. `cols` only staggers within a row, so
+// the delay never accumulates down the grid.
+const cardReveal = (i, cols) => ({
+  initial: { opacity: 0, y: 26, scale: 0.97 },
+  whileInView: { opacity: 1, y: 0, scale: 1 },
+  viewport: { once: false, amount: 0.25 },
+  transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: (i % cols) * 0.05 },
+})
+
+// The process section as a vertical timeline: a rail down the left whose
+// coloured fill tracks scroll position through the section, and a node per
+// step that lights up as that step comes into view.
+const tlStep = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], when: 'beforeChildren' } },
+}
+const tlNode = {
+  hidden: { scale: 0.4, borderColor: 'rgba(226, 232, 240, 1)', boxShadow: '0 0 0 0 rgba(22, 132, 234, 0)' },
+  show: {
+    scale: 1,
+    borderColor: 'rgba(22, 132, 234, 1)',
+    boxShadow: '0 0 0 6px rgba(22, 132, 234, 0.12)',
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
+function ProcessSteps({ steps }) {
+  const reduceMotion = useReducedMotion()
+  const railRef = useRef(null)
+  // Maps "section entering the lower quarter of the viewport" -> "section
+  // leaving the upper half" onto 0..1, so the rail reads empty on arrival
+  // and is full by the time the last step has been read.
+  const { scrollYProgress } = useScroll({ target: railRef, offset: ['start 78%', 'end 55%'] })
+  const railFill = useSpring(scrollYProgress, { stiffness: 90, damping: 26, restDelta: 0.001 })
+
   return (
-    <div className="svc-codecard">
+    <div className="svc-timeline" ref={railRef}>
+      <span className="svc-timeline-rail" aria-hidden="true">
+        <motion.span className="svc-timeline-fill" style={{ scaleY: reduceMotion ? 1 : railFill }} />
+      </span>
+      {steps.map((step, i) => (
+        <motion.div
+          className="svc-tl-step"
+          key={step.title}
+          variants={tlStep}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
+        >
+          <motion.span className="svc-tl-node" variants={tlNode} aria-hidden="true">
+            <span className="svc-tl-node-core" />
+          </motion.span>
+          <div className="svc-tl-card">
+            <span className="svc-tl-num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+            {step.meta ? <span className="svc-tl-meta">{step.meta}</span> : null}
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  )
+}
+
+// Hero credential pills. Shared by both hero layouts (with and without the
+// survey form) so the two never drift apart.
+function HeroBadges({ badges }) {
+  if (!badges) return null
+  return (
+    <motion.div className="svc-badges" {...groupProps}>
+      {badges.map((b) => (
+        <motion.span className="svc-badge" key={b} variants={revealItem}>
+          <span className="svc-badge-dot" aria-hidden="true" />
+          {b}
+        </motion.span>
+      ))}
+    </motion.div>
+  )
+}
+
+// Types `code` out character by character the first time the card scrolls
+// into view, then holds the finished sample. Returns how many characters of
+// the source are currently visible; `lines.length` worth of newlines count as
+// characters too, so blank lines pause for a beat like real typing does.
+const TYPE_CPS = 260
+
+function useTypedLength(text, active) {
+  const [typed, setTyped] = useState(0)
+  useEffect(() => {
+    if (!active) return undefined
+    if (typed >= text.length) return undefined
+    let frame
+    let previous
+    let carry = 0
+    const step = (now) => {
+      if (previous === undefined) previous = now
+      carry += ((now - previous) / 1000) * TYPE_CPS
+      previous = now
+      if (carry >= 1) {
+        const chars = Math.floor(carry)
+        carry -= chars
+        setTyped((n) => Math.min(text.length, n + chars))
+      }
+      frame = requestAnimationFrame(step)
+    }
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+    // `typed` is deliberately out of the dep list: it changes every frame and
+    // would restart the loop each time. The guard above reads it once, which
+    // is all that is needed to stop scheduling after the sample is complete.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, active])
+  return typed
+}
+
+function CodeCard({ filename, code }) {
+  // Typing runs against the same trailing-newline-stripped string the lines
+  // are split from, so the final character typed is the final character
+  // rendered -- counting against the raw `code` leaves the caret one short
+  // of the end forever.
+  const source = useMemo(() => code.replace(/\n+$/, ''), [code])
+  const lines = useMemo(() => source.split('\n'), [source])
+  const reduceMotion = useReducedMotion()
+  const cardRef = useRef(null)
+  const inView = useInView(cardRef, { once: true, amount: 0.35 })
+  // +1 per line for the newline the reader "presses" at the end of it.
+  // Character index each line starts at, so a line can work out how much of
+  // itself is visible without the map callback carrying a running total.
+  const starts = useMemo(() => {
+    const out = []
+    let n = 0
+    for (const line of lines) { out.push(n); n += line.length + 1 }
+    return out
+  }, [lines])
+  const typed = useTypedLength(source, inView && !reduceMotion)
+  const done = reduceMotion || typed >= source.length
+
+  return (
+    <div className={`svc-codecard${done ? '' : ' is-typing'}`} ref={cardRef}>
       <div className="svc-codecard-head">
         <span className="svc-codedots"><span /><span /><span /></span>
         <span className="svc-codefile">{filename}</span>
       </div>
-      <pre className="svc-codebody">
-        {lines.map((line, i) => <span className="ln" key={i}>{highlight(line)}</span>)}
+      <pre className="svc-codebody" role="img" aria-label={source}>
+        {lines.map((line, i) => {
+          const available = done ? line.length : typed - starts[i]
+          const onCursorLine = !done && available >= 0 && available <= line.length
+          // Every row renders whether or not it has content yet, so the card
+          // is full height from the first frame and the column beside it
+          // never jumps as lines arrive.
+          return (
+            <span className="ln" key={i} aria-hidden="true">
+              {available > 0 ? highlight(line.slice(0, Math.min(line.length, available))) : null}
+              {onCursorLine ? <span className="svc-caret" /> : null}
+            </span>
+          )
+        })}
       </pre>
     </div>
   )
@@ -442,9 +611,11 @@ function Deliverables({ deliver }) {
             ))}
           </div>
         ) : null}
-        <div className="svc-grid">
+        {/* key on the active tab so switching tabs replays the reveal on the
+            cards that just swapped in, instead of showing them flat. */}
+        <div className="svc-grid" key={tab || 'all'}>
           {cards.map((card, i) => (
-            <motion.article className="svc-card" key={card.title} {...fade} transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}>
+            <motion.article className="svc-card" key={card.title} {...cardReveal(i, 3)}>
               <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
               <h3>{card.title}</h3>
               <p>{card.text}</p>
@@ -550,14 +721,10 @@ export default function ServiceDetailTemplate({ config }) {
           {formConfig ? (
             <div className="svc-hero-2col">
               <motion.div className="svc-hero-inner svc-hero-inner--left" {...fade} transition={{ duration: 0.5 }}>
-                <span className="svc-eyebrow-pill">{config.hero.eyebrow}</span>
+                <span className="svc-eyebrow-pill"><span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span></span>
                 <h1>{config.hero.h1}</h1>
                 <p className="svc-hero-sub">{formConfig.heroSubhead || config.hero.subhead}</p>
-                {config.hero.badges ? (
-                  <div className="svc-badges">
-                    {config.hero.badges.map((b) => <span className="svc-badge" key={b}>{b}</span>)}
-                  </div>
-                ) : null}
+                <HeroBadges badges={config.hero.badges} />
                 <a className="svc-hero-upwork" href={UPWORK} target="_blank" rel="noopener noreferrer">Or hire via Upwork &rarr;</a>
               </motion.div>
               <motion.div className="svc-hero-form-col" {...fade} transition={{ duration: 0.5, delay: 0.08 }}>
@@ -567,18 +734,14 @@ export default function ServiceDetailTemplate({ config }) {
           ) : (
             <>
               <motion.div className="svc-hero-inner" {...fade} transition={{ duration: 0.5 }}>
-                <span className="svc-eyebrow-pill">{config.hero.eyebrow}</span>
+                <span className="svc-eyebrow-pill"><span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span></span>
                 <h1>{config.hero.h1}</h1>
                 <p className="svc-hero-sub">{config.hero.subhead}</p>
                 <div className="svc-hero-ctas">
                   <Link href={config.hero.ctaPrimary.to} className="primary-pill large">{config.hero.ctaPrimary.label} <ArrowRight size={18} /></Link>
                   <Link href={config.hero.ctaSecondary.to} className="secondary-pill">{config.hero.ctaSecondary.label}</Link>
                 </div>
-                {config.hero.badges ? (
-                  <div className="svc-badges">
-                    {config.hero.badges.map((b) => <span className="svc-badge" key={b}>{b}</span>)}
-                  </div>
-                ) : null}
+                <HeroBadges badges={config.hero.badges} />
               </motion.div>
               {config.hero.mockup ? <HeroMockup name={config.hero.mockup} /> : null}
             </>
@@ -654,18 +817,7 @@ export default function ServiceDetailTemplate({ config }) {
             <span className="svc-eyebrow">The process</span>
             <h2>{config.how.h2}</h2>
           </div>
-          <div className="svc-steps">
-            {config.how.steps.map((step, i) => (
-              <motion.div className="svc-step" key={step.title} {...fade} transition={{ duration: 0.4, delay: 0.04 }}>
-                <span className="svc-step-num">{String(i + 1).padStart(2, '0')}</span>
-                <div className="svc-step-body">
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
-                  {step.meta ? <span className="svc-step-meta">{step.meta}</span> : null}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <ProcessSteps steps={config.how.steps} />
         </div>
       </section>
 
@@ -702,7 +854,7 @@ export default function ServiceDetailTemplate({ config }) {
           </div>
           <div className="svc-grid two">
             {config.who.cards.map((card, i) => (
-              <motion.article className="svc-card accent" key={card.title} {...fade} transition={{ duration: 0.4, delay: (i % 2) * 0.06 }}>
+              <motion.article className="svc-card" key={card.title} {...cardReveal(i, 2)}>
                 <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
@@ -742,11 +894,14 @@ export default function ServiceDetailTemplate({ config }) {
           </div>
           {config.why.points ? (
             <div className="svc-why-panel">
-              <div className="svc-why-list">
+              <motion.div className="svc-why-list" {...groupProps}>
                 {config.why.points.map((point) => (
-                  <div className="svc-why-row" key={point}><CheckCircle2 size={20} /><span>{point}</span></div>
+                  <motion.div className="svc-why-row" key={point} variants={revealItem}>
+                    <span className="svc-why-check" aria-hidden="true"><CheckCircle2 size={18} /></span>
+                    <span>{point}</span>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           ) : null}
           {config.why.comparison ? (

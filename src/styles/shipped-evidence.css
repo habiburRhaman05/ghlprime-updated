@@ -88,11 +88,12 @@
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 20px;
-  box-shadow: var(--shadow-soft);
-  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  /* Deliberately no box-shadow: the sticky stack below keeps every earlier
+     card parked behind the active one, and their shadows layered up into a
+     blurry halo around the card. The 1px border carries the edge instead. */
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 .se-pair:hover {
-  box-shadow: var(--shadow);
   border-color: rgba(22, 132, 234, 0.28);
   transform: translateY(-2px);
 }
