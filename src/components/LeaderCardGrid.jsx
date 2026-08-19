@@ -83,6 +83,8 @@ export default function LeaderCardGrid({ leaders = [] }) {
                 </div>
               ) : null}
 
+
+
               <div className="leader-profile-image-wrap">
                 <img src={leader.image_url} alt={leader.name} className="leader-profile-image" loading="lazy" decoding="async" />
               </div>
