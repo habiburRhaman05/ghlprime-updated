@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, ArrowLeft, Check } from 'lucide-react'
 import './service-survey.css'
 
@@ -97,7 +98,7 @@ export default function ServiceSurveyForm({ form, slug }) {
   if (submitted) {
     return (
       <div className="svf-card">
-        <div className="svf-success">
+        <div className="svf-body svf-success">
           <div className="svf-success-icon"><Check size={26} /></div>
           <h3 className="svf-success-title">{form.success.title}</h3>
           <p className="svf-success-sub">{form.success.subtitle}</p>
@@ -112,27 +113,42 @@ export default function ServiceSurveyForm({ form, slug }) {
 
   return (
     <div className="svf-card">
-      {form.titlePill ? <span className="svf-pill">{form.titlePill}</span> : null}
-      {form.titleSub ? <p className="svf-subtitle">{form.titleSub}</p> : null}
+      {/* Brand header band: everything that stays put across steps lives
+          here, so the white body below only ever holds the current step. */}
+      <div className="svf-head">
+        {form.titlePill ? <span className="svf-pill">{form.titlePill}</span> : null}
+        {form.titleSub ? <p className="svf-subtitle">{form.titleSub}</p> : null}
 
-      {/* Step indicator: one static segment per step, filled left-to-right.
-          Nothing slides or renumbers between steps -- only the fill changes. */}
-      <div className="svf-progress">
-        <div className="svf-progress-meta">
-          <span className="svf-progress-name">{form.stepLabels[step - 1]}</span>
-          <span className="svf-progress-count">{step} / {totalSteps}</span>
-        </div>
-        <div className="svf-progress-segments">
-          {form.stepLabels.map((label, i) => (
-            <span
-              className={`svf-progress-segment${i < step ? ' is-filled' : ''}`}
-              key={label}
-              aria-hidden="true"
-            />
-          ))}
+        {/* Step indicator: one static segment per step, filled left-to-right.
+            Nothing slides or renumbers between steps -- only the fill changes. */}
+        <div className="svf-progress">
+          <div className="svf-progress-meta">
+            <span className="svf-progress-name">{form.stepLabels[step - 1]}</span>
+            <span className="svf-progress-count">{step} / {totalSteps}</span>
+          </div>
+          <div className="svf-progress-segments">
+            {form.stepLabels.map((label, i) => (
+              <span
+                className={`svf-progress-segment${i < step ? ' is-filled' : ''}`}
+                key={label}
+                aria-hidden="true"
+              />
+            ))}
+          </div>
         </div>
       </div>
 
+      <div className="svf-body">
+      {/* Keyed on the step number so advancing swaps the whole panel out --
+          the fields slide across rather than snapping in place. */}
+      <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={step}
+        initial={{ opacity: 0, x: 18 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -18 }}
+        transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+      >
       <div className="svf-eyebrow">{current.eyebrow}</div>
       {current.title ? <div className="svf-title">{current.title}</div> : null}
 
@@ -187,7 +203,7 @@ export default function ServiceSurveyForm({ form, slug }) {
                   aria-pressed={selected}
                   onClick={() => set(q.name, opt)}
                 >
-                  <span className="svf-radio-dot" />
+                  <span className="svf-radio-dot">{selected ? <Check size={11} strokeWidth={3.5} /> : null}</span>
                   <span>{opt}</span>
                 </button>
               )
@@ -207,6 +223,8 @@ export default function ServiceSurveyForm({ form, slug }) {
           />
         </div>
       ) : null}
+      </motion.div>
+      </AnimatePresence>
 
       <div className={`svf-nav${step === 1 ? ' end' : ''}`}>
         {step > 1 ? (
@@ -217,6 +235,7 @@ export default function ServiceSurveyForm({ form, slug }) {
         <button type="button" className="svf-next" onClick={handleNext} disabled={!stepValid || submitting}>
           {submitting ? 'Sending...' : (isLast ? (form.submitLabel || 'Submit') : 'Next')} <ArrowRight size={16} />
         </button>
+      </div>
       </div>
     </div>
   )

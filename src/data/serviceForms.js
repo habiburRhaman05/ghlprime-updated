@@ -13,7 +13,7 @@ export const SERVICE_FORMS = {
   // ---------------------------------------------------------------- GHL Setup
   '/services/ghl-setup': {
     titlePill: 'Free GHL Audit Included',
-    titleSub: "Tell us about your setup — we'll map exactly what needs fixing.",
+    titleSub: "Tell us about your setup, we'll map exactly what needs fixing.",
     heroSubhead:
       'A messy GoHighLevel account costs you leads and hours every week. Tell us where you stand and our Certified Admins will map the fix.',
     stepLabels: ['Your Info', 'About You', 'Your Needs', 'Scope'],

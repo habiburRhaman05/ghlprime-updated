@@ -39,14 +39,35 @@ export const config = {
     visual: {
       kind: 'code',
       filename: 'saas-plans.ts',
+      // Long enough to stand level with the prose column beside it -- the
+      // grid centres both, so a short block leaves the row visibly lopsided.
       code: `// GoHighLevel SaaS plan config
 const plans = [
-  { name: "Starter", price: 97, rebill: 1.4 },
-  { name: "Growth",  price: 297, rebill: 1.4 },
-  { name: "Agency",  price: 497, rebill: 1.4 },
+  { name: "Starter", price: 97,  rebill: 1.4, seats: 1 },
+  { name: "Growth",  price: 297, rebill: 1.4, seats: 5 },
+  { name: "Agency",  price: 497, rebill: 1.4, seats: 25 },
 ];
+
+// Usage markup applied on top of platform cost
+const rebilling = {
+  phone: 1.4,
+  email: 1.4,
+  ai: 1.4,
+};
+
+// Every new customer inherits this account
 const snapshot = "crm-starter-v3";
 const provision = "auto-on-payment";
+const trialDays = 14;
+
+// White-label shell the client actually sees
+const branding = {
+  domain: "app.youragency.com",
+  loginLogo: "/brand/logo.svg",
+  hideVendor: true,
+  supportEmail: "help@youragency.com",
+};
+
 // ✓ Stripe connected · margin locked · ok`,
     },
   },
