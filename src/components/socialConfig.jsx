@@ -1,0 +1,50 @@
+// Platform list and brand glyphs for team member social links.
+//
+// Its own module because both LeaderCardGrid and the home page's team section
+// render these, and a component file that also exports constants trips
+// react-refresh/only-export-components.
+
+export const socialConfig = [
+  {
+    key: 'linkedin_url',
+    label: 'LinkedIn',
+    svg: (
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.94 8.5H3.56V20h3.38V8.5Zm.22-3.56a1.96 1.96 0 1 0-3.92 0a1.96 1.96 0 0 0 3.92 0ZM20.44 13.02c0-3.45-1.84-5.05-4.29-5.05c-1.98 0-2.87 1.09-3.36 1.86V8.5H9.41c.05.88 0 11.5 0 11.5h3.38v-6.42c0-.34.02-.68.13-.92c.27-.68.89-1.38 1.93-1.38c1.36 0 1.9 1.04 1.9 2.57V20h3.38v-6.98Z"/></svg>
+    ),
+  },
+  {
+    key: 'facebook_url',
+    label: 'Facebook',
+    svg: (
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7h2.34l.35-2.73H13.5V9.53c0-.79.22-1.33 1.35-1.33h1.44V5.78c-.25-.03-1.1-.1-2.08-.1c-2.06 0-3.48 1.26-3.48 3.58v2.01H8.39V14h2.34v7h2.77Z"/></svg>
+    ),
+  },
+  {
+    key: 'instagram_url',
+    label: 'Instagram',
+    svg: (
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5A3.95 3.95 0 0 0 7.75 20.2h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5A3.95 3.95 0 0 0 16.25 3.8h-8.5Zm8.95 1.35a1.1 1.1 0 1 1 0 2.2a1.1 1.1 0 0 1 0-2.2ZM12 6.86A5.14 5.14 0 1 1 6.86 12A5.14 5.14 0 0 1 12 6.86Zm0 1.8A3.34 3.34 0 1 0 15.34 12A3.34 3.34 0 0 0 12 8.66Z"/></svg>
+    ),
+  },
+  {
+    key: 'twitter_url',
+    label: 'Twitter / X',
+    svg: (
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-7.39L5.6 22H2.5l7.25-8.29L1.2 2h6.4l4.43 6.78L18.9 2Zm-1.1 18h1.72L6.7 3.9H4.86L17.8 20Z"/></svg>
+    ),
+  },
+  {
+    key: 'upwork_url',
+    label: 'Upwork',
+    svg: (
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.2 7.2a4.8 4.8 0 0 0-4.35 2.8c-1.08-1.63-1.8-3.43-2.13-5.3H8.3v6.18a2.02 2.02 0 1 1-4.03 0V7.2H2v3.68a4.3 4.3 0 0 0 8.6 0v-.55c.42.76.9 1.48 1.43 2.16l-1.2 5.67h2.32l.85-4.03c.95.67 2.04 1.04 3.2 1.04A4.99 4.99 0 0 0 22 10.2a3 3 0 0 0-.02-.32A4.79 4.79 0 0 0 17.2 7.2Zm0 5.67c-.77 0-1.5-.26-2.09-.74l.24-1.12a2.5 2.5 0 0 1 1.85-1.54c.16-.03.32-.05.49-.05a2.5 2.5 0 1 1-.49 4.95Z"/></svg>
+    ),
+  },
+  {
+    key: 'website_url',
+    label: 'Website',
+    svg: (
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10.01 10.01 0 0 0 12 2Zm6.93 9h-3.16a15.56 15.56 0 0 0-1.18-4.52A8.03 8.03 0 0 1 18.93 11ZM12 4.07c.83 0 2.06 1.57 2.74 4.93H9.26C9.94 5.64 11.17 4.07 12 4.07ZM4.99 13h3.24a15.67 15.67 0 0 0 1.11 4.37A8.03 8.03 0 0 1 4.99 13Zm3.24-2H4.99a8.03 8.03 0 0 1 4.35-4.37A15.67 15.67 0 0 0 8.23 11Zm3.77 8.93c-.83 0-2.06-1.57-2.74-4.93h5.48c-.68 3.36-1.91 4.93-2.74 4.93Zm3.16-6.93H8.84a13.6 13.6 0 0 1 0-2h6.32a13.6 13.6 0 0 1 0 2Zm-.57 4.37A15.56 15.56 0 0 0 15.77 13h3.16a8.03 8.03 0 0 1-4.34 4.37Z"/></svg>
+    ),
+  },
+]

@@ -79,9 +79,19 @@
 .svc-breadcrumb [aria-current="page"] { color: var(--svc-heading); font-weight: 600; }
 
 /* ---------- Hero (centered) ---------- */
+/* The hero owns the top of the page. The navbar is a floating pill rendered
+   above the page content, so without this the hero's gradient starts below it
+   and the page background shows through as a band across the top -- with the
+   seam landing exactly on the navbar's bottom edge, which reads as the two
+   overlapping. Pulling the hero up by the pill's block height and adding the
+   same amount back as padding puts the gradient behind the navbar without
+   moving any hero content. The navbar itself is untouched. */
 .svc-hero {
+  --nav-block: 5.6rem;
   background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 52%, #eef2ff 100%);
-  padding: 2.8rem 0 4.6rem; text-align: center;
+  margin-top: calc(-1 * var(--nav-block));
+  padding: calc(var(--nav-block) + 2.8rem) 0 4.6rem;
+  text-align: center;
 }
 .svc-hero-inner { max-width: 52rem; margin: 0 auto; }
 .svc-hero h1 {
@@ -130,7 +140,9 @@
 .svc-flow-step {
   flex: 1; background: #fff; border: 1px solid var(--svc-border-card); border-radius: 16px;
   padding: 1.6rem 1.4rem; box-shadow: var(--shadow-soft, 0 14px 30px rgba(69,107,156,.05)); text-align: left;
+  transition: box-shadow .35s ease, border-color .3s ease;
 }
+.svc-flow-step:hover { border-color: rgba(24,149,255,.32); box-shadow: 0 22px 40px -24px rgba(22,132,234,.55); }
 .svc-flow-num {
   display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem;
   border-radius: 999px; font-weight: 700; color: #fff; margin-bottom: .9rem;
@@ -150,14 +162,59 @@
 .svc-highlight { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .svc-highlight-text h2 { margin: 0 0 1rem; font-size: clamp(1.7rem, 3.2vw, 2.4rem); color: var(--svc-heading); letter-spacing: normal; line-height: 1.18; }
 
+/* Hero copy needs a 3D context for the unfold, and the eyebrow pill has to
+   stop being inline for a rotation to apply to it at all. */
+.svc-hero-inner { perspective: 1000px; }
+/* 3D contexts for the sections whose children rotate. */
+.svc-stats, .svc-flow, .svc-phases, .svc-why-list, .svc-cta .container { perspective: 1100px; }
+.svc-stat, .svc-flow-step, .svc-phase, .svc-why-row { will-change: transform; }
+.svc-hero-inner .svc-eyebrow-pill { transform-style: preserve-3d; }
+.svc-badges { perspective: 800px; }
+.svc-hero-form-col { transform-style: preserve-3d; }
+.svc-visual-3d { display: block; }
+
+/* ---------- 3D surfaces (service pages) ----------
+   Depth inside the tilted code card, plus hover 3D on the smaller repeated
+   elements. The tilt/float primitives themselves live in motion3d.css and
+   are shared with the home page. */
+.m3d-tilt .svc-codecard-head { transform: translateZ(20px); }
+.m3d-tilt .svc-codebody { transform: translateZ(10px); }
+
+/* Hero credential pills pop toward the reader. No transform here: the pill
+   is a framer-motion element, so the push is driven by whileHover in
+   ServiceDetailTemplate -- an inline transform beats a :hover rule. */
+.svc-badge { transition: box-shadow .35s ease; }
+.svc-badge:hover { box-shadow: 0 14px 24px -14px rgba(15,31,53,.6); }
+
+/* Callouts and pricing cards lift out of the page on hover. */
+.svc-callout, .svc-price-card {
+  transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .3s ease;
+  will-change: transform;
+}
+.svc-callout:hover, .svc-price-card:hover {
+  transform: perspective(1000px) rotateX(4deg) translateZ(20px);
+  box-shadow: 0 26px 44px -26px rgba(22,132,234,.55);
+}
+
+/* The why-panel check tiles rotate as they lift. */
+.svc-why-row:hover .svc-why-check { transform: perspective(500px) rotateY(-18deg) scale(1.08); }
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-tech-cell, .svc-callout, .svc-price-card,
+  .m3d-tilt .svc-codecard-head, .m3d-tilt .svc-codebody,
+  .svc-why-row:hover .svc-why-check { transform: none !important; }
+}
+
 /* ---------- Light code card ---------- */
 .svc-codecard {
-  background: #f8fafc; border: 1px solid var(--svc-border); border-radius: 16px; overflow: hidden;
+  background: #f8fafc; border: 1px solid var(--svc-border); border-radius: 16px;
   box-shadow: 0 20px 44px rgba(33,73,130,.08);
+  transform-style: preserve-3d;
 }
 .svc-codecard-head {
   display: flex; align-items: center; gap: .5rem; padding: .75rem 1rem;
   background: #f1f5f9; border-bottom: 1px solid var(--svc-border);
+  border-radius: 16px 16px 0 0;
 }
 .svc-codedots { display: flex; gap: .35rem; }
 .svc-codedots span { width: .65rem; height: .65rem; border-radius: 50%; background: #cdd9e6; }
@@ -238,17 +295,13 @@
   opacity: 0; transition: opacity .35s ease;
 }
 .svc-card:hover::before { opacity: 1; }
-/* Brand rule that draws across the top edge on hover. */
-.svc-card::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; pointer-events: none; z-index: 1;
-  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
-  transform: scaleX(0); transform-origin: left center;
-  transition: transform .5s cubic-bezier(.22,1,.36,1);
-}
-.svc-card:hover::after { transform: scaleX(1); }
 .svc-card > * { position: relative; z-index: 1; }
+/* No transform: .svc-card is a framer-motion element, and framer's inline
+   transform beats a stylesheet :hover rule -- this lift silently never ran.
+   TiltCard drives the lift and the 3D tilt now; the colour shift stays here. */
+.svc-card { will-change: transform; backface-visibility: hidden; }
 .svc-card:hover {
-  transform: translateY(-4px); border-color: rgba(24,149,255,.36);
+  border-color: rgba(24,149,255,.36);
   box-shadow: 0 24px 46px -26px rgba(22,132,234,.6), 0 2px 6px rgba(15,31,53,.05);
 }
 .svc-card-icon {
@@ -333,6 +386,7 @@
    single stacked column left most of the card's width empty, which is what
    made the row read as unbalanced. */
 .svc-tl-card {
+  will-change: transform; backface-visibility: hidden;
   display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.35fr);
   gap: 1.1rem 2.6rem; align-items: start;
   background: #fff; border: 1px solid var(--svc-border-card); border-radius: 16px;
@@ -341,7 +395,7 @@
   transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s ease, border-color .28s ease;
 }
 .svc-tl-card:hover {
-  transform: translateY(-2px); border-color: rgba(22,132,234,.3);
+  border-color: rgba(22,132,234,.3);
   box-shadow: 0 18px 38px -22px rgba(22,132,234,.55), 0 2px 6px rgba(15,31,53,.05);
 }
 .svc-tl-head { min-width: 0; }
@@ -897,8 +951,15 @@
 
 /* ---- App-dev: tech stack grid, comparison table, callout grid ---- */
 .svc-tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-.svc-tech-cell { display: flex; flex-direction: column; align-items: center; gap: .7rem; background: #fff; border: 1px solid var(--svc-border-card); border-radius: 12px; padding: 1.4rem 1rem; transition: transform .2s ease, box-shadow .2s ease; }
-.svc-tech-cell:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(15,31,53,.1); }
+.svc-tech-cell {
+  display: flex; flex-direction: column; align-items: center; gap: .7rem; background: #fff;
+  border: 1px solid var(--svc-border-card); border-radius: 12px; padding: 1.4rem 1rem;
+  transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+}
+.svc-tech-cell:hover {
+  transform: perspective(700px) rotateY(-10deg) rotateX(6deg) translateZ(14px);
+  box-shadow: 0 18px 30px -18px rgba(15,31,53,.55);
+}
 .svc-tech-mono { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: normal; flex: none; }
 .svc-tech-name { font-size: 13px; font-weight: 600; color: var(--svc-heading); text-align: center; }
 

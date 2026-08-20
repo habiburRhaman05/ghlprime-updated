@@ -12,6 +12,8 @@ import {
   Inbox, UserCheck, CalendarCheck, Send,
   FileText, Tag, DollarSign, Bell, Calendar, CircleDollarSign,
 } from 'lucide-react'
+import Tilt from './motion3d/Tilt'
+import TiltCard from './motion3d/TiltCard'
 import SiteFooter from './SiteFooter'
 import FaqSection from './FaqSection'
 import ShippedEvidenceSection from './ShippedEvidenceSection'
@@ -110,6 +112,22 @@ const fade = {
   viewport: { once: true, amount: 0.2 },
 }
 
+// Hero copy arrives as a 3D unfold: each line hinges down from the one above
+// it. staggerChildren needs variants on both ends, so the column holds the
+// timing and each child holds the rotation.
+const heroStack = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+}
+const heroLine = {
+  hidden: { opacity: 0, rotateX: -50, y: 22 },
+  show: {
+    opacity: 1, rotateX: 0, y: 0,
+    transition: { type: 'spring', stiffness: 120, damping: 20, mass: 0.9 },
+  },
+}
+const heroLineProps = { variants: heroLine, style: { transformOrigin: 'top center', transformPerspective: 1000 } }
+
 // Staggered reveal for card grids and checklists. staggerChildren only works
 // when both ends of the tree use variants, so the parent carries the timing
 // and the child carries the actual transition.
@@ -118,8 +136,11 @@ const revealGroup = {
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } },
 }
 const revealItem = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, rotateX: -55, y: 18 },
+  show: {
+    opacity: 1, rotateX: 0, y: 0,
+    transition: { type: 'spring', stiffness: 120, damping: 20, mass: 0.9 },
+  },
 }
 const groupProps = {
   variants: revealGroup,
@@ -135,28 +156,21 @@ const groupProps = {
 // time the card comes back into view. `cols` only staggers within a row, so
 // the delay never accumulates down the grid.
 const cardReveal = (i, cols) => ({
-  initial: { opacity: 0, y: 28, scale: 0.965, filter: 'blur(6px)' },
-  whileInView: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+  style: { transformOrigin: 'top center', transformPerspective: 1100 },
+  initial: { opacity: 0, rotateX: -44, y: 24 },
+  whileInView: { opacity: 1, rotateX: 0, y: 0 },
   viewport: { once: false, amount: 0.25 },
-  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: (i % cols) * 0.06 },
+  transition: { type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: (i % cols) * 0.08 },
 })
-
-// Feeds the pointer's position inside a card to CSS as --mx/--my, which is
-// what the spotlight gradient in .svc-card::before follows. Writing a custom
-// property is cheap enough to do straight from mousemove.
-const trackPointer = (e) => {
-  const el = e.currentTarget
-  const r = el.getBoundingClientRect()
-  el.style.setProperty('--mx', `${e.clientX - r.left}px`)
-  el.style.setProperty('--my', `${e.clientY - r.top}px`)
-}
 
 // The process section as a vertical timeline: a rail down the left whose
 // coloured fill tracks scroll position through the section, and a node per
 // step that lights up as that step comes into view.
+// Swings in from the rail on its left edge rather than sliding up, so each
+// card reads as hinged to the timeline it hangs off.
 const tlStep = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], when: 'beforeChildren' } },
+  hidden: { opacity: 0, rotateY: -20, x: 28 },
+  show: { opacity: 1, rotateY: 0, x: 0, transition: { type: 'spring', stiffness: 120, damping: 20, mass: 0.9, when: 'beforeChildren' } },
 }
 const tlNode = {
   hidden: { scale: 0.4, borderColor: 'rgba(226, 232, 240, 1)', boxShadow: '0 0 0 0 rgba(22, 132, 234, 0)' },
@@ -164,7 +178,7 @@ const tlNode = {
     scale: 1,
     borderColor: 'rgba(22, 132, 234, 1)',
     boxShadow: '0 0 0 6px rgba(22, 132, 234, 0.12)',
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    transition: { type: 'spring', stiffness: 120, damping: 20, mass: 0.9 },
   },
 }
 
@@ -190,11 +204,12 @@ function ProcessSteps({ steps }) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.4 }}
+          style={{ transformOrigin: 'left center', transformPerspective: 1200 }}
         >
           <motion.span className="svc-tl-node" variants={tlNode} aria-hidden="true">
             <span className="svc-tl-node-core" />
           </motion.span>
-          <div className="svc-tl-card">
+          <Tilt className="svc-tl-card" max={4}>
             <div className="svc-tl-head">
               <span className="svc-tl-num">{String(i + 1).padStart(2, '0')}</span>
               <h3>{step.title}</h3>
@@ -203,7 +218,7 @@ function ProcessSteps({ steps }) {
               <p>{step.text}</p>
               {step.meta ? <span className="svc-tl-meta">{step.meta}</span> : null}
             </div>
-          </div>
+          </Tilt>
         </motion.div>
       ))}
     </div>
@@ -217,7 +232,13 @@ function HeroBadges({ badges }) {
   return (
     <motion.div className="svc-badges" {...groupProps}>
       {badges.map((b) => (
-        <motion.span className="svc-badge" key={b} variants={revealItem}>
+        <motion.span
+          className="svc-badge"
+          key={b}
+          variants={revealItem}
+          style={{ transformPerspective: 600, transformOrigin: 'top center' }}
+          whileHover={{ z: 18, rotateX: -6, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
+        >
           {b}
         </motion.span>
       ))}
@@ -283,7 +304,8 @@ function CodeCard({ filename, code }) {
   const done = reduceMotion || typed >= source.length
 
   return (
-    <div className={`svc-codecard${done ? '' : ' is-typing'}`} ref={cardRef}>
+    <div className="m3d-float" ref={cardRef}>
+    <Tilt className={`svc-codecard${done ? '' : ' is-typing'}`}>
       <div className="svc-codecard-head">
         <span className="svc-codedots"><span /><span /><span /></span>
         <span className="svc-codefile">{filename}</span>
@@ -303,6 +325,7 @@ function CodeCard({ filename, code }) {
           )
         })}
       </pre>
+    </Tilt>
     </div>
   )
 }
@@ -562,12 +585,23 @@ function SupportDesk() {
 
 function WhatIsVisual({ visual }) {
   if (!visual) return null
-  if (visual.kind === 'figma') return <FigmaSplit />
-  if (visual.kind === 'helpdesk') return <HelpdeskCard data={visual} />
-  if (visual.kind === 'workflow') return <WorkflowBuilder />
-  if (visual.kind === 'dashboard') return <CrmDashboard />
-  if (visual.kind === 'support') return <SupportDesk />
-  return <CodeCard filename={visual.filename} code={visual.code} />
+  // CodeCard brings its own float + tilt; the rest are plain mockups, so they
+  // get the same treatment here rather than each re-implementing it.
+  if (visual.kind === 'code' || !visual.kind) {
+    return <CodeCard filename={visual.filename} code={visual.code} />
+  }
+  const inner =
+    visual.kind === 'figma' ? <FigmaSplit />
+    : visual.kind === 'helpdesk' ? <HelpdeskCard data={visual} />
+    : visual.kind === 'workflow' ? <WorkflowBuilder />
+    : visual.kind === 'dashboard' ? <CrmDashboard />
+    : visual.kind === 'support' ? <SupportDesk />
+    : <CodeCard filename={visual.filename} code={visual.code} />
+  return (
+    <div className="m3d-float">
+      <Tilt className="svc-visual-3d" max={5}>{inner}</Tilt>
+    </div>
+  )
 }
 
 function Flow({ flow }) {
@@ -592,7 +626,15 @@ function Flow({ flow }) {
 function FlowItem({ step, index, numbered, last }) {
   return (
     <>
-      <motion.div className="svc-flow-step" {...fade} transition={{ duration: 0.4, delay: index * 0.08 }}>
+      <motion.div
+        className="svc-flow-step"
+        style={{ transformOrigin: 'top center', transformPerspective: 1000 }}
+        initial={{ opacity: 0, rotateX: -46, y: 22 }}
+        whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+        whileHover={{ z: 24, transition: { type: 'spring', stiffness: 240, damping: 20 } }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: index * 0.1 }}
+      >
         {numbered
           ? <span className="svc-flow-num">{index + 1}</span>
           : <span className="svc-flow-icon"><Icon name={step.icon} size={20} /></span>}
@@ -628,11 +670,11 @@ function Deliverables({ deliver }) {
             cards that just swapped in, instead of showing them flat. */}
         <div className="svc-grid" key={tab || 'all'}>
           {cards.map((card, i) => (
-            <motion.article className="svc-card" key={card.title} onMouseMove={trackPointer} {...cardReveal(i, 3)}>
+            <TiltCard className="svc-card" key={card.title} reveal={cardReveal(i, 3)}>
               <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
               <h3>{card.title}</h3>
               <p>{card.text}</p>
-            </motion.article>
+            </TiltCard>
           ))}
         </div>
       </div>
@@ -733,23 +775,49 @@ export default function ServiceDetailTemplate({ config }) {
           </nav>
           {formConfig ? (
             <div className="svc-hero-2col">
-              <motion.div className="svc-hero-inner svc-hero-inner--left" {...fade} transition={{ duration: 0.5 }}>
-                <span className="svc-eyebrow-pill"><span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span></span>
-                <h1>{config.hero.h1}</h1>
-                <p className="svc-hero-sub">{formConfig.heroSubhead || config.hero.subhead}</p>
+              <motion.div
+                className="svc-hero-inner svc-hero-inner--left"
+                variants={heroStack}
+                initial="hidden"
+                animate="show"
+              >
+                <motion.span className="svc-eyebrow-pill" {...heroLineProps}>
+                  <span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span>
+                </motion.span>
+                <motion.h1 {...heroLineProps}>{config.hero.h1}</motion.h1>
+                <motion.p className="svc-hero-sub" {...heroLineProps}>{formConfig.heroSubhead || config.hero.subhead}</motion.p>
                 <HeroBadges badges={config.hero.badges} />
-                <a className="primary-pill svc-hero-upwork" href={UPWORK} target="_blank" rel="noopener noreferrer">Or hire via Upwork &rarr;</a>
+                <motion.a
+                  className="primary-pill svc-hero-upwork"
+                  href={UPWORK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  {...heroLineProps}
+                >
+                  Or hire via Upwork &rarr;
+                </motion.a>
               </motion.div>
-              <motion.div className="svc-hero-form-col" {...fade} transition={{ duration: 0.5, delay: 0.08 }}>
+              {/* The card swings in from its right edge. No pointer tilt on
+                  this one: it is a form, and a panel that moves under the
+                  cursor while you are typing into it is hostile. */}
+              <motion.div
+                className="svc-hero-form-col"
+                style={{ transformOrigin: 'right center', transformPerspective: 1300 }}
+                initial={{ opacity: 0, rotateY: 20, x: 34 }}
+                animate={{ opacity: 1, rotateY: 0, x: 0 }}
+                transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: 0.12 }}
+              >
                 <ServiceSurveyForm form={formConfig} slug={config.slug} />
               </motion.div>
             </div>
           ) : (
             <>
-              <motion.div className="svc-hero-inner" {...fade} transition={{ duration: 0.5 }}>
-                <span className="svc-eyebrow-pill"><span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span></span>
-                <h1>{config.hero.h1}</h1>
-                <p className="svc-hero-sub">{config.hero.subhead}</p>
+              <motion.div className="svc-hero-inner" variants={heroStack} initial="hidden" animate="show">
+                <motion.span className="svc-eyebrow-pill" {...heroLineProps}>
+                  <span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span>
+                </motion.span>
+                <motion.h1 {...heroLineProps}>{config.hero.h1}</motion.h1>
+                <motion.p className="svc-hero-sub" {...heroLineProps}>{config.hero.subhead}</motion.p>
                 <div className="svc-hero-ctas">
                   <Link href={config.hero.ctaPrimary.to} className="primary-pill large">{config.hero.ctaPrimary.label} <ArrowRight size={18} /></Link>
                   <Link href={config.hero.ctaSecondary.to} className="secondary-pill">{config.hero.ctaSecondary.label}</Link>
@@ -766,11 +834,20 @@ export default function ServiceDetailTemplate({ config }) {
       <section className="svc-section" style={{ paddingTop: '3rem', paddingBottom: '0' }}>
         <div className="container">
           <div className="svc-stats">
-            {config.stats.map((s) => (
-              <div className="svc-stat" key={s.label}>
+            {config.stats.map((s, i) => (
+              <motion.div
+                className="svc-stat"
+                key={s.label}
+                style={{ transformOrigin: 'bottom center', transformPerspective: 900 }}
+                initial={{ opacity: 0, rotateX: -55 }}
+                whileInView={{ opacity: 1, rotateX: 0 }}
+                whileHover={{ z: 28, transition: { type: 'spring', stiffness: 260, damping: 22 } }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ type: 'spring', stiffness: 90, damping: 16, mass: 0.9, delay: i * 0.08 }}
+              >
                 <span className="svc-stat-num">{s.num}</span>
                 <span className="svc-stat-label">{s.label}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -844,7 +921,15 @@ export default function ServiceDetailTemplate({ config }) {
             </div>
             <div className="svc-phases">
               {config.phases.items.map((p, i) => (
-                <motion.div className="svc-phase" key={p.name} {...fade} transition={{ duration: 0.35, delay: (i % 7) * 0.04 }}>
+                <motion.div
+                  className="svc-phase"
+                  key={p.name}
+                  style={{ transformOrigin: 'left center', transformPerspective: 1100 }}
+                  initial={{ opacity: 0, rotateY: -22, x: 24 }}
+                  whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: (i % 7) * 0.06 }}
+                >
                   <span className={`svc-phase-dot ${p.group}`} />
                   <span className="svc-phase-n">{String(i + 1).padStart(2, '0')}</span>
                   <div className="svc-phase-body">
@@ -867,11 +952,11 @@ export default function ServiceDetailTemplate({ config }) {
           </div>
           <div className="svc-grid two">
             {config.who.cards.map((card, i) => (
-              <motion.article className="svc-card" key={card.title} onMouseMove={trackPointer} {...cardReveal(i, 2)}>
+              <TiltCard className="svc-card" key={card.title} reveal={cardReveal(i, 2)}>
                 <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
-              </motion.article>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -909,7 +994,13 @@ export default function ServiceDetailTemplate({ config }) {
             <div className="svc-why-panel">
               <motion.div className="svc-why-list" {...groupProps}>
                 {config.why.points.map((point) => (
-                  <motion.div className="svc-why-row" key={point} variants={revealItem}>
+                  <motion.div
+                    className="svc-why-row"
+                    key={point}
+                    variants={revealItem}
+                    style={{ transformOrigin: 'top center', transformPerspective: 900 }}
+                    whileHover={{ z: 18, transition: { type: 'spring', stiffness: 260, damping: 22 } }}
+                  >
                     <span className="svc-why-check" aria-hidden="true"><CheckCircle2 size={18} /></span>
                     <span>{point}</span>
                   </motion.div>
@@ -972,7 +1063,13 @@ export default function ServiceDetailTemplate({ config }) {
       {/* CTA closer */}
       <section className="svc-cta">
         <div className="container">
-          <motion.div {...fade} transition={{ duration: 0.5 }}>
+          <motion.div
+            style={{ transformOrigin: 'bottom center', transformPerspective: 1200 }}
+            initial={{ opacity: 0, rotateX: 26, y: 30 }}
+            whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
+          >
             <h2>{config.cta.headline}</h2>
             <p>{config.cta.subtext}</p>
             <div className="svc-cta-actions">

@@ -4,26 +4,25 @@ import { useEffect, useState } from 'react'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { HOMEPAGE_FAQS } from '../data/faqs'
-import CertificationsSection from '../components/CertificationsSection'
 import HomeSeoShell from '../components/HomeSeoShell'
-import ShippedEvidenceSection from '../components/ShippedEvidenceSection'
-import LifeAtGHL from '../components/home-page/LifeAtGHL'
-import TeamTestimonials from '../components/home-page/TeamTestimonials'
-import TrainingOnboarding from '../components/home-page/TrainingOnboarding'
-import VibeCoding from '../components/home-page/VibeCoding'
-import TrustedLogosSection from '../components/home-page/TrustedLogosSection'
-import OurStackSection from '../components/home-page/OurStackSection'
-import WhatWeAreSection from '../components/home-page/WhatWeAreSection'
-import WhatWeHandleSection from '../components/home-page/WhatWeHandleSection'
-import AgencyNeedsSection from '../components/home-page/AgencyNeedsSection'
-import WhyChooseSection from '../components/home-page/WhyChooseSection'
-import LeadersSection from '../components/home-page/LeadersSection'
-import ExpertsSection from '../components/home-page/ExpertsSection'
-import CaseStudiesSection from '../components/home-page/CaseStudiesSection'
-import FinalCtaSection from '../components/home-page/FinalCtaSection'
-import CertificationsOverviewSection from '../components/home-page/CertificationsOverviewSection'
-import HeroStatsBar from '../components/hero/HeroStatsBar'
-import HeroBanner from '../components/hero/hero-banner'
+
+// Home v2. The homepage is composed entirely from these sections now. The
+// previous per-section components under components/home-page/ remain in the
+// tree -- several are still used by other routes -- they are simply no longer
+// part of this page. The navbar and the footer are untouched.
+import HeroV2 from '../components/home-v2/HeroV2'
+import TrustBandV2 from '../components/home-v2/TrustBandV2'
+import WhoWeAreV2 from '../components/home-v2/WhoWeAreV2'
+import BentoV2 from '../components/home-v2/BentoV2'
+import CapabilitiesV2 from '../components/home-v2/CapabilitiesV2'
+import AgentV2 from '../components/home-v2/AgentV2'
+import VibeCodingV2 from '../components/home-v2/VibeCodingV2'
+import ProcessV2 from '../components/home-v2/ProcessV2'
+import StackV2 from '../components/home-v2/StackV2'
+import TeamV2 from '../components/home-v2/TeamV2'
+import LifeAtGhlV2 from '../components/home-v2/LifeAtGhlV2'
+import ProofV2 from '../components/home-v2/ProofV2'
+import FinalCtaV2 from '../components/home-v2/FinalCtaV2'
 
 const SITE_URL = 'https://ghlprime.com'
 const HOMEPAGE_LAST_MODIFIED = '2026-05-24'
@@ -196,30 +195,19 @@ export default function HomePage() {
       <HomeSeoShell />
 
 
-     <HeroBanner
-     activePill={activePill}
-     rotatingPills={rotatingPills}
-     />
-
-      <HeroStatsBar />
-      <TrustedLogosSection />
-      <WhatWeAreSection />
-      <LifeAtGHL/>
-      {/* <TeamTestimonials /> */}
-      <WhatWeHandleSection />
-      <AgencyNeedsSection />
-      <TrainingOnboarding />
-      <VibeCoding />
-      <OurStackSection />
-      {/* <WhyChooseSection /> */}
-     
-      <LeadersSection />
-      <CertificationsSection />
-      <CertificationsOverviewSection />
-      <ExpertsSection />
-      <CaseStudiesSection />
-      {/* <ShippedEvidenceSection pageKey="home" /> */}
-      <FinalCtaSection />
+      <HeroV2 activePill={activePill} rotatingPills={rotatingPills} />
+      <TrustBandV2 />
+      <WhoWeAreV2 />
+      <BentoV2 />
+      <CapabilitiesV2 />
+      <AgentV2 />
+      <VibeCodingV2 />
+      <ProcessV2 />
+      <StackV2 />
+      <TeamV2 />
+      <LifeAtGhlV2 />
+      <ProofV2 />
+      <FinalCtaV2 />
       <FaqSection faqs={HOMEPAGE_FAQS} intro="Common questions from agencies and founders before they engage GHL Prime." />
       <SiteFooter />
     </>

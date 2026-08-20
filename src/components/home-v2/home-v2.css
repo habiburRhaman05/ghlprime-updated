@@ -1,0 +1,801 @@
+/* =========================================================================
+   Home v2 -- a full redesign of the homepage around an "AI automation
+   agency" identity, in a light theme throughout.
+
+   Rhythm comes from three surface tones rather than from dark/light
+   contrast:
+     .is-white  pure white, for the densest reading sections
+     .is-paper  #f4f8fd, the default page tone
+     .is-tint   a soft blue wash with a ruled grid, for the "system"
+                sections (hero, capabilities, process, team, CTA)
+
+   Everything is namespaced .hv2- so it cannot leak into the navbar, the
+   footer, or any service page, all of which are unchanged.
+
+   Buttons are deliberately NOT restyled here -- every CTA uses the global
+   .primary-pill so the whole site keeps one primary button.
+   ========================================================================= */
+
+.hv2 {
+  --navy: #0b1b30;
+  --body: #55697f;
+  --line: rgba(16, 37, 63, .09);
+  --line-strong: rgba(16, 37, 63, .14);
+  --accent: #1895ff;
+  --accent-ink: #0a5fae;
+  --accent-soft: rgba(24, 149, 255, .1);
+  --paper: #f4f8fd;
+  /* Muted tones, both measured against white:
+       --muted      5.2:1  labels, captions, mono meta
+       --muted-soft 4.9:1  the quietest state text
+     The greys these replaced sat at 3.1:1 and 2.3:1 respectively,
+     which is why the small text was washing out. */
+  --muted: #5b7086;
+  --muted-soft: #5f7387;
+  --radius: 20px;
+}
+
+.hv2-section { position: relative; padding: clamp(4.5rem, 8vw, 7.5rem) 0; }
+.hv2-section.is-white { background: #fff; }
+.hv2-section.is-paper { background: var(--paper); }
+.hv2-section.is-tint {
+  background: linear-gradient(180deg, #eef5fe 0%, #f7fbff 55%, #f4f8fd 100%);
+  isolation: isolate;
+}
+.hv2-inner { width: min(1240px, calc(100% - 2.5rem)); margin: 0 auto; position: relative; z-index: 2; }
+
+/* ---------- Shared backdrops --------------------------------------------
+   A ruled grid plus two soft blooms. Decorative, behind content, never take
+   pointer events. */
+.hv2-grid-bg {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(32, 93, 171, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 93, 171, .055) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(130% 95% at 50% 0%, #000 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(130% 95% at 50% 0%, #000 25%, transparent 80%);
+}
+.hv2-bloom { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+.hv2-bloom.one { width: 38rem; height: 38rem; top: -13rem; left: -9rem; background: rgba(24, 149, 255, .16); }
+.hv2-bloom.two { width: 32rem; height: 32rem; bottom: -14rem; right: -7rem; background: rgba(124, 96, 255, .1); }
+
+/* ---------- Section headings -------------------------------------------- */
+.hv2-eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem; color: var(--accent-ink);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+}
+.hv2-eyebrow::before { content: ''; width: 1.6rem; height: 1px; background: currentColor; opacity: .55; }
+
+.hv2-head { max-width: 46rem; margin-bottom: clamp(2.5rem, 4vw, 3.5rem); }
+.hv2-head.centered { margin-inline: auto; text-align: center; }
+.hv2-head h2 {
+  margin: 1rem 0 0; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.08;
+  letter-spacing: -.02em; font-weight: 800; color: var(--navy); text-wrap: balance;
+}
+.hv2-head p { margin: 1.1rem 0 0; font-size: 1.05rem; line-height: 1.7; max-width: 40rem; color: var(--body); }
+.hv2-head.centered p { margin-inline: auto; }
+/* Gradient-filled emphasis word, matching the primary button ramp. */
+.hv2-hl {
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* =========================================================================
+   HERO
+   ========================================================================= */
+/* The hero owns the very top of the page. The navbar is a floating pill
+   (sticky, 13.6px down, ~75px tall) rendered above the page content, so
+   without this the hero's wash starts below it and leaves a flat band across
+   the top. Pulling the hero up by the pill's full block height and adding
+   the same amount back as padding puts the wash behind the navbar without
+   moving any hero content. The navbar itself is untouched. */
+.hv2-hero {
+  --nav-block: 5.6rem;
+  margin-top: calc(-1 * var(--nav-block));
+  padding: calc(var(--nav-block) + clamp(3rem, 6vw, 5rem)) 0 clamp(4rem, 7vw, 6.5rem);
+  overflow: hidden;
+}
+.hv2-hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
+  gap: clamp(2rem, 5vw, 4.5rem); align-items: center;
+}
+
+.hv2-pill-slot { height: 2.15rem; margin-bottom: 1.4rem; }
+.hv2-pill {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .4rem .95rem; border-radius: 999px;
+  background: #fff; border: 1px solid rgba(24, 149, 255, .3);
+  color: var(--accent-ink); font-size: .82rem; font-weight: 700;
+  box-shadow: 0 6px 16px -10px rgba(24, 149, 255, .8);
+}
+.hv2-pill-dot {
+  width: .45rem; height: .45rem; border-radius: 50%; background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, .16);
+  animation: hv2Pulse 2.4s ease-in-out infinite;
+}
+@keyframes hv2Pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+.hv2-hero h1 {
+  margin: 0; font-size: clamp(2.4rem, 5.2vw, 4.15rem); line-height: 1.05;
+  letter-spacing: -.03em; font-weight: 800; color: var(--navy); text-wrap: balance;
+}
+.hv2-nowrap { white-space: nowrap; }
+.hv2-hero h1 .go { color: #b8791a; }
+.hv2-hero h1 .high { color: #1895ff; }
+.hv2-hero h1 .level { color: #0f8f43; }
+.hv2-lede { margin: 1.5rem 0 0; max-width: 34rem; font-size: clamp(1rem, 1.3vw, 1.12rem); line-height: 1.72; color: var(--body); }
+/* Every CTA in this page uses the global .primary-pill -- there is no
+   secondary button style here on purpose. */
+.hv2-hero-cta { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.1rem; align-items: center; }
+
+.hv2-hero-trust { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2.4rem; }
+.hv2-trust-item { display: inline-flex; align-items: center; gap: .5rem; font-size: .85rem; color: var(--body); font-weight: 500; }
+.hv2-trust-item svg { color: #16a34a; flex: none; }
+
+/* ---------- Hero visual: a live automation pipeline ---------------------- */
+.hv2-console {
+  position: relative; border-radius: 22px; background: #fff;
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .05), 0 34px 70px -38px rgba(15, 31, 53, .45);
+}
+.hv2-console-bar {
+  display: flex; align-items: center; gap: .5rem; padding: .8rem 1.1rem;
+  border-bottom: 1px solid var(--line); background: #f8fbff;
+  border-radius: 22px 22px 0 0;
+}
+.hv2-dots { display: flex; gap: .35rem; }
+.hv2-dots span { width: .6rem; height: .6rem; border-radius: 50%; background: #cddced; }
+.hv2-console-title { margin-left: auto; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .72rem; color: var(--muted); }
+.hv2-console-live {
+  display: inline-flex; align-items: center; gap: .4rem; font-size: .68rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: #128040;
+}
+.hv2-console-live::before {
+  content: ''; width: .4rem; height: .4rem; border-radius: 50%; background: #16a34a;
+  animation: hv2Pulse 1.6s ease-in-out infinite;
+}
+.hv2-console-body { padding: 1.4rem 1.3rem 1.5rem; }
+
+.hv2-flow { display: grid; gap: .55rem; }
+.hv2-node {
+  position: relative; display: grid; grid-template-columns: 2.35rem 1fr auto; align-items: center; gap: .85rem;
+  padding: .8rem .9rem; border-radius: 14px; background: #f8fbff; border: 1px solid var(--line);
+  transition: border-color .4s ease, background .4s ease, transform .4s cubic-bezier(.22,1,.36,1);
+}
+.hv2-node.is-active { border-color: rgba(24, 149, 255, .5); background: rgba(24, 149, 255, .07); transform: translateX(3px); }
+.hv2-node.is-done { border-color: rgba(22, 163, 74, .28); background: rgba(22, 163, 74, .05); }
+.hv2-node-icon {
+  width: 2.35rem; height: 2.35rem; border-radius: 10px; display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent); transition: background .4s ease, color .4s ease;
+}
+.hv2-node.is-active .hv2-node-icon { background: var(--primary-gradient, #1895ff); color: #fff; }
+.hv2-node.is-done .hv2-node-icon { background: rgba(22, 163, 74, .13); color: #16a34a; }
+.hv2-node-label { font-size: .9rem; font-weight: 600; color: var(--navy); }
+.hv2-node-sub { display: block; margin-top: .12rem; font-size: .74rem; color: var(--muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.hv2-node-state { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-soft); }
+.hv2-node.is-active .hv2-node-state { color: var(--accent-ink); }
+.hv2-node.is-done .hv2-node-state { color: #128040; }
+.hv2-node + .hv2-node::before {
+  content: ''; position: absolute; left: 1.5rem; top: -.55rem; width: 1px; height: .55rem; background: var(--line-strong);
+}
+.hv2-node.is-done + .hv2-node::before, .hv2-node.is-active + .hv2-node::before { background: rgba(24, 149, 255, .6); }
+
+.hv2-console-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  margin-top: 1.1rem; padding-top: .95rem; border-top: 1px solid var(--line);
+  font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .74rem; color: var(--muted);
+}
+.hv2-console-metric strong { color: var(--accent-ink); font-weight: 700; }
+
+/* ---------- Depth inside the tilted panels --------------------------------
+   The tilt and idle-drift primitives themselves live in motion3d.css and are
+   shared with the service pages. Only the per-layer depth is home-specific. */
+/* Inner layers lift off the panel so the tilt reads as depth rather than a
+   flat image being rotated. */
+/* Z values are deliberately shallow. The panels no longer clip their own
+   overflow (that is what makes preserve-3d work at all), so anything pushed
+   far forward visibly detaches past the panel edge. */
+.m3d-tilt .hv2-console-bar,
+.m3d-tilt .hv2-chat-head,
+.m3d-tilt .hv2-editor-bar { transform: translateZ(16px); }
+.m3d-tilt .hv2-flow,
+.m3d-tilt .hv2-chat-body,
+.m3d-tilt .hv2-editor-body { transform: translateZ(8px); transform-style: preserve-3d; }
+/* The step that is currently running rises out of the stack. */
+.m3d-tilt .hv2-node { transition: transform .4s cubic-bezier(.22,1,.36,1), border-color .4s ease, background .4s ease; }
+.m3d-tilt .hv2-node.is-active { transform: translateX(3px) translateZ(14px); }
+.m3d-tilt .hv2-node.is-done { transform: translateZ(4px); }
+
+
+/* =========================================================================
+   MARQUEE (partner logos)
+   ========================================================================= */
+.hv2-marquee-section { padding: clamp(2.5rem, 4vw, 3.5rem) 0; background: #fff; border-block: 1px solid var(--line); overflow: hidden; }
+.hv2-marquee-label {
+  text-align: center; font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.8rem;
+}
+.hv2-marquee {
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.hv2-marquee-track { display: flex; gap: 3.5rem; width: max-content; animation: hv2Scroll 42s linear infinite; }
+.hv2-marquee:hover .hv2-marquee-track { animation-play-state: paused; }
+@keyframes hv2Scroll { to { transform: translateX(-50%); } }
+.hv2-marquee-item { display: grid; place-items: center; height: 2.6rem; flex: none; }
+.hv2-marquee-item img {
+  max-height: 2.6rem; max-width: 9rem; width: auto; object-fit: contain;
+  filter: grayscale(1); opacity: .55; transition: opacity .3s ease, filter .3s ease;
+}
+.hv2-marquee-item:hover img { opacity: 1; filter: none; }
+
+/* =========================================================================
+   STATS
+   ========================================================================= */
+.hv2-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line); border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 24px 50px -34px rgba(15, 31, 53, .4);
+  perspective: 900px;
+}
+.hv2-stat {
+  background: #fff; padding: clamp(1.6rem, 3vw, 2.4rem) 1.4rem; text-align: center;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease;
+}
+/* Transform-free: the tile is a framer element and the forward push is
+   driven by whileHover in TrustBandV2. */
+.hv2-stat:hover { box-shadow: 0 22px 40px -26px rgba(24, 149, 255, .8); }
+.hv2-stat-value {
+  display: block; font-size: clamp(2.1rem, 4.4vw, 3.2rem); font-weight: 800; letter-spacing: -.03em; line-height: 1;
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hv2-stat-label {
+  display: block; margin-top: .65rem; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* =========================================================================
+   WHO WE ARE -- photo collage + proof cards
+   ========================================================================= */
+/* align-items: stretch so the collage column is exactly as tall as the copy
+   beside it; the two proportional rows then divide that height between the
+   wide frame and the pair below it. */
+.hv2-who { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 4vw, 4rem); align-items: stretch; }
+/* The collage tilts as a single object with each frame sitting at its own
+   depth, so the three photos separate rather than turning together flat.
+   --rx/--ry come from the pointer handler in WhoWeAreV2. */
+.hv2-who-stage { height: 100%; perspective: 1100px; }
+.hv2-who-collage {
+  display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: 1.25fr 1fr;
+  gap: .9rem; height: 100%; min-height: 26rem;
+  transform-style: preserve-3d; will-change: transform;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1);
+}
+.hv2-who-shot:nth-child(1) { transform: translateZ(34px); }
+.hv2-who-shot:nth-child(2) { transform: translateZ(14px); }
+.hv2-who-shot:nth-child(3) { transform: translateZ(24px); }
+.hv2-who-shot {
+  position: relative; overflow: hidden; border-radius: 18px; background: #e8eff8;
+  border: 1px solid var(--line); box-shadow: 0 18px 38px -26px rgba(15, 31, 53, .5);
+  padding: 0; cursor: zoom-in; display: block; width: 100%;
+}
+/* Expand affordance, so it reads as openable rather than decorative. */
+.hv2-who-shot::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 55%, rgba(6, 20, 40, .38));
+  opacity: 0; transition: opacity .3s ease;
+}
+.hv2-who-shot:hover::after, .hv2-who-shot:focus-visible::after { opacity: 1; }
+.hv2-who-shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hv2-life-shot { padding: 0; border: 1px solid var(--line); cursor: zoom-in; display: block; }
+.hv2-life-shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* First frame spans both columns so the collage reads as a composed set
+   rather than a plain 2x2. */
+.hv2-who-shot:first-child { grid-column: span 2; }
+.hv2-who-shot img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  object-position: center;
+  transition: transform .6s cubic-bezier(.22,1,.36,1);
+}
+/* The two lower frames both carry text near an edge, and the default centre
+   crop cut through it: the left photo's wordmark sits along the bottom and
+   was sliced off, the right photo's headline sits along the top and showed
+   as a half-cut band. Anchoring both crops to the bottom reveals the first
+   and pushes the second out of frame. */
+.hv2-who-shot:nth-child(2) img,
+.hv2-who-shot:nth-child(3) img { object-position: center bottom; }
+.hv2-who-shot:hover img { transform: scale(1.06); }
+
+.hv2-who-cards { display: grid; gap: .85rem; margin-top: 1.8rem; }
+.hv2-who-card {
+  display: grid; grid-template-columns: 2.9rem 1fr; gap: 1rem; align-items: center;
+  padding: 1.05rem 1.2rem; border-radius: 16px; background: #fff;
+  border: 1px solid var(--line); box-shadow: 0 1px 3px rgba(15, 31, 53, .04);
+  transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, box-shadow .3s ease;
+}
+.hv2-who-card:hover { transform: translateX(4px); border-color: rgba(24, 149, 255, .3); box-shadow: 0 16px 32px -22px rgba(24, 149, 255, .8); }
+.hv2-who-icon { width: 2.9rem; height: 2.9rem; border-radius: 12px; display: grid; place-items: center; color: #fff; }
+.hv2-who-icon.blue { background: linear-gradient(140deg, #1895ff, #0a5fae); }
+.hv2-who-icon.green { background: linear-gradient(140deg, #21c45d, #0f8f43); }
+.hv2-who-icon.amber { background: linear-gradient(140deg, #f7b733, #d4881a); }
+.hv2-who-card h3 { margin: 0 0 .15rem; font-size: 1rem; font-weight: 700; color: var(--navy); }
+.hv2-who-card p { margin: 0; font-size: .9rem; color: var(--body); line-height: 1.5; }
+
+/* =========================================================================
+   BENTO -- what we handle
+   ========================================================================= */
+.hv2-bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.1rem; }
+/* Grid placement lives on the wrapper cell, because the card itself is now
+   nested one level down inside TiltCard's entrance element. */
+.hv2-bento-cell { grid-column: span 2; }
+.hv2-bento-cell:nth-child(1), .hv2-bento-cell:nth-child(2) { grid-column: span 3; }
+.hv2-bento-cell, .hv2-team-cell { height: 100%; }
+.hv2-bento-card, .hv2-team-card { height: 100%; }
+.hv2-bento-card {
+  position: relative; overflow: hidden;
+  will-change: transform; backface-visibility: hidden;
+  padding: clamp(1.5rem, 2.4vw, 2rem);
+  border-radius: var(--radius); background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 16px 34px -26px rgba(15, 31, 53, .4);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+}
+.hv2-bento-card::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0; border-radius: inherit;
+  background: radial-gradient(14rem 14rem at var(--mx, 50%) var(--my, 0%), rgba(24, 149, 255, .13), transparent 62%);
+  opacity: 0; transition: opacity .35s ease;
+}
+.hv2-bento-card:hover::before { opacity: 1; }
+.hv2-bento-card > * { position: relative; z-index: 1; }
+/* No transform here: this card is a framer-motion element, and framer's
+   inline transform beats a stylesheet :hover rule. The lift and the 3D tilt
+   are driven from TiltCard instead. */
+.hv2-bento-card:hover { border-color: rgba(24, 149, 255, .34); box-shadow: 0 26px 50px -28px rgba(24, 149, 255, .55); }
+.hv2-bento-icon {
+  width: 3rem; height: 3rem; border-radius: 13px; display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent); margin-bottom: 1.2rem;
+  transition: background .35s ease, color .35s ease, transform .38s cubic-bezier(.22,1,.36,1);
+}
+.hv2-bento-card:hover .hv2-bento-icon { background: var(--primary-gradient, #1895ff); color: #fff; transform: translateY(-3px) scale(1.06); }
+.hv2-bento-card h3 { margin: 0 0 .6rem; font-size: 1.18rem; font-weight: 700; color: var(--navy); text-wrap: balance; }
+.hv2-bento-card p { margin: 0; font-size: .97rem; line-height: 1.68; color: var(--body); }
+.hv2-bento-tag {
+  display: inline-block; margin-top: 1.1rem; padding: .3rem .7rem; border-radius: 999px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--accent-ink); background: var(--accent-soft);
+}
+
+/* =========================================================================
+   CAPABILITIES -- selectable list with a live preview panel
+   ========================================================================= */
+.hv2-cap { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+.hv2-cap-list { display: grid; gap: .5rem; }
+.hv2-cap-item {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .95rem;
+  width: 100%; text-align: left; padding: 1rem 1.1rem; border-radius: 14px; cursor: pointer;
+  background: transparent; border: 1px solid transparent; color: inherit; font: inherit;
+  transition: background .3s ease, border-color .3s ease, transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease;
+}
+.hv2-cap-item:hover { background: #fff; transform: translateX(3px); }
+.hv2-cap-item.is-active { background: #fff; border-color: rgba(24, 149, 255, .34); box-shadow: 0 14px 28px -20px rgba(24, 149, 255, .9); }
+.hv2-cap-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .74rem; font-weight: 700; color: var(--muted-soft); }
+.hv2-cap-item.is-active .hv2-cap-num { color: var(--accent-ink); }
+.hv2-cap-title { font-size: 1.02rem; font-weight: 600; color: #3b5068; }
+.hv2-cap-item.is-active .hv2-cap-title { color: var(--navy); font-weight: 700; }
+.hv2-cap-chev { color: #b3c2d3; transition: transform .3s ease, color .3s ease; }
+.hv2-cap-item.is-active .hv2-cap-chev { color: var(--accent); transform: translateX(3px); }
+
+.hv2-cap-panel {
+  position: relative; border-radius: var(--radius); padding: clamp(1.6rem, 3vw, 2.3rem);
+  background: #fff; border: 1px solid var(--line); min-height: 21rem;
+  box-shadow: 0 30px 60px -38px rgba(15, 31, 53, .5);
+}
+.hv2-cap-panel-icon {
+  width: 3.2rem; height: 3.2rem; border-radius: 14px; display: grid; place-items: center;
+  background: var(--primary-gradient, #1895ff); color: #fff; margin-bottom: 1.3rem;
+  box-shadow: 0 16px 30px -16px rgba(2, 38, 70, .8);
+}
+.hv2-cap-panel h3 { margin: 0 0 .8rem; font-size: 1.5rem; font-weight: 700; color: var(--navy); letter-spacing: -.015em; }
+.hv2-cap-panel p { margin: 0; font-size: 1.02rem; line-height: 1.72; color: var(--body); }
+.hv2-cap-points { display: grid; gap: .6rem; margin-top: 1.5rem; }
+.hv2-cap-point { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; color: #3b5068; }
+.hv2-cap-point svg { color: #16a34a; flex: none; margin-top: .15rem; }
+
+/* =========================================================================
+   AI AGENT -- transcript that plays itself out
+   ========================================================================= */
+.hv2-agent { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; }
+.hv2-chat { border-radius: 22px; background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 70px -40px rgba(15, 31, 53, .55); }
+.hv2-chat-head {
+  display: flex; align-items: center; gap: .7rem; padding: .95rem 1.15rem;
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646)); color: #fff;
+  border-radius: 22px 22px 0 0;
+}
+.hv2-chat-avatar { width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .2); flex: none; }
+.hv2-chat-name { font-size: .92rem; font-weight: 700; }
+.hv2-chat-status { display: block; font-size: .72rem; opacity: .85; font-weight: 500; }
+.hv2-chat-badge {
+  margin-left: auto; font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .64rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .25rem .55rem; border-radius: 999px; background: rgba(255, 255, 255, .18);
+}
+.hv2-chat-body { padding: 1.2rem; display: grid; gap: .7rem; min-height: 20rem; align-content: start; background: #f7fafd; }
+.hv2-msg { max-width: 82%; padding: .7rem .95rem; border-radius: 14px; font-size: .92rem; line-height: 1.55; }
+.hv2-msg.from-user { justify-self: end; background: #fff; border: 1px solid var(--line); color: #1b2d43; border-bottom-right-radius: 5px; }
+.hv2-msg.from-bot { justify-self: start; background: var(--primary-gradient, #1895ff); color: #fff; border-bottom-left-radius: 5px; }
+.hv2-typing { display: inline-flex; gap: .22rem; align-items: center; }
+.hv2-typing span { width: .32rem; height: .32rem; border-radius: 50%; background: currentColor; opacity: .5; animation: hv2Typing 1.1s ease-in-out infinite; }
+.hv2-typing span:nth-child(2) { animation-delay: .15s; }
+.hv2-typing span:nth-child(3) { animation-delay: .3s; }
+@keyframes hv2Typing { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-2px); } }
+.hv2-chat-foot {
+  padding: .8rem 1.15rem; border-top: 1px solid var(--line); background: #fff;
+  border-radius: 0 0 22px 22px;
+  display: flex; align-items: center; gap: .6rem; font-size: .8rem; color: var(--body);
+}
+.hv2-chat-foot-dot { width: .45rem; height: .45rem; border-radius: 50%; background: #16a34a; flex: none; }
+
+.hv2-agent-points { display: grid; gap: 1.1rem; margin-top: 2rem; }
+.hv2-agent-point { display: grid; grid-template-columns: 2.6rem 1fr; gap: .95rem; align-items: start; }
+.hv2-agent-point-icon { width: 2.6rem; height: 2.6rem; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.hv2-agent-point h4 { margin: 0 0 .25rem; font-size: 1.02rem; font-weight: 700; color: var(--navy); }
+.hv2-agent-point p { margin: 0; font-size: .94rem; line-height: 1.6; color: var(--body); }
+
+/* =========================================================================
+   VIBE CODING -- editor that types itself
+   ========================================================================= */
+.hv2-vibe { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; }
+/* The editor stays dark on purpose -- it is a code surface, and developers
+   read code on dark. It is a device inside a light page, not a dark section. */
+.hv2-editor {
+  border-radius: 20px; background: #0d1c30;
+  border: 1px solid rgba(126, 176, 255, .2);
+  box-shadow: 0 34px 70px -38px rgba(6, 20, 40, .85);
+}
+.hv2-editor-bar {
+  display: flex; align-items: center; gap: .5rem; padding: .75rem 1rem;
+  background: rgba(255, 255, 255, .04); border-bottom: 1px solid rgba(126, 176, 255, .14);
+  border-radius: 20px 20px 0 0;
+}
+.hv2-editor-bar .hv2-dots span { background: rgba(146, 190, 255, .3); }
+.hv2-editor-file { margin-left: auto; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .72rem; color: rgba(178, 208, 245, .7); }
+.hv2-editor-body {
+  margin: 0; padding: 1.2rem 1.3rem; min-height: 17rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .8rem; line-height: 1.85;
+  color: #cfe0f5; overflow-x: auto;
+}
+.hv2-editor-line { display: block; white-space: pre; min-height: 1.85em; }
+.hv2-editor-line .c { color: #6b87a8; }
+.hv2-editor-line .k { color: #7cc4ff; }
+.hv2-editor-line .s { color: #7ee2a8; }
+.hv2-caret {
+  display: inline-block; width: .45rem; height: 1em; vertical-align: -.15em; margin-left: 1px;
+  background: #7cc4ff; animation: hv2Caret 1s steps(1, end) infinite;
+}
+@keyframes hv2Caret { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+.hv2-vibe-chips { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.8rem; }
+/* Each chip carries its hue in its own outline rather than a leading dot.
+   --chip is set per chip in VibeCodingV2. The plain border in the shorthand
+   is the fallback: browsers without color-mix drop the second declaration
+   and keep it, rather than losing the border entirely. */
+.hv2-vibe-chip {
+  display: inline-flex; align-items: center; padding: .45rem .95rem; border-radius: 999px;
+  font-size: .84rem; font-weight: 600; color: #3b5068; background: #fff;
+  border: 1px solid var(--line);
+  border-color: color-mix(in srgb, var(--chip, #1895ff) 58%, transparent);
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s ease, border-color .28s ease;
+}
+.hv2-vibe-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--chip, #1895ff);
+  box-shadow: 0 10px 20px -12px rgba(15, 31, 53, .6);
+}
+
+/* =========================================================================
+   PROCESS + TRAINING OUTCOMES
+   ========================================================================= */
+.hv2-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; position: relative; perspective: 1100px; }
+.hv2-steps::before { content: ''; position: absolute; left: 0; right: 0; top: 1.6rem; height: 1px; background: var(--line-strong); }
+.hv2-step { position: relative; padding-top: 4rem; }
+.hv2-step-dot {
+  position: absolute; top: .95rem; left: 0; width: 1.35rem; height: 1.35rem; border-radius: 50%;
+  background: #fff; border: 2px solid var(--accent); display: grid; place-items: center;
+  box-shadow: 0 0 0 6px rgba(24, 149, 255, .1);
+}
+.hv2-step-dot::after { content: ''; width: .42rem; height: .42rem; border-radius: 50%; background: var(--accent); }
+.hv2-step-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .74rem; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); }
+.hv2-step h3 { margin: .55rem 0 .6rem; font-size: 1.12rem; font-weight: 700; color: var(--navy); text-wrap: balance; }
+.hv2-step p { margin: 0; font-size: .94rem; line-height: 1.65; color: var(--body); }
+
+.hv2-outcomes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+.hv2-outcome {
+  padding: 1.4rem 1.35rem; border-radius: 16px; background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .04);
+  transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, box-shadow .3s ease;
+}
+.hv2-outcome:hover { transform: translateY(-3px); border-color: rgba(24, 149, 255, .3); box-shadow: 0 18px 34px -24px rgba(24, 149, 255, .8); }
+.hv2-outcome-eyebrow {
+  display: block; font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: .55rem;
+}
+.hv2-outcome strong { display: block; font-size: 1rem; font-weight: 700; color: var(--navy); line-height: 1.4; }
+
+/* =========================================================================
+   STACK strip
+   ========================================================================= */
+/* Three bands at different angles read as one surface curving away rather
+   than three flat strips stacked up. */
+.hv2-stack-rows { display: grid; gap: 1rem; perspective: 1500px; }
+.hv2-stack-row:nth-child(1) { transform: rotateX(7deg) translateZ(-18px); }
+.hv2-stack-row:nth-child(3) { transform: rotateX(-7deg) translateZ(-18px); }
+.hv2-stack-row {
+  position: relative; overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.hv2-stack-track { display: flex; gap: .75rem; width: max-content; animation: hv2Scroll 50s linear infinite; }
+.hv2-stack-row.is-reverse .hv2-stack-track { animation-direction: reverse; }
+.hv2-stack-row:hover .hv2-stack-track { animation-play-state: paused; }
+.hv2-stack-chip {
+  display: inline-flex; align-items: center; gap: .55rem; flex: none;
+  padding: .6rem 1.05rem; border-radius: 999px; font-size: .88rem; font-weight: 600;
+  background: #fff; border: 1px solid var(--line); color: #2b4058;
+  box-shadow: 0 1px 2px rgba(15, 31, 53, .05);
+}
+.hv2-stack-chip img { width: 1.15rem; height: 1.15rem; object-fit: contain; }
+.hv2-stack-dot { width: .5rem; height: .5rem; border-radius: 50%; flex: none; }
+
+/* =========================================================================
+   TEAM + CERTIFICATIONS + EXPERTS
+   ========================================================================= */
+.hv2-team {
+  display: grid; gap: 1.6rem; justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 22rem));
+}
+.hv2-team-card {
+  position: relative; text-align: center; padding: 1.6rem 1.5rem 1.9rem;
+  will-change: transform; backface-visibility: hidden;
+  border-radius: 22px; background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 20px 40px -30px rgba(15, 31, 53, .5);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s ease, box-shadow .35s ease;
+}
+/* Portrait sits on a soft stage rather than in a circle, so cut-out photos
+   keep their shape and read as a headshot rather than an avatar. */
+.hv2-team-stage {
+  display: grid; place-items: end center; height: 15rem; margin-bottom: 1.1rem;
+  border-radius: 16px; overflow: hidden;
+  background: linear-gradient(180deg, #f2f7fe, #ffffff 78%);
+}
+.hv2-team-stage img {
+  max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.hv2-team-card:hover .hv2-team-stage img { transform: scale(1.04); }
+.hv2-team-body p {
+  margin: .9rem 0 0; font-size: .9rem; line-height: 1.62; color: var(--body);
+}
+.hv2-team-divider {
+  display: block; width: 2.6rem; height: 2px; margin: .85rem auto 0; border-radius: 2px;
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+}
+/* Transform-free for the same reason as .hv2-bento-card above. */
+.hv2-team-card:hover { border-color: rgba(24, 149, 255, .34); box-shadow: 0 26px 50px -30px rgba(24, 149, 255, .7); }
+.hv2-team-photo {
+  display: block; width: 6.5rem; height: 6.5rem; margin: 0 auto 1.1rem;
+  border-radius: 50%; overflow: hidden; border: 3px solid #fff; background: #e8eff8;
+  box-shadow: 0 0 0 1px var(--line), 0 12px 24px -14px rgba(15, 31, 53, .6);
+}
+.hv2-team-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hv2-team-card h3 { margin: 0 0 .35rem; font-size: 1.24rem; font-weight: 800; color: var(--navy); letter-spacing: -.01em; }
+.hv2-team-role {
+  display: block; font-size: .86rem; font-weight: 700; letter-spacing: .01em; color: var(--accent-ink);
+}
+.hv2-team-socials { display: flex; justify-content: center; gap: .6rem; margin-top: 1.2rem; }
+.hv2-team-social {
+  display: inline-grid; place-items: center; width: 2.45rem; height: 2.45rem;
+  border-radius: 50%; color: #5b7086; background: #fff; border: 1px solid var(--line-strong);
+  transition: color .25s ease, border-color .25s ease, transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s ease;
+}
+.hv2-team-social svg { width: 1.05rem; height: 1.05rem; }
+.hv2-team-social:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -12px rgba(15, 31, 53, .7);
+}
+/* Each platform hovers to its own brand colour. */
+.hv2-team-social.brand-linkedin:hover { color: #0a66c2; border-color: rgba(10, 102, 194, .45); }
+.hv2-team-social.brand-facebook:hover { color: #1877f2; border-color: rgba(24, 119, 242, .45); }
+.hv2-team-social.brand-instagram:hover { color: #d62976; border-color: rgba(214, 41, 118, .45); }
+.hv2-team-social.brand-twitter:hover { color: #0f1419; border-color: rgba(15, 20, 25, .35); }
+.hv2-team-social.brand-upwork:hover { color: #14a800; border-color: rgba(20, 168, 0, .45); }
+.hv2-team-social.brand-website:hover { color: var(--accent-ink); border-color: rgba(24, 149, 255, .45); }
+
+.hv2-experts {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: .9rem;
+  margin-top: clamp(2rem, 3.5vw, 3rem); perspective: 1000px;
+}
+/* Two-faced card. The parent carries the perspective; the flipper carries
+   preserve-3d, and each face hides its own back so only one shows at a time. */
+.hv2-expert { text-align: center; }
+.hv2-expert-flip {
+  position: relative; display: block; aspect-ratio: 1;
+  transform-style: preserve-3d; will-change: transform;
+  transition: transform .8s cubic-bezier(.34, 1.2, .3, 1);
+}
+.hv2-expert:hover .hv2-expert-flip, .hv2-expert:focus-within .hv2-expert-flip { transform: rotateY(180deg); }
+.hv2-expert-face {
+  position: absolute; inset: 0; border-radius: 16px; overflow: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border: 1px solid var(--line); background: #e8eff8;
+}
+.hv2-expert-face img { width: 100%; height: 100%; object-fit: cover; }
+.hv2-expert-face.back {
+  transform: rotateY(180deg);
+  display: grid; align-content: center; gap: .25rem; padding: .7rem;
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+  border-color: transparent; color: #fff;
+}
+.hv2-expert-face.back strong { font-size: .9rem; font-weight: 700; line-height: 1.25; }
+.hv2-expert-face.back span { font-size: .74rem; opacity: .88; line-height: 1.3; }
+
+.hv2-certs { margin-top: clamp(2.5rem, 4vw, 3.5rem); text-align: center; }
+.hv2-certs-label { margin: 0 0 .8rem; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.hv2-certs-lede { margin: 0 auto 1.6rem; max-width: 46rem; font-size: .98rem; line-height: 1.7; color: var(--body); }
+.hv2-certs-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.1rem; }
+.hv2-cert {
+  display: grid; place-items: center; width: 4.6rem; height: 4.6rem;
+  border-radius: 16px; background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .05);
+  transition: transform .85s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .3s ease;
+}
+/* A full turn on hover -- the badge spins like a coin rather than tipping. */
+.hv2-cert:hover {
+  transform: perspective(700px) rotateY(360deg) translateY(-5px) scale(1.06);
+  border-color: rgba(24, 149, 255, .4);
+  box-shadow: 0 18px 32px -20px rgba(24, 149, 255, .9);
+}
+.hv2-cert img { width: 70%; height: 70%; object-fit: contain; }
+
+/* =========================================================================
+   LIFE AT GHL PRIME -- culture strip
+   ========================================================================= */
+.hv2-life-rows { display: grid; gap: 1rem; }
+.hv2-life-row {
+  position: relative; overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.hv2-life-track { display: flex; gap: 1rem; width: max-content; animation: hv2Scroll 60s linear infinite; }
+.hv2-life-row.is-reverse .hv2-life-track { animation-direction: reverse; }
+.hv2-life-row:hover .hv2-life-track { animation-play-state: paused; }
+.hv2-life-shot {
+  flex: none; width: 17rem; height: 11rem; border-radius: 18px; overflow: hidden;
+  background: #e8eff8; border: 1px solid var(--line);
+  box-shadow: 0 16px 32px -24px rgba(15, 31, 53, .55);
+}
+.hv2-life-shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+.hv2-life-shot:hover img { transform: scale(1.07); }
+
+/* =========================================================================
+   LIGHTBOX -- full-screen image viewer (portalled to body)
+   ========================================================================= */
+.hv2-lightbox {
+  position: fixed; inset: 0; z-index: 200; display: grid; place-items: center;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  background: rgba(5, 12, 23, .88);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  cursor: zoom-out;
+}
+.hv2-lb-image {
+  max-width: min(1100px, 92vw); max-height: 86vh; width: auto; height: auto;
+  border-radius: 14px; cursor: default;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .9);
+}
+.hv2-lb-close, .hv2-lb-nav {
+  position: absolute; display: grid; place-items: center;
+  width: 2.9rem; height: 2.9rem; border-radius: 50%; cursor: pointer;
+  color: #fff; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .22);
+  transition: background .22s ease, transform .22s cubic-bezier(.22, 1, .36, 1);
+}
+.hv2-lb-close:hover, .hv2-lb-nav:hover { background: rgba(255, 255, 255, .2); transform: scale(1.06); }
+.hv2-lb-close { top: clamp(1rem, 3vw, 2rem); right: clamp(1rem, 3vw, 2rem); }
+.hv2-lb-nav.prev { left: clamp(.75rem, 3vw, 2rem); }
+.hv2-lb-nav.next { right: clamp(.75rem, 3vw, 2rem); }
+.hv2-lb-count {
+  position: absolute; bottom: clamp(1rem, 3vw, 2rem); left: 50%; transform: translateX(-50%);
+  font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .78rem;
+  color: rgba(255, 255, 255, .75);
+}
+
+/* =========================================================================
+   PROOF -- case studies
+   ========================================================================= */
+.hv2-proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.hv2-proof-card {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  border-radius: var(--radius); background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 16px 34px -26px rgba(15, 31, 53, .4);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+}
+.hv2-proof-card:hover {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
+  border-color: rgba(24, 149, 255, .32);
+  box-shadow: 0 26px 50px -28px rgba(24, 149, 255, .5);
+}
+.hv2-proof-media { aspect-ratio: 16 / 9; overflow: hidden; background: #eef4fb; }
+.hv2-proof-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.22,1,.36,1); }
+.hv2-proof-card:hover .hv2-proof-media img { transform: scale(1.05); }
+.hv2-proof-body { padding: 1.35rem 1.4rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+.hv2-proof-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); }
+.hv2-proof-body h3 { margin: .6rem 0 .5rem; font-size: 1.1rem; font-weight: 700; color: var(--navy); text-wrap: balance; }
+.hv2-proof-body p { margin: 0 0 1.1rem; font-size: .94rem; line-height: 1.62; color: var(--body); }
+.hv2-proof-link { margin-top: auto; display: inline-flex; align-items: center; gap: .4rem; font-size: .9rem; font-weight: 700; color: var(--accent-ink); }
+.hv2-proof-link svg { transition: transform .25s ease; }
+.hv2-proof-card:hover .hv2-proof-link svg { transform: translateX(4px); }
+
+/* =========================================================================
+   FINAL CTA
+   ========================================================================= */
+.hv2-cta-panel {
+  position: relative; overflow: hidden; border-radius: 28px; text-align: center;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 4rem);
+  background: linear-gradient(150deg, #eaf3ff, #f7fbff 55%, #eef5fe);
+  border: 1px solid rgba(24, 149, 255, .18);
+  box-shadow: 0 30px 70px -46px rgba(15, 31, 53, .6);
+}
+.hv2-cta-panel h2 {
+  position: relative; z-index: 2; margin: 1rem 0 0;
+  font-size: clamp(2rem, 4.2vw, 3.2rem); font-weight: 800; letter-spacing: -.025em;
+  line-height: 1.08; color: var(--navy); text-wrap: balance;
+}
+.hv2-cta-panel p {
+  position: relative; z-index: 2; margin: 1.2rem auto 0; max-width: 38rem;
+  font-size: 1.05rem; line-height: 1.7; color: var(--body);
+}
+.hv2-cta-actions { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: .9rem; justify-content: center; margin-top: 2.2rem; }
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width: 1080px) {
+  .hv2-hero-grid, .hv2-cap, .hv2-agent, .hv2-who, .hv2-vibe { grid-template-columns: 1fr; }
+  .hv2-cap-panel { min-height: 0; }
+  .hv2-bento-card, .hv2-bento-card:nth-child(1), .hv2-bento-card:nth-child(2) { grid-column: span 3; }
+  .hv2-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.2rem; }
+  .hv2-steps::before { display: none; }
+  .hv2-outcomes { grid-template-columns: repeat(2, 1fr); }
+  .hv2-proof { grid-template-columns: repeat(2, 1fr); }
+  .hv2-experts { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 760px) {
+  .hv2-inner { width: min(1240px, calc(100% - 1.75rem)); }
+  .hv2-bento { grid-template-columns: 1fr; }
+  .hv2-bento-card, .hv2-bento-card:nth-child(1), .hv2-bento-card:nth-child(2) { grid-column: auto; }
+  .hv2-stats { grid-template-columns: repeat(2, 1fr); }
+  .hv2-steps, .hv2-outcomes, .hv2-proof { grid-template-columns: 1fr; }
+  .hv2-team { grid-template-columns: minmax(0, 1fr); }
+  .hv2-experts { grid-template-columns: repeat(2, 1fr); }
+  .hv2-step { padding-top: 3.4rem; }
+  .hv2-hero h1 { font-size: clamp(2.1rem, 8vw, 2.9rem); }
+  .hv2-who-collage { min-height: 20rem; }
+  .hv2-life-shot { width: 13rem; height: 8.5rem; }
+  .hv2-cert { width: 4rem; height: 4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hv2 *, .hv2 *::before, .hv2 *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  /* Flatten every CSS-driven 3D surface. !important because several of these
+     are set by nth-child rules of equal specificity further up the file. */
+    .hv2-who-collage,
+  .hv2-who-shot,
+  .hv2-stack-row,
+  .hv2-expert-flip,
+  .m3d-float { transform: none !important; }
+}

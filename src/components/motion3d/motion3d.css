@@ -1,0 +1,33 @@
+/* =========================================================================
+   Shared 3D primitives.
+
+   Used by the home page (components/home-v2) and the service pages
+   (ServiceDetailTemplate). Only the 3D context and compositor hints live
+   here -- the actual rotation is written by Tilt.jsx / TiltCard.jsx as
+   framer motion values, because framer's inline transform always beats a
+   stylesheet rule on an element it animates.
+   ========================================================================= */
+
+.m3d-tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Slow idle drift for a "device" panel, handed over to the pointer tilt on
+   hover. Applied to a wrapper so the two transforms compose rather than
+   overwrite one another. */
+.m3d-float {
+  transform-style: preserve-3d;
+  animation: m3dFloat 11s ease-in-out infinite;
+}
+.m3d-float:hover { animation-play-state: paused; }
+@keyframes m3dFloat {
+  0%, 100% { transform: perspective(1600px) rotateY(-3.5deg) rotateX(1.6deg) translateY(0); }
+  50%      { transform: perspective(1600px) rotateY(3.5deg) rotateX(-1.6deg) translateY(-12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m3d-float { animation: none; }
+  .m3d-tilt, .m3d-float { transform: none !important; }
+}

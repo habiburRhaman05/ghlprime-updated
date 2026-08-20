@@ -1,0 +1,133 @@
+/* =========================================================================
+   FAQ, redesigned.
+
+   Was a two-column grid of identical collapsed pills, which gave the reader
+   16 equally-weighted things to scan and no obvious entry point. This is a
+   sticky heading rail beside a single-column list: one reading order, one
+   open answer at a time, and the "ask us instead" escape hatch stays on
+   screen the whole way down.
+
+   Namespaced .faq2- so nothing here collides with the previous .faq-*
+   rules still living in styles/faq.css.
+   ========================================================================= */
+
+.faq2 {
+  --faq-navy: #0b1b30;
+  --faq-body: #55697f;
+  --faq-line: rgba(16, 37, 63, .1);
+  --faq-accent: #1895ff;
+  --faq-accent-ink: #0a5fae;
+  background: #fff;
+  padding: clamp(4rem, 7vw, 6.5rem) 0;
+}
+
+.faq2-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+/* ---------- Rail ---------------------------------------------------------- */
+.faq2-rail { position: sticky; top: 7rem; }
+.faq2-eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem; color: var(--faq-accent-ink);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+}
+.faq2-eyebrow::before { content: ''; width: 1.6rem; height: 1px; background: currentColor; opacity: .55; }
+.faq2-rail h2 {
+  margin: 1rem 0 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: 1.1;
+  letter-spacing: -.02em; font-weight: 800; color: var(--faq-navy); text-wrap: balance;
+}
+.faq2-intro { margin: 1rem 0 0; font-size: 1.02rem; line-height: 1.7; color: var(--faq-body); max-width: 26rem; }
+
+.faq2-help {
+  display: grid; grid-template-columns: auto 1fr; gap: .55rem .8rem;
+  margin-top: 2.2rem; padding: 1.2rem 1.3rem; border-radius: 16px;
+  background: linear-gradient(160deg, #eef5fe, #f8fbff);
+  border: 1px solid rgba(24, 149, 255, .18);
+}
+.faq2-help-dot {
+  width: .6rem; height: .6rem; border-radius: 50%; margin-top: .42rem;
+  background: #16a34a; box-shadow: 0 0 0 4px rgba(22, 163, 74, .14);
+}
+.faq2-help strong { display: block; font-size: .98rem; font-weight: 700; color: var(--faq-navy); }
+.faq2-help p { margin: .2rem 0 0; font-size: .88rem; line-height: 1.55; color: var(--faq-body); }
+.faq2-help-link {
+  grid-column: 2; display: inline-flex; align-items: center; gap: .4rem; margin-top: .3rem;
+  font-size: .9rem; font-weight: 700; color: var(--faq-accent-ink);
+}
+.faq2-help-link svg { transition: transform .25s ease; }
+.faq2-help-link:hover svg { transform: translateX(4px); }
+
+/* ---------- List ---------------------------------------------------------- */
+.faq2-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.faq2-item {
+  position: relative; overflow: hidden;
+  border-radius: 14px; border: 1px solid transparent;
+  transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.faq2-item:hover { background: #f7fafd; }
+.faq2-item.is-open {
+  background: #fff; border-color: rgba(24, 149, 255, .26);
+  box-shadow: 0 18px 38px -26px rgba(22, 132, 234, .75);
+}
+/* Accent rail that grows down the open item's left edge. */
+.faq2-rule {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 3px;
+  background: var(--primary-gradient, linear-gradient(180deg, #1895ff, #022646));
+  transform: scaleY(0); transform-origin: top center;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+.faq2-item.is-open .faq2-rule { transform: scaleY(1); }
+
+.faq2-q {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem;
+  width: 100%; padding: 1.15rem 1.2rem; text-align: left; cursor: pointer;
+  background: none; border: 0; font: inherit; color: inherit;
+}
+.faq2-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .74rem; font-weight: 700; color: #9aabc0;
+  transition: color .3s ease;
+}
+.faq2-item.is-open .faq2-n { color: var(--faq-accent-ink); }
+.faq2-q-text {
+  font-size: 1.02rem; font-weight: 600; line-height: 1.45; color: var(--faq-navy);
+  text-wrap: balance;
+}
+.faq2-icon {
+  display: grid; place-items: center; width: 2.1rem; height: 2.1rem; flex: none;
+  border-radius: 50%; color: var(--faq-accent-ink);
+  background: rgba(24, 149, 255, .1); border: 1px solid rgba(24, 149, 255, .2);
+  transition: background .3s ease, color .3s ease;
+}
+.faq2-item.is-open .faq2-icon {
+  background: var(--primary-gradient, #1895ff); color: #fff; border-color: transparent;
+}
+
+.faq2-a { overflow: hidden; }
+.faq2-a p {
+  margin: 0; padding: 0 1.2rem 1.25rem 3.35rem;
+  font-size: .98rem; line-height: 1.72; color: var(--faq-body); max-width: 44rem;
+}
+
+/* ---------- Responsive ---------------------------------------------------- */
+@media (max-width: 900px) {
+  .faq2-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+  .faq2-rail { position: static; }
+  .faq2-intro { max-width: none; }
+}
+@media (max-width: 560px) {
+  .faq2-q { grid-template-columns: 1fr auto; gap: .75rem; padding: 1rem; }
+  .faq2-n { display: none; }
+  .faq2-a p { padding: 0 1rem 1.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq2 *, .faq2 *::before, .faq2 *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
