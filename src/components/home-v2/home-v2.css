@@ -308,8 +308,12 @@
    was sliced off, the right photo's headline sits along the top and showed
    as a half-cut band. Anchoring both crops to the bottom reveals the first
    and pushes the second out of frame. */
-.hv2-who-shot:nth-child(2) img,
-.hv2-who-shot:nth-child(3) img { object-position: center bottom; }
+/* The left frame's wordmark sits along the bottom, so that one is anchored
+   hard to the bottom edge. The right frame needed the headline at its top
+   cropped away but NOT the faces underneath it -- pinned to the bottom the
+   crop went too far and took the heads too, so it sits just short of it. */
+.hv2-who-shot:nth-child(2) img { object-position: center bottom; }
+.hv2-who-shot:nth-child(3) img { object-position: center 72%; }
 .hv2-who-shot:hover img { transform: scale(1.06); }
 
 .hv2-who-cards { display: grid; gap: .85rem; margin-top: 1.8rem; }
@@ -321,9 +325,11 @@
 }
 .hv2-who-card:hover { transform: translateX(4px); border-color: rgba(24, 149, 255, .3); box-shadow: 0 16px 32px -22px rgba(24, 149, 255, .8); }
 .hv2-who-icon { width: 2.9rem; height: 2.9rem; border-radius: 12px; display: grid; place-items: center; color: #fff; }
-.hv2-who-icon.blue { background: linear-gradient(140deg, #1895ff, #0a5fae); }
-.hv2-who-icon.green { background: linear-gradient(140deg, #21c45d, #0f8f43); }
-.hv2-who-icon.amber { background: linear-gradient(140deg, #f7b733, #d4881a); }
+/* One family rather than three unrelated hues: brand blue, then a violet
+   and a teal at the same depth, so the row reads as a set. */
+.hv2-who-icon.blue { background: linear-gradient(140deg, #38a4ff, #0a5fae); }
+.hv2-who-icon.violet { background: linear-gradient(140deg, #8b74ff, #4c31c9); }
+.hv2-who-icon.teal { background: linear-gradient(140deg, #23c1bd, #0b7a77); }
 .hv2-who-card h3 { margin: 0 0 .15rem; font-size: 1rem; font-weight: 700; color: var(--navy); }
 .hv2-who-card p { margin: 0; font-size: .9rem; color: var(--body); line-height: 1.5; }
 
@@ -673,11 +679,17 @@
 .hv2-life-row.is-reverse .hv2-life-track { animation-direction: reverse; }
 .hv2-life-row:hover .hv2-life-track { animation-play-state: paused; }
 .hv2-life-shot {
-  flex: none; width: 17rem; height: 11rem; border-radius: 18px; overflow: hidden;
+  flex: none; width: 17rem; height: 12.75rem; border-radius: 18px; overflow: hidden;
   background: #e8eff8; border: 1px solid var(--line);
   box-shadow: 0 16px 32px -24px rgba(15, 31, 53, .55);
 }
-.hv2-life-shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+/* These are mostly upright group shots, so a centred crop takes the tops of
+   heads off. Biasing the window upward keeps faces whole; the taller tile
+   above does the rest. */
+.hv2-life-shot img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 26%;
+  transition: transform .6s cubic-bezier(.22,1,.36,1);
+}
 .hv2-life-shot:hover img { transform: scale(1.07); }
 
 /* =========================================================================
@@ -782,7 +794,7 @@
   .hv2-step { padding-top: 3.4rem; }
   .hv2-hero h1 { font-size: clamp(2.1rem, 8vw, 2.9rem); }
   .hv2-who-collage { min-height: 20rem; }
-  .hv2-life-shot { width: 13rem; height: 8.5rem; }
+  .hv2-life-shot { width: 13rem; height: 9.75rem; }
   .hv2-cert { width: 4rem; height: 4rem; }
 }
 

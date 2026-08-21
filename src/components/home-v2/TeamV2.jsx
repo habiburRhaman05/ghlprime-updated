@@ -6,6 +6,12 @@ import { fetchTeamMembers, fetchTeamPageExperts } from '../../lib/teamApi'
 import { socialConfig } from '../socialConfig'
 import './home-v2.css'
 
+// The home page shows a curated ten of the expert list; the Team page still
+// shows everyone. Matched on name rather than position so reordering in the
+// admin can never silently drop a different person than the one intended.
+const HOME_EXPERT_EXCLUDE = new Set(['Habibur Rahman'])
+const HOME_EXPERT_LIMIT = 10
+
 // Certification marks, carried over from the previous CertificationsSection.
 const CERTS = [
   { title: 'A2P Compliance', image: 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/knES3eSWYIsc5YSZ3YLl/media/6809495041e8e478540a0fc9.png' },
@@ -21,7 +27,12 @@ export default function TeamV2() {
   const [experts, setExperts] = useState([])
 
   useEffect(() => { fetchTeamMembers().then((list) => setLeaders((list || []).slice(0, 3))) }, [])
-  useEffect(() => { fetchTeamPageExperts().then((list) => setExperts((list || []).slice(0, 10))) }, [])
+  useEffect(() => {
+    fetchTeamPageExperts().then((list) => {
+      const curated = (list || []).filter((m) => !HOME_EXPERT_EXCLUDE.has((m.name || '').trim()))
+      setExperts(curated.slice(0, HOME_EXPERT_LIMIT))
+    })
+  }, [])
 
   return (
     <section className="hv2 hv2-section is-tint">

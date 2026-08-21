@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Headphones, Users, TrendingUp } from 'lucide-react'
+import { LifeBuoy, BadgeCheck, Rocket } from 'lucide-react'
 import { fetchGalleryImages } from '../../lib/galleryApi'
 import { trackPointer, resetPointer } from '../motion3d/pointer'
 import Lightbox from './Lightbox'
@@ -18,9 +18,12 @@ const FALLBACK = [
 
 // Carried over from the three proof cards under the old section.
 const CARDS = [
-  { icon: Headphones, tone: 'blue', title: '24/7 Support', text: 'Always available when you need us.' },
-  { icon: Users, tone: 'green', title: 'Expert Team', text: 'Specialists in GHL & automation.' },
-  { icon: TrendingUp, tone: 'amber', title: 'Client Growth', text: 'We train, support & help you scale.' },
+  // LifeBuoy reads as "someone will help you" better than a headset, which
+  // says call-centre; BadgeCheck says certified rather than just "people";
+  // Rocket carries scale, which is what the copy actually promises.
+  { icon: LifeBuoy, tone: 'blue', title: '24/7 Support', text: 'Always available when you need us.' },
+  { icon: BadgeCheck, tone: 'violet', title: 'Expert Team', text: 'Specialists in GHL & automation.' },
+  { icon: Rocket, tone: 'teal', title: 'Client Growth', text: 'We train, support & help you scale.' },
 ]
 
 export default function WhoWeAreV2() {
