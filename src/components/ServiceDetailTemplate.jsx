@@ -769,8 +769,8 @@ function Hero3DCollageSection({ images }) {
                 width: '65%',
                 borderRadius: '16px',
                 boxShadow: isHovered 
-                  ? '0 60px 120px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(0,0,0,0.05)'
-                  : '-20px 20px 50px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(0,0,0,0.05)',
+                  ? '0 80px 140px rgba(0,0,0,0.4), 0 20px 40px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(0,0,0,0.05)'
+                  : '-30px 30px 60px rgba(0,0,0,0.25), -10px 10px 20px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(0,0,0,0.05)',
                 background: '#fff',
                 overflow: 'hidden',
                 zIndex: isHovered ? 100 : i,
