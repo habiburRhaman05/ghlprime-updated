@@ -1,4 +1,4 @@
-﻿import ServiceDetailTemplate from '../components/ServiceDetailTemplate'
+import ServiceDetailTemplate from '../components/ServiceDetailTemplate'
 
 export const config = {
   slug: '/services/ghl-setup',
@@ -21,6 +21,14 @@ export const config = {
     ctaPrimary: { label: 'Book a Free Call', to: '/booking' },
     ctaSecondary: { label: 'See Our Work', to: '/case-studies' },
     badges: ['GoHighLevel', 'Sub-Accounts', 'Pipelines', 'Calendars', 'A2P / Twilio', 'Snapshots'],
+  },
+  showcase3D: {
+    images: [
+      '/dashboard1.png',
+      '/dashboard2.png',
+      '/dashboard3.jpg',
+      '/dashboard4.avif'
+    ]
   },
   stats: [
     { num: '1–2 wks', label: 'Typical full setup turnaround' },

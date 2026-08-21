@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, Fragment, useMemo, useRef, useEffect } from 'react'
 import Link from 'next/link'
@@ -710,6 +710,82 @@ function HeroMockup({ name }) {
   )
 }
 
+function Hero3DCollageSection({ images }) {
+  const [hoveredIdx, setHoveredIdx] = useState(null)
+
+  return (
+    <section className="svc-section" style={{ padding: '6rem 0 12rem 0', position: 'relative', zIndex: 20 }}>
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className="svc-head center" style={{ zIndex: 10, position: 'relative', marginBottom: '2rem' }}>
+          <h2>The Ultimate Operating System</h2>
+          <p className="svc-hero-sub">A fully integrated ecosystem built for scaling your agency.</p>
+        </div>
+        
+        <div 
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '900px',
+            aspectRatio: '16 / 9',
+            perspective: '2000px',
+            marginTop: '3rem',
+            marginBottom: '4rem'
+          }}
+        >
+          {images.map((src, i) => {
+            const isHovered = hoveredIdx === i
+            return (
+            <motion.div
+              key={src}
+              initial={{ opacity: 0, z: -200, y: 100 }}
+              whileInView={{ opacity: 1, z: i * 60, y: 0 }}
+              transition={{ type: 'spring', stiffness: 100, damping: 20, delay: i * 0.15 }}
+              viewport={{ once: true, amount: 0.3 }}
+              animate={isHovered ? {
+                top: '30%',
+                left: '50%',
+                x: '-50%',
+                y: '-30%',
+                z: 600,
+                scale: 1.35,
+                rotateX: 0,
+                rotateZ: 0,
+                transition: { duration: 0.4, ease: "easeOut" }
+              } : {
+                top: `${i * 12}%`,
+                left: `${i * 12}%`,
+                x: '0%',
+                y: '0%',
+                z: i * 60,
+                scale: 1,
+                rotateX: 45,
+                rotateZ: -20,
+                transition: { type: 'spring', stiffness: 100, damping: 20 }
+              }}
+              onMouseEnter={() => setHoveredIdx(i)}
+              onMouseLeave={() => setHoveredIdx(null)}
+              style={{
+                position: 'absolute',
+                width: '65%',
+                borderRadius: '16px',
+                boxShadow: isHovered 
+                  ? '0 60px 120px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(0,0,0,0.05)'
+                  : '-20px 20px 50px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(0,0,0,0.05)',
+                background: '#fff',
+                overflow: 'hidden',
+                zIndex: isHovered ? 100 : i,
+                cursor: 'pointer'
+              }}
+            >
+              <img src={src} alt={`Dashboard ${i+1}`} style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </motion.div>
+          )})}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function ServiceDetailTemplate({ config }) {
   const formConfig = SERVICE_FORMS[config.slug]
   const url = `${SITE}${config.slug}`
@@ -829,6 +905,9 @@ export default function ServiceDetailTemplate({ config }) {
           )}
         </div>
       </section>
+
+      {/* 3D Showcase Section */}
+      {config.showcase3D ? <Hero3DCollageSection images={config.showcase3D.images} /> : null}
 
       {/* Stats bar */}
       <section className="svc-section" style={{ paddingTop: '3rem', paddingBottom: '0' }}>
