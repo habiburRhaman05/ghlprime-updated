@@ -25,56 +25,63 @@
 .av-hero .pv2-lede { margin-inline: auto; max-width: 40rem; }
 .av-hero .pv2-actions { justify-content: center; }
 
-/* ---------- stepped shelf ------------------------------------------------- */
-/* Three cards on a staircase. The offsets do the work a heading hierarchy
-   would otherwise have to: the eye reads them in order without numbering
-   having to shout. */
-.av-shelf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; align-items: start; }
-.av-shelf > *:nth-child(2) { margin-top: clamp(1.2rem, 3vw, 2.6rem); }
-.av-shelf > *:nth-child(3) { margin-top: clamp(2.4rem, 6vw, 5.2rem); }
-/* Natural heights, so the staircase stays a staircase instead of the grid
-   stretching all three back to one baseline. */
-.av-shelf .m3d-slot, .av-shelf .av-card { height: auto; }
+/* ---------- reason cards --------------------------------------------------- */
+/* Three flat cards on one baseline. A tone hairline crowns each card and the
+   animated mark shares the top row with a ghosted number. */
+.av-shelf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
 
 .av-card {
   position: relative;
   padding: clamp(1.6rem, 2.6vw, 2.2rem);
   border-radius: 22px; background: #fff; border: 1px solid var(--line);
   box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 20px 42px -30px rgba(15, 31, 53, .5);
-  transition: border-color .35s ease, box-shadow .35s ease;
+  transition: border-color .35s ease, box-shadow .35s ease, transform .35s ease;
+  overflow: hidden;
 }
-.av-card:hover { border-color: color-mix(in srgb, var(--ic-to, #1d4ed8) 34%, transparent); }
+/* tone hairline (the fill comes from the ic-* class) */
+.av-card::before {
+  content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, var(--ic-to, #1d4ed8), color-mix(in srgb, var(--ic-to, #1d4ed8) 8%, transparent));
+}
+.av-card:hover { border-color: color-mix(in srgb, var(--ic-to, #1d4ed8) 34%, transparent); transform: translateY(-4px); }
+.av-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
 .av-card-num {
-  position: absolute; top: clamp(1rem, 2vw, 1.4rem); right: clamp(1rem, 2vw, 1.5rem);
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; line-height: 1;
   color: transparent; -webkit-text-stroke: 1.3px color-mix(in srgb, var(--ic-to, #1d4ed8) 40%, transparent);
   user-select: none;
-  /* Depth set here rather than through an .m3d-l* helper: those also set
-     position: relative, which would break this element's absolute placing. */
-  transform: translateZ(14px);
 }
 .av-card h3 { margin: 1.15rem 0 .55rem; font-size: 1.14rem; font-weight: 800; color: var(--navy); text-wrap: balance; }
 .av-card p { margin: 0; font-size: .96rem; line-height: 1.68; color: var(--body); }
 
-/* ---------- ecosystem plaque ---------------------------------------------- */
-.av-plaque {
-  display: grid; grid-template-columns: auto minmax(0, 1fr);
-  gap: clamp(1.4rem, 3vw, 2.6rem); align-items: center;
+/* ---------- ecosystem band -------------------------------------------------- */
+/* One band, two halves: the Octopi identity on the left, what it adds on
+   the right. The logo ships as a bare mark -- no tile behind it. */
+.av-band {
+  display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(1.6rem, 3.5vw, 3rem); align-items: center;
+  margin-top: clamp(2rem, 4vw, 3rem);
   padding: clamp(1.8rem, 3.4vw, 2.8rem);
   border-radius: 26px;
   background: linear-gradient(150deg, #ffffff, #f1f7ff);
   border: 1px solid var(--line-strong);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 24px 48px -34px rgba(15, 31, 53, .5);
 }
-/* The ODL mark ships as a tiny webp -- present it as a crisp app-style icon
-   rather than stretching it across the plaque. */
-.av-plaque-mark {
-  display: grid; place-items: center; flex: none;
-  width: clamp(4.6rem, 8vw, 6rem); aspect-ratio: 1;
+.av-band-id { display: flex; align-items: center; gap: clamp(1rem, 2vw, 1.5rem); }
+.av-band-logo { width: clamp(4.4rem, 8vw, 5.6rem); height: auto; object-fit: contain; flex: none; }
+.av-band-id strong { display: block; font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 800; color: var(--navy); letter-spacing: -.01em; }
+.av-band-id span { display: block; margin-top: .45rem; font-size: .98rem; line-height: 1.68; color: var(--body); max-width: 30rem; }
+.av-band-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.av-band-list li {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .8rem 1rem; border-radius: 14px;
+  background: rgba(255, 255, 255, .75); border: 1px solid var(--line);
+  font-size: .93rem; line-height: 1.5; color: #3b5068;
 }
-.av-plaque-mark img { width: 62%; height: 62%; object-fit: contain; }
-.av-plaque strong { display: block; font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 800; color: var(--navy); letter-spacing: -.01em; }
-.av-plaque p { margin: .55rem 0 0; font-size: 1rem; line-height: 1.7; color: var(--body); max-width: 44rem; }
+@media (max-width: 900px) {
+  .av-shelf { grid-template-columns: 1fr; }
+  .av-band { grid-template-columns: 1fr; }
+}
 
 .av-eco-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.3rem; }
 .av-eco-item {
@@ -91,23 +98,29 @@
 .av-ledger { border-top: 1px solid var(--line); }
 .av-row {
   display: grid;
-  grid-template-columns: clamp(3.4rem, 6vw, 5rem) 2.9rem minmax(0, 1fr) minmax(0, 1.25fr);
+  grid-template-columns: clamp(3.4rem, 6vw, 5rem) 2.9rem minmax(0, 1fr);
   gap: clamp(.9rem, 2.4vw, 2rem); align-items: center;
-  padding: clamp(1.4rem, 2.6vw, 2rem) clamp(.4rem, 1.5vw, 1.2rem);
+  padding: clamp(1.4rem, 2.6vw, 2rem) clamp(.9rem, 1.8vw, 1.4rem);
   border-bottom: 1px solid var(--line);
-  transition: background .35s ease;
+  border-radius: 18px;
+  transition: background .35s ease, transform .35s ease, box-shadow .35s ease;
 }
+.av-ledger .av-row:first-child { border-top: none; }
 /* A tint keyed to the row's own tone, so hovering the ledger walks a colour
    down the page instead of repeating one blue five times. */
-.av-row:hover { background: color-mix(in srgb, var(--ic-soft, rgba(59, 130, 246, .13)) 55%, transparent); }
+.av-row:hover {
+  background: color-mix(in srgb, var(--ic-soft, rgba(59, 130, 246, .13)) 55%, transparent);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -28px rgba(15, 31, 53, .55);
+}
 .av-row-num {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: clamp(1.6rem, 3.2vw, 2.5rem); font-weight: 700; line-height: 1;
   color: transparent; -webkit-text-stroke: 1.3px color-mix(in srgb, var(--ic-to, #1d4ed8) 45%, transparent);
   user-select: none;
 }
-.av-row h3 { margin: 0; font-size: clamp(1rem, 1.6vw, 1.16rem); font-weight: 800; color: var(--navy); text-wrap: balance; }
-.av-row p { margin: 0; font-size: .96rem; line-height: 1.66; color: var(--body); }
+.av-row-body h3 { margin: 0; font-size: clamp(1rem, 1.6vw, 1.16rem); font-weight: 800; color: var(--navy); text-wrap: balance; }
+.av-row-body p { margin: .45rem 0 0; font-size: .96rem; line-height: 1.66; color: var(--body); max-width: 46rem; }
 
 /* ---------- closing CTA ---------------------------------------------------- */
 /* One level plate. No stacked shadow plates behind it and no depth on the
@@ -133,20 +146,44 @@
   letter-spacing: -.025em; font-weight: 800; color: var(--navy); text-wrap: balance;
 }
 .av-trust-rule { display: block; width: 3.4rem; height: 3px; margin-top: 1.4rem; border-radius: 99px; background: var(--primary-gradient, #1895ff); }
-.av-prose p { margin: 0 0 1.25rem; font-size: 1.03rem; line-height: 1.82; color: var(--body); }
-.av-prose p:last-child { margin-bottom: 0; }
-.av-prose p:first-child::first-letter {
-  float: left; font-size: 3.2rem; line-height: .84; font-weight: 800;
-  margin: .14rem .6rem 0 0;
-  background: var(--primary-gradient, #1895ff);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+
+/* The opening premise reads as a statement; the supporting arguments become
+   three pillars with alternating accents. */
+.av-trust-lede { margin: 0; font-size: clamp(1.08rem, 1.7vw, 1.22rem); line-height: 1.78; color: #33475f; font-weight: 500; }
+.av-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.8rem; }
+.av-pillar {
+  position: relative; padding: 1.35rem 1.25rem; border-radius: 18px;
+  background: linear-gradient(165deg, #ffffff, #f6faff);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 16px 32px -28px rgba(15, 31, 53, .45);
+  transition: transform .35s ease, border-color .35s ease;
 }
+.av-pillar::before {
+  content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; border-radius: 99px;
+  background: var(--pillar-accent, #1895ff);
+}
+.av-pillar:nth-child(1) { --pillar-accent: #0ea5e9; }
+.av-pillar:nth-child(2) { --pillar-accent: #8b5cf6; }
+.av-pillar:nth-child(3) { --pillar-accent: #0d9f6e; }
+.av-pillar:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--pillar-accent) 34%, transparent); }
+.av-pillar strong { display: block; font-size: 1.02rem; font-weight: 800; color: var(--navy); letter-spacing: -.01em; }
+.av-pillar p { margin: .55rem 0 0; font-size: .93rem; line-height: 1.66; color: var(--body); }
+
+/* ---------- hero trust chips ------------------------------------------------ */
+.av-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.6rem; }
+.av-chip {
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: .48rem .95rem; border-radius: 999px;
+  background: #fff; border: 1px solid var(--line-strong);
+  font-size: .85rem; font-weight: 600; color: #33475f;
+  box-shadow: 0 1px 2px rgba(15, 31, 53, .05);
+}
+.av-chip svg { color: #16a34a; flex: none; }
 
 /* ---------- responsive ------------------------------------------------------ */
 @media (max-width: 1080px) {
   .av-shelf { grid-template-columns: repeat(2, 1fr); }
-  .av-shelf > *:nth-child(3) { margin-top: 0; }
-  .av-eco-list { grid-template-columns: repeat(2, 1fr); }
+  .av-pillars { grid-template-columns: 1fr; }
   .av-trust { grid-template-columns: 1fr; }
   .av-trust-rail { position: static; }
 }
@@ -155,11 +192,7 @@
     grid-template-columns: clamp(2.6rem, 9vw, 3.4rem) 2.6rem minmax(0, 1fr);
     align-items: start;
   }
-  .av-row p { grid-column: 3; }
-  .av-plaque { grid-template-columns: 1fr; justify-items: start; }
 }
 @media (max-width: 700px) {
   .av-shelf { grid-template-columns: 1fr; }
-  .av-shelf > *:nth-child(2), .av-shelf > *:nth-child(3) { margin-top: 0; }
-  .av-eco-list { grid-template-columns: 1fr; }
 }

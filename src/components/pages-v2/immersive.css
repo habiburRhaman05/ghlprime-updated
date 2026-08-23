@@ -312,7 +312,6 @@
 .iv-leader.flip .iv-leader-media { order: 2; }
 .iv-leader.flip .iv-leader-body { order: 1; }
 
-.iv-leader-media { perspective: 900px; }
 .iv-photo-frame {
   position: relative;
   border-radius: 26px;
@@ -320,7 +319,6 @@
   background: linear-gradient(150deg, #ffffff, #eef5fe);
   border: 1px solid var(--line-strong);
   box-shadow: 0 1px 3px rgba(15, 31, 53, 0.05), 0 40px 80px -48px rgba(15, 31, 53, 0.65);
-  transform-style: preserve-3d;
 }
 .iv-photo-frame::before {
   content: '';
@@ -328,7 +326,6 @@
   inset: -14px;
   border-radius: 32px;
   border: 1px dashed rgba(24, 149, 255, 0.3);
-  animation: ivSpin 60s linear infinite;
 }
 .iv-photo-frame img {
   display: block;
@@ -337,8 +334,9 @@
   object-fit: cover;
   object-position: center 20%;
   border-radius: 19px;
-  transform: translateZ(20px);
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1);
 }
+.iv-leader:hover .iv-photo-frame img { transform: scale(1.025); }
 .iv-badge-pill {
   position: absolute;
   top: 1.35rem;
@@ -398,6 +396,49 @@
 }
 .iv-leader-divider { display: block; width: 3.2rem; height: 3px; margin: 1.1rem 0; border-radius: 99px; background: var(--primary-gradient, #1895ff); }
 .iv-leader-body > p { margin: 0; font-size: 1.02rem; line-height: 1.75; color: var(--body); max-width: 34rem; }
+
+/* ---------- hiring track ----------------------------------------------------- */
+/* The five hiring paragraphs become one numbered rule: a vertical track with
+   gradient number nodes and a closing note panel. */
+.iv-track {
+  position: relative;
+  list-style: none; margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; padding: 0;
+  max-width: 52rem; margin-inline: auto;
+}
+.iv-track::before {
+  content: ''; position: absolute; top: .6rem; bottom: .6rem; left: 1.55rem;
+  width: 2px; border-radius: 99px;
+  background: linear-gradient(180deg, rgba(24, 149, 255, .5), rgba(24, 149, 255, .08));
+}
+.iv-track li {
+  position: relative;
+  display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: clamp(1rem, 2.4vw, 1.7rem);
+  align-items: start;
+}
+.iv-track li + li { margin-top: clamp(1.8rem, 3.5vw, 2.6rem); }
+.iv-track-node {
+  position: relative; z-index: 1;
+  display: grid; place-items: center;
+  width: 3.2rem; height: 3.2rem; border-radius: 50%;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .82rem; font-weight: 700; color: #fff;
+  background: var(--primary-gradient, linear-gradient(135deg, #1895ff, #022646));
+  border: 3px solid #fff;
+  box-shadow: 0 10px 22px -12px rgba(2, 38, 70, 0.65);
+}
+.iv-track-body h3 {
+  margin: .35rem 0 .5rem; font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+  font-weight: 800; color: var(--navy); text-wrap: balance;
+}
+.iv-track-body p { margin: 0; font-size: .98rem; line-height: 1.72; color: var(--body); }
+.iv-track-note {
+  max-width: 52rem; margin: clamp(2rem, 4vw, 2.8rem) auto 0;
+  padding: 1.25rem 1.5rem; border-radius: 18px;
+  background: linear-gradient(165deg, #ffffff, #f2f8ff);
+  border: 1px solid var(--line);
+  border-left: 3px solid #1895ff;
+  font-size: .96rem; line-height: 1.72; color: #33475f;
+}
 .iv-social-rail { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.4rem; }
 .iv-social-rail .leader-social-link {
   width: 2.6rem;

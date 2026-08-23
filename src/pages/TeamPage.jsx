@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { motion, animate, useInView, useMotionValue, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
@@ -11,7 +11,6 @@ import { CertifiedAdminOverlay, SkillsBadges } from '../components/Certification
 import CertificationsSection from '../components/CertificationsSection'
 import { socialConfig } from '../components/socialConfig'
 import { fetchTeamMembers, fetchTeamPageExperts } from '../lib/teamApi'
-import Tilt from '../components/motion3d/Tilt'
 import ScrollProgress from '../components/motion3d/ScrollProgress'
 import '../components/pages-v2/pages-v2.css'
 import '../components/pages-v2/immersive.css'
@@ -41,32 +40,10 @@ const SPRING = { type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }
 
 const heroStack = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } } }
 const heroLine = {
-  hidden: { opacity: 0, rotateX: -50, y: 22 },
-  show: { opacity: 1, rotateX: 0, y: 0, transition: SPRING },
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: SPRING },
 }
-const heroLineProps = { variants: heroLine, style: { transformOrigin: 'top center', transformPerspective: 1000 } }
-
-function YearsStat({ value }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-15% 0px' })
-  const raw = String(value ?? '').trim()
-  const num = parseFloat(raw)
-  const suffix = Number.isFinite(num) ? raw.replace(/^[0-9.]+/, '') : ''
-  const count = useMotionValue(0)
-  const display = useTransform(count, (v) => `${Math.round(v)}${suffix}`)
-
-  useEffect(() => {
-    if (!inView || !Number.isFinite(num)) return undefined
-    const controls = animate(count, num, { duration: 1.6, ease: 'easeOut' })
-    return () => controls.stop()
-  }, [inView, num, count])
-
-  return (
-    <strong ref={ref}>
-      {Number.isFinite(num) ? <motion.span>{display}</motion.span> : raw}
-    </strong>
-  )
-}
+const heroLineProps = { variants: heroLine }
 
 function LeaderSpotlight({ leader, index }) {
   const flip = index % 2 === 1
@@ -77,33 +54,30 @@ function LeaderSpotlight({ leader, index }) {
     <article className={`iv-leader${flip ? ' flip' : ''}`}>
       <motion.div
         className="iv-leader-media"
-        initial={{ opacity: 0, rotateY: flip ? 24 : -24, x: flip ? 44 : -44 }}
-        whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
+        initial={{ opacity: 0, y: 26 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        style={{ transformPerspective: 1300 }}
         transition={SPRING}
       >
-        <Tilt max={6} className="iv-photo-frame-wrap">
-          <div className="iv-photo-frame">
-            <img src={leader.image_url} alt={leader.name} loading="lazy" decoding="async" />
-            {leader.badge_label ? (
-              <span className="iv-badge-pill">{badgeIcon}{leader.badge_label}</span>
-            ) : null}
-            {leader.years_experience ? (
-              <div className="iv-years-disc">
-                <YearsStat value={leader.years_experience} />
-                <span>Years</span>
-                <span>Experience</span>
-              </div>
-            ) : null}
-          </div>
-        </Tilt>
+        <div className="iv-photo-frame">
+          <img src={leader.image_url} alt={leader.name} loading="lazy" decoding="async" />
+          {leader.badge_label ? (
+            <span className="iv-badge-pill">{badgeIcon}{leader.badge_label}</span>
+          ) : null}
+          {leader.years_experience ? (
+            <div className="iv-years-disc">
+              <strong>{leader.years_experience}</strong>
+              <span>Years</span>
+              <span>Experience</span>
+            </div>
+          ) : null}
+        </div>
       </motion.div>
 
       <motion.div
         className="iv-leader-body"
-        initial={{ opacity: 0, x: flip ? -36 : 36 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: 26 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ ...SPRING, delay: 0.08 }}
       >
@@ -133,23 +107,15 @@ function LeaderSpotlight({ leader, index }) {
   )
 }
 
-function RevealProse({ paragraphs }) {
-  return (
-    <div className="pv2-prose">
-      {paragraphs.map((text, i) => (
-        <motion.p
-          key={i}
-          initial={{ opacity: 0, y: 22, filter: 'blur(8px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.65, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {text}
-        </motion.p>
-      ))}
-    </div>
-  )
-}
+// Hiring standards rendered as a numbered track rather than a wall of prose:
+// each paragraph becomes one step on a single connecting rule.
+const hiringSteps = [
+  { title: 'Experienced GHL people only', text: hiringParagraphs[0] },
+  { title: 'Certified and assessed', text: hiringParagraphs[1] },
+  { title: 'Matched by specialty', text: hiringParagraphs[2] },
+  { title: 'Two-layer leadership review', text: hiringParagraphs[3] },
+]
+const hiringNote = hiringParagraphs[4]
 
 export default function TeamPage() {
   const [leaders, setLeaders] = useState([])
@@ -160,9 +126,6 @@ export default function TeamPage() {
     fetchTeamPageExperts().then(setExperts)
   }, [])
 
-  const { scrollYProgress } = useScroll()
-  const heroY = useTransform(scrollYProgress, [0, 0.16], [0, -70])
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.13], [1, 0])
 
   return (
     <main className="about-page team-page pv2">
@@ -219,7 +182,7 @@ export default function TeamPage() {
         <span className="pv2-grid-bg" aria-hidden="true" />
         <span className="pv2-bloom one" aria-hidden="true" />
         <span className="pv2-bloom two" aria-hidden="true" />
-        <motion.div className="pv2-inner pv2-hero-grid" style={{ y: heroY, opacity: heroOpacity }}>
+        <div className="pv2-inner pv2-hero-grid">
           <motion.div variants={heroStack} initial="hidden" animate="show">
             <motion.span className="pv2-eyebrow" {...heroLineProps}>Team</motion.span>
             <motion.h1 {...heroLineProps}>The people behind GHL Prime.</motion.h1>
@@ -233,7 +196,7 @@ export default function TeamPage() {
             </motion.div>
           </motion.div>
 
-        </motion.div>
+        </div>
       </section>
 
       {/* --------------------------------------------------------- leaders */}
@@ -279,10 +242,9 @@ export default function TeamPage() {
                 <motion.div
                   className="pv2-expert iv-expert-static"
                   key={member.id || member.name}
-                  initial={{ opacity: 0, rotateX: -34, y: 22 }}
-                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
-                  style={{ transformOrigin: 'top center', transformPerspective: 1000 }}
                   transition={{ ...SPRING, delay: (index % 5) * 0.07 }}
                 >
                   <span className="iv-expert-photo">
@@ -307,10 +269,9 @@ export default function TeamPage() {
         <div className="pv2-inner">
           <motion.div
             className="pv2-cta"
-            initial={{ opacity: 0, rotateX: 24, y: 30 }}
-            whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            style={{ transformOrigin: 'bottom center', transformPerspective: 1200 }}
             transition={SPRING}
           >
             <span className="iv-aurora a1" aria-hidden="true" />
@@ -332,7 +293,7 @@ export default function TeamPage() {
       <section className="pv2-section is-white" aria-labelledby="hiring-process-heading">
         <div className="pv2-inner">
           <motion.div
-            className="pv2-head"
+            className="pv2-head centered"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
@@ -342,7 +303,33 @@ export default function TeamPage() {
             <h2 id="hiring-process-heading">How We Hire and <span className="pv2-hl">Train Our Team</span></h2>
           </motion.div>
 
-          <RevealProse paragraphs={hiringParagraphs} />
+          <ol className="iv-track">
+            {hiringSteps.map(({ title, text }, i) => (
+              <motion.li
+                key={title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ ...SPRING, delay: i * 0.05 }}
+              >
+                <span className="iv-track-node">{String(i + 1).padStart(2, '0')}</span>
+                <div className="iv-track-body">
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+              </motion.li>
+            ))}
+          </ol>
+
+          <motion.p
+            className="iv-track-note"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ ...SPRING, delay: 0.1 }}
+          >
+            {hiringNote}
+          </motion.p>
         </div>
       </section>
 
