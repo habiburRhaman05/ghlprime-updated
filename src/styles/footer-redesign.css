@@ -72,12 +72,10 @@
   align-items: center;
   justify-content: center;
   width: fit-content;
-  background: linear-gradient(90deg, #1e7ef1, #5bb4ff, #1e7ef1);
-  background-size: 200% 100%;
+  background: var(--primary-gradient);
   color: white !important;
   font-weight: 800;
   box-shadow: 0 12px 28px rgba(30,126,241,.22);
-  animation: footerHireShift 2.8s linear infinite;
 }
 .footer-hire-expert-link::after {
   content: '';

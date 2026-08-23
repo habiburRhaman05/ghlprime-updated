@@ -195,6 +195,17 @@
 .is-dark .pv2-logo-card {
   box-shadow: 0 0 0 1px rgba(125, 185, 255, 0.14), 0 40px 90px -40px rgba(2, 12, 27, 0.9);
 }
+/* The ODL mark ships as a tiny 29px webp -- present it as a crisp app-style
+   icon instead of stretching it across the card. */
+.iv-halo .pv2-logo-card img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  border-radius: 14px;
+  background: #fff;
+  padding: 0.45rem;
+}
+.iv-halo .pv2-logo-card strong { margin-top: 0.6rem; }
 
 /* ---------- belief timeline ---------------------------------------------- */
 .iv-timeline { position: relative; display: grid; gap: clamp(1.4rem, 3vh, 2.2rem); }

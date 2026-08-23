@@ -334,7 +334,7 @@ export default function AboutPage() {
             <div className="iv-halo">
               <div className="m3d-float">
                 <Tilt className="pv2-logo-card" max={7}>
-                  <img src="https://octopi-digital.com/_next/image?url=%2Foctopi-logo.png&w=256&q=75" alt="Octopi Digital" />
+                  <img src="/ODL%20logo.webp" alt="Octopi Digital" />
                   <strong>Octopi Digital</strong>
                   <p>Growth systems, execution support, and a stronger operational foundation behind GHL Prime.</p>
                 </Tilt>
@@ -444,7 +444,7 @@ export default function AboutPage() {
             <h2>Explore the services, systems, and backend strategy behind GHL Prime.</h2>
             <div className="pv2-cta-actions">
               <Link href="/services" className="primary-pill large">Explore Services <ArrowRight size={16} /></Link>
-              <Link href="/booking" className="primary-pill large">Get a free consultation</Link>
+              <Link href="/booking" className="secondary-pill large">Get a free consultation</Link>
             </div>
           </motion.div>
         </div>
