@@ -593,3 +593,34 @@
   .iv-cube { transform: rotateX(-11deg) rotateY(-24deg); }
   .iv-face.back, .iv-face.left, .iv-face.top, .iv-face.bottom { visibility: hidden; }
 }
+
+/* ---------- separation card marks ---------------------------------------------
+   Living details for the three "why a separate brand" cards on the About
+   page: a crosshair reticle that spins while the lock dot pulses, a gem
+   swaying under sparkles, and a gauge needle hunting for more speed. */
+.av-spin { transform-box: view-box; transform-origin: 12px 12px; animation: av-spin 8s linear infinite; }
+@keyframes av-spin { to { transform: rotate(360deg); } }
+.av-pulse { transform-box: fill-box; transform-origin: center; animation: av-pulse 1.8s ease-in-out infinite; }
+@keyframes av-pulse {
+  0%, 100% { transform: scale(.78); opacity: .7; }
+  50% { transform: scale(1); opacity: 1; }
+}
+.av-spark { transform-box: fill-box; transform-origin: center; animation: av-spark 1.5s ease-in-out infinite; }
+.av-spark.s2 { animation-delay: .75s; }
+@keyframes av-spark {
+  0%, 100% { transform: scale(.5); opacity: .35; }
+  50% { transform: scale(1); opacity: 1; }
+}
+.av-sway { transform-box: fill-box; transform-origin: top center; animation: av-sway 3.2s ease-in-out infinite; }
+@keyframes av-sway {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+.av-gauge { transform-box: view-box; transform-origin: 12px 17px; animation: av-gauge 2.6s cubic-bezier(.45, 0, .55, 1) infinite; }
+@keyframes av-gauge {
+  0%, 100% { transform: rotate(-46deg); }
+  50% { transform: rotate(42deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .av-spin, .av-pulse, .av-spark, .av-sway, .av-gauge { animation: none !important; }
+}

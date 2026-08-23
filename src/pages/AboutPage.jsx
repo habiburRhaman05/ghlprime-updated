@@ -7,14 +7,11 @@ import {
   ArrowRight,
   BadgeCheck,
   BrainCog,
-  Crosshair,
   Focus,
-  Gem,
   Handshake,
   Network,
   Orbit,
   Puzzle,
-  Rocket,
   Route,
   Server,
 } from 'lucide-react'
@@ -28,21 +25,75 @@ import '../components/pages-v2/pages-v2.css'
 import '../components/pages-v2/immersive.css'
 import '../components/pages-v2/about-v2.css'
 
+// Hand-drawn marks for the separation-reason cards, each with a living
+// detail: a crosshair whose reticle spins while the lock dot pulses, a gem
+// swaying under sparkles, and a gauge whose needle keeps hunting for more
+// speed. Loops are pure CSS (see immersive.css).
+function AvSvg({ size = 22, children }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {children}
+    </svg>
+  )
+}
+
+const IconFocusLock = ({ size }) => (
+  <AvSvg size={size}>
+    <g className="av-spin">
+      <circle cx="12" cy="12" r="7.6" strokeDasharray="3.1 2.5" />
+    </g>
+    <path d="M12 2.4v2.6M12 19v2.6M2.4 12H5M19 12h2.6" />
+    <circle className="av-pulse" cx="12" cy="12" r="1.9" fill="currentColor" stroke="none" />
+  </AvSvg>
+)
+
+const IconPremiumGem = ({ size }) => (
+  <AvSvg size={size}>
+    <g className="av-sway">
+      <path d="M7.2 4h9.6l3.6 5L12 20 3.6 9z" />
+      <path d="M3.6 9h16.8M7.2 4l2.4 5L12 20m2.4-11L16.8 4" opacity=".62" />
+    </g>
+    <path className="av-spark" d="M20.6 2.6l.44 1.2 1.2.44-1.2.44-.44 1.2-.44-1.2-1.2-.44 1.2-.44z" fill="currentColor" stroke="none" />
+    <circle className="av-spark s2" cx="2.9" cy="15.6" r=".85" fill="currentColor" stroke="none" />
+  </AvSvg>
+)
+
+const IconSpeedGauge = ({ size }) => (
+  <AvSvg size={size}>
+    <path d="M4 17a8 8 0 0 1 16 0" />
+    <g className="av-gauge">
+      <path d="M12 17V9.4" />
+      <circle cx="12" cy="9.4" r=".95" fill="currentColor" stroke="none" />
+    </g>
+    <circle className="av-pulse" cx="12" cy="17" r="1.55" fill="currentColor" stroke="none" />
+  </AvSvg>
+)
+
 const separationReasons = [
   {
-    icon: Crosshair,
+    icon: IconFocusLock,
     tone: 'ic-sky',
     title: 'Hyper-Focused Positioning',
     text: 'We wanted GHL Prime to feel specific, sharp, and fully centered around GoHighLevel systems, AI agents, and automation workflows.',
   },
   {
-    icon: Gem,
+    icon: IconPremiumGem,
     tone: 'ic-violet',
     title: 'A Premium Service Experience',
     text: 'The brand exists to present backend systems work with more clarity, stronger design, and a cleaner premium offer structure.',
   },
   {
-    icon: Rocket,
+    icon: IconSpeedGauge,
     tone: 'ic-amber',
     title: 'Built For Faster Innovation',
     text: 'Separating the brand created room to move faster with niche services, AI workflows, and highly specialized automation offers.',

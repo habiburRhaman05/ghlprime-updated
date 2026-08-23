@@ -283,36 +283,106 @@
 }
 
 /* Bento card marks, same family of living details. */
-.hv2-pluspop { transform-box: fill-box; transform-origin: center; animation: hv2-pluspop 1.8s cubic-bezier(.34, 1.56, .64, 1) infinite; }
-@keyframes hv2-pluspop {
-  0%, 100% { transform: scale(.72); opacity: .65; }
-  40% { transform: scale(1.12); opacity: 1; }
+.hv2-strike { transform-box: fill-box; transform-origin: center; animation: hv2-strike 1.9s cubic-bezier(.5, 0, .6, 1) infinite; }
+@keyframes hv2-strike {
+  0%, 14% { transform: translateY(0); }
+  7% { transform: translateY(1.5px); }
+  55%, 100% { transform: translateY(0); }
 }
-.hv2-dropblock { transform-box: fill-box; transform-origin: center; animation: hv2-dropblock 2s cubic-bezier(.3, .9, .4, 1) infinite; }
-@keyframes hv2-dropblock {
-  0% { transform: translateY(-2.6px); opacity: .3; }
-  30% { transform: translateY(0); opacity: 1; }
-  72%, 82% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-2.6px); opacity: .3; }
+.hv2-chime { opacity: 0; animation: hv2-chime 1.9s ease-out infinite; }
+.hv2-chime.c2 { animation-delay: .95s; }
+@keyframes hv2-chime {
+  0%, 12% { opacity: 0; }
+  22% { opacity: 1; }
+  48% { opacity: 0; }
+  100% { opacity: 0; }
 }
-.hv2-type { animation: hv2-type 1.2s ease-in-out infinite; }
-@keyframes hv2-type {
-  0%, 60%, 100% { transform: translateY(.4px); opacity: .55; }
-  30% { transform: translateY(-1.2px); opacity: 1; }
+.hv2-bobber { animation: hv2-bobber 3.4s ease-in-out infinite; }
+@keyframes hv2-bobber {
+  0%, 100% { transform: translateY(-.8px); }
+  50% { transform: translateY(.9px); }
 }
-.hv2-type.ty2 { animation-delay: .18s; }
-.hv2-type.ty3 { animation-delay: .36s; }
-.hv2-slowspin { transform-box: fill-box; transform-origin: center; animation: hv2-slowspin 9s linear infinite; }
-@keyframes hv2-slowspin { to { transform: rotate(360deg); } }
-.hv2-ringcore { transform-box: fill-box; transform-origin: center; animation: hv2-ringcore 1.8s ease-in-out infinite; }
+.hv2-flame { transform-box: fill-box; transform-origin: top; animation: hv2-flame .55s ease-in-out infinite alternate; }
+@keyframes hv2-flame {
+  from { transform: scaleY(.72) scaleX(.92); opacity: .85; }
+  to { transform: scaleY(1.12) scaleX(1.05); opacity: 1; }
+}
+.hv2-exhaust { animation: hv2-exhaust .9s ease-in-out infinite; }
+@keyframes hv2-exhaust {
+  0%, 100% { opacity: .15; transform: translateX(0); }
+  50% { opacity: .75; transform: translateX(.4px); }
+}
+.hv2-gear { transform-box: fill-box; transform-origin: center; }
+.hv2-gear.gA { animation: hv2-spin-cw 6s linear infinite; }
+.hv2-gear.gB { animation: hv2-spin-ccw 4.4s linear infinite; }
+@keyframes hv2-spin-cw { to { transform: rotate(360deg); } }
+@keyframes hv2-spin-ccw { to { transform: rotate(-360deg); } }
+.hv2-corepulse { transform-box: fill-box; transform-origin: center; animation: hv2-ringcore 1.8s ease-in-out infinite; }
 @keyframes hv2-ringcore {
   0%, 100% { transform: scale(.84); opacity: .75; }
   50% { transform: scale(1); opacity: 1; }
 }
+.hv2-orbit { transform-box: view-box; transform-origin: 12px 12px; }
+.hv2-orbit.o1 { animation: hv2-spin-cw 7s linear infinite; }
+.hv2-orbit.o2 { animation: hv2-spin-ccw 4.6s linear infinite; }
+.hv2-sweep { transform-box: view-box; transform-origin: 12px 12px; animation: hv2-spin-cw 4s linear infinite; }
 /* The route rider moves via SMIL animateMotion, which the global reduced-motion
    rule can't still -- hide it there instead. */
 @media (prefers-reduced-motion: reduce) {
   .hv2-traveldot { display: none; }
+}
+
+/* Capability panel marks: tool rocking while it works, bot blinking, an eye
+   that keeps losing its pupil (white-label invisibility), and a terminal
+   cursor. The runbook reuses the self-drawing check from the hero calendar;
+   the link pulse reuses the SMIL route rider above. */
+.hv2-rock { transform-box: fill-box; transform-origin: 18% 88%; animation: hv2-rock 2.1s ease-in-out infinite; }
+@keyframes hv2-rock {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(9deg); }
+}
+.hv2-eye { transform-box: fill-box; transform-origin: center; animation: hv2-blink 2.6s ease-in-out infinite; }
+@keyframes hv2-blink {
+  0%, 86%, 100% { transform: scaleY(1); }
+  92% { transform: scaleY(.12); }
+}
+.hv2-antenna { transform-box: fill-box; transform-origin: center; animation: hv2-antenna 1.4s ease-in-out infinite; }
+@keyframes hv2-antenna {
+  0%, 100% { opacity: .45; transform: scale(.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+.hv2-pupil { transform-box: fill-box; transform-origin: center; animation: hv2-pupil 2.8s ease-in-out infinite; }
+@keyframes hv2-pupil {
+  0%, 100% { opacity: .12; transform: scale(.55); }
+  55% { opacity: 1; transform: scale(1); }
+}
+.hv2-cursor { animation: hv2-cursor 1.1s steps(1, end) infinite; }
+@keyframes hv2-cursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: .15; }
+}
+
+/* Agent section proof points: the moon breathes under twinkling stars, an
+   arrow keeps landing in the bullseye, and a pencil writes a line that
+   redraws itself. */
+.hv2-moonglow { transform-box: fill-box; transform-origin: center; animation: hv2-moonglow 3.2s ease-in-out infinite; }
+@keyframes hv2-moonglow {
+  0%, 100% { transform: scale(.97); opacity: .88; }
+  50% { transform: scale(1.03); opacity: 1; }
+}
+.hv2-arrowhit { animation: hv2-arrowhit 2.2s cubic-bezier(.3, .7, .3, 1) infinite; }
+@keyframes hv2-arrowhit {
+  0% { transform: translate(2.6px, 2.6px); opacity: 0; }
+  30% { opacity: 1; }
+  55%, 72% { transform: translate(0, 0); opacity: 1; }
+  90%, 100% { transform: translate(.4px, .4px); opacity: 0; }
+}
+.hv2-writeline { stroke-dasharray: 100; stroke-dashoffset: 100; animation: hv2-trend 2.8s cubic-bezier(.45, 0, .3, 1) infinite; }
+.hv2-penrock { transform-box: fill-box; transform-origin: 80% 18%; animation: hv2-penrock 2.8s ease-in-out infinite; }
+@keyframes hv2-penrock {
+  0%, 12% { transform: rotate(-9deg); }
+  30%, 62% { transform: rotate(0deg); }
+  78%, 100% { transform: rotate(-9deg); }
 }
 .hv2-node-label { font-size: .9rem; font-weight: 600; color: var(--navy); }
 .hv2-node-sub { display: block; margin-top: .12rem; font-size: .74rem; color: var(--muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }

@@ -2,9 +2,69 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
-import { BrainCircuit, MoonStar, RefreshCcwDot, Target } from 'lucide-react'
+import { BrainCircuit } from 'lucide-react'
 import { Plane, Stage } from '../motion3d/Depth'
 import './home-v2.css'
+
+// The three proof-point marks are hand-drawn with living details: a moon
+// breathing under twinkling stars, an arrow that keeps landing in the
+// bullseye, and a pencil writing a line that redraws itself. All loops are
+// pure CSS and share keyframes with the other sections' marks.
+function PointSvg({ size = 19, children }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {children}
+    </svg>
+  )
+}
+
+function IconMoonStars({ size }) {
+  return (
+    <PointSvg size={size}>
+      <g className="hv2-moonglow">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z" />
+      </g>
+      <path className="hv2-tw" d="M18.2 2.6l.46 1.24 1.24.46-1.24.46-.46 1.24-.46-1.24-1.24-.46 1.24-.46z" fill="currentColor" stroke="none" />
+      <circle className="hv2-tw t2" cx="21.2" cy="8.9" r=".85" fill="currentColor" stroke="none" />
+    </PointSvg>
+  )
+}
+
+function IconTargetHit({ size }) {
+  return (
+    <PointSvg size={size}>
+      <circle cx="10.6" cy="13.4" r="8" />
+      <circle cx="10.6" cy="13.4" r="4.6" opacity=".85" />
+      <circle className="hv2-corepulse" cx="10.6" cy="13.4" r="1.7" fill="currentColor" stroke="none" />
+      <g className="hv2-arrowhit">
+        <path d="M21.2 2.8l-6.7 6.7M14.5 9.5l-.3-2.8M14.5 9.5l2.8.3" />
+      </g>
+    </PointSvg>
+  )
+}
+
+function IconCrmWrite({ size }) {
+  return (
+    <PointSvg size={size}>
+      <path d="M4 20.2h16" opacity=".8" />
+      <path className="hv2-writeline" pathLength="100" d="M4.4 15.8c2.7-2.2 5.4-2.2 8.1 0" />
+      <g className="hv2-penrock">
+        <path d="M14.1 12.4l4.5-4.5a1.77 1.77 0 0 1 2.5 2.5l-4.5 4.5-3.33.83z" />
+      </g>
+      <path className="hv2-tw t2" d="M20.6 16l.42 1.14.9.42-.9.42-.42 1.14-.42-1.14-.9-.42.9-.42z" fill="currentColor" stroke="none" />
+    </PointSvg>
+  )
+}
 
 // A real qualification exchange, played back message by message. This is the
 // section that has to *show* what an AI automation agency ships, so the
@@ -19,9 +79,9 @@ const SCRIPT = [
 ]
 
 const POINTS = [
-  { icon: MoonStar, tone: 'ic-indigo', title: 'Answers in seconds, at 3am', text: 'No queue, no missed enquiry, no lead going cold overnight while your team sleeps.' },
-  { icon: Target, tone: 'ic-amber', title: 'Qualifies before it books', text: 'Intent, budget, and timeline captured up front, so the calls that land are worth taking.' },
-  { icon: RefreshCcwDot, tone: 'ic-teal', title: 'Writes straight back to your CRM', text: 'Contact, notes, pipeline stage, and calendar entry all updated without anyone touching it.' },
+  { icon: IconMoonStars, tone: 'ic-indigo', title: 'Answers in seconds, at 3am', text: 'No queue, no missed enquiry, no lead going cold overnight while your team sleeps.' },
+  { icon: IconTargetHit, tone: 'ic-amber', title: 'Qualifies before it books', text: 'Intent, budget, and timeline captured up front, so the calls that land are worth taking.' },
+  { icon: IconCrmWrite, tone: 'ic-teal', title: 'Writes straight back to your CRM', text: 'Contact, notes, pipeline stage, and calendar entry all updated without anyone touching it.' },
 ]
 
 const REPLY_MS = 1150

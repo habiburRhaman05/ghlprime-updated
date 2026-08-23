@@ -4,11 +4,10 @@ import { motion } from 'framer-motion'
 import { DepthCard } from '../motion3d/Depth'
 import './home-v2.css'
 
-// The five card marks are drawn here so each can carry a living detail: an
-// expertise plus that pops, a block dropping onto a stack, a lead dot riding
-// the automation route, typing dots inside the AI chat bubble, and a lifebuoy
-// turning slowly. Loops are pure CSS except the route rider, which uses
-// SMIL motion and is hidden for reduced-motion users (see home-v2.css).
+// The five card marks are drawn here so each can carry a living scene: a
+// service bell being struck with chime ripples, a rocket bobbing on its
+// flickering flame, meshing gears, an orbiting neural system, and a clock
+// whose hand sweeps around the dial. Loops are pure CSS throughout.
 function PipeSvg({ size = 22, children }) {
   return (
     <svg
@@ -27,62 +26,80 @@ function PipeSvg({ size = 22, children }) {
   )
 }
 
-function IconExpertPlus({ size }) {
+function IconBellStrike({ size }) {
   return (
     <PipeSvg size={size}>
-      <circle cx="9.5" cy="8" r="3.4" />
-      <path d="M3.2 20c0-3.6 2.8-5.7 6.3-5.7 1.6 0 3 .44 4.1 1.24" />
-      <path className="hv2-pluspop" d="M18.2 12.6v5.2M15.6 15.2h5.2" strokeWidth="2" />
+      <rect x="4.2" y="17.7" width="15.6" height="2.5" rx="1.25" />
+      <path d="M6.3 17.7v-1c0-3.8 2.55-6.3 5.7-6.3s5.7 2.5 5.7 6.3v1" />
+      <g className="hv2-strike">
+        <circle cx="12" cy="8.3" r="1.3" fill="currentColor" stroke="none" />
+      </g>
+      <path className="hv2-chime c1" d="M17.6 6.4a6.6 6.6 0 0 1 2.5 3.3" />
+      <path className="hv2-chime c2" d="M6.4 6.4a6.6 6.6 0 0 0-2.5 3.3" />
     </PipeSvg>
   )
 }
 
-function IconBlocksStack({ size }) {
+function IconRocketLaunch({ size }) {
   return (
     <PipeSvg size={size}>
-      <path d="M3.5 16.4v3.1M20.5 16.4v3.1" opacity=".7" />
-      <rect x="5.6" y="13.4" width="12.8" height="3.6" rx="1.1" opacity=".85" />
-      <g className="hv2-dropblock">
-        <rect x="7.9" y="8.2" width="8.2" height="3.6" rx="1.1" />
-        <path d="M12 2.9l.52 1.42L14 4.84l-1.48.52L12 6.78l-.52-1.42L10 4.84l1.48-.52z" fill="currentColor" stroke="none" />
+      <path className="hv2-tw t2" d="M4.6 4.2l.42 1.14.9.42-.9.42-.42 1.14-.42-1.14-.9-.42.9-.42z" fill="currentColor" stroke="none" />
+      <g className="hv2-bobber">
+        <path d="M12 2.4c2.9 1.75 4.4 4.5 4.4 7.8 0 1.44-.26 2.8-.76 4.06H8.36a10.3 10.3 0 0 1-.76-4.06c0-3.3 1.5-6.05 4.4-7.8z" />
+        <circle cx="12" cy="9.3" r="1.55" />
+        <path d="M8.36 13.1l-2.5 2.9c.44.86 1.32 1.46 2.4 1.62M15.64 13.1l2.5 2.9c-.44.86-1.32 1.46-2.4 1.62" />
+        <g className="hv2-flame">
+          <path d="M12 17.6c1.15.55 1.85 1.5 1.85 2.6 0 .72-.34 1.4-.94 1.9L12 22.8l-.91-.7c-.6-.5-.94-1.18-.94-1.9 0-1.1.7-2.05 1.85-2.6z" fill="currentColor" stroke="none" />
+        </g>
+        <path className="hv2-exhaust e1" d="M8.9 19.2h-2.2M15.1 19.2h2.2" opacity=".7" />
       </g>
     </PipeSvg>
   )
 }
 
-function IconRouteRider({ size }) {
+function IconGearsMesh({ size }) {
   return (
     <PipeSvg size={size}>
-      <path d="M4.5 19.5C12.5 19.5 11.5 4.5 19.5 4.5" opacity=".9" />
-      <circle cx="4.5" cy="19.5" r="1.9" />
-      <rect x="17.7" y="2.7" width="3.6" height="3.6" rx=".95" />
-      <circle className="hv2-traveldot" r="1.45" fill="currentColor" stroke="none">
-        <animateMotion dur="2.2s" repeatCount="indefinite" path="M4.5 19.5C12.5 19.5 11.5 4.5 19.5 4.5" />
-      </circle>
-    </PipeSvg>
-  )
-}
-
-function IconBotChat({ size }) {
-  return (
-    <PipeSvg size={size}>
-      <path d="M21 14.2a2 2 0 0 1-2 2H8.4L3.6 20.4V5.6A2 2 0 0 1 5.6 3.6H19a2 2 0 0 1 2 2z" />
-      <path d="M6.1 1.9v1.7M18.5 1.9v1.7" opacity=".65" />
-      <circle className="hv2-type ty1" cx="8.7" cy="9.9" r="1.15" fill="currentColor" stroke="none" />
-      <circle className="hv2-type ty2" cx="12" cy="9.9" r="1.15" fill="currentColor" stroke="none" />
-      <circle className="hv2-type ty3" cx="15.3" cy="9.9" r="1.15" fill="currentColor" stroke="none" />
-    </PipeSvg>
-  )
-}
-
-function IconLifeRing({ size }) {
-  return (
-    <PipeSvg size={size}>
-      <g className="hv2-slowspin">
-        <circle cx="12" cy="12" r="8.6" />
-        <path d="M6.05 6.05l3.5 3.5M17.95 6.05l-3.5 3.5M17.95 17.95l-3.5-3.5M6.05 17.95l3.5-3.5" />
+      <g className="hv2-gear gA">
+        <circle cx="8.7" cy="14.9" r="4.15" strokeWidth="2.7" strokeDasharray="2.08 2.02" />
+        <circle cx="8.7" cy="14.9" r="4.15" />
+        <circle cx="8.7" cy="14.9" r="1.35" fill="currentColor" stroke="none" />
       </g>
-      <circle className="hv2-ringcore" cx="12" cy="12" r="4.3" />
+      <g className="hv2-gear gB">
+        <circle cx="16.9" cy="7.2" r="2.95" strokeWidth="2.3" strokeDasharray="1.85 1.78" />
+        <circle cx="16.9" cy="7.2" r="2.95" />
+        <circle cx="16.9" cy="7.2" r="1.05" fill="currentColor" stroke="none" />
+      </g>
+    </PipeSvg>
+  )
+}
+
+function IconNeuralOrbit({ size }) {
+  return (
+    <PipeSvg size={size}>
+      <circle className="hv2-corepulse" cx="12" cy="12" r="2.15" fill="currentColor" stroke="none" />
+      <g className="hv2-orbit o1">
+        <path d="M12 12L12 3.6" opacity=".6" />
+        <circle cx="12" cy="3.6" r="1.3" />
+      </g>
+      <g className="hv2-orbit o2">
+        <path d="M12 12L18.2 15.4" opacity=".6" />
+        <circle cx="18.2" cy="15.4" r="1.05" />
+      </g>
+    </PipeSvg>
+  )
+}
+
+function IconClockSweep({ size }) {
+  return (
+    <PipeSvg size={size}>
+      <circle cx="12" cy="12" r="8.7" />
+      <path d="M12 3.3v1.9M12 18.8v1.9M3.3 12h1.9M18.8 12h1.9" opacity=".7" />
+      <g className="hv2-sweep">
+        <path d="M12 12V6.4" />
+        <circle cx="12" cy="6.4" r="1" fill="currentColor" stroke="none" />
+      </g>
+      <circle className="hv2-ringcore" cx="12" cy="12" r="1.3" fill="currentColor" stroke="none" />
     </PipeSvg>
   )
 }
@@ -90,35 +107,35 @@ function IconLifeRing({ size }) {
 // Content carried over from the previous "What We Handle For You" section.
 const CARDS = [
   {
-    icon: IconExpertPlus,
+    icon: IconBellStrike,
     tone: 'ic-sky',
     tag: 'On demand',
     title: 'No GHL expert on your team',
     text: 'Stop paying for a full-time hire you barely need. Tap certified GHL specialists on demand for builds, fixes, strategy, or anything in between.',
   },
   {
-    icon: IconBlocksStack,
+    icon: IconRocketLaunch,
     tone: 'ic-violet',
     tag: 'White-label',
     title: "Can't launch your SaaS fast enough",
     text: 'We set up your fully white-labeled CRM from scratch: branded, configured, and client-ready. You own the product. We do the build.',
   },
   {
-    icon: IconRouteRider,
+    icon: IconGearsMesh,
     tone: 'ic-amber',
     tag: 'Automation',
     title: 'Broken or half-built automations',
     text: 'Leaking leads, missed follow-ups, workflows that randomly break. We build, audit, and fix automations end-to-end, so every lead is handled perfectly.',
   },
   {
-    icon: IconBotChat,
+    icon: IconNeuralOrbit,
     tone: 'ic-indigo',
     tag: 'AI agents',
     title: 'AI agents that actually work for your agency',
     text: "We design, build, and deploy AI agents tailored to your agency's workflow. Qualify leads, handle inquiries, run AI call centers, and book meetings 24/7, without you touching a thing.",
   },
   {
-    icon: IconLifeRing,
+    icon: IconClockSweep,
     tone: 'ic-teal',
     tag: '24/7',
     title: 'No support = clients leave your platform',
