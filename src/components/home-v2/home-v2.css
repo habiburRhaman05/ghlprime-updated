@@ -622,31 +622,23 @@
 
 .hv2-experts {
   display: grid; grid-template-columns: repeat(5, 1fr); gap: .9rem;
-  margin-top: clamp(2rem, 3.5vw, 3rem); perspective: 1000px;
+  margin-top: clamp(2rem, 3.5vw, 3rem);
 }
-/* Two-faced card. The parent carries the perspective; the flipper carries
-   preserve-3d, and each face hides its own back so only one shows at a time. */
-.hv2-expert { text-align: center; }
-.hv2-expert-flip {
-  position: relative; display: block; aspect-ratio: 1;
-  transform-style: preserve-3d; will-change: transform;
-  transition: transform .8s cubic-bezier(.34, 1.2, .3, 1);
-}
-.hv2-expert:hover .hv2-expert-flip, .hv2-expert:focus-within .hv2-expert-flip { transform: rotateY(180deg); }
-.hv2-expert-face {
-  position: absolute; inset: 0; border-radius: 16px; overflow: hidden;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+/* Static portraits -- photo on top, name and role underneath. A gentle zoom
+   on hover stands in for the old two-faced card flip. */
+.hv2-expert-static { text-align: center; }
+.hv2-expert-static .hv2-expert-photo {
+  display: block; position: relative; aspect-ratio: 3 / 4;
+  border-radius: 16px; overflow: hidden;
   border: 1px solid var(--line); background: #e8eff8;
 }
-.hv2-expert-face img { width: 100%; height: 100%; object-fit: cover; }
-.hv2-expert-face.back {
-  transform: rotateY(180deg);
-  display: grid; align-content: center; gap: .25rem; padding: .7rem;
-  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
-  border-color: transparent; color: #fff;
+.hv2-expert-static .hv2-expert-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 22%;
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1);
 }
-.hv2-expert-face.back strong { font-size: .9rem; font-weight: 700; line-height: 1.25; }
-.hv2-expert-face.back span { font-size: .74rem; opacity: .88; line-height: 1.3; }
+.hv2-expert:hover .hv2-expert-photo img { transform: scale(1.05); }
+.hv2-expert-name { display: block; margin-top: .55rem; font-size: .88rem; font-weight: 700; color: var(--navy); line-height: 1.3; }
+.hv2-expert-role { display: block; margin-top: .1rem; font-size: .76rem; color: var(--body); line-height: 1.35; }
 
 .hv2-certs { margin-top: clamp(2.5rem, 4vw, 3.5rem); text-align: center; }
 .hv2-certs-label { margin: 0 0 .8rem; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
@@ -808,6 +800,5 @@
     .hv2-who-collage,
   .hv2-who-shot,
   .hv2-stack-row,
-  .hv2-expert-flip,
   .m3d-float { transform: none !important; }
 }

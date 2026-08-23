@@ -399,7 +399,7 @@ export default function AboutPage() {
           <div className="pv2-experts">
             {experts.map((member, index) => (
               <motion.div
-                className="pv2-expert"
+                className="pv2-expert iv-expert-static"
                 key={member.id || member.name}
                 initial={{ opacity: 0, rotateX: -34, y: 22 }}
                 whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
@@ -407,14 +407,8 @@ export default function AboutPage() {
                 style={{ transformOrigin: 'top center', transformPerspective: 1000 }}
                 transition={{ ...SPRING, delay: (index % 5) * 0.07 }}
               >
-                <span className="pv2-flip">
-                  <span className="pv2-face front">
-                    <img src={member.image_url} alt={member.name} loading="lazy" decoding="async" />
-                  </span>
-                  <span className="pv2-face back">
-                    <strong>{member.name}</strong>
-                    <span>{member.title}</span>
-                  </span>
+                <span className="iv-expert-photo">
+                  <img src={member.image_url} alt={member.name} loading="lazy" decoding="async" />
                 </span>
                 <span className="pv2-expert-name">{member.name}</span>
                 <span className="pv2-expert-role">{member.title}</span>

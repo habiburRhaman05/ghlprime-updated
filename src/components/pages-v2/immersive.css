@@ -513,6 +513,27 @@
 }
 .pv2-expert:hover .pv2-face.front::after { left: 130%; }
 
+/* static portraits (no flip) -- team page */
+.iv-expert-static { text-align: center; }
+.iv-expert-static .iv-expert-photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #e8eff8;
+}
+.iv-expert-static .iv-expert-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pv2-expert:hover .iv-expert-photo img { transform: scale(1.05); }
+.iv-expert-static .skills-badges { margin-top: 0.45rem; justify-content: center; }
+
 /* ---------- CTA aurora ------------------------------------------------------ */
 .iv-aurora {
   position: absolute;

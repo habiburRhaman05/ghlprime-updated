@@ -105,28 +105,22 @@ export default function TeamV2() {
 
         {experts.length ? (
           <div className="hv2-experts">
-            {experts.map((member, i) => (
-              <motion.div
-                className="hv2-expert"
-                key={member.id || member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: (i % 5) * 0.05 }}
-              >
-                {/* Two-faced card: photo on the front, the name and role
-                    reversed out of the brand gradient on the back. */}
-                <span className="hv2-expert-flip">
-                  <span className="hv2-expert-face front">
+              {experts.map((member, i) => (
+                <motion.div
+                  className="hv2-expert hv2-expert-static"
+                  key={member.id || member.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: (i % 5) * 0.05 }}
+                >
+                  <span className="hv2-expert-photo">
                     <img src={member.image_url} alt={member.name} loading="lazy" decoding="async" />
                   </span>
-                  <span className="hv2-expert-face back">
-                    <strong>{member.name}</strong>
-                    <span>{member.title}</span>
-                  </span>
-                </span>
-              </motion.div>
-            ))}
+                  <strong className="hv2-expert-name">{member.name}</strong>
+                  <span className="hv2-expert-role">{member.title}</span>
+                </motion.div>
+              ))}
           </div>
         ) : null}
 

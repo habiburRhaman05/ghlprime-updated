@@ -323,31 +323,25 @@ export default function TeamPage() {
           </motion.div>
 
           <div className="pv2-experts">
-            {experts.map((member, index) => (
-              <motion.div
-                className="pv2-expert"
-                key={member.id || member.name}
-                initial={{ opacity: 0, rotateX: -34, y: 22 }}
-                whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                style={{ transformOrigin: 'top center', transformPerspective: 1000 }}
-                transition={{ ...SPRING, delay: (index % 5) * 0.07 }}
-              >
-                <span className="pv2-flip">
-                  <span className="pv2-face front">
+              {experts.map((member, index) => (
+                <motion.div
+                  className="pv2-expert iv-expert-static"
+                  key={member.id || member.name}
+                  initial={{ opacity: 0, rotateX: -34, y: 22 }}
+                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  style={{ transformOrigin: 'top center', transformPerspective: 1000 }}
+                  transition={{ ...SPRING, delay: (index % 5) * 0.07 }}
+                >
+                  <span className="iv-expert-photo">
                     <img src={member.image_url} alt={member.name} loading="lazy" decoding="async" />
                     {index < 5 ? <CertifiedAdminOverlay /> : null}
                   </span>
-                  <span className="pv2-face back">
-                    <strong>{member.name}</strong>
-                    <span>{member.title}</span>
-                    <SkillsBadges personIndex={index} />
-                  </span>
-                </span>
-                <span className="pv2-expert-name">{member.name}</span>
-                <span className="pv2-expert-role">{member.title}</span>
-              </motion.div>
-            ))}
+                  <span className="pv2-expert-name">{member.name}</span>
+                  <span className="pv2-expert-role">{member.title}</span>
+                  <SkillsBadges personIndex={index} />
+                </motion.div>
+              ))}
           </div>
         </div>
       </section>
