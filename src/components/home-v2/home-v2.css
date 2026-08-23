@@ -126,8 +126,8 @@
 .hv2-hero h1 .high { color: #1895ff; }
 .hv2-hero h1 .level { color: #0f8f43; }
 .hv2-lede { margin: 1.5rem 0 0; max-width: 34rem; font-size: clamp(1rem, 1.3vw, 1.12rem); line-height: 1.72; color: var(--body); }
-/* Every CTA in this page uses the global .primary-pill -- there is no
-   secondary button style here on purpose. */
+/* CTAs on this page use the global .primary-pill; the hero's secondary
+   "See What We Do" action uses the global .secondary-pill. */
 .hv2-hero-cta { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.1rem; align-items: center; }
 
 .hv2-hero-trust { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2.4rem; }
@@ -328,7 +328,7 @@
 /* One family rather than three unrelated hues: brand blue, then a violet
    and a teal at the same depth, so the row reads as a set. */
 .hv2-who-icon.blue { background: linear-gradient(140deg, #38a4ff, #0a5fae); }
-.hv2-who-icon.violet { background: linear-gradient(140deg, #8b74ff, #4c31c9); }
+.hv2-who-icon.gold { background: linear-gradient(140deg, #f7ba3e, #c07a10); }
 .hv2-who-icon.teal { background: linear-gradient(140deg, #23c1bd, #0b7a77); }
 .hv2-who-card h3 { margin: 0 0 .15rem; font-size: 1rem; font-weight: 700; color: var(--navy); }
 .hv2-who-card p { margin: 0; font-size: .9rem; color: var(--body); line-height: 1.5; }

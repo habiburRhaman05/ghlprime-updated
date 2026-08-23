@@ -1,13 +1,28 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ArrowRight, Bot, CheckCircle2, LayoutGrid, ShieldCheck, Sparkles, Workflow } from 'lucide-react'
+import { motion, useMotionTemplate, useScroll, useTransform } from 'framer-motion'
+import {
+  ArrowRight,
+  Bot,
+  CheckCircle2,
+  Layers,
+  LayoutGrid,
+  ShieldCheck,
+  Sparkles,
+  Workflow,
+  Zap,
+} from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { ABOUT_FAQS } from '../data/faqs'
 import { fetchTeamPageExperts } from '../lib/teamApi'
+import Tilt from '../components/motion3d/Tilt'
+import ScrollProgress from '../components/motion3d/ScrollProgress'
+import { DepthScene, Layer } from '../components/motion3d/DepthScene'
+import '../components/pages-v2/pages-v2.css'
+import '../components/pages-v2/immersive.css'
 
 const separationReasons = [
   {
@@ -62,6 +77,125 @@ const beliefs = [
   },
 ]
 
+const trustParagraphs = [
+  'GHL Prime is built on a simple premise: agencies should not have to choose between technical depth and business growth. Most agency owners are strong at sales, client relationships, and strategy but the backend of a GoHighLevel operation is a full-time job on its own. CRM configuration, automation logic, AI agent deployment, client support, and custom development all require specialized expertise that is expensive to hire in-house and unreliable to source from freelancers.',
+  'GHL Prime was founded to solve exactly that. We are a GHL-only team we do not generalize across platforms or dilute our expertise across fifty different tools. Every specialist on our team works exclusively in the GoHighLevel ecosystem, which means we build faster, troubleshoot better, and deliver results that a generalist freelancer simply cannot match.',
+  'Our Certified Admin badge is the highest-level GoHighLevel certification available. Combined with our 10 specialty certifications including HIPAA Compliance, A2P, AI Employee, and SaaS Mode we carry the formal credentials to back every claim we make about our capabilities.',
+  'We operate fully white-labeled, which means your clients never know we exist. Your agency is the front door. We are the engine room. That is how it is supposed to work.',
+]
+
+const SPRING = { type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }
+
+const heroStack = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } } }
+const heroLine = {
+  hidden: { opacity: 0, rotateX: -50, y: 22 },
+  show: { opacity: 1, rotateX: 0, y: 0, transition: SPRING },
+}
+const heroLineProps = { variants: heroLine, style: { transformOrigin: 'top center', transformPerspective: 1000 } }
+
+const orbitTiles = [
+  { icon: Bot, pos: 'pos-0', depth: 1.4, delay: 0.15 },
+  { icon: Workflow, pos: 'pos-1', depth: -0.7, delay: 0.3 },
+  { icon: Sparkles, pos: 'pos-2', depth: 1.8, delay: 0.45 },
+  { icon: ShieldCheck, pos: 'pos-3', depth: -1.1, delay: 0.6 },
+  { icon: Zap, pos: 'pos-4', depth: 1.1, delay: 0.75 },
+  { icon: Layers, pos: 'pos-5', depth: -1.5, delay: 0.9 },
+]
+
+function OrbitConstellation() {
+  return (
+    <DepthScene className="iv-orbit" strength={26}>
+      <Layer depth={-0.5} className="iv-ring-slot">
+        <span className="iv-spin r-a" />
+      </Layer>
+      <Layer depth={-1} className="iv-ring-slot">
+        <span className="iv-spin r-b" />
+      </Layer>
+      <Layer depth={0.6} className="iv-core-wrap">
+        <motion.div
+          className="iv-core"
+          initial={{ opacity: 0, scale: 0.55, rotateX: -40 }}
+          animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+          transition={{ ...SPRING, delay: 0.1 }}
+        >
+          GHL
+        </motion.div>
+      </Layer>
+      {orbitTiles.map(({ icon: Icon, pos, depth, delay }) => (
+        <Layer key={pos} depth={depth} className={`iv-tile ${pos}`}>
+          <motion.span
+            className="iv-tile-inner"
+            initial={{ opacity: 0, scale: 0.4, y: 18 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ ...SPRING, delay }}
+          >
+            <Icon size={19} />
+          </motion.span>
+        </Layer>
+      ))}
+    </DepthScene>
+  )
+}
+
+function StackCard({ item, index, total, progress }) {
+  const from = Math.min(0.25 + index * 0.35, 0.95)
+  const to = Math.min(from + 0.4, 1)
+  const settled = index === total - 1
+  const scale = useTransform(progress, [from, to], [1, settled ? 1 : 0.93])
+  const dim = useTransform(progress, [from, to], [1, settled ? 1 : 0.72])
+  const filter = useMotionTemplate`brightness(${dim})`
+  const { icon: Icon, title, text } = item
+
+  return (
+    <motion.article
+      className="iv-stack-card"
+      style={{ '--i': index, scale, filter }}
+      initial={{ opacity: 0, rotateX: -26, y: 46 }}
+      whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ ...SPRING }}
+    >
+      <span className="iv-stack-num">{String(index + 1).padStart(2, '0')}</span>
+      <div className="iv-stack-body">
+        <span className="iv-stack-icon"><Icon size={20} /></span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </div>
+    </motion.article>
+  )
+}
+
+function StackDeck({ items }) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+
+  return (
+    <div className="iv-stack" ref={ref}>
+      {items.map((item, i) => (
+        <StackCard key={item.title} item={item} index={i} total={items.length} progress={scrollYProgress} />
+      ))}
+    </div>
+  )
+}
+
+function RevealProse({ paragraphs, dropCap = false }) {
+  return (
+    <div className={`pv2-prose${dropCap ? ' iv-dropcap' : ''}`}>
+      {paragraphs.map((text, i) => (
+        <motion.p
+          key={i}
+          initial={{ opacity: 0, y: 22, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.65, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {text}
+        </motion.p>
+      ))}
+    </div>
+  )
+}
+
 export default function AboutPage() {
   const [experts, setExperts] = useState([])
 
@@ -69,8 +203,13 @@ export default function AboutPage() {
     fetchTeamPageExperts().then(setExperts)
   }, [])
 
+  const { scrollYProgress } = useScroll()
+  const heroY = useTransform(scrollYProgress, [0, 0.16], [0, -70])
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.13], [1, 0])
+
   return (
-    <main className="about-page about-redesign-page">
+    <main className="about-page pv2">
+      <ScrollProgress />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
@@ -95,193 +234,241 @@ export default function AboutPage() {
           about: { '@id': 'https://ghlprime.com/#organization' },
           datePublished: '2024-08-01',
           dateModified: '2026-05-24',
-          speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.about-redesign-hero-copy p', '.faq-question', '.faq-answer'] },
+          speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '.pv2-lede', '.faq2-q-text', '.faq2-a'] },
         }) }} />
-      <section className="about-redesign-hero">
-        <div className="container about-redesign-hero-inner">
+
+      {/* ---------------------------------------------------------------- hero */}
+      <section className="pv2-section is-tint pv2-hero">
+        <span className="pv2-grid-bg" aria-hidden="true" />
+        <span className="pv2-bloom one" aria-hidden="true" />
+        <span className="pv2-bloom two" aria-hidden="true" />
+        <motion.div className="pv2-inner pv2-hero-grid" style={{ y: heroY, opacity: heroOpacity }}>
           <motion.div
-            className="about-redesign-hero-copy"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
+            className="pv2-head"
+            variants={heroStack}
+            initial="hidden"
+            animate="show"
+            style={{ marginBottom: 0 }}
           >
-            <span className="eyebrow-label light-eyebrow">About Us</span>
-            <h1>Built For One Thing: GoHighLevel Growth Systems</h1>
-            <p>
+            <motion.span className="pv2-eyebrow" {...heroLineProps}>About Us</motion.span>
+            <motion.h1 {...heroLineProps}>Built For One Thing: GoHighLevel Growth Systems</motion.h1>
+            <motion.p className="pv2-lede" variants={heroLine}>
               GHL Prime exists to help businesses build better CRM structure, smarter automation, stronger follow-up,
               and a more premium backend growth system powered by GoHighLevel.
-            </p>
-            <div className="about-redesign-hero-actions">
+            </motion.p>
+            <motion.div className="pv2-actions" variants={heroLine}>
               <Link href="/services" className="primary-pill large">Explore Services</Link>
-              <Link href="/booking" className="secondary-pill about-secondary-pill">Get a free consultation</Link>
-            </div>
+              <Link href="/booking" className="secondary-pill large">Get a free consultation</Link>
+            </motion.div>
           </motion.div>
-        </div>
+
+          <OrbitConstellation />
+        </motion.div>
       </section>
 
-      <section className="section section-white">
-        <div className="container">
-          <div className="section-title centered">
-            <span className="eyebrow-label">Why We Created A Separate Brand</span>
-            <h2>Focused. Clear. Built for a specific kind of client need.</h2>
-            <p>GHL Prime was created as a distinct brand so the service offering could feel sharper, more intentional, and more specialized.</p>
-          </div>
-          <div className="about-redesign-card-grid three-col">
-            {separationReasons.map(({ icon: Icon, title, text }, index) => (
-              <motion.article
-                key={title}
-                className="about-redesign-card"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -8 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.05 }}
-              >
-                <div className="about-redesign-icon"><Icon size={18} /></div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section about-octopi-section">
-        <div className="container about-octopi-grid">
+      {/* ------------------------------------------- why a separate brand */}
+      <section className="pv2-section is-white">
+        <div className="pv2-inner">
           <motion.div
-            className="about-octopi-copy"
-            initial={{ opacity: 0, y: 24 }}
+            className="pv2-head centered"
+            initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={SPRING}
           >
-            <span className="eyebrow-label">Powered By A Stronger Ecosystem</span>
-            <h2>Backed by Octopi Digital a broader digital growth and technology company.</h2>
-            <p>
-              While GHL Prime focuses specifically on GoHighLevel, AI, and automation, it is supported by the broader execution strength of Octopi Digital.
-              That means more operational support, more implementation depth, and a stronger environment for delivering real systems work.
-            </p>
-            <div className="about-octopi-checklist">
-              {octopiChecklist.map((item) => (
-                <div key={item} className="about-octopi-check-item">
-                  <CheckCircle2 size={16} />
+            <span className="pv2-eyebrow">Why We Created A Separate Brand</span>
+            <h2>Focused. Clear. Built for a <span className="pv2-hl">specific kind of client need.</span></h2>
+            <p>GHL Prime was created as a distinct brand so the service offering could feel sharper, more intentional, and more specialized.</p>
+          </motion.div>
+
+          <StackDeck items={separationReasons} />
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- octopi */}
+      <section className="pv2-section is-dark is-tint-dark">
+        <span className="pv2-grid-bg" aria-hidden="true" />
+        <span className="pv2-bloom one" aria-hidden="true" />
+        <span className="pv2-bloom two" aria-hidden="true" />
+        <div className="pv2-inner pv2-split">
+          <motion.div
+            initial={{ opacity: 0, x: -28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={SPRING}
+          >
+            <div className="pv2-head" style={{ marginBottom: 0 }}>
+              <span className="pv2-eyebrow">Powered By A Stronger Ecosystem</span>
+              <h2>Backed by Octopi Digital a broader <span className="pv2-hl">digital growth and technology company.</span></h2>
+              <p>
+                While GHL Prime focuses specifically on GoHighLevel, AI, and automation, it is supported by the broader execution strength of Octopi Digital.
+                That means more operational support, more implementation depth, and a stronger environment for delivering real systems work.
+              </p>
+            </div>
+
+            <div className="pv2-checklist">
+              {octopiChecklist.map((item, i) => (
+                <motion.div
+                  className="pv2-check"
+                  key={item}
+                  initial={{ opacity: 0, rotateX: -50, y: 14 }}
+                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  style={{ transformOrigin: 'left center', transformPerspective: 800 }}
+                  transition={{ ...SPRING, delay: i * 0.07 }}
+                >
+                  <span className="pv2-check-icon"><CheckCircle2 size={15} /></span>
                   <span>{item}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
 
           <motion.div
-            className="about-octopi-visual"
-            initial={{ opacity: 0, y: 24, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, rotateY: 24, x: 34 }}
+            whileInView={{ opacity: 1, rotateY: 0, x: 0 }}
             viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55, delay: 0.06 }}
+            style={{ transformOrigin: 'right center', transformPerspective: 1300 }}
+            transition={SPRING}
           >
-            <div className="about-octopi-visual-card">
-              <img src="https://octopi-digital.com/_next/image?url=%2Foctopi-logo.png&w=256&q=75" alt="Octopi Digital" className="about-octopi-logo" />
-              <strong>Octopi Digital</strong>
-              <p>Growth systems, execution support, and a stronger operational foundation behind GHL Prime.</p>
+            <div className="iv-halo">
+              <div className="m3d-float">
+                <Tilt className="pv2-logo-card" max={7}>
+                  <img src="https://octopi-digital.com/_next/image?url=%2Foctopi-logo.png&w=256&q=75" alt="Octopi Digital" />
+                  <strong>Octopi Digital</strong>
+                  <p>Growth systems, execution support, and a stronger operational foundation behind GHL Prime.</p>
+                </Tilt>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="section section-white">
-        <div className="container">
-          <div className="section-title centered">
-            <span className="eyebrow-label">What We Believe</span>
-            <h2>The principles behind how we build.</h2>
-            <p>These ideas shape the way GHL Prime approaches systems, automation, design quality, and client delivery.</p>
-          </div>
-          <div className="about-redesign-card-grid five-col">
-            {beliefs.map(({ icon: Icon, title, text }, index) => (
-              <motion.article
-                key={title}
-                className="about-redesign-card compact"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -8 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.04 }}
-              >
-                <div className="about-redesign-icon"><Icon size={18} /></div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-white experts-section about-experts-section">
-        <div className="container">
-          <div className="section-title centered experts-section-title">
-            <span className="eyebrow-label">Our Experts</span>
-            <h2>The team supporting delivery behind the scenes.</h2>
-            <p>Certified GoHighLevel specialists, automation engineers, and support leads who deliver the builds behind our client work.</p>
-          </div>
-
-          <div className="experts-grid">
-            {experts.map((member, index) => (
-              <motion.article
-                key={member.id || member.name}
-                className="expert-card"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -8 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.05 }}
-              >
-                <div className="expert-card-image-wrap">
-                  <img src={member.image_url} alt={member.name} className="expert-card-image" />
-                </div>
-                <div className="expert-card-body">
-                  <h3>{member.name}</h3>
-                  <p>{member.title}</p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section about-final-cta-section">
-        <div className="container">
+      {/* --------------------------------------------------------- beliefs */}
+      <section className="pv2-section is-white">
+        <div className="pv2-inner">
           <motion.div
-            className="final-cta-card premium-final-cta"
+            className="pv2-head centered"
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={SPRING}
+          >
+            <span className="pv2-eyebrow">What We Believe</span>
+            <h2>The principles behind <span className="pv2-hl">how we build.</span></h2>
+            <p>These ideas shape the way GHL Prime approaches systems, automation, design quality, and client delivery.</p>
+          </motion.div>
+
+          <div className="iv-timeline">
+            {beliefs.map(({ icon: Icon, title, text }, index) => (
+              <motion.div
+                key={title}
+                className={`iv-trow ${index % 2 ? 'from-right' : 'from-left'}`}
+                initial={{ opacity: 0, x: index % 2 ? 48 : -48, rotateY: index % 2 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+                viewport={{ once: true, amount: 0.45 }}
+                transition={{ ...SPRING, delay: 0.04 * (index % 3) }}
+              >
+                <article className="iv-tcard">
+                  <span className="iv-tstep">{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+                <span className="iv-node"><Icon size={16} /></span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --------------------------------------------------------- experts */}
+      <section className="pv2-section is-paper">
+        <div className="pv2-inner">
+          <motion.div
+            className="pv2-head centered"
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={SPRING}
+          >
+            <span className="pv2-eyebrow">Our Experts</span>
+            <h2>The team supporting <span className="pv2-hl">delivery behind the scenes.</span></h2>
+            <p>Certified GoHighLevel specialists, automation engineers, and support leads who deliver the builds behind our client work.</p>
+          </motion.div>
+
+          <div className="pv2-experts">
+            {experts.map((member, index) => (
+              <motion.div
+                className="pv2-expert"
+                key={member.id || member.name}
+                initial={{ opacity: 0, rotateX: -34, y: 22 }}
+                whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                style={{ transformOrigin: 'top center', transformPerspective: 1000 }}
+                transition={{ ...SPRING, delay: (index % 5) * 0.07 }}
+              >
+                <span className="pv2-flip">
+                  <span className="pv2-face front">
+                    <img src={member.image_url} alt={member.name} loading="lazy" decoding="async" />
+                  </span>
+                  <span className="pv2-face back">
+                    <strong>{member.name}</strong>
+                    <span>{member.title}</span>
+                  </span>
+                </span>
+                <span className="pv2-expert-name">{member.name}</span>
+                <span className="pv2-expert-role">{member.title}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- cta */}
+      <section className="pv2-section is-tint">
+        <div className="pv2-inner">
+          <motion.div
+            className="pv2-cta"
+            initial={{ opacity: 0, rotateX: 24, y: 30 }}
+            whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            style={{ transformOrigin: 'bottom center', transformPerspective: 1200 }}
+            transition={SPRING}
+          >
+            <span className="iv-aurora a1" aria-hidden="true" />
+            <span className="iv-aurora a2" aria-hidden="true" />
+            <span className="pv2-grid-bg" aria-hidden="true" />
+            <span className="pv2-eyebrow" style={{ position: 'relative', zIndex: 2 }}>
+              Want the same kind of structure for your business?
+            </span>
+            <h2>Explore the services, systems, and backend strategy behind GHL Prime.</h2>
+            <div className="pv2-cta-actions">
+              <Link href="/services" className="primary-pill large">Explore Services <ArrowRight size={16} /></Link>
+              <Link href="/booking" className="primary-pill large">Get a free consultation</Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------------- trust */}
+      <section className="pv2-section is-white" aria-labelledby="why-agencies-trust-heading">
+        <div className="pv2-inner">
+          <motion.div
+            className="pv2-head"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.55 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={SPRING}
           >
-            <div>
-              <span className="cta-label">Want the same kind of structure for your business?</span>
-              <h2>Explore the services, systems, and backend strategy behind GHL Prime.</h2>
-            </div>
-            <div className="final-cta-actions">
-              <Link href="/services" className="primary-pill large">Explore Services <ArrowRight size={16} /></Link>
-              <Link href="/booking" className="secondary-pill">Get a free consultation</Link>
-            </div>
+            <span className="pv2-eyebrow">Why Us</span>
+            <h2 id="why-agencies-trust-heading">Why Agencies <span className="pv2-hl">Trust GHL Prime</span></h2>
           </motion.div>
+
+          <RevealProse paragraphs={trustParagraphs} dropCap />
         </div>
       </section>
 
-      <section className="section section-white about-trust-section" aria-labelledby="why-agencies-trust-heading">
-        <div className="container">
-          <div className="section-title">
-            <span className="eyebrow-label">Why Us</span>
-            <h2 id="why-agencies-trust-heading">Why Agencies Trust GHL Prime</h2>
-          </div>
-          <div className="about-trust-prose">
-            <p>GHL Prime is built on a simple premise: agencies should not have to choose between technical depth and business growth. Most agency owners are strong at sales, client relationships, and strategy but the backend of a GoHighLevel operation is a full-time job on its own. CRM configuration, automation logic, AI agent deployment, client support, and custom development all require specialized expertise that is expensive to hire in-house and unreliable to source from freelancers.</p>
-            <p>GHL Prime was founded to solve exactly that. We are a GHL-only team we do not generalize across platforms or dilute our expertise across fifty different tools. Every specialist on our team works exclusively in the GoHighLevel ecosystem, which means we build faster, troubleshoot better, and deliver results that a generalist freelancer simply cannot match.</p>
-            <p>Our Certified Admin badge is the highest-level GoHighLevel certification available. Combined with our 10 specialty certifications including HIPAA Compliance, A2P, AI Employee, and SaaS Mode we carry the formal credentials to back every claim we make about our capabilities.</p>
-            <p>We operate fully white-labeled, which means your clients never know we exist. Your agency is the front door. We are the engine room. That is how it is supposed to work.</p>
-          </div>
-        </div>
-      </section>
-            <FaqSection faqs={ABOUT_FAQS} intro="A quick read on who we are and how we operate." />
+      <FaqSection faqs={ABOUT_FAQS} intro="A quick read on who we are and how we operate." />
       <SiteFooter />
     </main>
   )

@@ -1,0 +1,250 @@
+/* =========================================================================
+   About + Team, redesigned.
+
+   Same content as before, rebuilt on the vocabulary the home page uses:
+   three light surface tones for rhythm, and real 3D rather than fades.
+   The tilt/float primitives themselves live in components/motion3d.
+
+   Namespaced .pv2- so none of this can reach the navbar, the footer, the
+   home page or the service pages.
+   ========================================================================= */
+
+.pv2 {
+  --navy: #0b1b30;
+  --body: #55697f;
+  --muted: #5b7086;
+  --line: rgba(16, 37, 63, .09);
+  --line-strong: rgba(16, 37, 63, .14);
+  --accent: #1895ff;
+  --accent-ink: #0a5fae;
+  --accent-soft: rgba(24, 149, 255, .1);
+  --paper: #f4f8fd;
+  --radius: 20px;
+}
+
+.pv2-section { position: relative; padding: clamp(4rem, 7vw, 6.5rem) 0; }
+.pv2-section.is-white { background: #fff; }
+.pv2-section.is-paper { background: var(--paper); }
+.pv2-section.is-tint {
+  background: linear-gradient(180deg, #eef5fe 0%, #f7fbff 55%, #f4f8fd 100%);
+  isolation: isolate;
+}
+.pv2-inner { width: min(1240px, calc(100% - 2.5rem)); margin: 0 auto; position: relative; z-index: 2; }
+
+/* Decorative backdrops -- behind content, never take pointer events. */
+.pv2-grid-bg {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(32, 93, 171, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 93, 171, .055) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(130% 95% at 50% 0%, #000 25%, transparent 80%);
+  -webkit-mask-image: radial-gradient(130% 95% at 50% 0%, #000 25%, transparent 80%);
+}
+.pv2-bloom { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+.pv2-bloom.one { width: 36rem; height: 36rem; top: -12rem; left: -8rem; background: rgba(24, 149, 255, .16); }
+.pv2-bloom.two { width: 30rem; height: 30rem; bottom: -13rem; right: -6rem; background: rgba(124, 96, 255, .1); }
+
+/* ---------- Headings ----------------------------------------------------- */
+.pv2-eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem; color: var(--accent-ink);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+}
+.pv2-eyebrow::before { content: ''; width: 1.6rem; height: 1px; background: currentColor; opacity: .55; }
+
+.pv2-head { max-width: 46rem; margin-bottom: clamp(2.4rem, 4vw, 3.4rem); }
+.pv2-head.centered { margin-inline: auto; text-align: center; }
+.pv2-head h2 {
+  margin: 1rem 0 0; font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.1;
+  letter-spacing: -.02em; font-weight: 800; color: var(--navy); text-wrap: balance;
+}
+.pv2-head p { margin: 1rem 0 0; font-size: 1.04rem; line-height: 1.7; color: var(--body); max-width: 40rem; }
+.pv2-head.centered p { margin-inline: auto; }
+.pv2-hl {
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ---------- Hero --------------------------------------------------------- */
+/* Pulled up behind the floating navbar pill so the wash starts at the very
+   top instead of leaving a band with a seam on the pill's bottom edge. */
+.pv2-hero {
+  --nav-block: 5.6rem;
+  margin-top: calc(-1 * var(--nav-block));
+  padding: calc(var(--nav-block) + clamp(2.5rem, 5vw, 4rem)) 0 clamp(3.5rem, 6vw, 5.5rem);
+  overflow: hidden;
+}
+.pv2-hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: clamp(2rem, 5vw, 4rem); align-items: center;
+}
+.pv2-hero h1 {
+  margin: 1rem 0 0; font-size: clamp(2.2rem, 4.8vw, 3.6rem); line-height: 1.06;
+  letter-spacing: -.03em; font-weight: 800; color: var(--navy); text-wrap: balance;
+}
+.pv2-lede { margin: 1.3rem 0 0; max-width: 34rem; font-size: clamp(1rem, 1.25vw, 1.1rem); line-height: 1.72; color: var(--body); }
+.pv2-actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2rem; }
+
+/* Hero visual: a panel with cards floating off it at real depth. */
+.pv2-stage {
+  position: relative; border-radius: 24px; padding: clamp(1.5rem, 3vw, 2.2rem);
+  background: linear-gradient(160deg, #ffffff, #f3f8ff);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .05), 0 34px 70px -40px rgba(15, 31, 53, .5);
+  transform-style: preserve-3d;
+}
+.pv2-stage-main { transform: translateZ(26px); }
+.pv2-stage-main span {
+  display: inline-block; font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink);
+}
+.pv2-stage-main strong { display: block; margin: .6rem 0 .5rem; font-size: 1.24rem; font-weight: 800; color: var(--navy); letter-spacing: -.01em; }
+.pv2-stage-main p { margin: 0; font-size: .95rem; line-height: 1.65; color: var(--body); }
+
+.pv2-chip {
+  display: grid; grid-template-columns: 2.4rem 1fr; align-items: center; gap: .8rem;
+  margin-top: .9rem; padding: .85rem 1rem; border-radius: 14px;
+  background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 14px 28px -20px rgba(15, 31, 53, .7);
+}
+.pv2-chip:nth-of-type(1) { transform: translateZ(52px); }
+.pv2-chip:nth-of-type(2) { transform: translateZ(38px); }
+.pv2-chip-icon {
+  width: 2.4rem; height: 2.4rem; border-radius: 11px; display: grid; place-items: center;
+  background: var(--primary-gradient, #1895ff); color: #fff;
+}
+.pv2-chip strong { display: block; font-size: .95rem; font-weight: 700; color: var(--navy); }
+.pv2-chip span { font-size: .82rem; color: var(--body); }
+
+/* ---------- Card grids --------------------------------------------------- */
+.pv2-grid { display: grid; gap: 1.1rem; }
+.pv2-grid.three { grid-template-columns: repeat(3, 1fr); }
+.pv2-grid.five { grid-template-columns: repeat(5, 1fr); }
+
+.pv2-card {
+  position: relative; overflow: hidden; height: 100%;
+  padding: clamp(1.4rem, 2.2vw, 1.9rem);
+  border-radius: var(--radius); background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 16px 34px -26px rgba(15, 31, 53, .4);
+  will-change: transform; backface-visibility: hidden;
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+/* Cursor wash, under the content and never intercepting clicks. */
+.pv2-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0;
+  background: radial-gradient(13rem 13rem at var(--mx, 50%) var(--my, 0%), rgba(24, 149, 255, .13), transparent 62%);
+  opacity: 0; transition: opacity .35s ease;
+}
+.pv2-card:hover::before { opacity: 1; }
+.pv2-card > * { position: relative; z-index: 1; }
+.pv2-card:hover { border-color: rgba(24, 149, 255, .34); box-shadow: 0 26px 48px -28px rgba(24, 149, 255, .55); }
+.pv2-card-icon {
+  width: 2.9rem; height: 2.9rem; border-radius: 13px; display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent); margin-bottom: 1.1rem;
+  transition: background .35s ease, color .35s ease, transform .38s cubic-bezier(.22,1,.36,1);
+}
+.pv2-card:hover .pv2-card-icon { background: var(--primary-gradient, #1895ff); color: #fff; transform: translateY(-3px) scale(1.06); }
+.pv2-card h3 { margin: 0 0 .55rem; font-size: 1.1rem; font-weight: 700; color: var(--navy); text-wrap: balance; }
+.pv2-card p { margin: 0; font-size: .95rem; line-height: 1.66; color: var(--body); }
+.pv2-cell { height: 100%; }
+
+/* ---------- Split (Octopi) ----------------------------------------------- */
+.pv2-split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 4vw, 3.6rem); align-items: center; }
+.pv2-checklist { display: grid; gap: .6rem; margin-top: 1.6rem; }
+.pv2-check { display: flex; align-items: flex-start; gap: .7rem; font-size: .96rem; color: #3b5068; }
+.pv2-check-icon {
+  display: inline-grid; place-items: center; flex: none; width: 1.7rem; height: 1.7rem;
+  border-radius: 8px; background: rgba(22, 163, 74, .12); color: #128040;
+  transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+.pv2-check:hover .pv2-check-icon { transform: perspective(500px) rotateY(-18deg) scale(1.06); }
+
+.pv2-logo-card {
+  text-align: center; padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.4rem);
+  border-radius: 22px; background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .05), 0 30px 60px -38px rgba(15, 31, 53, .55);
+  transform-style: preserve-3d;
+}
+.pv2-logo-card img { max-width: 11rem; height: auto; transform: translateZ(30px); }
+.pv2-logo-card strong { display: block; margin: 1.2rem 0 .5rem; font-size: 1.16rem; font-weight: 800; color: var(--navy); transform: translateZ(18px); }
+.pv2-logo-card p { margin: 0; font-size: .95rem; line-height: 1.65; color: var(--body); transform: translateZ(10px); }
+
+/* ---------- Experts: two-faced flip cards -------------------------------- */
+.pv2-experts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; perspective: 1100px; }
+.pv2-expert { text-align: center; }
+.pv2-flip {
+  position: relative; display: block; aspect-ratio: 3 / 4;
+  transform-style: preserve-3d; will-change: transform;
+  transition: transform .8s cubic-bezier(.34, 1.2, .3, 1);
+}
+.pv2-expert:hover .pv2-flip, .pv2-expert:focus-within .pv2-flip { transform: rotateY(180deg); }
+.pv2-face {
+  position: absolute; inset: 0; border-radius: 18px; overflow: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border: 1px solid var(--line); background: #e8eff8;
+}
+.pv2-face img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+.pv2-face.back {
+  transform: rotateY(180deg);
+  display: grid; align-content: center; gap: .4rem; padding: 1rem .8rem;
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+  border-color: transparent; color: #fff;
+}
+.pv2-face.back strong { font-size: .98rem; font-weight: 800; line-height: 1.25; }
+.pv2-face.back span { font-size: .78rem; opacity: .9; line-height: 1.35; }
+/* The certified badge and skill badges ride on the front / back faces so no
+   content is lost from the previous card. */
+.pv2-face .certified-admin-overlay { z-index: 2; }
+.pv2-face.back .skills-badges { margin-top: .5rem; justify-content: center; }
+.pv2-expert-name { display: block; margin-top: .65rem; font-size: .92rem; font-weight: 700; color: var(--navy); }
+.pv2-expert-role { display: block; font-size: .78rem; color: var(--body); }
+
+/* ---------- CTA ---------------------------------------------------------- */
+.pv2-cta {
+  position: relative; overflow: hidden; border-radius: 28px; text-align: center;
+  padding: clamp(2.6rem, 5vw, 4.2rem) clamp(1.5rem, 4vw, 3.6rem);
+  background: linear-gradient(150deg, #eaf3ff, #f7fbff 55%, #eef5fe);
+  border: 1px solid rgba(24, 149, 255, .18);
+  box-shadow: 0 30px 70px -46px rgba(15, 31, 53, .6);
+}
+.pv2-cta h2 {
+  position: relative; z-index: 2; margin: 1rem 0 0;
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem); font-weight: 800; letter-spacing: -.025em;
+  line-height: 1.12; color: var(--navy); text-wrap: balance;
+}
+.pv2-cta-actions { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: .85rem; justify-content: center; margin-top: 2rem; }
+
+/* ---------- Long-form prose ---------------------------------------------- */
+.pv2-prose { max-width: 52rem; }
+.pv2-prose p { margin: 0 0 1.1rem; font-size: 1.02rem; line-height: 1.8; color: var(--body); }
+.pv2-prose p:last-child { margin-bottom: 0; }
+
+/* ---------- 3D on the shared certification badges ------------------------ */
+.pv2 .certifications-grid > * {
+  transition: transform .7s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease;
+  will-change: transform;
+}
+.pv2 .certifications-grid > *:hover { transform: perspective(700px) rotateY(360deg) translateY(-5px) scale(1.05); }
+
+/* ---------- Responsive ---------------------------------------------------- */
+@media (max-width: 1080px) {
+  .pv2-hero-grid, .pv2-split { grid-template-columns: 1fr; }
+  .pv2-grid.five { grid-template-columns: repeat(3, 1fr); }
+  .pv2-experts { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 760px) {
+  .pv2-inner { width: min(1240px, calc(100% - 1.75rem)); }
+  .pv2-grid.three, .pv2-grid.five { grid-template-columns: 1fr; }
+  .pv2-experts { grid-template-columns: repeat(2, 1fr); }
+  .pv2-hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv2 *, .pv2 *::before, .pv2 *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .pv2-flip, .pv2-stage-main, .pv2-chip, .pv2-logo-card img,
+  .pv2-logo-card strong, .pv2-logo-card p { transform: none !important; }
+}

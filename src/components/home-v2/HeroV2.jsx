@@ -94,7 +94,7 @@ export default function HeroV2({ activePill, rotatingPills }) {
             <a href={UPWORK} target="_blank" rel="noopener noreferrer" className="primary-pill large">
               Hire Your Expert Team <ArrowRight size={17} />
             </a>
-            <Link href="/services" className="primary-pill large">
+            <Link href="/services" className="secondary-pill large">
               See What We Do <ArrowRight size={16} />
             </Link>
           </motion.div>
