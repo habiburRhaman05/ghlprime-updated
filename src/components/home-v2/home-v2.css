@@ -326,10 +326,10 @@
 .hv2-who-card:hover { transform: translateX(4px); border-color: rgba(24, 149, 255, .3); box-shadow: 0 16px 32px -22px rgba(24, 149, 255, .8); }
 .hv2-who-icon { width: 2.9rem; height: 2.9rem; border-radius: 12px; display: grid; place-items: center; color: #fff; }
 /* One family rather than three unrelated hues: brand blue, then a violet
-   and a teal at the same depth, so the row reads as a set. */
-.hv2-who-icon.blue { background: linear-gradient(140deg, #38a4ff, #0a5fae); }
-.hv2-who-icon.gold { background: linear-gradient(140deg, #f7ba3e, #c07a10); }
-.hv2-who-icon.teal { background: linear-gradient(140deg, #23c1bd, #0b7a77); }
+   and an emerald at the same depth, so the row reads as a set. */
+.hv2-who-icon.blue { background: linear-gradient(140deg, #4da3ff, #1a56db); }
+.hv2-who-icon.violet { background: linear-gradient(140deg, #a78bfa, #6d28d9); }
+.hv2-who-icon.emerald { background: linear-gradient(140deg, #34d399, #047857); }
 .hv2-who-card h3 { margin: 0 0 .15rem; font-size: 1rem; font-weight: 700; color: var(--navy); }
 .hv2-who-card p { margin: 0; font-size: .9rem; color: var(--body); line-height: 1.5; }
 

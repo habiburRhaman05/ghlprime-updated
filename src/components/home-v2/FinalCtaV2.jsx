@@ -29,7 +29,7 @@ export default function FinalCtaV2() {
             <a href={UPWORK} target="_blank" rel="noopener noreferrer" className="primary-pill large">
               Hire Your Expert Team <ArrowRight size={17} />
             </a>
-            <Link href="/booking" className="primary-pill large">
+            <Link href="/booking" className="secondary-pill large">
               Book a free call <ArrowRight size={16} />
             </Link>
           </div>

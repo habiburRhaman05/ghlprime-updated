@@ -376,7 +376,7 @@ export default function TeamPage() {
             <h2>Explore the services and client systems shaped by the people behind GHL Prime.</h2>
             <div className="pv2-cta-actions">
               <Link href="/case-studies" className="primary-pill large">View Case Studies <ArrowRight size={16} /></Link>
-              <Link href="/services" className="primary-pill large">Explore Services</Link>
+              <Link href="/services" className="secondary-pill large">Explore Services</Link>
             </div>
           </motion.div>
         </div>
