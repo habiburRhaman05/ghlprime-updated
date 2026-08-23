@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion, animate, useInView, useMotionValue, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Orbit, UsersRound, Waypoints } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { TEAM_FAQS } from '../data/faqs'
@@ -13,7 +13,6 @@ import { socialConfig } from '../components/socialConfig'
 import { fetchTeamMembers, fetchTeamPageExperts } from '../lib/teamApi'
 import Tilt from '../components/motion3d/Tilt'
 import ScrollProgress from '../components/motion3d/ScrollProgress'
-import { DepthScene, Layer } from '../components/motion3d/DepthScene'
 import '../components/pages-v2/pages-v2.css'
 import '../components/pages-v2/immersive.css'
 
@@ -66,52 +65,6 @@ function YearsStat({ value }) {
     <strong ref={ref}>
       {Number.isFinite(num) ? <motion.span>{display}</motion.span> : raw}
     </strong>
-  )
-}
-
-function ValueCube() {
-  return (
-    <DepthScene className="iv-cube-scene" strength={18}>
-      <Layer depth={-0.9} className="iv-ring-slot">
-        <span className="iv-spin r-b" />
-      </Layer>
-      <Layer depth={0.6}>
-        <div className="m3d-float">
-          <div className="iv-cube">
-            <div className="iv-face front">
-              <span className="iv-face-kicker">Core team</span>
-              <strong>Built around strategy + systems</strong>
-              <p>The team is designed to connect business direction, customer journey thinking, and technical delivery.</p>
-            </div>
-            <div className="iv-face back">
-              <span className="iv-face-mark">GHL</span>
-            </div>
-            <div className="iv-face right">
-              <div className="iv-face-chip">
-                <span className="ic ic-sm ic-solid iv-face-chip-icon ic-sky"><UsersRound size={16} /></span>
-                <div>
-                  <strong>Focused team</strong>
-                  <span>Clear roles, aligned execution</span>
-                </div>
-              </div>
-            </div>
-            <div className="iv-face left">
-              <div className="iv-face-chip">
-                <span className="ic ic-sm ic-solid iv-face-chip-icon ic-violet"><Waypoints size={16} /></span>
-                <div>
-                  <strong>Systems-first delivery</strong>
-                  <span>Built for scale and clarity</span>
-                </div>
-              </div>
-            </div>
-            <div className="iv-face top">
-              <Orbit size={56} className="iv-face-ghost" />
-            </div>
-            <div className="iv-face bottom" />
-          </div>
-        </div>
-      </Layer>
-    </DepthScene>
   )
 }
 
@@ -280,7 +233,6 @@ export default function TeamPage() {
             </motion.div>
           </motion.div>
 
-          <ValueCube />
         </motion.div>
       </section>
 

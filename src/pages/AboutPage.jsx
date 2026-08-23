@@ -5,15 +5,10 @@ import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   ArrowRight,
-  BadgeCheck,
-  BrainCog,
-  Focus,
   Handshake,
   Network,
   Orbit,
   Puzzle,
-  Route,
-  Server,
 } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
@@ -79,6 +74,57 @@ const IconSpeedGauge = ({ size }) => (
   </AvSvg>
 )
 
+// Principle-row marks for the ledger: a lead riding the delivery route,
+// server slats blinking activity, focus brackets hunting their subject, a
+// compute chip with a pulsing core, and a trust shield redrawing its check.
+const IconPathRider = ({ size }) => (
+  <AvSvg size={size}>
+    <path d="M4.6 18.8C13 18.8 11 5.2 19.4 5.2" opacity=".9" />
+    <circle cx="4.6" cy="18.8" r="1.7" />
+    <rect x="17.6" y="3.4" width="3.6" height="3.6" rx=".95" />
+    <circle className="av-pathdot" r="1.4" fill="currentColor" stroke="none">
+      <animateMotion dur="2.4s" repeatCount="indefinite" path="M4.6 18.8C13 18.8 11 5.2 19.4 5.2" />
+    </circle>
+  </AvSvg>
+)
+
+const IconServerLeds = ({ size }) => (
+  <AvSvg size={size}>
+    <rect x="3.6" y="4" width="16.8" height="4.6" rx="1.4" />
+    <rect x="3.6" y="9.9" width="16.8" height="4.6" rx="1.4" />
+    <rect x="3.6" y="15.8" width="16.8" height="4.6" rx="1.4" />
+    <path d="M6.6 6.3h4M6.6 12.2h4M6.6 18.1h4" opacity=".55" />
+    <circle className="av-led l1" cx="17" cy="6.3" r="1" fill="currentColor" stroke="none" />
+    <circle className="av-led l2" cx="17" cy="12.2" r="1" fill="currentColor" stroke="none" />
+    <circle className="av-led l3" cx="17" cy="18.1" r="1" fill="currentColor" stroke="none" />
+  </AvSvg>
+)
+
+const IconFocusFrame = ({ size }) => (
+  <AvSvg size={size}>
+    <g className="av-bracket b1"><path d="M3.4 8V4.9a1.5 1.5 0 0 1 1.5-1.5H8" /></g>
+    <g className="av-bracket b2"><path d="M16 3.4h3.1a1.5 1.5 0 0 1 1.5 1.5V8" /></g>
+    <g className="av-bracket b3"><path d="M20.6 16v3.1a1.5 1.5 0 0 1-1.5 1.5H16" /></g>
+    <g className="av-bracket b4"><path d="M8 20.6H4.9a1.5 1.5 0 0 1-1.5-1.5V16" /></g>
+    <circle className="av-pulse" cx="12" cy="12" r="2" fill="currentColor" stroke="none" />
+  </AvSvg>
+)
+
+const IconAiChip = ({ size }) => (
+  <AvSvg size={size}>
+    <rect x="6.9" y="6.9" width="10.2" height="10.2" rx="2.1" />
+    <path d="M9.6 6.9V4.3M14.4 6.9V4.3M9.6 19.7v-2.6M14.4 19.7v-2.6M6.9 9.6H4.3M6.9 14.4H4.3M19.7 9.6h-2.6M19.7 14.4h-2.6" opacity=".75" />
+    <circle className="av-pulse" cx="12" cy="12" r="1.85" fill="currentColor" stroke="none" />
+  </AvSvg>
+)
+
+const IconShieldCheck = ({ size }) => (
+  <AvSvg size={size}>
+    <path d="M12 2.9l7 2.5v5.3c0 4.6-3 7.9-7 9.4-4-1.5-7-4.8-7-9.4V5.4z" />
+    <path className="av-checkdraw" pathLength="100" d="M8.7 11.9l2.3 2.3 4.3-4.5" strokeWidth="2" />
+  </AvSvg>
+)
+
 const separationReasons = [
   {
     icon: IconFocusLock,
@@ -109,31 +155,31 @@ const octopiChecklist = [
 
 const beliefs = [
   {
-    icon: Route,
+    icon: IconPathRider,
     tone: 'ic-sky',
     title: 'Systems Should Support Growth',
     text: 'The right CRM and automation setup should reduce friction, improve speed, and help the business scale without chaos.',
   },
   {
-    icon: Server,
+    icon: IconServerLeds,
     tone: 'ic-indigo',
     title: 'Backend Matters As Much As Frontend',
     text: 'A clean backend improves team performance, customer experience, and the overall perceived quality of the brand.',
   },
   {
-    icon: Focus,
+    icon: IconFocusFrame,
     tone: 'ic-violet',
     title: 'Clarity Beats Complexity',
     text: 'We prefer systems that are easier to understand, easier to manage, and easier to improve over time.',
   },
   {
-    icon: BrainCog,
+    icon: IconAiChip,
     tone: 'ic-teal',
     title: 'AI Should Be Useful',
     text: 'We apply AI where it genuinely improves responsiveness, qualification, and automation performance.',
   },
   {
-    icon: BadgeCheck,
+    icon: IconShieldCheck,
     tone: 'ic-emerald',
     title: 'Execution Quality Builds Trust',
     text: 'Good work is not only about what gets delivered, but how clearly, consistently, and reliably it performs afterwards.',

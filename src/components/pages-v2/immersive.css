@@ -40,6 +40,15 @@
   perspective: 1200px;
 }
 .iv-ring-slot { position: absolute; inset: 0; display: grid; place-items: center; }
+
+/* Team hero is text-only -- center the copy stack. */
+.team-page .pv2-hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  text-align: center;
+}
+.team-page .pv2-hero-grid .pv2-lede { margin-inline: auto; }
+.team-page .pv2-hero-grid .pv2-actions { justify-content: center; }
 .iv-spin {
   border-radius: 50%;
   border: 1px dashed rgba(24, 149, 255, 0.35);
@@ -291,86 +300,6 @@
 .iv-tcard h3 { margin: 0.75rem 0 0.45rem; font-size: 1.08rem; font-weight: 800; color: var(--navy); }
 .iv-tcard p { margin: 0; font-size: 0.95rem; line-height: 1.66; color: var(--body); }
 
-/* ---------- team hero: rotating value cube -------------------------------- */
-.iv-cube-scene {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: clamp(340px, 36vw, 440px);
-  perspective: 1300px;
-}
-.iv-cube {
-  --cs: clamp(230px, 26vw, 300px);
-  width: var(--cs);
-  height: var(--cs);
-  position: relative;
-  transform-style: preserve-3d;
-  animation: ivCubeSpin 26s linear infinite;
-}
-.iv-cube-scene:hover .iv-cube { animation-play-state: paused; }
-@keyframes ivCubeSpin {
-  from { transform: rotateX(-11deg) rotateY(0deg); }
-  to { transform: rotateX(-11deg) rotateY(360deg); }
-}
-.iv-face {
-  position: absolute;
-  inset: 0;
-  border-radius: 22px;
-  padding: 1.3rem;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 255, 0.96));
-  border: 1px solid var(--line-strong);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), 0 24px 48px -34px rgba(15, 31, 53, 0.6);
-  overflow: hidden;
-  display: grid;
-  align-content: center;
-}
-.iv-face.front { transform: translateZ(calc(var(--cs) / 2)); }
-.iv-face.back {
-  transform: rotateY(180deg) translateZ(calc(var(--cs) / 2));
-  background: var(--primary-gradient, linear-gradient(135deg, #1895ff, #022646));
-  place-items: center;
-}
-.iv-face.right { transform: rotateY(90deg) translateZ(calc(var(--cs) / 2)); }
-.iv-face.left { transform: rotateY(-90deg) translateZ(calc(var(--cs) / 2)); }
-.iv-face.top {
-  transform: rotateX(90deg) translateZ(calc(var(--cs) / 2));
-  background: linear-gradient(160deg, #eaf3ff, #f7fbff);
-  place-items: center;
-}
-.iv-face.bottom { transform: rotateX(-90deg) translateZ(calc(var(--cs) / 2)); }
-
-.iv-face-kicker {
-  display: block;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-}
-.iv-face.front strong { display: block; margin: 0.5rem 0 0.4rem; font-size: 1.06rem; font-weight: 800; color: var(--navy); line-height: 1.3; }
-.iv-face.front p { margin: 0; font-size: 0.83rem; line-height: 1.6; color: var(--body); }
-.iv-face-chip { display: flex; align-items: flex-start; gap: 0.7rem; }
-/* Geometry only -- the fill comes from the tone class (icon-system.css). */
-.iv-face-chip .iv-face-chip-icon { --ic-size: 2.2rem; border-radius: 10px; }
-.iv-face-chip strong { display: block; font-size: 0.92rem; font-weight: 800; color: var(--navy); }
-.iv-face-chip span:not(.iv-face-chip-icon) { display: block; margin-top: 0.15rem; font-size: 0.78rem; line-height: 1.45; color: var(--body); }
-.iv-face-mark {
-  width: 46%;
-  aspect-ratio: 1;
-  border-radius: 26%;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  font-weight: 800;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(2px);
-}
-.iv-face-ghost { color: rgba(24, 149, 255, 0.16); }
-
 /* ---------- leader spotlights --------------------------------------------- */
 .iv-leaders { display: grid; gap: clamp(3rem, 7vw, 5.5rem); }
 .iv-leader {
@@ -580,7 +509,6 @@
 }
 
 @media (max-width: 760px) {
-  .iv-cube-scene { min-height: clamp(300px, 78vw, 360px); }
   .iv-years-disc { width: 5.4rem; }
   .iv-years-disc strong { font-size: 1.35rem; }
 }
@@ -588,10 +516,8 @@
 /* ---------- reduced motion ---------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .iv-progress { display: none; }
-  .iv-spin, .iv-core, .iv-tile-inner, .iv-cube, .iv-halo::before, .iv-halo::after,
+  .iv-spin, .iv-core, .iv-tile-inner, .iv-halo::before, .iv-halo::after,
   .iv-node::after, .iv-aurora, .iv-photo-frame::before { animation: none !important; }
-  .iv-cube { transform: rotateX(-11deg) rotateY(-24deg); }
-  .iv-face.back, .iv-face.left, .iv-face.top, .iv-face.bottom { visibility: hidden; }
 }
 
 /* ---------- separation card marks ---------------------------------------------
@@ -621,6 +547,33 @@
   0%, 100% { transform: rotate(-46deg); }
   50% { transform: rotate(42deg); }
 }
+
+/* Principle-row marks (the build-principles ledger). */
+.av-led { transform-box: fill-box; transform-origin: center; animation: av-led 1.6s ease-in-out infinite; }
+.av-led.l2 { animation-delay: .53s; }
+.av-led.l3 { animation-delay: 1.06s; }
+@keyframes av-led {
+  0%, 100% { opacity: .25; transform: scale(.8); }
+  45% { opacity: 1; transform: scale(1); }
+}
+.av-bracket { animation: av-bracket 2.4s ease-in-out infinite; --bx: 0px; --by: 0px; }
+.av-bracket.b1 { --bx: 1.2px; --by: 1.2px; }
+.av-bracket.b2 { --bx: -1.2px; --by: 1.2px; }
+.av-bracket.b3 { --bx: -1.2px; --by: -1.2px; }
+.av-bracket.b4 { --bx: 1.2px; --by: -1.2px; }
+@keyframes av-bracket {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(var(--bx), var(--by)); }
+}
+.av-checkdraw { stroke-dasharray: 100; stroke-dashoffset: 100; animation: av-checkdraw 2.6s cubic-bezier(.45, 0, .3, 1) infinite; }
+@keyframes av-checkdraw {
+  0% { stroke-dashoffset: 100; }
+  40%, 72% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -100; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .av-spin, .av-pulse, .av-spark, .av-sway, .av-gauge { animation: none !important; }
+  .av-spin, .av-pulse, .av-spark, .av-sway, .av-gauge,
+  .av-led, .av-bracket, .av-checkdraw { animation: none !important; }
+  /* The route rider moves via SMIL, which the rule above can't stop. */
+  .av-pathdot { display: none !important; }
 }
