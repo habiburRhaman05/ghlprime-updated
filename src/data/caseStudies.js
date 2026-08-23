@@ -7,10 +7,10 @@ export const caseStudies = [
     challenge: 'Losing nearly 40% of online inquiries that arrived outside business hours',
     solution: 'Custom GoHighLevel automated nurture sequence for after-hours lead capture',
     outcome: '40% increase in lead conversion in 90 days',
-    headline_result: 'Turned a mid-sized development firm\'s &ldquo;lost&rdquo; after-hours leads into qualified tours — a 40% lift in conversion in 90 days while saving the team 20 hours a week.',
+    headline_result: 'Turned a mid-sized development firm\'s &ldquo;lost&rdquo; after-hours leads into qualified tours, a 40% lift in conversion in 90 days while saving the team 20 hours a week.',
     image_caption: 'Before vs. After: After-Hours Lead Capture & Nurture Automation',
     flow: [
-      { label: 'Instant lead capture', text: 'Every online inquiry — form, call, or DM — is captured into a single GoHighLevel pipeline the moment it arrives, day or night.' },
+      { label: 'Instant lead capture', text: 'Every online inquiry (form, call, or DM) is captured into a single GoHighLevel pipeline the moment it arrives, day or night.' },
       { label: 'After-hours response', text: 'Leads that come in outside business hours get an immediate automated reply so they never sit unanswered until morning.' },
       { label: 'Automated nurture sequence', text: 'A timed SMS and email sequence keeps each prospect engaged and moves them toward booking a tour without manual chasing.' },
       { label: 'Qualified tour booking', text: 'Interested leads are guided straight to a calendar to book a tour, turning previously lost inquiries into real appointments.' },
@@ -21,7 +21,7 @@ export const caseStudies = [
     body: [
       'A mid-sized development firm was losing nearly 40% of their online inquiries simply because they could not respond outside of business hours. Their team was also bogged down in manual data entry, so high-value leads slipped through before anyone could follow up.',
       'We implemented a custom GoHighLevel automated nurture sequence that captured every inquiry instantly, replied to after-hours leads automatically, and kept prospects engaged until they were ready to book a tour. The goal was simple: remove the friction between the lead and the human.',
-      'In just 90 days the firm saw a 40% increase in lead conversion and saved roughly 20 hours a week — turning leads they used to lose into qualified tours. It was not magic; it was a 2-4 week transition that put their core lead-capture workflows live first, then layered on the deeper automation.',
+      'In just 90 days the firm saw a 40% increase in lead conversion and saved roughly 20 hours a week, turning leads they used to lose into qualified tours. It was not magic; it was a 2-4 week transition that put their core lead-capture workflows live first, then layered on the deeper automation.',
     ],
     featured: false,
   },

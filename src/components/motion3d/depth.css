@@ -1,0 +1,75 @@
+/* =========================================================================
+   Depth system -- structure only.
+
+   Rotation and translation are written by Depth.jsx as framer motion values
+   (framer's inline transform beats a stylesheet rule on any element it
+   animates). What lives here is the 3D context, the resting depths of the
+   layers inside a card, and the cursor wash.
+   ========================================================================= */
+
+.m3d-stage { position: relative; }
+.m3d-world { position: relative; transform-style: preserve-3d; height: 100%; }
+.m3d-plane { transform-style: preserve-3d; will-change: transform; }
+
+/* Slots keep their own 3D context so a card's dolly-in is perspectival
+   rather than a plain scale. */
+.m3d-slot { transform-style: preserve-3d; height: 100%; }
+
+/* NOTE: no `overflow: hidden` here, ever. Overflow forces a flat rendering
+   context, which silently collapses every translateZ inside the card. The
+   wash below is clipped by `border-radius: inherit` instead. */
+.m3d-card {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.m3d-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    14rem 14rem at var(--mx, 50%) var(--my, 0%),
+    color-mix(in srgb, var(--ic-from, #60a5fa) 22%, transparent),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.m3d-card:hover::before { opacity: 1; }
+
+/* Contact shadow. Grows as the card comes toward the viewer, which is what
+   sells the Z movement -- without it the card just looks like it scaled. */
+.m3d-card::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: -6px;
+  height: 18px;
+  border-radius: 50%;
+  z-index: -1;
+  background: rgba(12, 30, 54, 0.28);
+  filter: blur(14px);
+  opacity: 0;
+  transform: translateZ(-40px);
+  transition: opacity 0.45s ease;
+}
+.m3d-card:hover::after { opacity: 1; }
+
+/* Resting depths for content inside a card. The card's own Z lift widens the
+   gaps between these under perspective, so hover separates the layers
+   instead of skewing them. */
+.m3d-l1 { transform: translateZ(16px); }
+.m3d-l2 { transform: translateZ(30px); }
+.m3d-l3 { transform: translateZ(48px); }
+.m3d-l1, .m3d-l2, .m3d-l3 { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .m3d-plane, .m3d-card, .m3d-l1, .m3d-l2, .m3d-l3 { transform: none !important; }
+  .m3d-card::after { display: none; }
+}

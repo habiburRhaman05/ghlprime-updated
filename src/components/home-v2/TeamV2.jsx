@@ -133,8 +133,8 @@ export default function TeamV2() {
         >
           <p className="hv2-certs-label">Certifications</p>
           <p className="hv2-certs-lede">
-            GHL Prime holds official GoHighLevel certifications including Certified Admin — the
-            highest certification available on the platform — plus A2P Compliance, HIPAA
+            GHL Prime holds official GoHighLevel certifications including Certified Admin, the
+            highest certification available on the platform, plus A2P Compliance, HIPAA
             Compliance, AI Employee, SaaS Mode, and 7 additional specializations.
           </p>
           <div className="hv2-certs-row">

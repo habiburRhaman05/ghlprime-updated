@@ -69,7 +69,9 @@
   padding: 2rem;
 }
 .services-hero-glass-card.main strong { font-size: 1.7rem; color: #16283f; }
-.services-hero-glass-card.main span { color: #607895; }
+/* :not(.ic) so the rule stops repainting the icon tile's glyph, which has
+   its own colour from the tone class. */
+.services-hero-glass-card.main > span:not(.ic) { color: #607895; }
 .services-hero-glass-card.floating {
   position: absolute;
   min-height: 3.2rem;
@@ -164,17 +166,13 @@
   flex-direction: column;
   justify-content: flex-start;
 }
+/* Geometry only. Colour comes from the tone class on the same element
+   (see styles/icon-system.css), so the eight cards no longer read as eight
+   copies of one blue badge. */
 .services-expert-icon {
-  width: 2.75rem;
-  height: 2.75rem;
+  --ic-size: 2.75rem;
   border-radius: .9rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: .9rem;
-  background: linear-gradient(180deg, #eef5ff, #e7f0ff);
-  color: #2b77e7;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
 }
 .services-how-it-works-card {
   padding: 2rem;

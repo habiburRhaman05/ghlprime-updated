@@ -142,6 +142,10 @@ const revealItem = {
     transition: { type: 'spring', stiffness: 120, damping: 20, mass: 0.9 },
   },
 }
+// Palette cycle for the config-driven icon tiles (see styles/icon-system.css).
+const TONES = ['ic-sky', 'ic-violet', 'ic-amber', 'ic-teal', 'ic-indigo', 'ic-rose', 'ic-emerald', 'ic-blue']
+const tone = (i) => TONES[i % TONES.length]
+
 const groupProps = {
   variants: revealGroup,
   initial: 'hidden',
@@ -637,7 +641,7 @@ function FlowItem({ step, index, numbered, last }) {
       >
         {numbered
           ? <span className="svc-flow-num">{index + 1}</span>
-          : <span className="svc-flow-icon"><Icon name={step.icon} size={20} /></span>}
+          : <span className={`ic svc-flow-icon ${tone(index)}`}><Icon name={step.icon} size={20} /></span>}
         <h3>{step.title}</h3>
         <p>{step.text}</p>
       </motion.div>
@@ -671,7 +675,7 @@ function Deliverables({ deliver }) {
         <div className="svc-grid" key={tab || 'all'}>
           {cards.map((card, i) => (
             <TiltCard className="svc-card" key={card.title} reveal={cardReveal(i, 3)}>
-              <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
+              <span className={`ic svc-card-icon ${tone(i)}`}><Icon name={card.icon} size={20} /></span>
               <h3>{card.title}</h3>
               <p>{card.text}</p>
             </TiltCard>
@@ -966,7 +970,7 @@ export default function ServiceDetailTemplate({ config }) {
         <section className="svc-section">
           <div className="container">
             <div className="svc-callout">
-              <span className="svc-callout-icon"><Icon name={config.callout.icon} size={22} /></span>
+              <span className="ic svc-callout-icon ic-indigo"><Icon name={config.callout.icon} size={22} /></span>
               <div>
                 <h3>{config.callout.title}</h3>
                 <p>{config.callout.text}</p>
@@ -1032,7 +1036,7 @@ export default function ServiceDetailTemplate({ config }) {
           <div className="svc-grid two">
             {config.who.cards.map((card, i) => (
               <TiltCard className="svc-card" key={card.title} reveal={cardReveal(i, 2)}>
-                <span className="svc-card-icon"><Icon name={card.icon} size={20} /></span>
+                <span className={`ic svc-card-icon ${tone(i)}`}><Icon name={card.icon} size={20} /></span>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
               </TiltCard>
@@ -1115,7 +1119,7 @@ export default function ServiceDetailTemplate({ config }) {
             <div className="svc-callout-grid">
               {config.why.callouts.map((co) => (
                 <div className="svc-callout" key={co.title}>
-                  <span className="svc-callout-icon"><Icon name={co.icon || 'ShieldCheck'} size={22} /></span>
+                  <span className="ic svc-callout-icon ic-indigo"><Icon name={co.icon || 'ShieldCheck'} size={22} /></span>
                   <div><h3>{co.title}</h3><p>{co.text}</p></div>
                 </div>
               ))}

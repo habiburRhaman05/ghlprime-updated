@@ -166,12 +166,154 @@
 }
 .hv2-node.is-active { border-color: rgba(24, 149, 255, .5); background: rgba(24, 149, 255, .07); transform: translateX(3px); }
 .hv2-node.is-done { border-color: rgba(22, 163, 74, .28); background: rgba(22, 163, 74, .05); }
-.hv2-node-icon {
-  width: 2.35rem; height: 2.35rem; border-radius: 10px; display: grid; place-items: center;
-  background: var(--accent-soft); color: var(--accent); transition: background .4s ease, color .4s ease;
-}
-.hv2-node.is-active .hv2-node-icon { background: var(--primary-gradient, #1895ff); color: #fff; }
+/* Sizing only -- the colour comes from the tone class on the tile, so each
+   step in the run reads as its own thing rather than five identical badges.
+   The running step fills with its tone; a finished one goes green. */
+.hv2-node-icon { --ic-size: 2.35rem; border-radius: 10px; }
+.hv2-node.is-active .hv2-node-icon { color: #fff; }
+.hv2-node.is-active .hv2-node-icon::after { opacity: 1; }
 .hv2-node.is-done .hv2-node-icon { background: rgba(22, 163, 74, .13); color: #16a34a; }
+.hv2-node.is-done .hv2-node-icon::after { opacity: 0; }
+
+/* Living details on the pipeline icons: the funnel swallows a drop, the AI
+   stars twinkle in sequence, voice waves ripple, the calendar check draws
+   itself and the CRM bolt flashes. Pure CSS loops; the global
+   prefers-reduced-motion rule at the end of this file stills them. */
+.hv2-node-icon svg { overflow: visible; }
+.hv2-node.is-active .hv2-node-icon { animation: hv2-iconpop .55s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes hv2-iconpop {
+  0% { transform: scale(.8); }
+  60% { transform: scale(1.09); }
+  100% { transform: scale(1); }
+}
+.hv2-drop { animation: hv2-drop 1.5s cubic-bezier(.55, 0, .85, .45) infinite; }
+@keyframes hv2-drop {
+  0% { transform: translateY(-.5px); opacity: 0; }
+  30% { opacity: 1; }
+  75% { transform: translateY(3.4px); opacity: 1; }
+  100% { transform: translateY(3.9px); opacity: 0; }
+}
+.hv2-tw { transform-box: fill-box; transform-origin: center; animation: hv2-twinkle 1.5s ease-in-out infinite; }
+.hv2-tw.t2 { animation-delay: .4s; }
+.hv2-tw.t3 { animation-delay: .8s; }
+@keyframes hv2-twinkle {
+  0%, 100% { transform: scale(.6); opacity: .45; }
+  50% { transform: scale(1); opacity: 1; }
+}
+.hv2-wave { animation: hv2-wave 1.8s ease-out infinite; }
+.hv2-wave.w2 { animation-delay: .45s; }
+@keyframes hv2-wave {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
+.hv2-draw { stroke-dasharray: 11; stroke-dashoffset: 11; animation: hv2-draw 2.4s ease-in-out infinite; }
+@keyframes hv2-draw {
+  0% { stroke-dashoffset: 11; }
+  40%, 75% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -11; }
+}
+.hv2-bolt { animation: hv2-flash 1.6s ease-in-out infinite; }
+@keyframes hv2-flash {
+  0%, 100% { opacity: .4; }
+  50% { opacity: 1; }
+}
+
+/* The proof-card marks share the same living-detail treatment as the hero
+   pipeline: headset cups pulse under sonar rings, dots travel between the
+   team heads while the lead figure heartbeats, and the growth bars breathe
+   upward beneath a trend line that draws itself and flashes at the tip. */
+.hv2-pulse { transform-box: fill-box; transform-origin: center; animation: hv2-pulse 1.6s ease-in-out infinite; }
+.hv2-pulse.p2 { animation-delay: .8s; }
+@keyframes hv2-pulse {
+  0%, 100% { transform: scale(.84); opacity: .7; }
+  50% { transform: scale(1); opacity: 1; }
+}
+.hv2-ring { transform-box: fill-box; transform-origin: center; opacity: 0; animation: hv2-ring 2.4s cubic-bezier(.22, .61, .36, 1) infinite; }
+.hv2-ring.r2 { animation-delay: 1.2s; }
+@keyframes hv2-ring {
+  0% { transform: scale(.42); opacity: .9; }
+  70% { opacity: .28; }
+  100% { transform: scale(1.12); opacity: 0; }
+}
+.hv2-dot { opacity: 0; animation: hv2-dotA 1.7s ease-in-out infinite; }
+.hv2-dot.dtB { animation-name: hv2-dotB; animation-delay: .85s; }
+@keyframes hv2-dotA {
+  0% { transform: translate(0, 0); opacity: 0; }
+  25% { opacity: 1; }
+  70%, 100% { transform: translate(1.85px, -.55px); opacity: 0; }
+}
+@keyframes hv2-dotB {
+  0% { transform: translate(0, 0); opacity: 0; }
+  25% { opacity: 1; }
+  70%, 100% { transform: translate(-1.85px, -.55px); opacity: 0; }
+}
+.hv2-beat { transform-box: fill-box; transform-origin: center; animation: hv2-beat 1.8s ease-in-out infinite; }
+@keyframes hv2-beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.hv2-grow { transform-box: fill-box; transform-origin: bottom; animation: hv2-grow 2s ease-in-out infinite; }
+.hv2-grow.g2 { animation-delay: .22s; }
+.hv2-grow.g3 { animation-delay: .44s; }
+@keyframes hv2-grow {
+  0% { transform: scaleY(.35); }
+  45%, 70% { transform: scaleY(1); }
+  100% { transform: scaleY(.35); }
+}
+.hv2-trend { stroke-dasharray: 100; stroke-dashoffset: 100; animation: hv2-trend 2.8s cubic-bezier(.45, 0, .3, 1) infinite; }
+@keyframes hv2-trend {
+  0% { stroke-dashoffset: 100; }
+  45%, 80% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -100; }
+}
+.hv2-tip { stroke-dasharray: 100; stroke-dashoffset: 100; opacity: 0; animation: hv2-tip 2.8s ease infinite; }
+@keyframes hv2-tip {
+  0%, 38% { stroke-dashoffset: 100; opacity: 0; }
+  48% { opacity: 1; }
+  52%, 80% { stroke-dashoffset: 0; opacity: 1; }
+  88%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+.hv2-flashdot { transform-box: fill-box; transform-origin: center; opacity: 0; animation: hv2-tipflash 2.8s ease-out infinite; }
+@keyframes hv2-tipflash {
+  0%, 44% { transform: scale(.2); opacity: 0; }
+  54% { transform: scale(1.25); opacity: 1; }
+  66% { transform: scale(1); opacity: .9; }
+  78%, 100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Bento card marks, same family of living details. */
+.hv2-pluspop { transform-box: fill-box; transform-origin: center; animation: hv2-pluspop 1.8s cubic-bezier(.34, 1.56, .64, 1) infinite; }
+@keyframes hv2-pluspop {
+  0%, 100% { transform: scale(.72); opacity: .65; }
+  40% { transform: scale(1.12); opacity: 1; }
+}
+.hv2-dropblock { transform-box: fill-box; transform-origin: center; animation: hv2-dropblock 2s cubic-bezier(.3, .9, .4, 1) infinite; }
+@keyframes hv2-dropblock {
+  0% { transform: translateY(-2.6px); opacity: .3; }
+  30% { transform: translateY(0); opacity: 1; }
+  72%, 82% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-2.6px); opacity: .3; }
+}
+.hv2-type { animation: hv2-type 1.2s ease-in-out infinite; }
+@keyframes hv2-type {
+  0%, 60%, 100% { transform: translateY(.4px); opacity: .55; }
+  30% { transform: translateY(-1.2px); opacity: 1; }
+}
+.hv2-type.ty2 { animation-delay: .18s; }
+.hv2-type.ty3 { animation-delay: .36s; }
+.hv2-slowspin { transform-box: fill-box; transform-origin: center; animation: hv2-slowspin 9s linear infinite; }
+@keyframes hv2-slowspin { to { transform: rotate(360deg); } }
+.hv2-ringcore { transform-box: fill-box; transform-origin: center; animation: hv2-ringcore 1.8s ease-in-out infinite; }
+@keyframes hv2-ringcore {
+  0%, 100% { transform: scale(.84); opacity: .75; }
+  50% { transform: scale(1); opacity: 1; }
+}
+/* The route rider moves via SMIL animateMotion, which the global reduced-motion
+   rule can't still -- hide it there instead. */
+@media (prefers-reduced-motion: reduce) {
+  .hv2-traveldot { display: none; }
+}
 .hv2-node-label { font-size: .9rem; font-weight: 600; color: var(--navy); }
 .hv2-node-sub { display: block; margin-top: .12rem; font-size: .74rem; color: var(--muted); font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .hv2-node-state { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-soft); }
@@ -183,30 +325,45 @@
 .hv2-node.is-done + .hv2-node::before, .hv2-node.is-active + .hv2-node::before { background: rgba(24, 149, 255, .6); }
 
 .hv2-console-foot {
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  display: flex; align-items: center; gap: 1.6rem;
   margin-top: 1.1rem; padding-top: .95rem; border-top: 1px solid var(--line);
   font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .74rem; color: var(--muted);
 }
 .hv2-console-metric strong { color: var(--accent-ink); font-weight: 700; }
 
-/* ---------- Depth inside the tilted panels --------------------------------
-   The tilt and idle-drift primitives themselves live in motion3d.css and are
-   shared with the service pages. Only the per-layer depth is home-specific. */
-/* Inner layers lift off the panel so the tilt reads as depth rather than a
-   flat image being rotated. */
-/* Z values are deliberately shallow. The panels no longer clip their own
-   overflow (that is what makes preserve-3d work at all), so anything pushed
-   far forward visibly detaches past the panel edge. */
-.m3d-tilt .hv2-console-bar,
-.m3d-tilt .hv2-chat-head,
-.m3d-tilt .hv2-editor-bar { transform: translateZ(16px); }
-.m3d-tilt .hv2-flow,
-.m3d-tilt .hv2-chat-body,
-.m3d-tilt .hv2-editor-body { transform: translateZ(8px); transform-style: preserve-3d; }
-/* The step that is currently running rises out of the stack. */
-.m3d-tilt .hv2-node { transition: transform .4s cubic-bezier(.22,1,.36,1), border-color .4s ease, background .4s ease; }
-.m3d-tilt .hv2-node.is-active { transform: translateX(3px) translateZ(14px); }
-.m3d-tilt .hv2-node.is-done { transform: translateZ(4px); }
+/* ---------- Hero stage: surfaces at real depth ----------------------------
+   The panels are no longer rotated toward the cursor. They sit at different
+   Z offsets inside one perspective (owned by Stage in motion3d/Depth.jsx)
+   and travel at rates proportional to that depth, which is what actually
+   reads as three dimensions. Everything here is structure and resting depth;
+   the motion is written by Depth.jsx as motion values. */
+.hv2-hero-stage { position: relative; min-height: clamp(24rem, 34vw, 30rem); display: grid; align-items: center; }
+.hv2-hero-stage .m3d-world { display: grid; align-items: center; }
+
+/* Backdrop plate. Sits well behind the console, so it slides noticeably less
+   than the chips in front -- the parallax gap is the whole effect. */
+.hv2-stage-glow {
+  position: absolute; inset: -12% -8%; border-radius: 44px; pointer-events: none;
+  background:
+    radial-gradient(45% 55% at 30% 25%, rgba(24, 149, 255, .3), transparent 70%),
+    radial-gradient(45% 55% at 78% 78%, rgba(124, 96, 255, .26), transparent 70%);
+  filter: blur(34px);
+}
+
+.hv2-stage-console { position: relative; }
+/* Each row of the console keeps its own depth, so the panel is a stack of
+   layers rather than one printed image. */
+.hv2-stage-console .hv2-console,
+.hv2-stage-console .hv2-console-body,
+.hv2-stage-console .hv2-flow { transform-style: preserve-3d; }
+.hv2-stage-console .hv2-console-bar { transform: translateZ(18px); }
+.hv2-stage-console .hv2-console-foot { transform: translateZ(10px); }
+.hv2-stage-console .hv2-node {
+  transition: transform .45s cubic-bezier(.22,1,.36,1), border-color .4s ease, background .4s ease;
+}
+.hv2-stage-console .hv2-node.is-active { transform: translateZ(30px); }
+.hv2-stage-console .hv2-node.is-done { transform: translateZ(8px); }
+
 
 
 /* =========================================================================
@@ -266,9 +423,8 @@
    beside it; the two proportional rows then divide that height between the
    wide frame and the pair below it. */
 .hv2-who { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 4vw, 4rem); align-items: stretch; }
-/* The collage tilts as a single object with each frame sitting at its own
-   depth, so the three photos separate rather than turning together flat.
-   --rx/--ry come from the pointer handler in WhoWeAreV2. */
+/* The collage tilts as one sheet under the pointer (trackPointer writes the
+   angles); each frame still sits at its own resting depth via translateZ. */
 .hv2-who-stage { height: 100%; perspective: 1100px; }
 .hv2-who-collage {
   display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: 1.25fr 1fr;
@@ -324,12 +480,13 @@
   transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, box-shadow .3s ease;
 }
 .hv2-who-card:hover { transform: translateX(4px); border-color: rgba(24, 149, 255, .3); box-shadow: 0 16px 32px -22px rgba(24, 149, 255, .8); }
-.hv2-who-icon { width: 2.9rem; height: 2.9rem; border-radius: 12px; display: grid; place-items: center; color: #fff; }
-/* One family rather than three unrelated hues: brand blue, then a violet
-   and an emerald at the same depth, so the row reads as a set. */
-.hv2-who-icon.blue { background: linear-gradient(140deg, #4da3ff, #1a56db); }
-.hv2-who-icon.violet { background: linear-gradient(140deg, #a78bfa, #6d28d9); }
-.hv2-who-icon.emerald { background: linear-gradient(140deg, #34d399, #047857); }
+/* Background-free marks: the illustration carries its own brand hue, so the
+   animation reads on the white card without a tile behind it. */
+.hv2-who-mark { width: 2.9rem; height: 2.9rem; display: grid; place-items: center; flex: none; }
+.hv2-who-mark.m-sky { color: #0ea5e9; }
+.hv2-who-mark.m-violet { color: #8b5cf6; }
+.hv2-who-mark.m-emerald { color: #0d9f6e; }
+
 .hv2-who-card h3 { margin: 0 0 .15rem; font-size: 1rem; font-weight: 700; color: var(--navy); }
 .hv2-who-card p { margin: 0; font-size: .9rem; color: var(--body); line-height: 1.5; }
 
@@ -343,37 +500,31 @@
 .hv2-bento-cell:nth-child(1), .hv2-bento-cell:nth-child(2) { grid-column: span 3; }
 .hv2-bento-cell, .hv2-team-cell { height: 100%; }
 .hv2-bento-card, .hv2-team-card { height: 100%; }
+/* No overflow clipping: it would collapse the card's 3D context and flatten
+   every layer inside it. The cursor wash is inherited from .m3d-card, which
+   clips itself with border-radius: inherit instead. */
 .hv2-bento-card {
-  position: relative; overflow: hidden;
-  will-change: transform; backface-visibility: hidden;
+  position: relative;
   padding: clamp(1.5rem, 2.4vw, 2rem);
   border-radius: var(--radius); background: #fff; border: 1px solid var(--line);
   box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 16px 34px -26px rgba(15, 31, 53, .4);
-  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+  transition: box-shadow .35s ease, border-color .35s ease;
 }
-.hv2-bento-card::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0; border-radius: inherit;
-  background: radial-gradient(14rem 14rem at var(--mx, 50%) var(--my, 0%), rgba(24, 149, 255, .13), transparent 62%);
-  opacity: 0; transition: opacity .35s ease;
-}
-.hv2-bento-card:hover::before { opacity: 1; }
 .hv2-bento-card > * { position: relative; z-index: 1; }
 /* No transform here: this card is a framer-motion element, and framer's
-   inline transform beats a stylesheet :hover rule. The lift and the 3D tilt
-   are driven from TiltCard instead. */
+   inline transform beats a stylesheet :hover rule. The Z lift is driven from
+   DepthCard instead. */
 .hv2-bento-card:hover { border-color: rgba(24, 149, 255, .34); box-shadow: 0 26px 50px -28px rgba(24, 149, 255, .55); }
-.hv2-bento-icon {
-  width: 3rem; height: 3rem; border-radius: 13px; display: grid; place-items: center;
-  background: var(--accent-soft); color: var(--accent); margin-bottom: 1.2rem;
-  transition: background .35s ease, color .35s ease, transform .38s cubic-bezier(.22,1,.36,1);
-}
-.hv2-bento-card:hover .hv2-bento-icon { background: var(--primary-gradient, #1895ff); color: #fff; transform: translateY(-3px) scale(1.06); }
+.hv2-bento-icon { --ic-size: 3rem; margin-bottom: 1.2rem; }
 .hv2-bento-card h3 { margin: 0 0 .6rem; font-size: 1.18rem; font-weight: 700; color: var(--navy); text-wrap: balance; }
 .hv2-bento-card p { margin: 0; font-size: .97rem; line-height: 1.68; color: var(--body); }
 .hv2-bento-tag {
   display: inline-block; margin-top: 1.1rem; padding: .3rem .7rem; border-radius: 999px;
   font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .68rem; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--accent-ink); background: var(--accent-soft);
+  text-transform: uppercase;
+  /* Inherits the card's tone tokens, so the tag matches its own icon rather
+     than every card sharing one blue. */
+  color: var(--ic-ink, var(--accent-ink)); background: var(--ic-soft, var(--accent-soft));
 }
 
 /* =========================================================================
@@ -416,7 +567,13 @@
    AI AGENT -- transcript that plays itself out
    ========================================================================= */
 .hv2-agent { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; }
+.hv2-chat-stage, .hv2-editor-stage { position: relative; }
 .hv2-chat { border-radius: 22px; background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 70px -40px rgba(15, 31, 53, .55); }
+/* Header and transcript sit at their own depths inside the panel, so the
+   panel is a stack of surfaces rather than one printed sheet. */
+.hv2-chat, .hv2-chat-body, .hv2-editor, .hv2-editor-body { transform-style: preserve-3d; }
+.hv2-chat-head, .hv2-editor-bar { transform: translateZ(20px); }
+.hv2-chat-foot { transform: translateZ(12px); }
 .hv2-chat-head {
   display: flex; align-items: center; gap: .7rem; padding: .95rem 1.15rem;
   background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646)); color: #fff;
@@ -534,11 +691,12 @@
 /* =========================================================================
    STACK strip
    ========================================================================= */
-/* Three bands at different angles read as one surface curving away rather
-   than three flat strips stacked up. */
-.hv2-stack-rows { display: grid; gap: 1rem; perspective: 1500px; }
-.hv2-stack-row:nth-child(1) { transform: rotateX(7deg) translateZ(-18px); }
-.hv2-stack-row:nth-child(3) { transform: rotateX(-7deg) translateZ(-18px); }
+/* The middle band sits nearest the viewer and the outer two recede, so the
+   strip reads as three surfaces at different distances. No rotation: the
+   chips stay square to the screen and fully legible. */
+.hv2-stack-rows { display: grid; gap: 1rem; perspective: 1400px; transform-style: preserve-3d; }
+.hv2-stack-row:nth-child(1), .hv2-stack-row:nth-child(3) { transform: translateZ(-90px); opacity: .82; }
+.hv2-stack-row:nth-child(2) { transform: translateZ(18px); }
 .hv2-stack-row {
   position: relative; overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
@@ -719,14 +877,19 @@
    PROOF -- case studies
    ========================================================================= */
 .hv2-proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+/* Perspective has to sit on the element directly above the card. The entrance
+   wrapper is that element, and `perspective` still applies to its children
+   even while framer is writing an inline transform on it. */
+.hv2-proof-slot { perspective: 1100px; height: 100%; }
 .hv2-proof-card {
   position: relative; display: flex; flex-direction: column; overflow: hidden;
+  height: 100%; will-change: transform;
   border-radius: var(--radius); background: #fff; border: 1px solid var(--line);
   box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 16px 34px -26px rgba(15, 31, 53, .4);
   transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
 }
 .hv2-proof-card:hover {
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
+  transform: translateZ(38px);
   border-color: rgba(24, 149, 255, .32);
   box-shadow: 0 26px 50px -28px rgba(24, 149, 255, .5);
 }
@@ -797,8 +960,7 @@
   }
   /* Flatten every CSS-driven 3D surface. !important because several of these
      are set by nth-child rules of equal specificity further up the file. */
-    .hv2-who-collage,
   .hv2-who-shot,
   .hv2-stack-row,
-  .m3d-float { transform: none !important; }
+  .hv2-stage-console .hv2-node { transform: none !important; }
 }

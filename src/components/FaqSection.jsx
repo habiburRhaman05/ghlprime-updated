@@ -43,7 +43,7 @@ export default function FaqSection({
             <span className="faq2-help-dot" aria-hidden="true" />
             <div>
               <strong>Still have a question?</strong>
-              <p>Ask us directly — same-day reply, no commitment.</p>
+              <p>Ask us directly, same-day reply, no commitment.</p>
             </div>
             <Link href="/booking" className="faq2-help-link">
               Book a free call <ArrowRight size={15} />

@@ -2,15 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
-import { Bot, Clock, Filter, CalendarCheck } from 'lucide-react'
-import Tilt from '../motion3d/Tilt'
+import { BrainCircuit, MoonStar, RefreshCcwDot, Target } from 'lucide-react'
+import { Plane, Stage } from '../motion3d/Depth'
 import './home-v2.css'
 
 // A real qualification exchange, played back message by message. This is the
 // section that has to *show* what an AI automation agency ships, so the
 // transcript is the product demo rather than a stock illustration.
 const SCRIPT = [
-  { from: 'user', text: 'Hi — do you handle GoHighLevel migrations?' },
+  { from: 'user', text: 'Hi, do you handle GoHighLevel migrations?' },
   { from: 'bot', text: 'We do. Are you moving off HubSpot, Keap, or something else?' },
   { from: 'user', text: 'HubSpot. About 12,000 contacts.' },
   { from: 'bot', text: 'That size migrates cleanly in 1–2 weeks with zero data loss. What is your timeline?' },
@@ -19,9 +19,9 @@ const SCRIPT = [
 ]
 
 const POINTS = [
-  { icon: Clock, title: 'Answers in seconds, at 3am', text: 'No queue, no missed enquiry, no lead going cold overnight while your team sleeps.' },
-  { icon: Filter, title: 'Qualifies before it books', text: 'Intent, budget, and timeline captured up front, so the calls that land are worth taking.' },
-  { icon: CalendarCheck, title: 'Writes straight back to your CRM', text: 'Contact, notes, pipeline stage, and calendar entry all updated without anyone touching it.' },
+  { icon: MoonStar, tone: 'ic-indigo', title: 'Answers in seconds, at 3am', text: 'No queue, no missed enquiry, no lead going cold overnight while your team sleeps.' },
+  { icon: Target, tone: 'ic-amber', title: 'Qualifies before it books', text: 'Intent, budget, and timeline captured up front, so the calls that land are worth taking.' },
+  { icon: RefreshCcwDot, tone: 'ic-teal', title: 'Writes straight back to your CRM', text: 'Contact, notes, pipeline stage, and calendar entry all updated without anyone touching it.' },
 ]
 
 const REPLY_MS = 1150
@@ -75,7 +75,7 @@ export default function AgentV2() {
             <span className="hv2-eyebrow">AI agents, deployed</span>
             <h2>Your best closer <span className="hv2-hl">never sleeps.</span></h2>
             <p>
-              We design, build, and deploy AI agents tailored to your agency&apos;s workflow —
+              We design, build, and deploy AI agents tailored to your agency&apos;s workflow, 
               qualifying leads, handling inquiries, running AI call centers, and booking
               meetings 24/7, without you touching a thing.
             </p>
@@ -85,8 +85,8 @@ export default function AgentV2() {
             {POINTS.map((p) => {
               const Icon = p.icon
               return (
-                <div className="hv2-agent-point" key={p.title}>
-                  <span className="hv2-agent-point-icon"><Icon size={19} /></span>
+                <div className="hv2-agent-point ic-hover" key={p.title}>
+                  <span className={`ic hv2-agent-point-icon ${p.tone}`}><Icon size={19} /></span>
                   <div>
                     <h4>{p.title}</h4>
                     <p>{p.text}</p>
@@ -103,13 +103,17 @@ export default function AgentV2() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
-        <Tilt
+        <Stage className="hv2-chat-stage" perspective={1400} travel={26}>
+        <Plane className="hv2-stage-glow" z={-170} lag={0.55} aria-hidden="true" />
+        <Plane
           className="hv2-chat"
+          z={0}
+          delay={0.06}
           role="img"
           aria-label={SCRIPT.map((m) => `${m.from === 'bot' ? 'Agent' : 'Visitor'}: ${m.text}`).join(' ')}
         >
           <div className="hv2-chat-head">
-            <span className="hv2-chat-avatar"><Bot size={16} /></span>
+            <span className="hv2-chat-avatar"><BrainCircuit size={16} /></span>
             <span>
               <span className="hv2-chat-name">Intake Agent</span>
               <span className="hv2-chat-status">Answers in under 5 seconds</span>
@@ -123,11 +127,11 @@ export default function AgentV2() {
                 <motion.div
                   className={`hv2-msg from-${m.from}`}
                   key={i}
-                  style={{ transformPerspective: 700, transformOrigin: 'bottom center' }}
-                  initial={{ opacity: 0, rotateX: -55, y: 12 }}
-                  animate={{ opacity: 1, rotateX: 0, y: 0 }}
-                  exit={{ opacity: 0, rotateX: 30, transition: { duration: 0.2 } }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 24, mass: 0.7 }}
+                  style={{ transformPerspective: 800 }}
+                  initial={{ opacity: 0, z: -140, y: 10 }}
+                  animate={{ opacity: 1, z: 0, y: 0 }}
+                  exit={{ opacity: 0, z: -90, transition: { duration: 0.2 } }}
+                  transition={{ type: 'spring', stiffness: 210, damping: 24, mass: 0.7 }}
                 >
                   {m.text}
                 </motion.div>
@@ -144,7 +148,8 @@ export default function AgentV2() {
             <span className="hv2-chat-foot-dot" aria-hidden="true" />
             Meeting booked · contact and pipeline stage synced to GoHighLevel
           </div>
-        </Tilt>
+        </Plane>
+        </Stage>
         </motion.div>
       </div>
     </section>

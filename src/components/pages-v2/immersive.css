@@ -352,16 +352,8 @@
 .iv-face.front strong { display: block; margin: 0.5rem 0 0.4rem; font-size: 1.06rem; font-weight: 800; color: var(--navy); line-height: 1.3; }
 .iv-face.front p { margin: 0; font-size: 0.83rem; line-height: 1.6; color: var(--body); }
 .iv-face-chip { display: flex; align-items: flex-start; gap: 0.7rem; }
-.iv-face-chip .iv-face-chip-icon {
-  flex: none;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: var(--primary-gradient, #1895ff);
-  color: #fff;
-}
+/* Geometry only -- the fill comes from the tone class (icon-system.css). */
+.iv-face-chip .iv-face-chip-icon { --ic-size: 2.2rem; border-radius: 10px; }
 .iv-face-chip strong { display: block; font-size: 0.92rem; font-weight: 800; color: var(--navy); }
 .iv-face-chip span:not(.iv-face-chip-icon) { display: block; margin-top: 0.15rem; font-size: 0.78rem; line-height: 1.45; color: var(--body); }
 .iv-face-mark {

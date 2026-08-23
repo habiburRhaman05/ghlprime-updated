@@ -37,7 +37,7 @@ export default function LifeAtGhlV2() {
           <span className="hv2-eyebrow">Team culture</span>
           <h2>Life at <span className="hv2-hl">GHL Prime.</span></h2>
           <p>
-            The team behind the builds — in one office, working the same hours your clients do,
+            The team behind the builds, in one office, working the same hours your clients do,
             and shipping together rather than passing tickets around.
           </p>
         </motion.div>

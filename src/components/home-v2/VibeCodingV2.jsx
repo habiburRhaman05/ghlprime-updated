@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import Tilt from '../motion3d/Tilt'
+import { Plane, Stage } from '../motion3d/Depth'
 import './home-v2.css'
 
 // Carried over from the old Vibe Coding capability chips.
@@ -95,7 +95,7 @@ export default function VibeCodingV2() {
             <span className="hv2-eyebrow">Vibe coding</span>
             <h2>If GHL can&rsquo;t do it, <span className="hv2-hl">we build it.</span></h2>
             <p>
-              When the platform stops short, we write the layer that closes the gap — custom
+              When the platform stops short, we write the layer that closes the gap, custom
               endpoints, dashboards, and logic wired straight back into your workflows.
             </p>
           </div>
@@ -123,8 +123,12 @@ export default function VibeCodingV2() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
-        <Tilt
+        <Stage className="hv2-editor-stage" perspective={1400} travel={26}>
+        <Plane className="hv2-stage-glow" z={-170} lag={0.55} aria-hidden="true" />
+        <Plane
           className="hv2-editor"
+          z={0}
+          delay={0.06}
           role="img"
           aria-label="A custom GoHighLevel integration being written: syncDealToClientPortal pushes a deal into a client portal and triggers a portal-updated workflow back inside GHL."
         >
@@ -152,7 +156,8 @@ export default function VibeCodingV2() {
               )
             })}
           </pre>
-        </Tilt>
+        </Plane>
+        </Stage>
         </motion.div>
       </div>
     </section>

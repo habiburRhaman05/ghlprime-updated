@@ -211,7 +211,6 @@
   position: relative;
   z-index: 2;
   color: #2c73f0;
-  text-shadow: 0 0 18px rgba(44, 115, 240, 0.14);
 }
 .training-heading-sweep {
   position: absolute;

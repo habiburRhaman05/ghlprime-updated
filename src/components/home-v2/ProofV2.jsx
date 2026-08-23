@@ -33,18 +33,19 @@ export default function ProofV2() {
         >
           <span className="hv2-eyebrow">Proof of work</span>
           <h2>Systems already <span className="hv2-hl">running in production.</span></h2>
-          <p>Real builds for real agencies — the automations, AI agents, and CRMs behind them are live right now.</p>
+          <p>Real builds for real agencies, the automations, AI agents, and CRMs behind them are live right now.</p>
         </motion.div>
 
         <div className="hv2-proof">
           {studies.map((study, i) => (
             <motion.div
+              className="hv2-proof-slot"
               key={study.id || study.slug || i}
-              style={{ transformOrigin: 'top center', transformPerspective: 1100 }}
-              initial={{ opacity: 0, rotateX: -42, y: 26 }}
-              whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+              style={{ transformPerspective: 1100 }}
+              initial={{ opacity: 0, z: -280, y: 20 }}
+              whileInView={{ opacity: 1, z: 0, y: 0 }}
               viewport={{ once: false, amount: 0.25 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: i * 0.09 }}
+              transition={{ type: 'spring', stiffness: 74, damping: 17, mass: 0.85, delay: i * 0.1 }}
             >
               <Link
                 href={study.slug ? `/case-studies/${safeSlug(study.slug)}` : '/case-studies'}

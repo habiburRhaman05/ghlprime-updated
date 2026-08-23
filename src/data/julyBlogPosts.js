@@ -20,11 +20,11 @@ export const julyBlogPosts = [
     "published_at": "2026-07-10T09:00:00+00:00",
     "content":
       "<p>GHL is short for GoHighLevel, an all-in-one sales and marketing platform that combines a CRM, funnel and website builder, email and SMS marketing, appointment booking, and review management into one login. It is built primarily for marketing agencies and local service businesses in the US.</p>" +
-      "<p>If you searched for what is GHL and landed in a pile of agency jargon, that is the short answer. The rest of this guide explains what it means in practice &mdash; what GoHighLevel replaces, what it costs, where it is genuinely strong, and where it will frustrate you.</p>" +
+      "<p>If you searched for what is GHL and landed in a pile of agency jargon, that is the short answer. The rest of this guide explains what it means in practice, what GoHighLevel replaces, what it costs, where it is genuinely strong, and where it will frustrate you.</p>" +
       "<h2>Key takeaways</h2>" +
       "<ul>" +
       "<li><strong>GHL is an acronym for GoHighLevel</strong>, sometimes branded simply as HighLevel. The client-facing white-label app is called LeadConnector.</li>" +
-      "<li>It replaces a stack of separate tools &mdash; typically a CRM, an email platform, an SMS provider, a booking tool, a funnel builder, and a review tool.</li>" +
+      "<li>It replaces a stack of separate tools, typically a CRM, an email platform, an SMS provider, a booking tool, a funnel builder, and a review tool.</li>" +
       "<li>Pricing sits at three tiers: <strong>$97, $297, and $497 per month</strong> as of July 2026, plus usage charges for texts, emails, and calls.</li>" +
       "<li>It is designed agency-first. A single account holds many <strong>sub-accounts</strong> (one per client), which is why agencies adopt it and why solo business owners sometimes find it heavy.</li>" +
       "<li>It is a service platform, not a magic button. Budget real configuration time before it produces anything.</li>" +
@@ -58,10 +58,10 @@ export const julyBlogPosts = [
       "<p>Broadly, GoHighLevel fits three groups:</p>" +
       "<ul>" +
       "<li><strong>Marketing agencies</strong> serving local service clients, who want one system across every client and the option to bill for it.</li>" +
-      "<li><strong>Local service businesses</strong> &mdash; home services, clinics, gyms, law firms, contractors &mdash; that live on inbound calls, texts, and booked appointments.</li>" +
+      "<li><strong>Local service businesses</strong> (home services, clinics, gyms, law firms, contractors) that live on inbound calls, texts, and booked appointments.</li>" +
       "<li><strong>Consultants and coaches</strong> selling courses or programs who need funnels, memberships, and follow-up in one place.</li>" +
       "</ul>" +
-      "<p>Standing up a sub-account properly &mdash; pipelines, calendars, phone registration, and automations that do not double-text people &mdash; is genuinely fiddly, and most teams lose a day or two to it the first time. If you would rather not, the GHL Prime team does this build as a standard <a href='/services/ghl-setup'>GoHighLevel setup engagement</a>. Either way, here is what the plans actually get you.</p>" +
+      "<p>Standing up a sub-account properly (pipelines, calendars, phone registration, and automations that do not double-text people) is genuinely fiddly, and most teams lose a day or two to it the first time. If you would rather not, the GHL Prime team does this build as a standard <a href='/services/ghl-setup'>GoHighLevel setup engagement</a>. Either way, here is what the plans actually get you.</p>" +
       "<h2>How much does GHL cost, and what do the plans include?</h2>" +
       "<p>As of July 2026 GoHighLevel sells three tiers. Pricing changes, so confirm current numbers before you budget.</p>" +
       "<ul>" +
@@ -75,7 +75,7 @@ export const julyBlogPosts = [
       "<p>A first build follows the same order almost every time. Doing it out of order is what creates the mess people later pay to have untangled.</p>" +
       "<ol>" +
       "<li><strong>Create the sub-account.</strong> One per business. Never run two clients in one sub-account, because contacts, numbers, and automations cannot be cleanly separated later.</li>" +
-      "<li><strong>Fill in the business profile.</strong> Legal name, address, EIN, and website. This is not admin busywork &mdash; US phone registration reads these fields, and a mismatch gets your texting application rejected.</li>" +
+      "<li><strong>Fill in the business profile.</strong> Legal name, address, EIN, and website. This is not admin busywork, US phone registration reads these fields, and a mismatch gets your texting application rejected.</li>" +
       "<li><strong>Buy and register a phone number.</strong> In the US you must complete A2P 10DLC brand and campaign registration before texting reliably reaches anyone. Start this early; it is the longest-lead item in the whole build.</li>" +
       "<li><strong>Connect email sending.</strong> Authenticate a sending domain with SPF, DKIM, and DMARC records so your email lands in inboxes rather than spam.</li>" +
       "<li><strong>Build pipelines that match how the business actually sells.</strong> Name stages as events you can verify, not feelings. &ldquo;Quote sent&rdquo; is a stage. &ldquo;Hot lead&rdquo; is not.</li>" +
@@ -87,7 +87,7 @@ export const julyBlogPosts = [
       "<h2>What can you actually build with GoHighLevel?</h2>" +
       "<p>Feature lists are abstract. These are the five automations that show up in almost every GHL Prime build, in the order clients usually feel them.</p>" +
       "<p><strong>1. Speed to lead.</strong> A form submission or new inbound lead triggers a text and an email inside sixty seconds, and drops a task on whoever owns follow-up. Response time is the single biggest lever on conversion for local services, and this one automation usually justifies the subscription on its own.</p>" +
-      "<p><strong>2. Missed-call text-back.</strong> When an inbound call goes unanswered, GoHighLevel sends an automatic text: an apology, a question, and a booking link. For home service businesses this is the highest-return automation in the platform, because a missed call is a customer already dialing a competitor. It is also the easiest one to get wrong &mdash; send it on every call including ones you answered, and you will annoy people.</p>" +
+      "<p><strong>2. Missed-call text-back.</strong> When an inbound call goes unanswered, GoHighLevel sends an automatic text: an apology, a question, and a booking link. For home service businesses this is the highest-return automation in the platform, because a missed call is a customer already dialing a competitor. It is also the easiest one to get wrong, send it on every call including ones you answered, and you will annoy people.</p>" +
       "<p><strong>3. Appointment reminders.</strong> A cadence of text and email reminders before a booked appointment, typically at twenty-four hours, two hours, and fifteen minutes. No-shows are pure lost margin for anyone selling time, and a reminder sequence is the cheapest fix available.</p>" +
       "<p><strong>4. Review requests.</strong> When a job is marked complete, the contact gets a review request pointed at your Google Business Profile. Timing matters more than wording: the window right after the work is finished is when people are most willing.</p>" +
       "<p><strong>5. Database reactivation.</strong> A campaign against contacts who went quiet six or twelve months ago. The list already exists and costs nothing to message, which makes it the fastest revenue in most accounts.</p>" +
@@ -180,7 +180,7 @@ export const julyBlogPosts = [
     "published": true,
     "published_at": "2026-07-11T09:00:00+00:00",
     "content":
-      "<p>A GoHighLevel snapshot is a reusable template of a sub-account. It copies the structure you built &mdash; workflows, funnels, pipelines, calendars, custom fields, and templates &mdash; into a new sub-account so you can deploy a proven setup in minutes instead of rebuilding it by hand.</p>" +
+      "<p>A GoHighLevel snapshot is a reusable template of a sub-account. It copies the structure you built (workflows, funnels, pipelines, calendars, custom fields, and templates) into a new sub-account so you can deploy a proven setup in minutes instead of rebuilding it by hand.</p>" +
       "<p>That is the sales pitch, and it is true. What nobody explains is the second half: a snapshot copies structure, not connections. Understanding exactly where that line falls is the difference between a five-minute client onboarding and a week of confused debugging.</p>" +
       "<h2>Key takeaways</h2>" +
       "<ul>" +
@@ -367,7 +367,7 @@ export const julyBlogPosts = [
       "<p><strong>The per-sub-account multiplier.</strong> Ten client accounts on Unlimited is $970 a month of cost before you have billed anyone. Agencies who assumed one agency-level fee get an unpleasant surprise in month two.</p>" +
       "<p><strong>Testing is billable.</strong> Every test call you make while tuning the agent consumes minutes at the same rate as a real customer. Budget for it during setup rather than wondering why a pre-launch month cost money.</p>" +
       "<p><strong>A bad call costs the same as a good one.</strong> If the agent mishandles the conversation and the customer hangs up at ninety seconds, you still pay for ninety seconds. Poor configuration is a direct cost, not just a quality problem.</p>" +
-      "<p><strong>Human transfers can bill twice.</strong> When the agent hands off to a real person, you may be paying for the AI minutes and the forwarded call leg. Design escalation to happen early or not at all, and think carefully about what happens when nobody picks up &mdash; we covered that failure mode in <a href='/blog/gohighlevel-voice-ai-call-transfer-no-answer'>what happens when the human transfer does not answer</a>.</p>" +
+      "<p><strong>Human transfers can bill twice.</strong> When the agent hands off to a real person, you may be paying for the AI minutes and the forwarded call leg. Design escalation to happen early or not at all, and think carefully about what happens when nobody picks up, we covered that failure mode in <a href='/blog/gohighlevel-voice-ai-call-transfer-no-answer'>what happens when the human transfer does not answer</a>.</p>" +
       "<p><strong>The platform plan is still separate.</strong> AI pricing sits on top of $97, $297, or $497. An agency on Unlimited platform with five AI sub-accounts is looking at $297 plus $485.</p>" +
       "<p><strong>Texting still needs registration.</strong> AI does not exempt you from US carrier rules. If the agent sends follow-up texts, that sub-account still needs A2P 10DLC registration or the messages quietly go nowhere.</p>" +
       "<h2>Which tier should you actually pick?</h2>" +
@@ -456,7 +456,7 @@ export const julyBlogPosts = [
       "<p>Two configuration details decide whether it helps or annoys:</p>" +
       "<ul>" +
       "<li><strong>Only fire on genuinely missed calls.</strong> If the automation triggers on answered calls too, every customer you just spoke to gets a text saying you missed them. This is the single most common misfire we see.</li>" +
-      "<li><strong>Ask a question, do not just apologize.</strong> &ldquo;Sorry we missed you&rdquo; invites nothing. &ldquo;Sorry we missed you &mdash; is this a no-heat emergency or can we book you this week?&rdquo; both qualifies and routes the lead in one message.</li>" +
+      "<li><strong>Ask a question, do not just apologize.</strong> &ldquo;Sorry we missed you&rdquo; invites nothing. &ldquo;Sorry we missed you, is this a no-heat emergency or can we book you this week?&rdquo; both qualifies and routes the lead in one message.</li>" +
       "</ul>" +
       "<p>Before any of this reaches a customer, the sub-account needs A2P 10DLC registration. US carriers filter unregistered business texts, and the failure is silent, so the dashboard shows delivered while nobody receives anything. Our <a href='/blog/a2p-10dlc-registration-leadconnector-complete-guide'>A2P 10DLC registration guide</a> covers the process, and it should be started on day one because it is the longest-lead item in the build.</p>" +
       "<h2>How do you build pre-season reactivation campaigns?</h2>" +
@@ -556,7 +556,7 @@ export const julyBlogPosts = [
       "<p>The exception is a very low-volume account sending a handful of transactional notifications a week. Below that threshold the warm-up effort outweighs the benefit.</p>" +
       "<h2>Use a subdomain, not the root domain</h2>" +
       "<p>Send marketing email from <strong>mail.clientdomain.com</strong> or <strong>send.clientdomain.com</strong>, never from clientdomain.com itself.</p>" +
-      "<p>The reason is containment. The root domain carries the owner&rsquo;s actual business email &mdash; quotes, invoices, replies to customers. If a marketing campaign damages sending reputation, you do not want that damage attached to the domain the business depends on to reach its accountant. Subdomains carry their own reputation, so a problem stays fenced.</p>" +
+      "<p>The reason is containment. The root domain carries the owner&rsquo;s actual business email, quotes, invoices, replies to customers. If a marketing campaign damages sending reputation, you do not want that damage attached to the domain the business depends on to reach its accountant. Subdomains carry their own reputation, so a problem stays fenced.</p>" +
       "<p>Pick the subdomain once and keep it. Rotating subdomains to escape a reputation problem is a tactic spammers use, and filters recognize it.</p>" +
       "<h2>How do you set up SPF, DKIM, and DMARC for GoHighLevel?</h2>" +
       "<p>All three are DNS TXT records added at the client&rsquo;s domain registrar or DNS host. GoHighLevel shows you the exact values to publish when you add a sending domain; your job is to add them correctly and verify.</p>" +
@@ -581,7 +581,7 @@ export const julyBlogPosts = [
       "<tr><td>3</td><td>500 to 1,000 per day</td><td>Opened in last 6 months</td><td>Gmail and Outlook placement</td></tr>" +
       "<tr><td>4</td><td>2,000 plus per day</td><td>Full active list</td><td>Any sudden drop in open rate</td></tr>" +
       "</tbody></table>" +
-      "<p>Two rules govern the whole ramp. <strong>Send to your best contacts first</strong>, because early positive engagement is what builds reputation. And <strong>stop escalating the moment metrics wobble</strong> &mdash; hold at the current volume for several days rather than pushing through a rising bounce rate.</p>" +
+      "<p>Two rules govern the whole ramp. <strong>Send to your best contacts first</strong>, because early positive engagement is what builds reputation. And <strong>stop escalating the moment metrics wobble</strong>, hold at the current volume for several days rather than pushing through a rising bounce rate.</p>" +
       "<p>Consistency beats volume. A domain sending 500 a day every weekday builds reputation faster than one sending 5,000 on a Monday and nothing else.</p>" +
       "<h2>Clean the list before you import it</h2>" +
       "<p>The fastest way to destroy a fresh domain is to import a client&rsquo;s old list and mail all of it. Before the first send:</p>" +
@@ -732,7 +732,7 @@ export const julyBlogPosts = [
       "<p>SMS reminders only reach anyone if the sub-account has completed A2P 10DLC registration. Unregistered US business texts are filtered silently, so the reminder appears sent and never arrives, which our <a href='/blog/a2p-10dlc-registration-leadconnector-complete-guide'>A2P 10DLC registration guide</a> explains in detail.</p>" +
       "<h2>How do you recover a no-show?</h2>" +
       "<p>Someone who booked and did not attend is a warmer lead than a cold form fill. They wanted the thing enough to schedule it. Most agencies never build the recovery workflow, which is free money left on the table.</p>" +
-      "<p>The mechanism is simple: mark the appointment status as a no-show, and trigger a workflow from that status change. In GoHighLevel the appointment status is what workflows listen to, so the discipline that matters is human &mdash; somebody has to actually mark it. If nobody updates statuses, no automation can help you. Feature naming around no-show handling has shifted over releases, so check what your account exposes and build against appointment status either way.</p>" +
+      "<p>The mechanism is simple: mark the appointment status as a no-show, and trigger a workflow from that status change. In GoHighLevel the appointment status is what workflows listen to, so the discipline that matters is human, somebody has to actually mark it. If nobody updates statuses, no automation can help you. Feature naming around no-show handling has shifted over releases, so check what your account exposes and build against appointment status either way.</p>" +
       "<p>A recovery sequence that performs:</p>" +
       "<ol>" +
       "<li><strong>Within 10 minutes:</strong> a text that assumes the best. Something went wrong, here is the link to grab another time.</li>" +
@@ -740,10 +740,10 @@ export const julyBlogPosts = [
       "<li><strong>Day three:</strong> a final short text. If no response, stop and drop them into a long-term nurture list rather than chasing.</li>" +
       "</ol>" +
       "<p>Tone is everything here. Accusatory phrasing kills the rebooking, so assume a flat tire rather than disrespect and keep the message short enough to answer from a parking lot.</p>" +
-      "<p>Also track the rate. If a particular calendar or rep runs a much higher no-show percentage, the problem is usually upstream &mdash; a booking window that is too long, an unclear appointment description, or leads booked before they were qualified.</p>" +
+      "<p>Also track the rate. If a particular calendar or rep runs a much higher no-show percentage, the problem is usually upstream, a booking window that is too long, an unclear appointment description, or leads booked before they were qualified.</p>" +
       "<p>Calendar configuration is fiddly and easy to get subtly wrong, and most teams lose a day to buffers and time zones the first time. If you would rather not, GHL Prime configures calendars and reminder cadences as part of our <a href='/services/ghl-setup'>GoHighLevel setup service</a>. Either way, book a test appointment yourself before any customer sees the link.</p>" +
       "<h2>Where to start</h2>" +
-      "<p>If bookings are already happening but no-shows are high, fix the reminder cadence first &mdash; it is an hour of work and the fastest measurable win. If bookings are conflicting or impossible to service, fix buffers, slot intervals, and connected calendars. If you are building from scratch, follow the ten steps above in order.</p>" +
+      "<p>If bookings are already happening but no-shows are high, fix the reminder cadence first, it is an hour of work and the fastest measurable win. If bookings are conflicting or impossible to service, fix buffers, slot intervals, and connected calendars. If you are building from scratch, follow the ten steps above in order.</p>" +
       "<p>Good GoHighLevel calendar setup is invisible when it works. If you would rather have it built correctly the first time, GHL Prime is a US-based implementation team and you can <a href='/booking'>book a free consultation</a>.</p>" +
       "<h2>Frequently asked questions about GoHighLevel calendars</h2>" +
       "<h3>What is the difference between round-robin and collective calendars?</h3>" +
@@ -817,7 +817,7 @@ export const julyBlogPosts = [
       "<li><strong>Velocity.</strong> A steady trickle of recent reviews signals an active business. Forty reviews in one week two years ago signals something else entirely.</li>" +
       "<li><strong>Recency.</strong> Customers discount reviews older than a few months, and so does the impression of the profile.</li>" +
       "</ul>" +
-      "<p>That is why automation wins. A business owner who asks manually will remember on quiet weeks and forget entirely during the busy season, which is exactly backwards &mdash; the busy season is when the most reviewable work happens.</p>" +
+      "<p>That is why automation wins. A business owner who asks manually will remember on quiet weeks and forget entirely during the busy season, which is exactly backwards, the busy season is when the most reviewable work happens.</p>" +
       "<p>If GoHighLevel itself is new, our guide to <a href='/blog/what-is-ghl'>what GHL is</a> covers the structure this sits inside. Review automation lives in a sub-account and is one of the easiest things to include in a standard client build.</p>" +
       "<h2>How do you set up review automation in GoHighLevel?</h2>" +
       "<p>The build has four parts and takes under an hour once the connection is authorized.</p>" +
@@ -854,7 +854,7 @@ export const julyBlogPosts = [
       "<p>Review gating means asking customers how satisfied they are first, then sending only the happy ones to Google while routing unhappy ones to a private feedback form. Plenty of tools have sold this as a feature. It is a bad idea and you should not build it.</p>" +
       "<p><strong>Google prohibits it.</strong> Their policies bar soliciting reviews selectively based on expected sentiment. Profiles found doing it risk having reviews removed or the profile penalized, and the client wears that consequence, not you.</p>" +
       "<p>Beyond policy, it does not work. A filtered five-star-only profile reads as fake to customers, who are demonstrably suspicious of a perfect record. A handful of critical reviews with a good response underneath builds more trust than a wall of unqualified praise.</p>" +
-      "<p>Ask everyone the same way. What you can legitimately do is fix problems before you ask &mdash; give the field team a way to flag a visit that went badly so the request is suppressed while somebody resolves it. Suppressing a request pending resolution is service recovery. Routing unhappy customers away from a public form permanently is gating.</p>" +
+      "<p>Ask everyone the same way. What you can legitimately do is fix problems before you ask, give the field team a way to flag a visit that went badly so the request is suppressed while somebody resolves it. Suppressing a request pending resolution is service recovery. Routing unhappy customers away from a public form permanently is gating.</p>" +
       "<h2>Where does Reviews AI help, and where must a human stay?</h2>" +
       "<p>Reviews AI can monitor incoming reviews and draft or post responses automatically. Responding to reviews is genuinely valuable and almost nobody does it consistently, so automation here solves a real problem.</p>" +
       "<p>Where it works well: <strong>positive reviews</strong>. A four or five star review needs a warm, brief, specific thank-you. That is a well-defined task and AI handles it at a quality most business owners will not beat, mostly because most business owners never reply at all.</p>" +
@@ -918,7 +918,7 @@ export const julyBlogPosts = [
     "published_at": "2026-07-17T09:00:00+00:00",
     "content":
       "<p>To migrate to GoHighLevel without downtime, run it as a sequenced project rather than a data export: audit what deserves to move, map fields deliberately, import contacts with every automation paused, rebuild workflows instead of copying them, and run both systems in parallel before you cut over.</p>" +
-      "<p>Migrations fail in predictable ways. The most expensive one is not losing data &mdash; it is importing five thousand contacts into an account with live automations and texting all of them at once. That single mistake has ended agency relationships, and it is entirely preventable.</p>" +
+      "<p>Migrations fail in predictable ways. The most expensive one is not losing data, it is importing five thousand contacts into an account with live automations and texting all of them at once. That single mistake has ended agency relationships, and it is entirely preventable.</p>" +
       "<h2>Key takeaways</h2>" +
       "<ul>" +
       "<li><strong>Pause every workflow before importing anything.</strong> This is the single most important line in this article.</li>" +
@@ -941,7 +941,7 @@ export const julyBlogPosts = [
       "<h2>Tags or custom fields: decide before you import</h2>" +
       "<p>Systems like HubSpot, Keap, and ActiveCampaign use tags heavily, and teams migrating in tend to bring thousands of them across. Do not.</p>" +
       "<p>The distinction that works: a <strong>tag</strong> records something that happened, and a <strong>custom field</strong> records something that is true.</p>" +
-      "<p>Attended Webinar March is a tag &mdash; it is an event. System Install Year is a custom field &mdash; it is an attribute with a value. Teams that encode attributes as tags end up with tag lists like Budget Under 5k, Budget 5k to 10k, and Budget Over 10k, where one numeric field would have been filterable, sortable, and usable in conditions.</p>" +
+      "<p>Attended Webinar March is a tag (it is an event. System Install Year is a custom field) it is an attribute with a value. Teams that encode attributes as tags end up with tag lists like Budget Under 5k, Budget 5k to 10k, and Budget Over 10k, where one numeric field would have been filterable, sortable, and usable in conditions.</p>" +
       "<p>Make this call during mapping. Changing it after import means exporting and re-importing everything.</p>" +
       "<h2>How do you import contacts without triggering live automations?</h2>" +
       "<p>This is the disaster section. Read it twice.</p>" +
@@ -1093,7 +1093,7 @@ export const julyBlogPosts = [
       "<li><strong>At Quote Sent:</strong> opportunity value and expected close date. A quote with no number cannot be forecast.</li>" +
       "<li><strong>At Closed Lost:</strong> a loss reason from a short fixed list. Free-text loss reasons are unreportable.</li>" +
       "</ul>" +
-      "<p>Keep the loss reason list to five or six options such as price, timing, went with competitor, no response, and not qualified. That single field is often the most valuable reporting asset in the whole account, because it tells the client whether they have a pricing problem or a follow-up problem &mdash; two very different fixes.</p>" +
+      "<p>Keep the loss reason list to five or six options such as price, timing, went with competitor, no response, and not qualified. That single field is often the most valuable reporting asset in the whole account, because it tells the client whether they have a pricing problem or a follow-up problem, two very different fixes.</p>" +
       "<h2>How do you track attribution so paid, organic, and referral separate?</h2>" +
       "<p>Attribution has to be captured at the moment of contact. It cannot be reconstructed later, and asking a client in November where their August leads came from produces guesses.</p>" +
       "<p>Four capture points cover most local businesses:</p>" +
@@ -1112,7 +1112,7 @@ export const julyBlogPosts = [
       "<p>Attribution work is genuinely fiddly, and the tracking-number and UTM plumbing is where most teams lose a day. If you would rather not, GHL Prime builds attribution and reporting as part of our <a href='/services/automation'>automation and workflow service</a>. Either way, capture at the source is the principle that makes the rest possible.</p>" +
       "<h2>Using the Opportunities view for forecasting</h2>" +
       "<p>Once value and expected close date are enforced, the Opportunities view becomes a forecast rather than a list. Two habits make it trustworthy.</p>" +
-      "<p><strong>Weight by stage, not by hope.</strong> A deal at Quote Sent is not the same as one at Quote Accepted. Applying a rough probability per stage &mdash; say 20 percent at quote sent and 80 percent at accepted &mdash; turns a pipeline total into a number worth planning against.</p>" +
+      "<p><strong>Weight by stage, not by hope.</strong> A deal at Quote Sent is not the same as one at Quote Accepted. Applying a rough probability per stage (say 20 percent at quote sent and 80 percent at accepted) turns a pipeline total into a number worth planning against.</p>" +
       "<p><strong>Enforce stale-deal hygiene.</strong> Any opportunity untouched for thirty days is not really open. Build a workflow that flags them so somebody either advances or closes them. A pipeline full of six-month-old deals inflates the forecast and hides the real number.</p>" +
       "<p>Automating that nudge is a good use of a simple workflow, and our roundup of <a href='/blog/5-gohighlevel-automation-workflows-every-agency-needs'>five workflows every agency needs</a> covers the general pattern for follow-up automations.</p>" +
       "<h2>What five widgets belong on a client dashboard?</h2>" +

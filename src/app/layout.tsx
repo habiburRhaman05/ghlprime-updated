@@ -17,6 +17,7 @@ import '../styles/footer-redesign.css'
 import '../styles/contact-page.css'
 import '../styles/certification-badges.css'
 import '../styles/faq.css'
+import '../styles/icon-system.css'
 
 import App from '../App'
 

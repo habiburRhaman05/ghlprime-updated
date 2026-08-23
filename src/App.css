@@ -286,15 +286,13 @@ button { font: inherit; }
 .primary-pill.why-choose-reference-cta,
 .primary-pill.vibe-cta-premium {
   background: var(--primary-gradient);
-  box-shadow: 0 14px 30px rgba(2, 38, 70, 0.35);
-  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  transition: transform .25s ease, filter .25s ease;
 }
 .primary-pill.nav-cta:hover,
 .primary-pill.hh-cta-primary:hover,
 .primary-pill.homepage-cta-btn:hover,
 .primary-pill.why-choose-reference-cta:hover,
 .primary-pill.vibe-cta-premium:hover {
-  box-shadow: 0 18px 38px rgba(2, 38, 70, 0.45);
   filter: brightness(1.12);
 }
 
@@ -302,7 +300,7 @@ button { font: inherit; }
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: 0 1rem; border-radius: 999px; font-weight: 700; transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
 }
 .primary-pill:hover, .secondary-pill:hover, .platform-tabs button:hover, .dashboard-tabs button:hover, .dashboard-cta:hover, .banner-settings:hover, .widget-preview-card button:hover, .sidebar-link:hover { transform: translateY(-2px); }
-.primary-pill { color: #fff; background: var(--primary-gradient); box-shadow: 0 14px 30px rgba(2, 38, 70, 0.28); border: 0; cursor: pointer; }
+.primary-pill { color: #fff; background: var(--primary-gradient); border: 0; cursor: pointer; }
 .primary-pill.large, .secondary-pill { min-height: 3rem; padding-inline: 1.25rem; }
 .secondary-pill { border: 1px solid rgba(22, 132, 234, 0.16); color: var(--primary); background: rgba(255,255,255,.92); }
 

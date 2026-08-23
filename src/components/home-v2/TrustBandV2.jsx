@@ -46,11 +46,11 @@ function Stat({ stat, active, reduceMotion, index }) {
   return (
     <motion.div
       className="hv2-stat"
-      // Hinged from the bottom edge, so the tiles swing up into the bar
-      // rather than sliding. The parent supplies the perspective.
-      style={{ transformOrigin: 'bottom center', transformPerspective: 900 }}
-      initial={{ opacity: 0, rotateX: -55 }}
-      whileInView={{ opacity: 1, rotateX: 0 }}
+      // Arrives out of depth and pushes further forward on hover, the same
+      // vocabulary every other surface on the page uses.
+      style={{ transformPerspective: 900 }}
+      initial={{ opacity: 0, z: -240, y: 16 }}
+      whileInView={{ opacity: 1, z: 0, y: 0 }}
       whileHover={{ z: 30, transition: { type: 'spring', stiffness: 260, damping: 22 } }}
       viewport={{ once: true, amount: 0.5 }}
       transition={{ type: 'spring', stiffness: 90, damping: 16, mass: 0.9, delay: index * 0.08 }}

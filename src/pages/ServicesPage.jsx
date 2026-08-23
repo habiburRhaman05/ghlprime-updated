@@ -5,7 +5,7 @@ import Link from 'next/link'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { SERVICES_FAQS } from '../data/faqs'
-import { ArrowRight, Bot, BriefcaseBusiness, Clock3, Code2, CreditCard, Headset, LayoutDashboard, Link2, MessageSquareText, Network, Settings2, Users, Workflow, Wrench, Check, X, Minus, User, TrendingUp } from 'lucide-react'
+import { ArrowRight, BotMessageSquare, Cable, Check, HandCoins, Hammer, Minus, MessagesSquare, PanelsTopLeft, SlidersHorizontal, SquareTerminal, Timer, TrendingUp, UserRound, UsersRound, VenetianMask, Waypoints, X } from 'lucide-react'
 
 const hireModels = [
   {
@@ -39,14 +39,14 @@ const hireModels = [
 ]
 
 const expertHandles = [
-  { title: 'GoHighLevel Setup & SaaS Configuration', text: 'Launch sub-accounts, snapshots, whitelabel setup, settings, domains, calendars, pipelines, and full CRM structure.', icon: Settings2 },
-  { title: 'Workflow Automation', text: 'Build and optimize workflows that actually work lead routing, nurture, onboarding, reactivation, reminders, and internal automations.', icon: Workflow },
-  { title: 'AI Agents & Call Center Setup', text: 'Deploy AI chat agents, voice agents, qualification systems, and AI call flows connected directly to your GHL workflows.', icon: Bot },
-  { title: 'White-Labeled Client Support', text: 'Need support under your own brand? We provide invisible expert help that feels like part of your internal team.', icon: Headset },
-  { title: 'API Integrations & Custom Connections', text: 'Connect GHL with third-party tools, internal systems, payment platforms, reporting dashboards, and custom workflows.', icon: Link2 },
-  { title: 'Vibe Coding & Custom Development', text: 'If GHL can’t do it natively, we build around it with custom code, interfaces, automations, and lightweight software solutions.', icon: Code2 },
-  { title: 'Sub-Account / SaaS Fulfillment', text: 'We support your client accounts behind the scenes so your SaaS or agency offer stays clean, consistent, and scalable.', icon: LayoutDashboard },
-  { title: 'Client Onboarding & Payment Setup', text: 'Forms, funnels, Stripe setup, onboarding flow, Twilio, email config, onboarding pipelines, and everything clients need to get started.', icon: CreditCard },
+  { title: 'GoHighLevel Setup & SaaS Configuration', text: 'Launch sub-accounts, snapshots, whitelabel setup, settings, domains, calendars, pipelines, and full CRM structure.', icon: SlidersHorizontal, tone: 'ic-sky' },
+  { title: 'Workflow Automation', text: 'Build and optimize workflows that actually work lead routing, nurture, onboarding, reactivation, reminders, and internal automations.', icon: Waypoints, tone: 'ic-indigo' },
+  { title: 'AI Agents & Call Center Setup', text: 'Deploy AI chat agents, voice agents, qualification systems, and AI call flows connected directly to your GHL workflows.', icon: BotMessageSquare, tone: 'ic-violet' },
+  { title: 'White-Labeled Client Support', text: 'Need support under your own brand? We provide invisible expert help that feels like part of your internal team.', icon: MessagesSquare, tone: 'ic-teal' },
+  { title: 'API Integrations & Custom Connections', text: 'Connect GHL with third-party tools, internal systems, payment platforms, reporting dashboards, and custom workflows.', icon: Cable, tone: 'ic-amber' },
+  { title: 'Vibe Coding & Custom Development', text: 'If GHL can’t do it natively, we build around it with custom code, interfaces, automations, and lightweight software solutions.', icon: SquareTerminal, tone: 'ic-rose' },
+  { title: 'Sub-Account / SaaS Fulfillment', text: 'We support your client accounts behind the scenes so your SaaS or agency offer stays clean, consistent, and scalable.', icon: PanelsTopLeft, tone: 'ic-emerald' },
+  { title: 'Client Onboarding & Payment Setup', text: 'Forms, funnels, Stripe setup, onboarding flow, Twilio, email config, onboarding pipelines, and everything clients need to get started.', icon: HandCoins, tone: 'ic-blue' },
 ]
 
 const steps = [
@@ -195,12 +195,12 @@ export default function ServicesPage() {
           </div>
           <div className="services-redesign-hero-visual">
             <div className="services-hero-glass-card main">
-              <Users size={24} />
+              <span className="ic ic-lg ic-solid ic-blue"><UsersRound size={24} /></span>
               <strong>Your On-Demand GHL Team</strong>
               <span>Builds, support, training, AI, and execution.</span>
             </div>
-            <div className="services-hero-glass-card floating one"><Clock3 size={18} /><span>Hourly / Project / Full-Time</span></div>
-            <div className="services-hero-glass-card floating two"><BriefcaseBusiness size={18} /><span>Fully white-labeled</span></div>
+            <div className="services-hero-glass-card floating one"><span className="ic ic-sm ic-solid ic-amber"><Timer size={18} /></span><span>Hourly / Project / Full-Time</span></div>
+            <div className="services-hero-glass-card floating two"><span className="ic ic-sm ic-solid ic-violet"><VenetianMask size={18} /></span><span>Fully white-labeled</span></div>
           </div>
         </div>
       </section>
@@ -240,7 +240,7 @@ export default function ServicesPage() {
               const Icon = item.icon
               return (
                 <motion.article key={item.title} className="services-expert-card" initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -8, scale: 1.01 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.4, delay: index * 0.04 }}>
-                  <div className="services-expert-icon"><Icon size={18} /></div>
+                  <div className={`ic services-expert-icon ${item.tone}`}><Icon size={18} /></div>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
                 </motion.article>
@@ -323,18 +323,18 @@ export default function ServicesPage() {
                 <tr className="services-compare-row services-compare-head-row">
                   <td className="services-compare-cell services-compare-rowlabel" aria-hidden="true" />
                   <th scope="col" className="services-compare-cell services-compare-colhead">
-                    <span className="services-compare-colicon"><User size={18} /></span>
+                    <span className="ic ic-sm services-compare-colicon ic-amber"><UserRound size={18} /></span>
                     <strong>Freelancer</strong>
                     <span className="services-compare-colsub">Contract help</span>
                   </th>
                   <th scope="col" className="services-compare-cell services-compare-colhead">
-                    <span className="services-compare-colicon"><Wrench size={18} /></span>
+                    <span className="ic ic-sm services-compare-colicon ic-rose"><Hammer size={18} /></span>
                     <strong>DIY</strong>
                     <span className="services-compare-colsub">You handle it</span>
                   </th>
                   <th scope="col" className="services-compare-cell services-compare-colhead services-compare-col-highlight">
                     <span className="services-compare-badge">Recommended</span>
-                    <span className="services-compare-colicon"><Users size={18} /></span>
+                    <span className="ic ic-sm ic-solid services-compare-colicon ic-blue"><UsersRound size={18} /></span>
                     <strong>GHL Prime</strong>
                     <span className="services-compare-colsub">Your expert team</span>
                   </th>

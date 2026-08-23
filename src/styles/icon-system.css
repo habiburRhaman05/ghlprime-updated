@@ -1,0 +1,115 @@
+/* =========================================================================
+   Icon system
+
+   One palette for every icon on the marketing side of the site. Before this
+   file the tiles were almost all brand-blue with a handful of one-off
+   gradients invented per section, so a page of six features read as six
+   copies of the same badge.
+
+   Two things live here:
+
+     1. Eight tone tokens. Each one exposes the same four variables, so a
+        tile only ever consumes --ic-*, never a literal hex. Recolouring a
+        section is a class swap.
+     2. The .ic tile itself, in a soft (default) and solid variant, plus the
+        hover behaviour: the tile fills with its gradient and lifts.
+
+   Applied to existing section stylesheets further down, so the older tiles
+   pick the palette up without their markup changing.
+   ========================================================================= */
+
+:root {
+  /* Glyph weight. Lucide ships stroke-width="2" as a presentation attribute;
+     a CSS property beats it, and 1.8 reads noticeably less blunt at the
+     small sizes these tiles use. */
+  --ic-stroke: 1.8;
+}
+
+.ic-sky     { --ic-from: #38bdf8; --ic-to: #0284c7; --ic-ink: #0369a1; --ic-soft: rgba(56, 189, 248, .14); }
+.ic-blue    { --ic-from: #60a5fa; --ic-to: #1d4ed8; --ic-ink: #1e40af; --ic-soft: rgba(59, 130, 246, .13); }
+.ic-indigo  { --ic-from: #818cf8; --ic-to: #4338ca; --ic-ink: #3730a3; --ic-soft: rgba(99, 102, 241, .13); }
+.ic-violet  { --ic-from: #c084fc; --ic-to: #7c3aed; --ic-ink: #6b21c8; --ic-soft: rgba(168, 85, 247, .13); }
+.ic-teal    { --ic-from: #2dd4bf; --ic-to: #0d9488; --ic-ink: #0f766e; --ic-soft: rgba(20, 184, 166, .14); }
+.ic-emerald { --ic-from: #34d399; --ic-to: #059669; --ic-ink: #047857; --ic-soft: rgba(16, 185, 129, .14); }
+.ic-amber   { --ic-from: #fbbf24; --ic-to: #d97706; --ic-ink: #a95a06; --ic-soft: rgba(245, 158, 11, .16); }
+.ic-rose    { --ic-from: #fb7185; --ic-to: #e11d48; --ic-ink: #be123c; --ic-soft: rgba(244, 63, 94, .13); }
+
+/* ---------- the tile ------------------------------------------------------ */
+/* The tone variables are deliberately NOT declared here. A custom property
+   set on the element itself beats one inherited from an ancestor, so
+   declaring defaults on .ic would stop a tone class on the parent card from
+   ever reaching the tile. Defaults live in the var() fallbacks instead. */
+.ic {
+  --ic-size: 2.9rem;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--ic-size);
+  height: var(--ic-size);
+  /* A squircle rather than a rounded square -- softer at these sizes and it
+     stops the tile competing with the rectangular cards it sits inside. */
+  border-radius: 32%;
+  color: var(--ic-ink, #1e40af);
+  background: var(--ic-soft, rgba(59, 130, 246, .13));
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / .55);
+  transition:
+    color .38s ease,
+    box-shadow .38s ease,
+    transform .45s cubic-bezier(.22, 1, .36, 1);
+}
+.ic svg { position: relative; z-index: 1; stroke-width: var(--ic-stroke); }
+
+/* The gradient fill is a pseudo-element that fades in, so hover is a real
+   crossfade instead of a hard background swap mid-transition. */
+.ic::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(140deg, var(--ic-from, #60a5fa), var(--ic-to, #1d4ed8));
+  opacity: 0;
+  transition: opacity .38s ease;
+}
+
+.ic-solid { color: #fff; box-shadow: 0 12px 24px -14px color-mix(in srgb, var(--ic-to, #1d4ed8) 75%, transparent); }
+.ic-solid::after { opacity: 1; }
+
+.ic-sm { --ic-size: 2.3rem; border-radius: 30%; }
+.ic-lg { --ic-size: 3.4rem; }
+
+/* Hover is driven from the card, not the tile, so the whole card is the
+   target. `:hover` on the tile itself is kept as a fallback for tiles that
+   are not inside one of these wrappers. */
+.ic:hover,
+.ic-hover:hover .ic,
+.hv2-card:hover .ic,
+.pv2-card:hover .ic,
+.svc-card:hover .ic {
+  color: #fff;
+  transform: translateY(-3px) scale(1.07);
+  box-shadow: 0 16px 30px -14px color-mix(in srgb, var(--ic-to, #1d4ed8) 80%, transparent);
+}
+.ic:hover::after,
+.ic-hover:hover .ic::after,
+.hv2-card:hover .ic::after,
+.pv2-card:hover .ic::after,
+.svc-card:hover .ic::after { opacity: 1; }
+
+/* ---------- palette applied to the pre-existing tiles --------------------- */
+/* These selectors belong to older stylesheets; the rules below only restate
+   colour so the palette reaches them without their markup changing. */
+.hv2-node-icon svg,
+.hv2-bento-icon svg,
+.hv2-cap-panel-icon svg,
+.hv2-agent-point-icon svg,
+.pv2-chip-icon svg,
+.pv2-card-icon svg,
+.pv2-check-icon svg,
+.svc-badge svg,
+.faq2-q svg { stroke-width: var(--ic-stroke); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ic, .ic::after { transition-duration: .001ms !important; }
+  .ic:hover, .ic-hover:hover .ic { transform: none !important; }
+}

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronRight, Check, LifeBuoy, Bot, ShieldCheck, Plug, Code2, GraduationCap } from 'lucide-react'
+import { BookOpenCheck, Bot, Cable, Check, ChevronRight, EyeOff, SquareTerminal, Wrench } from 'lucide-react'
 import './home-v2.css'
 
 // Content carried over from the previous "Everything Your Agency Needs" grid,
@@ -10,37 +10,43 @@ import './home-v2.css'
 // time instead of asking the reader to scan six boxes at once.
 const CAPS = [
   {
-    icon: LifeBuoy,
+    icon: Wrench,
+    tone: 'ic-sky',
     title: 'GHL technical support',
     text: 'Direct expert support for setup, troubleshooting, cleanup, and backend execution.',
     points: ['Same-day response on build issues', 'Account audits and cleanup', 'Backend execution without hand-holding'],
   },
   {
     icon: Bot,
+    tone: 'ic-violet',
     title: 'AI agents & call center setup',
     text: 'Deploy AI systems that qualify leads, support clients, and automate repetitive communication.',
     points: ['Lead qualification round the clock', 'Voice and chat agents inside GHL', 'Books straight into your calendar'],
   },
   {
-    icon: ShieldCheck,
+    icon: EyeOff,
+    tone: 'ic-indigo',
     title: 'White-labeled client support',
     text: 'Stay invisible behind your agency while we help you support clients under your own brand.',
     points: ['Your brand on every touchpoint', 'Clients never know we exist', 'Coverage across US, CA, UK, AU'],
   },
   {
-    icon: Plug,
+    icon: Cable,
+    tone: 'ic-teal',
     title: 'API integrations',
     text: 'Connect HighLevel with third-party tools, CRMs, dashboards, and custom workflows.',
     points: ['Zapier, Slack, Google Workspace', 'Custom endpoints when none exist', 'Webhooks, triggers, and syncs'],
   },
   {
-    icon: Code2,
+    icon: SquareTerminal,
+    tone: 'ic-amber',
     title: 'Vibe coding & custom dev',
     text: 'If HighLevel can’t do it natively, we can build around it with custom code and automation logic.',
     points: ['Custom dashboards and portals', 'AI-assisted development', 'Logic the platform does not ship'],
   },
   {
-    icon: GraduationCap,
+    icon: BookOpenCheck,
+    tone: 'ic-emerald',
     title: 'Training & SOP support',
     text: 'We train your team, document the system, and help you scale delivery with more confidence.',
     points: ['Live technical deep dives', 'Documented runbooks', 'Ongoing upskilling as you grow'],
@@ -93,13 +99,13 @@ export default function CapabilitiesV2() {
                 // Swaps by rotating the panel out and the next one in, rather
                 // than cross-fading -- the selection reads as one object
                 // turning to its next face.
-                style={{ transformPerspective: 1200, transformOrigin: 'left center' }}
-                initial={{ opacity: 0, rotateY: 42, x: -14 }}
-                animate={{ opacity: 1, rotateY: 0, x: 0 }}
-                exit={{ opacity: 0, rotateY: -28, x: 10 }}
+                style={{ transformPerspective: 1200 }}
+                initial={{ opacity: 0, z: -260, y: 14 }}
+                animate={{ opacity: 1, z: 0, y: 0 }}
+                exit={{ opacity: 0, z: -140, transition: { duration: 0.22 } }}
                 transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
               >
-                <span className="hv2-cap-panel-icon"><Icon size={24} /></span>
+                <span className={`ic ic-lg ic-solid hv2-cap-panel-icon ${current.tone}`}><Icon size={24} /></span>
                 <h3>{current.title}</h3>
                 <p>{current.text}</p>
                 <div className="hv2-cap-points">

@@ -16,11 +16,11 @@ const STEPS = [
   },
   {
     title: 'Walkthrough & handoff',
-    text: 'We walk you through everything we have built — how it works, why it is set up that way, and how to use it confidently with your clients.',
+    text: 'We walk you through everything we have built, how it works, why it is set up that way, and how to use it confidently with your clients.',
   },
   {
     title: 'Ongoing support & upskilling',
-    text: 'As the platform evolves and your agency grows, we keep you updated — new features, better workflows, smarter approaches.',
+    text: 'As the platform evolves and your agency grows, we keep you updated, new features, better workflows, smarter approaches.',
   },
 ]
 
@@ -55,11 +55,11 @@ export default function ProcessV2() {
             <motion.div
               className="hv2-step is-lit"
               key={step.title}
-              style={{ transformOrigin: 'top center', transformPerspective: 1000 }}
-              initial={{ opacity: 0, rotateX: -55, y: 24 }}
-              whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+              style={{ transformPerspective: 1000 }}
+              initial={{ opacity: 0, z: -300, y: 18 }}
+              whileInView={{ opacity: 1, z: 0, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: i * 0.12 }}
+              transition={{ type: 'spring', stiffness: 74, damping: 17, mass: 0.85, delay: i * 0.1 }}
             >
               <span className="hv2-step-dot" aria-hidden="true" />
               <span className="hv2-step-num">{String(i + 1).padStart(2, '0')}</span>

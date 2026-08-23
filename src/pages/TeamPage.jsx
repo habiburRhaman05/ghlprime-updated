@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion, animate, useInView, useMotionValue, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Sparkles, Users, Workflow } from 'lucide-react'
+import { ArrowRight, Orbit, UsersRound, Waypoints } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
 import FaqSection from '../components/FaqSection'
 import { TEAM_FAQS } from '../data/faqs'
@@ -88,7 +88,7 @@ function ValueCube() {
             </div>
             <div className="iv-face right">
               <div className="iv-face-chip">
-                <span className="iv-face-chip-icon"><Users size={16} /></span>
+                <span className="ic ic-sm ic-solid iv-face-chip-icon ic-sky"><UsersRound size={16} /></span>
                 <div>
                   <strong>Focused team</strong>
                   <span>Clear roles, aligned execution</span>
@@ -97,7 +97,7 @@ function ValueCube() {
             </div>
             <div className="iv-face left">
               <div className="iv-face-chip">
-                <span className="iv-face-chip-icon"><Workflow size={16} /></span>
+                <span className="ic ic-sm ic-solid iv-face-chip-icon ic-violet"><Waypoints size={16} /></span>
                 <div>
                   <strong>Systems-first delivery</strong>
                   <span>Built for scale and clarity</span>
@@ -105,7 +105,7 @@ function ValueCube() {
               </div>
             </div>
             <div className="iv-face top">
-              <Sparkles size={56} className="iv-face-ghost" />
+              <Orbit size={56} className="iv-face-ghost" />
             </div>
             <div className="iv-face bottom" />
           </div>
