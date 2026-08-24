@@ -174,7 +174,7 @@ export default function BentoV2() {
                 columns={2}
                 lift={26}
               >
-                <span className="ic hv2-bento-icon m3d-l3"><Icon size={22} /></span>
+                <span className="ic ic-solid hv2-bento-icon m3d-l3"><Icon size={22} /></span>
                 <h3 className="m3d-l2">{card.title}</h3>
                 <p className="m3d-l1">{card.text}</p>
                 <span className="hv2-bento-tag m3d-l2">{card.tag}</span>

@@ -94,6 +94,8 @@ const OUTCOMES = [
   { eyebrow: 'No more depending on developers', title: 'You run it. We support you when needed.' },
 ]
 
+const PHASE_SPRING = { type: 'spring', stiffness: 110, damping: 19, mass: 0.9 }
+
 export default function ProcessV2() {
   return (
     <section className="hv2 hv2-section is-white">
@@ -110,20 +112,51 @@ export default function ProcessV2() {
           <p>No black boxes. You end up owning a system you understand, with a team on call when you want to extend it.</p>
         </motion.div>
 
-        {/* Four phase cards chained by chevrons -- each card carries its own
-            living mark next to a gradient number disc. */}
+        {/* Four phase cards chained by chevrons -- each card arrives out of
+            depth, its number disc stamps in with a one-shot ping the moment
+            it lands, and the chevron between two cards draws in right as
+            the second one arrives, so the chain reads as being assembled
+            rather than four boxes that happened to fade in together. */}
         <div className="hv2-phases">
           {PHASES.map(({ icon: Icon, title, text }, i) => (
             <motion.div
               className="hv2-phase"
               key={title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              style={{ transformPerspective: 1000 }}
+              initial={{ opacity: 0, z: -130, y: 22 }}
+              whileInView={{ opacity: 1, z: 0, y: 0 }}
+              whileHover={{ z: 20, transition: { type: 'spring', stiffness: 260, damping: 22 } }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ type: 'spring', stiffness: 110, damping: 19, mass: 0.9, delay: i * 0.09 }}
+              transition={{ ...PHASE_SPRING, delay: i * 0.16 }}
             >
+              {i > 0 ? (
+                <motion.span
+                  className="hv2-phase-chevron"
+                  aria-hidden="true"
+                  initial={{ opacity: 0, x: -6, scale: 0.4, rotate: 45 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1, rotate: 45 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ type: 'spring', stiffness: 280, damping: 18, delay: i * 0.16 - 0.06 }}
+                />
+              ) : null}
               <div className="hv2-phase-top">
-                <span className="hv2-phase-num">{String(i + 1).padStart(2, '0')}</span>
+                <motion.span
+                  className="hv2-phase-num"
+                  initial={{ scale: 0.4, rotate: -30, opacity: 0 }}
+                  whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 16, mass: 0.7, delay: i * 0.16 + 0.14 }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                  <motion.span
+                    className="hv2-phase-ping"
+                    aria-hidden="true"
+                    initial={{ scale: 0.7, opacity: 0.7 }}
+                    whileInView={{ scale: 1.9, opacity: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.85, delay: i * 0.16 + 0.2, ease: 'easeOut' }}
+                  />
+                </motion.span>
                 <span className="hv2-phase-icon"><Icon size={26} /></span>
               </div>
               <h3>{title}</h3>
@@ -132,7 +165,8 @@ export default function ProcessV2() {
           ))}
         </div>
 
-        {/* What ownership looks like afterwards -- one quiet band, green ticks. */}
+        {/* What ownership looks like afterwards -- one quiet band, each tick
+            drawing itself in as its row arrives instead of just appearing. */}
         <motion.div
           className="hv2-own"
           initial={{ opacity: 0, y: 26 }}
@@ -140,17 +174,31 @@ export default function ProcessV2() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
-          {OUTCOMES.map((item) => (
-            <div className="hv2-own-item" key={item.title}>
+          {OUTCOMES.map((item, i) => (
+            <motion.div
+              className="hv2-own-item"
+              key={item.title}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 20, mass: 0.7, delay: i * 0.1 }}
+            >
               <span className="hv2-own-tick" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
-                  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 12.5l5 5 10-11" /></svg>
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <motion.path
+                    d="M4.5 12.5l5 5 10-11"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.45, delay: i * 0.1 + 0.25, ease: 'easeOut' }}
+                  />
+                </svg>
               </span>
               <div className="hv2-own-copy">
                 <strong>{item.title}</strong>
                 <span>{item.eyebrow}</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

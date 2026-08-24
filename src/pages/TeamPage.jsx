@@ -300,15 +300,45 @@ export default function TeamPage() {
           </motion.div>
 
           <ol className="iv-track">
+            {/* Real element, not the ::before this used to be -- a
+                pseudo-element can't be handed to framer, and the rail
+                drawing itself downward as the steps arrive is what makes
+                the list read as a sequence being assembled live rather
+                than four boxes that just happened to fade in. */}
+            <motion.span
+              className="iv-track-rail"
+              aria-hidden="true"
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            />
             {hiringSteps.map(({ title, text }, i) => (
               <motion.li
                 key={title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                style={{ transformPerspective: 900 }}
+                initial={{ opacity: 0, z: -120, y: 20 }}
+                whileInView={{ opacity: 1, z: 0, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
-                transition={{ ...SPRING, delay: i * 0.05 }}
+                transition={{ ...SPRING, delay: i * 0.14 }}
               >
-                <span className="iv-track-node">{String(i + 1).padStart(2, '0')}</span>
+                <motion.span
+                  className="iv-track-node"
+                  initial={{ scale: 0.4, rotate: -35, opacity: 0 }}
+                  whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 16, mass: 0.7, delay: i * 0.14 + 0.1 }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                  <motion.span
+                    className="iv-track-ping"
+                    aria-hidden="true"
+                    initial={{ scale: 0.7, opacity: 0.7 }}
+                    whileInView={{ scale: 1.9, opacity: 0 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.9, delay: i * 0.14 + 0.15, ease: 'easeOut' }}
+                  />
+                </motion.span>
                 <div className="iv-track-body">
                   <h3>{title}</h3>
                   <p>{text}</p>

@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import {
-  Archive,
-  BellRing,
   CalendarCheck,
+  CalendarClock,
+  CalendarPlus,
   Clock,
   GitBranch,
   Layers,
@@ -16,15 +16,19 @@ import {
   Tag,
   Trophy,
   UserRoundPlus,
-  UserRoundX,
+  Voicemail,
 } from 'lucide-react'
 import Tilt from '../motion3d/Tilt'
 import './home-v2.css'
 
-// A single automation drawing itself in real time -- a trigger, a three-way
-// branch, one of those branches splitting again one level deeper, and every
-// path landing on its own explicit end rather than all quietly merging into
-// one. The same shape as the workflow builders inside GoHighLevel.
+// A real, causally-sound automation, not a placeholder: everything a
+// condition checks is something the system could actually know at that
+// point. The trigger fires the moment a lead comes in, so the first branch
+// is "what time is it right now" (business hours / after hours / weekend),
+// something knowable instantly -- not a reply that has not happened yet.
+// Only the business-hours branch calls right away, and only THAT call
+// produces something worth branching on again (did it connect). The other
+// two branches queue the lead for later instead of inventing a response.
 //
 // Two coordinate sets, not one: on a laptop/desktop the flow reads left to
 // right (the middle branch level with the trigger, the other two peeling off
@@ -37,22 +41,22 @@ import './home-v2.css'
 
 const HORIZONTAL_NODES = [
   { id: 'trigger', kind: 'trigger', tone: 'ic-sky', icon: UserRoundPlus, title: 'New Lead Captured', sub: 'form submitted', x: 70, y: 300, delay: 0 },
-  { id: 'condition1', kind: 'condition', tone: 'ic-indigo', icon: GitBranch, title: 'Response Type', sub: 'condition', x: 290, y: 300, delay: 0.3 },
+  { id: 'condition1', kind: 'condition', tone: 'ic-indigo', icon: GitBranch, title: 'Business Hours?', sub: 'condition', x: 290, y: 300, delay: 0.3 },
 
-  { id: 'email', kind: 'action', tone: 'ic-violet', icon: Mail, title: 'Send Welcome Email', sub: 'interested', x: 500, y: 110, delay: 0.62 },
+  { id: 'email', kind: 'action', tone: 'ic-violet', icon: PhoneCall, title: 'Call the Lead', sub: 'business hours', x: 500, y: 110, delay: 0.62 },
   { id: 'condition2', kind: 'condition', tone: 'ic-indigo', icon: CalendarCheck, title: 'Call Answered?', sub: 'condition', x: 710, y: 110, delay: 0.94 },
-  { id: 'won', kind: 'action', tone: 'ic-teal', icon: PhoneCall, title: 'Call Confirmed', sub: 'yes', x: 930, y: 40, delay: 1.26 },
-  { id: 'end-closed', kind: 'end', tone: 'ic-emerald', icon: Trophy, title: 'Deal Closed', sub: 'end', x: 1140, y: 40, delay: 1.58 },
-  { id: 'reminder', kind: 'action', tone: 'ic-amber', icon: BellRing, title: 'Send Call Reminder', sub: 'no answer', x: 930, y: 180, delay: 1.26 },
-  { id: 'end-nurture-a', kind: 'end', tone: 'ic-emerald', icon: Layers, title: 'Added to Nurture', sub: 'end', x: 1140, y: 180, delay: 1.58 },
+  { id: 'won', kind: 'action', tone: 'ic-teal', icon: CalendarPlus, title: 'Book Discovery Call', sub: 'yes', x: 930, y: 40, delay: 1.26 },
+  { id: 'end-closed', kind: 'end', tone: 'ic-emerald', icon: Trophy, title: 'Meeting Scheduled', sub: 'end', x: 1140, y: 40, delay: 1.58 },
+  { id: 'reminder', kind: 'action', tone: 'ic-amber', icon: Voicemail, title: 'Leave Voicemail', sub: 'no answer', x: 930, y: 180, delay: 1.26 },
+  { id: 'end-nurture-a', kind: 'end', tone: 'ic-emerald', icon: Layers, title: 'Added to Call Queue', sub: 'end', x: 1140, y: 180, delay: 1.58 },
 
-  { id: 'sms', kind: 'action', tone: 'ic-amber', icon: MessageSquareText, title: 'Send Follow-Up SMS', sub: 'some interest', x: 500, y: 300, delay: 0.62 },
-  { id: 'tag', kind: 'action', tone: 'ic-blue', icon: Tag, title: 'Add Nurture Tag', sub: 'ongoing sequence', x: 710, y: 300, delay: 0.94 },
-  { id: 'end-nurture-b', kind: 'end', tone: 'ic-emerald', icon: Repeat, title: 'In Nurture Sequence', sub: 'end', x: 930, y: 300, delay: 1.26 },
+  { id: 'sms', kind: 'action', tone: 'ic-amber', icon: MessageSquareText, title: 'After-Hours Text', sub: 'auto-sent', x: 500, y: 300, delay: 0.62 },
+  { id: 'tag', kind: 'action', tone: 'ic-blue', icon: Tag, title: 'Add Follow-Up Tag', sub: 'next-day', x: 710, y: 300, delay: 0.94 },
+  { id: 'end-nurture-b', kind: 'end', tone: 'ic-emerald', icon: Repeat, title: 'Queued for Morning', sub: 'end', x: 930, y: 300, delay: 1.26 },
 
-  { id: 'notinterested', kind: 'action', tone: 'ic-rose', icon: UserRoundX, title: 'Mark Not Interested', sub: 'no response', x: 500, y: 490, delay: 0.62 },
-  { id: 'wait', kind: 'action', tone: 'ic-rose', icon: Clock, title: 'Wait 30 Days', sub: 'then re-check', x: 710, y: 490, delay: 0.94 },
-  { id: 'end-archived', kind: 'end', tone: 'ic-emerald', icon: Archive, title: 'Archived', sub: 'end', x: 930, y: 490, delay: 1.26 },
+  { id: 'notinterested', kind: 'action', tone: 'ic-rose', icon: Mail, title: 'Weekend Auto-Reply', sub: 'weekend', x: 500, y: 490, delay: 0.62 },
+  { id: 'wait', kind: 'action', tone: 'ic-rose', icon: Clock, title: 'Wait Until Monday', sub: 'scheduled', x: 710, y: 490, delay: 0.94 },
+  { id: 'end-archived', kind: 'end', tone: 'ic-emerald', icon: CalendarClock, title: 'Follow-Up Monday AM', sub: 'end', x: 930, y: 490, delay: 1.26 },
 ]
 
 const HORIZONTAL_PATHS = [
@@ -81,22 +85,22 @@ const HORIZONTAL_PATHS = [
 // on the right.
 const VERTICAL_NODES = [
   { id: 'trigger', kind: 'trigger', tone: 'ic-sky', icon: UserRoundPlus, title: 'New Lead Captured', sub: 'form submitted', x: 430, y: 60, delay: 0 },
-  { id: 'condition1', kind: 'condition', tone: 'ic-indigo', icon: GitBranch, title: 'Response Type', sub: 'condition', x: 430, y: 260, delay: 0.3 },
+  { id: 'condition1', kind: 'condition', tone: 'ic-indigo', icon: GitBranch, title: 'Business Hours?', sub: 'condition', x: 430, y: 260, delay: 0.3 },
 
-  { id: 'email', kind: 'action', tone: 'ic-violet', icon: Mail, title: 'Send Welcome Email', sub: 'interested', x: 210, y: 460, delay: 0.62 },
+  { id: 'email', kind: 'action', tone: 'ic-violet', icon: PhoneCall, title: 'Call the Lead', sub: 'business hours', x: 210, y: 460, delay: 0.62 },
   { id: 'condition2', kind: 'condition', tone: 'ic-indigo', icon: CalendarCheck, title: 'Call Answered?', sub: 'condition', x: 210, y: 660, delay: 0.94 },
-  { id: 'won', kind: 'action', tone: 'ic-teal', icon: PhoneCall, title: 'Call Confirmed', sub: 'yes', x: 100, y: 860, delay: 1.26 },
-  { id: 'end-closed', kind: 'end', tone: 'ic-emerald', icon: Trophy, title: 'Deal Closed', sub: 'end', x: 100, y: 1060, delay: 1.58 },
-  { id: 'reminder', kind: 'action', tone: 'ic-amber', icon: BellRing, title: 'Send Call Reminder', sub: 'no answer', x: 320, y: 860, delay: 1.26 },
-  { id: 'end-nurture-a', kind: 'end', tone: 'ic-emerald', icon: Layers, title: 'Added to Nurture', sub: 'end', x: 320, y: 1060, delay: 1.58 },
+  { id: 'won', kind: 'action', tone: 'ic-teal', icon: CalendarPlus, title: 'Book Discovery Call', sub: 'yes', x: 100, y: 860, delay: 1.26 },
+  { id: 'end-closed', kind: 'end', tone: 'ic-emerald', icon: Trophy, title: 'Meeting Scheduled', sub: 'end', x: 100, y: 1060, delay: 1.58 },
+  { id: 'reminder', kind: 'action', tone: 'ic-amber', icon: Voicemail, title: 'Leave Voicemail', sub: 'no answer', x: 320, y: 860, delay: 1.26 },
+  { id: 'end-nurture-a', kind: 'end', tone: 'ic-emerald', icon: Layers, title: 'Added to Call Queue', sub: 'end', x: 320, y: 1060, delay: 1.58 },
 
-  { id: 'sms', kind: 'action', tone: 'ic-amber', icon: MessageSquareText, title: 'Send Follow-Up SMS', sub: 'some interest', x: 540, y: 460, delay: 0.62 },
-  { id: 'tag', kind: 'action', tone: 'ic-blue', icon: Tag, title: 'Add Nurture Tag', sub: 'ongoing sequence', x: 540, y: 660, delay: 0.94 },
-  { id: 'end-nurture-b', kind: 'end', tone: 'ic-emerald', icon: Repeat, title: 'In Nurture Sequence', sub: 'end', x: 540, y: 860, delay: 1.26 },
+  { id: 'sms', kind: 'action', tone: 'ic-amber', icon: MessageSquareText, title: 'After-Hours Text', sub: 'auto-sent', x: 540, y: 460, delay: 0.62 },
+  { id: 'tag', kind: 'action', tone: 'ic-blue', icon: Tag, title: 'Add Follow-Up Tag', sub: 'next-day', x: 540, y: 660, delay: 0.94 },
+  { id: 'end-nurture-b', kind: 'end', tone: 'ic-emerald', icon: Repeat, title: 'Queued for Morning', sub: 'end', x: 540, y: 860, delay: 1.26 },
 
-  { id: 'notinterested', kind: 'action', tone: 'ic-rose', icon: UserRoundX, title: 'Mark Not Interested', sub: 'no response', x: 760, y: 460, delay: 0.62 },
-  { id: 'wait', kind: 'action', tone: 'ic-rose', icon: Clock, title: 'Wait 30 Days', sub: 'then re-check', x: 760, y: 660, delay: 0.94 },
-  { id: 'end-archived', kind: 'end', tone: 'ic-emerald', icon: Archive, title: 'Archived', sub: 'end', x: 760, y: 860, delay: 1.26 },
+  { id: 'notinterested', kind: 'action', tone: 'ic-rose', icon: Mail, title: 'Weekend Auto-Reply', sub: 'weekend', x: 760, y: 460, delay: 0.62 },
+  { id: 'wait', kind: 'action', tone: 'ic-rose', icon: Clock, title: 'Wait Until Monday', sub: 'scheduled', x: 760, y: 660, delay: 0.94 },
+  { id: 'end-archived', kind: 'end', tone: 'ic-emerald', icon: CalendarClock, title: 'Follow-Up Monday AM', sub: 'end', x: 760, y: 860, delay: 1.26 },
 ]
 
 const VERTICAL_PATHS = [
@@ -271,7 +275,7 @@ export default function WorkflowCanvasV2() {
             className={`hv2-wf-canvas ${isMobile ? 'is-vertical' : 'is-horizontal'}`}
             max={4}
             role="img"
-            aria-label="An automation workflow: a new lead is captured, then branches three ways by response type. Interested leads get a welcome email, then branch again on whether the follow-up call was answered, ending in either a closed deal or a nurture sequence. Leads who show some interest get a follow-up SMS and a nurture tag, ending in an ongoing nurture sequence. Leads with no response are marked not interested, wait 30 days, and end up archived."
+            aria-label="An automation workflow: a new lead is captured, then routed by whether it is currently business hours. During business hours the lead is called immediately, then branches again on whether the call was answered, ending in either a scheduled discovery call or the lead being added to a call queue with a voicemail left. Outside business hours the lead gets an after-hours text, is tagged for next-day follow-up, and is queued for the morning. On a weekend the lead gets an automatic reply and is queued to be followed up with Monday morning."
           >
             <svg
               className="hv2-wf-svg"

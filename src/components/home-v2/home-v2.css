@@ -736,24 +736,30 @@
   padding: 1.5rem 1.45rem 1.65rem; border-radius: 20px;
   background: #fff; border: 1px solid var(--line);
   box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 18px 38px -30px rgba(15, 31, 53, .5);
-  transition: transform .32s cubic-bezier(.22, 1, .36, 1), border-color .32s ease, box-shadow .32s ease;
+  transition: border-color .32s ease, box-shadow .32s ease;
 }
-.hv2-phase:hover { transform: translateY(-4px); border-color: rgba(24, 149, 255, .34); box-shadow: 0 24px 44px -28px rgba(24, 149, 255, .55); }
-/* chain chevron between neighbouring cards */
-.hv2-phase:not(:last-child)::after {
-  content: ''; position: absolute; top: 2.5rem; right: -1.06rem;
+.hv2-phase:hover { border-color: rgba(24, 149, 255, .34); box-shadow: 0 24px 44px -28px rgba(24, 149, 255, .55); }
+/* chain chevron between neighbouring cards -- a real element now (see
+   ProcessV2.jsx) so it can draw in with the card instead of sitting static */
+.hv2-phase-chevron {
+  position: absolute; top: 2.5rem; left: -1.06rem;
   width: .58rem; height: .58rem; z-index: 1;
   border-top: 2px solid #b6c7dc; border-right: 2px solid #b6c7dc;
-  transform: rotate(45deg);
+  display: block;
 }
 .hv2-phase-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.15rem; }
 .hv2-phase-num {
+  position: relative;
   display: grid; place-items: center;
   width: 2.15rem; height: 2.15rem; border-radius: 50%;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: .78rem; font-weight: 700; color: #fff;
   background: var(--primary-gradient, linear-gradient(135deg, #1895ff, #022646));
   box-shadow: 0 8px 16px -8px rgba(2, 38, 70, .6);
+}
+.hv2-phase-ping {
+  position: absolute; inset: -4px; z-index: -1;
+  border-radius: 50%; border: 2px solid rgba(24, 149, 255, .75);
 }
 .hv2-phase-icon { color: var(--accent); display: inline-flex; }
 
@@ -1105,7 +1111,7 @@
   .hv2-cap-panel { min-height: 0; }
   .hv2-bento-card, .hv2-bento-card:nth-child(1), .hv2-bento-card:nth-child(2) { grid-column: span 3; }
   .hv2-phases { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
-  .hv2-phase:not(:last-child)::after { display: none; }
+  .hv2-phase-chevron { display: none; }
   .hv2-own { grid-template-columns: repeat(2, 1fr); }
   .hv2-proof { grid-template-columns: repeat(2, 1fr); }
   .hv2-experts { grid-template-columns: repeat(3, 1fr); }

@@ -405,9 +405,13 @@
   list-style: none; margin: clamp(2.2rem, 4vw, 3.2rem) 0 0; padding: 0;
   max-width: 52rem; margin-inline: auto;
 }
-.iv-track::before {
-  content: ''; position: absolute; top: .6rem; bottom: .6rem; left: 1.55rem;
-  width: 2px; border-radius: 99px;
+/* A real element now, not this pseudo-element -- framer needs a node it can
+   hand a motion value to, and animating a ::before isn't possible. Kept as a
+   comment marker here so the rule isn't mistaken for dead CSS: the visual
+   replacement is .iv-track-rail below, position-for-position identical. */
+.iv-track-rail {
+  position: absolute; top: .6rem; bottom: .6rem; left: 1.55rem;
+  width: 2px; border-radius: 99px; transform-origin: top center;
   background: linear-gradient(180deg, rgba(24, 149, 255, .5), rgba(24, 149, 255, .08));
 }
 .iv-track li {
@@ -425,6 +429,15 @@
   background: var(--primary-gradient, linear-gradient(135deg, #1895ff, #022646));
   border: 3px solid #fff;
   box-shadow: 0 10px 22px -12px rgba(2, 38, 70, 0.65);
+}
+/* One-shot radar ping the moment the badge stamps in -- a ring that expands
+   past the badge's own edge and fades, not a looping animation. Framer
+   drives the scale/opacity (see TeamPage.jsx), so this only ever plays
+   once per badge rather than repeating the way a CSS `animation: infinite`
+   would every time the badge re-entered hover or view. */
+.iv-track-ping {
+  position: absolute; inset: -3px; z-index: -1;
+  border-radius: 50%; border: 2px solid rgba(24, 149, 255, .8);
 }
 .iv-track-body h3 {
   margin: .35rem 0 .5rem; font-size: clamp(1.05rem, 1.8vw, 1.22rem);

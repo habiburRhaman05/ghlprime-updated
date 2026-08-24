@@ -368,7 +368,7 @@ export default function AboutPage() {
                 transition={{ ...SPRING, delay: i * 0.08 }}
               >
                 <div className="av-card-top">
-                  <span className="ic ic-lg"><Icon size={24} /></span>
+                  <span className="ic ic-solid ic-lg"><Icon size={24} /></span>
                   <span className="av-card-num">{String(i + 1).padStart(2, '0')}</span>
                 </div>
                 <h3>{title}</h3>
@@ -416,7 +416,7 @@ export default function AboutPage() {
             <ul className="av-band-list">
               {octopiChecklist.map(({ icon: Icon, tone, text }) => (
                 <li className={tone} key={text}>
-                  <span className="ic ic-sm"><Icon size={16} /></span>
+                  <span className="ic ic-solid ic-sm"><Icon size={16} /></span>
                   {text}
                 </li>
               ))}
