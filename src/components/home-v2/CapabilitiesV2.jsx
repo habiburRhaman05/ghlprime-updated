@@ -138,7 +138,6 @@ export default function CapabilitiesV2() {
 
   return (
     <section className="hv2 hv2-section is-tint">
-      <span className="hv2-grid-bg" aria-hidden="true" />
       <div className="hv2-inner">
         <motion.div
           className="hv2-head centered"

@@ -25,14 +25,14 @@
   --ic-stroke: 1.8;
 }
 
-.ic-sky     { --ic-from: #38bdf8; --ic-to: #0284c7; --ic-ink: #0369a1; --ic-soft: rgba(56, 189, 248, .14); }
-.ic-blue    { --ic-from: #60a5fa; --ic-to: #1d4ed8; --ic-ink: #1e40af; --ic-soft: rgba(59, 130, 246, .13); }
-.ic-indigo  { --ic-from: #818cf8; --ic-to: #4338ca; --ic-ink: #3730a3; --ic-soft: rgba(99, 102, 241, .13); }
-.ic-violet  { --ic-from: #c084fc; --ic-to: #7c3aed; --ic-ink: #6b21c8; --ic-soft: rgba(168, 85, 247, .13); }
-.ic-teal    { --ic-from: #2dd4bf; --ic-to: #0d9488; --ic-ink: #0f766e; --ic-soft: rgba(20, 184, 166, .14); }
-.ic-emerald { --ic-from: #34d399; --ic-to: #059669; --ic-ink: #047857; --ic-soft: rgba(16, 185, 129, .14); }
-.ic-amber   { --ic-from: #fbbf24; --ic-to: #d97706; --ic-ink: #a95a06; --ic-soft: rgba(245, 158, 11, .16); }
-.ic-rose    { --ic-from: #fb7185; --ic-to: #e11d48; --ic-ink: #be123c; --ic-soft: rgba(244, 63, 94, .13); }
+/* All eight classes stay in the markup (nothing to rewrite across the ten
+   files that use them) but now resolve to the same brand blue -- the exact
+   gradient the numbered badges use (hv2-phase-num, iv-track-node, av-card-num)
+   -- so every tile on the site reads as one consistent set instead of a
+   multi-coloured scatter. */
+.ic-sky, .ic-blue, .ic-indigo, .ic-violet, .ic-teal, .ic-emerald, .ic-amber, .ic-rose {
+  --ic-from: #1895ff; --ic-to: #022646; --ic-ink: #0a5fae; --ic-soft: rgba(24, 149, 255, .12);
+}
 
 /* ---------- the tile ------------------------------------------------------ */
 /* The tone variables are deliberately NOT declared here. A custom property
@@ -50,8 +50,8 @@
   /* A squircle rather than a rounded square -- softer at these sizes and it
      stops the tile competing with the rectangular cards it sits inside. */
   border-radius: 32%;
-  color: var(--ic-ink, #1e40af);
-  background: var(--ic-soft, rgba(59, 130, 246, .13));
+  color: var(--ic-ink, #0a5fae);
+  background: var(--ic-soft, rgba(24, 149, 255, .12));
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / .55);
   transition:
     color .38s ease,
@@ -67,12 +67,12 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(140deg, var(--ic-from, #60a5fa), var(--ic-to, #1d4ed8));
+  background: linear-gradient(140deg, var(--ic-from, #1895ff), var(--ic-to, #022646));
   opacity: 0;
   transition: opacity .38s ease;
 }
 
-.ic-solid { color: #fff; box-shadow: 0 12px 24px -14px color-mix(in srgb, var(--ic-to, #1d4ed8) 75%, transparent); }
+.ic-solid { color: #fff; box-shadow: 0 12px 24px -14px color-mix(in srgb, var(--ic-to, #022646) 75%, transparent); }
 .ic-solid::after { opacity: 1; }
 
 .ic-sm { --ic-size: 2.3rem; border-radius: 30%; }
@@ -88,7 +88,7 @@
 .svc-card:hover .ic {
   color: #fff;
   transform: translateY(-3px) scale(1.07);
-  box-shadow: 0 16px 30px -14px color-mix(in srgb, var(--ic-to, #1d4ed8) 80%, transparent);
+  box-shadow: 0 16px 30px -14px color-mix(in srgb, var(--ic-to, #022646) 80%, transparent);
 }
 .ic:hover::after,
 .ic-hover:hover .ic::after,

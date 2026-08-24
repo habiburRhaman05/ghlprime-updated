@@ -449,7 +449,7 @@
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
-.hv2-marquee-track { display: flex; gap: 3.5rem; width: max-content; animation: hv2Scroll 42s linear infinite; }
+.hv2-marquee-track { display: flex; gap: 3.5rem; width: max-content; animation: hv2Scroll 42s linear infinite; will-change: transform; }
 .hv2-marquee:hover .hv2-marquee-track { animation-play-state: paused; }
 @keyframes hv2Scroll { to { transform: translateX(-50%); } }
 .hv2-marquee-item { display: grid; place-items: center; height: 2.6rem; flex: none; }
@@ -712,51 +712,72 @@
 }
 @keyframes hv2Caret { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 .hv2-vibe-chips { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.8rem; }
-/* Each chip carries its hue in its own outline rather than a leading dot.
-   --chip is set per chip in VibeCodingV2. The plain border in the shorthand
-   is the fallback: browsers without color-mix drop the second declaration
-   and keep it, rather than losing the border entirely. */
+/* Neutral chips with a green tick -- no per-item hues. */
 .hv2-vibe-chip {
-  display: inline-flex; align-items: center; padding: .45rem .95rem; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .45rem .95rem; border-radius: 999px;
   font-size: .84rem; font-weight: 600; color: #3b5068; background: #fff;
   border: 1px solid var(--line);
-  border-color: color-mix(in srgb, var(--chip, #1895ff) 58%, transparent);
   transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s ease, border-color .28s ease;
 }
+.hv2-vibe-chip svg { color: #16a34a; flex: none; }
 .hv2-vibe-chip:hover {
   transform: translateY(-2px);
-  border-color: var(--chip, #1895ff);
+  border-color: var(--line-strong);
   box-shadow: 0 10px 20px -12px rgba(15, 31, 53, .6);
 }
 
 /* =========================================================================
    PROCESS + TRAINING OUTCOMES
    ========================================================================= */
-.hv2-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; position: relative; perspective: 1100px; }
-.hv2-steps::before { content: ''; position: absolute; left: 0; right: 0; top: 1.6rem; height: 1px; background: var(--line-strong); }
-.hv2-step { position: relative; padding-top: 4rem; }
-.hv2-step-dot {
-  position: absolute; top: .95rem; left: 0; width: 1.35rem; height: 1.35rem; border-radius: 50%;
-  background: #fff; border: 2px solid var(--accent); display: grid; place-items: center;
-  box-shadow: 0 0 0 6px rgba(24, 149, 255, .1);
+.hv2-phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: .4rem; }
+.hv2-phase {
+  position: relative;
+  padding: 1.5rem 1.45rem 1.65rem; border-radius: 20px;
+  background: #fff; border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .04), 0 18px 38px -30px rgba(15, 31, 53, .5);
+  transition: transform .32s cubic-bezier(.22, 1, .36, 1), border-color .32s ease, box-shadow .32s ease;
 }
-.hv2-step-dot::after { content: ''; width: .42rem; height: .42rem; border-radius: 50%; background: var(--accent); }
-.hv2-step-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .74rem; font-weight: 700; letter-spacing: .1em; color: var(--accent-ink); }
-.hv2-step h3 { margin: .55rem 0 .6rem; font-size: 1.12rem; font-weight: 700; color: var(--navy); text-wrap: balance; }
-.hv2-step p { margin: 0; font-size: .94rem; line-height: 1.65; color: var(--body); }
+.hv2-phase:hover { transform: translateY(-4px); border-color: rgba(24, 149, 255, .34); box-shadow: 0 24px 44px -28px rgba(24, 149, 255, .55); }
+/* chain chevron between neighbouring cards */
+.hv2-phase:not(:last-child)::after {
+  content: ''; position: absolute; top: 2.5rem; right: -1.06rem;
+  width: .58rem; height: .58rem; z-index: 1;
+  border-top: 2px solid #b6c7dc; border-right: 2px solid #b6c7dc;
+  transform: rotate(45deg);
+}
+.hv2-phase-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.15rem; }
+.hv2-phase-num {
+  display: grid; place-items: center;
+  width: 2.15rem; height: 2.15rem; border-radius: 50%;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .78rem; font-weight: 700; color: #fff;
+  background: var(--primary-gradient, linear-gradient(135deg, #1895ff, #022646));
+  box-shadow: 0 8px 16px -8px rgba(2, 38, 70, .6);
+}
+.hv2-phase-icon { color: var(--accent); display: inline-flex; }
 
-.hv2-outcomes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
-.hv2-outcome {
-  padding: 1.4rem 1.35rem; border-radius: 16px; background: #fff; border: 1px solid var(--line);
-  box-shadow: 0 1px 3px rgba(15, 31, 53, .04);
-  transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, box-shadow .3s ease;
+.hv2-phase h3 { margin: 0 0 .6rem; font-size: 1.12rem; font-weight: 800; color: var(--navy); text-wrap: balance; }
+.hv2-phase p { margin: 0; font-size: .94rem; line-height: 1.66; color: var(--body); }
+
+/* Ownership outcomes: one quiet tinted band, green ticks, no rainbow. */
+.hv2-own {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.1rem, 2.4vw, 1.6rem);
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+  padding: clamp(1.6rem, 3vw, 2.3rem);
+  border-radius: 24px;
+  background: linear-gradient(165deg, #ffffff, #f2f8ff);
+  border: 1px solid var(--line-strong);
 }
-.hv2-outcome:hover { transform: translateY(-3px); border-color: rgba(24, 149, 255, .3); box-shadow: 0 18px 34px -24px rgba(24, 149, 255, .8); }
-.hv2-outcome-eyebrow {
-  display: block; font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: .55rem;
+.hv2-own-item { display: flex; align-items: flex-start; gap: .8rem; }
+.hv2-own-tick {
+  flex: none; display: grid; place-items: center;
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  margin-top: .1rem;
+  color: #16a34a; background: #e9f7ef; border: 1px solid rgba(22, 163, 74, .28);
 }
-.hv2-outcome strong { display: block; font-size: 1rem; font-weight: 700; color: var(--navy); line-height: 1.4; }
+.hv2-own-item strong { display: block; font-size: .98rem; font-weight: 700; color: var(--navy); line-height: 1.42; }
+.hv2-own-copy > span { display: block; margin-top: .3rem; font-size: .84rem; line-height: 1.5; color: var(--body); }
 
 /* =========================================================================
    STACK strip
@@ -772,7 +793,7 @@
   mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
-.hv2-stack-track { display: flex; gap: .75rem; width: max-content; animation: hv2Scroll 50s linear infinite; }
+.hv2-stack-track { display: flex; gap: .75rem; width: max-content; animation: hv2Scroll 50s linear infinite; will-change: transform; }
 .hv2-stack-row.is-reverse .hv2-stack-track { animation-direction: reverse; }
 .hv2-stack-row:hover .hv2-stack-track { animation-play-state: paused; }
 .hv2-stack-chip {
@@ -807,9 +828,7 @@
 }
 .hv2-team-stage img {
   max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain;
-  transition: transform .5s cubic-bezier(.22,1,.36,1);
 }
-.hv2-team-card:hover .hv2-team-stage img { transform: scale(1.04); }
 .hv2-team-body p {
   margin: .9rem 0 0; font-size: .9rem; line-height: 1.62; color: var(--body);
 }
@@ -852,8 +871,8 @@
   display: grid; grid-template-columns: repeat(5, 1fr); gap: .9rem;
   margin-top: clamp(2rem, 3.5vw, 3rem);
 }
-/* Static portraits -- photo on top, name and role underneath. A gentle zoom
-   on hover stands in for the old two-faced card flip. */
+/* Static portraits -- photo on top, name and role underneath. No hover
+   effect on the image itself, it stands in for the old two-faced card flip. */
 .hv2-expert-static { text-align: center; }
 .hv2-expert-static .hv2-expert-photo {
   display: block; position: relative; aspect-ratio: 3 / 4;
@@ -862,9 +881,7 @@
 }
 .hv2-expert-static .hv2-expert-photo img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 22%;
-  transition: transform .5s cubic-bezier(.22, 1, .36, 1);
 }
-.hv2-expert:hover .hv2-expert-photo img { transform: scale(1.05); }
 .hv2-expert-name { display: block; margin-top: .55rem; font-size: .88rem; font-weight: 700; color: var(--navy); line-height: 1.3; }
 .hv2-expert-role { display: block; margin-top: .1rem; font-size: .76rem; color: var(--body); line-height: 1.35; }
 
@@ -876,13 +893,25 @@
   display: grid; place-items: center; width: 4.6rem; height: 4.6rem;
   border-radius: 16px; background: #fff; border: 1px solid var(--line);
   box-shadow: 0 1px 3px rgba(15, 31, 53, .05);
-  transition: transform .85s cubic-bezier(.22, 1, .36, 1), border-color .3s ease, box-shadow .3s ease;
+  /* Settling this transition covers the un-hover only: the spin itself is a
+     one-shot @keyframes below, not a transition on transform. A transition
+     retriggers on every fresh :hover match while the cursor drifts across a
+     row of these, which reads as one continuous, never-ending spin instead
+     of a single turn. */
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
-/* A full turn on hover -- the badge spins like a coin rather than tipping. */
+/* A full turn on hover -- the badge spins like a coin rather than tipping.
+   `forwards` holds the end frame for as long as the pointer stays put, and
+   because it is an animation (not a transition) it runs exactly once per
+   hover-enter no matter how long the hover lasts. */
 .hv2-cert:hover {
-  transform: perspective(700px) rotateY(360deg) translateY(-5px) scale(1.06);
+  animation: hv2CertSpin .85s cubic-bezier(.22, 1, .36, 1) forwards;
   border-color: rgba(24, 149, 255, .4);
   box-shadow: 0 18px 32px -20px rgba(24, 149, 255, .9);
+}
+@keyframes hv2CertSpin {
+  from { transform: perspective(700px) rotateY(0deg) translateY(0) scale(1); }
+  to { transform: perspective(700px) rotateY(360deg) translateY(-5px) scale(1.06); }
 }
 .hv2-cert img { width: 70%; height: 70%; object-fit: contain; }
 
@@ -891,11 +920,14 @@
    ========================================================================= */
 .hv2-life-rows { display: grid; gap: 1rem; }
 .hv2-life-row {
-  position: relative; overflow: hidden;
+  position: relative; overflow: hidden; contain: layout paint style;
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-.hv2-life-track { display: flex; gap: 1rem; width: max-content; animation: hv2Scroll 60s linear infinite; }
+.hv2-life-track {
+  display: flex; gap: 1rem; width: max-content; animation: hv2Scroll 60s linear infinite;
+  will-change: transform; backface-visibility: hidden;
+}
 .hv2-life-row.is-reverse .hv2-life-track { animation-direction: reverse; }
 .hv2-life-row:hover .hv2-life-track { animation-play-state: paused; }
 .hv2-life-shot {
@@ -1002,9 +1034,9 @@
   .hv2-hero-grid, .hv2-cap, .hv2-agent, .hv2-who, .hv2-vibe { grid-template-columns: 1fr; }
   .hv2-cap-panel { min-height: 0; }
   .hv2-bento-card, .hv2-bento-card:nth-child(1), .hv2-bento-card:nth-child(2) { grid-column: span 3; }
-  .hv2-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.2rem; }
-  .hv2-steps::before { display: none; }
-  .hv2-outcomes { grid-template-columns: repeat(2, 1fr); }
+  .hv2-phases { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+  .hv2-phase:not(:last-child)::after { display: none; }
+  .hv2-own { grid-template-columns: repeat(2, 1fr); }
   .hv2-proof { grid-template-columns: repeat(2, 1fr); }
   .hv2-experts { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1013,10 +1045,9 @@
   .hv2-bento { grid-template-columns: 1fr; }
   .hv2-bento-card, .hv2-bento-card:nth-child(1), .hv2-bento-card:nth-child(2) { grid-column: auto; }
   .hv2-stats { grid-template-columns: repeat(2, 1fr); }
-  .hv2-steps, .hv2-outcomes, .hv2-proof { grid-template-columns: 1fr; }
+  .hv2-phases, .hv2-own, .hv2-proof { grid-template-columns: 1fr; }
   .hv2-team { grid-template-columns: minmax(0, 1fr); }
   .hv2-experts { grid-template-columns: repeat(2, 1fr); }
-  .hv2-step { padding-top: 3.4rem; }
   .hv2-hero h1 { font-size: clamp(2.1rem, 8vw, 2.9rem); }
   .hv2-who-collage { min-height: 20rem; }
   .hv2-life-shot { width: 13rem; height: 9.75rem; }

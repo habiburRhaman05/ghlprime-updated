@@ -36,7 +36,10 @@
   font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
 }
 .faq2-eyebrow::before { content: ''; width: 1.6rem; height: 1px; background: currentColor; opacity: .55; }
-.faq2-rail h2 {
+/* The standalone /faq page renders this heading as an h1 (its only one);
+   every other page embedding FaqSection already has its own h1 and gets an
+   h2 here instead. Same element, same look either way. */
+.faq2-rail h1, .faq2-rail h2 {
   margin: 1rem 0 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: 1.1;
   letter-spacing: -.02em; font-weight: 800; color: var(--faq-navy); text-wrap: balance;
 }
@@ -73,15 +76,6 @@
   background: #fff; border-color: rgba(24, 149, 255, .26);
   box-shadow: 0 18px 38px -26px rgba(22, 132, 234, .75);
 }
-/* Accent rail that grows down the open item's left edge. */
-.faq2-rule {
-  position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 3px;
-  background: var(--primary-gradient, linear-gradient(180deg, #1895ff, #022646));
-  transform: scaleY(0); transform-origin: top center;
-  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
-}
-.faq2-item.is-open .faq2-rule { transform: scaleY(1); }
-
 .faq2-q {
   display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem;
   width: 100%; padding: 1.15rem 1.2rem; text-align: left; cursor: pointer;

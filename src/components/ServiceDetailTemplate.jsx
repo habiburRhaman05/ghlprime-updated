@@ -243,6 +243,7 @@ function HeroBadges({ badges }) {
           style={{ transformPerspective: 600, transformOrigin: 'top center' }}
           whileHover={{ z: 18, rotateX: -6, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
         >
+          <Check size={14} className="svc-badge-check" aria-hidden="true" />
           {b}
         </motion.span>
       ))}

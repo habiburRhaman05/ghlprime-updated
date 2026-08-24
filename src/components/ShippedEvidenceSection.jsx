@@ -1,13 +1,66 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { fetchShowcaseForPage, fetchShowcaseStats } from '../lib/showcaseApi'
 import '../styles/shipped-evidence.css'
-import { div } from 'framer-motion/client'
-import { motion } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 function isImageUrl(value) {
   return typeof value === 'string' && /^https?:\/\//i.test(value.trim())
+}
+
+const COUNT_MS = 1400
+
+// Stat values arrive as one string, e.g. "90+" or "550+" -- split the number
+// from its suffix so the number can count up and the suffix can just sit
+// there, the same split TrustBandV2 uses for the identical home page band.
+function splitStat(raw) {
+  const match = String(raw ?? '').match(/^(\d+(?:\.\d+)?)(.*)$/)
+  if (!match) return { target: 0, suffix: String(raw ?? '') }
+  return { target: Number(match[1]), suffix: match[2] }
+}
+
+// Counts from 0 to `target` once the bar is on screen -- holding at 0 until
+// then matters, a count-up that finishes above the fold is just a static
+// number with extra steps. Mirrors TrustBandV2's useCountUp on the home page.
+function useCountUp(target, active, reduceMotion) {
+  const [value, setValue] = useState(0)
+
+  useEffect(() => {
+    if (reduceMotion || !active) return undefined
+
+    let frame
+    let start
+    const step = (now) => {
+      if (start === undefined) start = now
+      const p = Math.min((now - start) / COUNT_MS, 1)
+      setValue(Math.round(target * (1 - Math.pow(1 - p, 3))))
+      if (p < 1) frame = requestAnimationFrame(step)
+    }
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+  }, [target, active, reduceMotion])
+
+  return reduceMotion ? target : value
+}
+
+function ShowcaseStat({ stat, active, reduceMotion, index }) {
+  const { target, suffix } = splitStat(stat.value)
+  const value = useCountUp(target, active, reduceMotion)
+  return (
+    <motion.div
+      className="se-stat"
+      style={{ transformPerspective: 900 }}
+      initial={{ opacity: 0, z: -240, y: 16 }}
+      whileInView={{ opacity: 1, z: 0, y: 0 }}
+      whileHover={{ z: 30, transition: { type: 'spring', stiffness: 260, damping: 22 } }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ type: 'spring', stiffness: 90, damping: 16, mass: 0.9, delay: index * 0.08 }}
+    >
+      <strong className="se-stat-value">{value}{suffix}</strong>
+      <span className="se-stat-label">{stat.label}</span>
+    </motion.div>
+  )
 }
 
 function normalizeTags(tags) {
@@ -63,6 +116,9 @@ export default function ShippedEvidenceSection({
   const [items, setItems] = useState([])
   const [stats, setStats] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const reduceMotion = useReducedMotion()
+  const statBarRef = useRef(null)
+  const statBarInView = useInView(statBarRef, { once: true, amount: 0.4 })
 
   useEffect(() => {
     let active = true
@@ -105,16 +161,20 @@ export default function ShippedEvidenceSection({
           <h2>Focused Expertise. Real <br/> <span>Delivery Power.</span></h2>
           <p>GHL Prime is specialized team backed by Octopi Digital. We don’t do everything we go deep on GHL,automation, AI, and custom dev so your agency has the best possible team behind it.</p>
         </motion.div>
-        {stats.length > 0 ? (
-          <div className="se-stat-bar">
-            {stats.map((stat) => (
-              <div key={stat.id} className="se-stat">
-                <strong className="se-stat-value">{stat.value}</strong>
-                <span className="se-stat-label">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        ) : <div>failed to load data</div>}
+        {/* Ref lives on this wrapper rather than on the conditional content
+            below: useInView reads the DOM node at mount, and this element is
+            the first one in the tree that is always present, even before
+            the stats have loaded. Attaching it to the stats.length-gated div
+            instead means useInView initializes against a node that does not
+            exist yet on the first render and never notices the real one
+            mounting later, so the count-up simply never starts. */}
+        <div className="se-stat-bar" ref={statBarRef}>
+          {stats.length > 0
+            ? stats.map((stat, i) => (
+                <ShowcaseStat key={stat.id} stat={stat} index={i} active={statBarInView} reduceMotion={reduceMotion} />
+              ))
+            : <div>failed to load data</div>}
+        </div>
 
         <div className="se-pairs">
           {items.length >  0 ? items.map((item, index) => {

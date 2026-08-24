@@ -5,15 +5,16 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
+  Award,
   Check,
+  EyeOff,
   Handshake,
   Network,
   Orbit,
   Puzzle,
+  UsersRound,
 } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
-import FaqSection from '../components/FaqSection'
-import { ABOUT_FAQS } from '../data/faqs'
 import { fetchTeamPageExperts } from '../lib/teamApi'
 import ScrollProgress from '../components/motion3d/ScrollProgress'
 import '../components/pages-v2/pages-v2.css'
@@ -190,14 +191,17 @@ const trustStatement = 'GHL Prime is built on a simple premise: agencies should 
 
 const trustPillars = [
   {
+    icon: UsersRound,
     title: 'A GHL-only team',
     text: 'We do not generalize across platforms or dilute our expertise across fifty different tools. Every specialist works exclusively in the GoHighLevel ecosystem, which means we build faster and troubleshoot better than a generalist freelancer ever could.',
   },
   {
+    icon: Award,
     title: 'Credentials that back it up',
     text: 'Our Certified Admin badge is the highest-level GoHighLevel certification available. Combined with 10 specialty certifications including HIPAA Compliance, A2P, AI Employee, and SaaS Mode, we carry the formal credentials behind every claim we make.',
   },
   {
+    icon: EyeOff,
     title: 'Invisible behind your brand',
     text: 'We operate fully white-labeled, which means your clients never know we exist. Your agency is the front door. We are the engine room. That is how it is supposed to work.',
   },
@@ -429,21 +433,23 @@ export default function AboutPage() {
               {trustStatement}
             </motion.p>
 
-            <div className="av-pillars">
-              {trustPillars.map(({ title, text }, i) => (
-                <motion.div
-                  className="av-pillar"
-                  key={title}
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ ...SPRING, delay: i * 0.07 }}
-                >
-                  <strong>{title}</strong>
-                  <p>{text}</p>
-                </motion.div>
+            <motion.div
+              className="av-pillars"
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={SPRING}
+            >
+              {trustPillars.map(({ icon: Icon, title, text }) => (
+                <div className="av-pillar" key={title}>
+                  <span className="ic"><Icon size={19} /></span>
+                  <div>
+                    <strong>{title}</strong>
+                    <p>{text}</p>
+                  </div>
+                </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -505,7 +511,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <FaqSection faqs={ABOUT_FAQS} intro="A quick read on who we are and how we operate." />
       <SiteFooter />
     </main>
   )

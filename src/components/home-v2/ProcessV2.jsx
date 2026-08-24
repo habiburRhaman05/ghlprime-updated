@@ -3,22 +3,83 @@
 import { motion } from 'framer-motion'
 import './home-v2.css'
 
-// Carried over from the previous training / onboarding section, condensed to
-// the four beats an agency actually goes through with us.
-const STEPS = [
+// Hand-drawn marks for the four delivery phases. Each one loops quietly:
+// a radar sweeping its scope, a block settling onto the stack, a handoff dot
+// travelling between panels, and skill bars climbing.
+function PhSvg({ size = 22, children }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {children}
+    </svg>
+  )
+}
+
+const IconScanRadar = ({ size }) => (
+  <PhSvg size={size}>
+    <circle cx="12" cy="12" r="7.6" />
+    <circle cx="12" cy="12" r="10.2" strokeDasharray="2.4 3.2" opacity=".5" />
+    <g className="hv2-sweep">
+      <path d="M12 12V5.6" />
+      <path d="M12 5.6a6.4 6.4 0 0 1 4.5 1.9" opacity=".45" />
+    </g>
+    <circle className="hv2-corepulse" cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+    <circle cx="16.2" cy="14.6" r=".8" fill="currentColor" stroke="none" opacity=".55" />
+    <circle cx="8.6" cy="15.4" r=".65" fill="currentColor" stroke="none" opacity=".4" />
+  </PhSvg>
+)
+
+const IconBuildBlocks = ({ size }) => (
+  <PhSvg size={size}>
+    <rect x="3.6" y="13.6" width="7.2" height="6" rx="1.5" />
+    <rect x="13.2" y="13.6" width="7.2" height="6" rx="1.5" />
+    <g className="hv2-bobber">
+      <rect x="8.4" y="4.4" width="7.2" height="6" rx="1.5" />
+    </g>
+    <path className="hv2-tw" d="M21.2 3.4l.42 1.14 1.14.42-1.14.42-.42 1.14-.42-1.14-1.14-.42 1.14-.42z" fill="currentColor" stroke="none" />
+  </PhSvg>
+)
+
+const IconHandoffPanels = ({ size }) => (
+  <PhSvg size={size}>
+    <rect x="3.2" y="7.2" width="6.2" height="9.6" rx="1.7" />
+    <rect x="14.6" y="7.2" width="6.2" height="9.6" rx="1.7" />
+    <path d="M9.8 12h4.4" />
+    <path d="M12.7 10.3L14.4 12l-1.7 1.7" />
+    <circle className="hv2-traveldot" r="1.3" fill="currentColor" stroke="none">
+      <animateMotion dur="1.7s" repeatCount="indefinite" path="M9.8 12h4.4" />
+    </circle>
+  </PhSvg>
+)
+
+const IconSkillRise = ({ size }) => (
+  <PhSvg size={size}>
+    <path d="M3.6 19.6h16.8" opacity=".5" />
+    <path className="hv2-grow g1" d="M6.6 19.6v-3.2" />
+    <path className="hv2-grow g2" d="M11 19.6v-6" />
+    <path className="hv2-grow g3" d="M15.4 19.6v-8.8" />
+    <circle className="hv2-flashdot" cx="15.4" cy="8.6" r="1.05" fill="currentColor" stroke="none" />
+  </PhSvg>
+)
+
+const PHASES = [
   {
+    icon: IconScanRadar,
     title: 'Scope & audit',
     text: 'We review your account, map the sales process, and identify exactly what needs to be built, fixed, or migrated.',
   },
   {
+    icon: IconBuildBlocks,
     title: 'Build the system',
     text: 'Sub-accounts, pipelines, automations, AI agents, and integrations assembled and wired end to end.',
   },
   {
+    icon: IconHandoffPanels,
     title: 'Walkthrough & handoff',
     text: 'We walk you through everything we have built, how it works, why it is set up that way, and how to use it confidently with your clients.',
   },
   {
+    icon: IconSkillRise,
     title: 'Ongoing support & upskilling',
     text: 'As the platform evolves and your agency grows, we keep you updated, new features, better workflows, smarter approaches.',
   },
@@ -36,7 +97,6 @@ const OUTCOMES = [
 export default function ProcessV2() {
   return (
     <section className="hv2 hv2-section is-white">
-      <span className="hv2-grid-bg" aria-hidden="true" />
       <div className="hv2-inner">
         <motion.div
           className="hv2-head centered"
@@ -50,40 +110,49 @@ export default function ProcessV2() {
           <p>No black boxes. You end up owning a system you understand, with a team on call when you want to extend it.</p>
         </motion.div>
 
-        <div className="hv2-steps">
-          {STEPS.map((step, i) => (
+        {/* Four phase cards chained by chevrons -- each card carries its own
+            living mark next to a gradient number disc. */}
+        <div className="hv2-phases">
+          {PHASES.map(({ icon: Icon, title, text }, i) => (
             <motion.div
-              className="hv2-step is-lit"
-              key={step.title}
-              style={{ transformPerspective: 1000 }}
-              initial={{ opacity: 0, z: -300, y: 18 }}
-              whileInView={{ opacity: 1, z: 0, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ type: 'spring', stiffness: 74, damping: 17, mass: 0.85, delay: i * 0.1 }}
+              className="hv2-phase"
+              key={title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ type: 'spring', stiffness: 110, damping: 19, mass: 0.9, delay: i * 0.09 }}
             >
-              <span className="hv2-step-dot" aria-hidden="true" />
-              <span className="hv2-step-num">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
+              <div className="hv2-phase-top">
+                <span className="hv2-phase-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="hv2-phase-icon"><Icon size={26} /></span>
+              </div>
+              <h3>{title}</h3>
+              <p>{text}</p>
             </motion.div>
           ))}
         </div>
 
-        <div className="hv2-outcomes">
-          {OUTCOMES.map((item, i) => (
-            <motion.div
-              className="hv2-outcome"
-              key={item.title}
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: i * 0.07 }}
-            >
-              <span className="hv2-outcome-eyebrow">{item.eyebrow}</span>
-              <strong>{item.title}</strong>
-            </motion.div>
+        {/* What ownership looks like afterwards -- one quiet band, green ticks. */}
+        <motion.div
+          className="hv2-own"
+          initial={{ opacity: 0, y: 26 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
+        >
+          {OUTCOMES.map((item) => (
+            <div className="hv2-own-item" key={item.title}>
+              <span className="hv2-own-tick" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 12.5l5 5 10-11" /></svg>
+              </span>
+              <div className="hv2-own-copy">
+                <strong>{item.title}</strong>
+                <span>{item.eyebrow}</span>
+              </div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

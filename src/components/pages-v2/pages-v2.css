@@ -213,12 +213,7 @@
 .pv2-prose p { margin: 0 0 1.1rem; font-size: 1.02rem; line-height: 1.8; color: var(--body); }
 .pv2-prose p:last-child { margin-bottom: 0; }
 
-/* ---------- 3D on the shared certification badges ------------------------ */
-.pv2 .certifications-grid > * {
-  transition: transform .7s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease;
-  will-change: transform;
-}
-.pv2 .certifications-grid > *:hover { transform: perspective(700px) rotateY(360deg) translateY(-5px) scale(1.05); }
+/* Certification badges: no hover animation -- Team page images stay still. */
 
 /* ---------- Responsive ---------------------------------------------------- */
 @media (max-width: 1080px) {

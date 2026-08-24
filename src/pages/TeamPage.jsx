@@ -5,8 +5,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import SiteFooter from '../components/SiteFooter'
-import FaqSection from '../components/FaqSection'
-import { TEAM_FAQS } from '../data/faqs'
 import { CertifiedAdminOverlay, SkillsBadges } from '../components/CertificationBadges'
 import CertificationsSection from '../components/CertificationsSection'
 import { socialConfig } from '../components/socialConfig'
@@ -179,7 +177,6 @@ export default function TeamPage() {
 
       {/* ---------------------------------------------------------------- hero */}
       <section className="pv2-section is-tint pv2-hero">
-        <span className="pv2-grid-bg" aria-hidden="true" />
         <span className="pv2-bloom one" aria-hidden="true" />
         <span className="pv2-bloom two" aria-hidden="true" />
         <div className="pv2-inner pv2-hero-grid">
@@ -276,7 +273,6 @@ export default function TeamPage() {
           >
             <span className="iv-aurora a1" aria-hidden="true" />
             <span className="iv-aurora a2" aria-hidden="true" />
-            <span className="pv2-grid-bg" aria-hidden="true" />
             <span className="pv2-eyebrow" style={{ position: 'relative', zIndex: 2 }}>
               Want to see the team’s work in action?
             </span>
@@ -333,7 +329,6 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <FaqSection faqs={TEAM_FAQS} intro="How the team is structured, certified, and how we support yours." />
       <SiteFooter />
     </main>
   )

@@ -18,7 +18,6 @@ export default function FinalCtaV2() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
-          <span className="hv2-grid-bg" aria-hidden="true" />
           <span className="hv2-eyebrow" style={{ position: 'relative', zIndex: 2 }}>Ready when you are</span>
           <h2>You close the clients. <br />We handle everything else.</h2>
           <p>

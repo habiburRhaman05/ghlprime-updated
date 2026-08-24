@@ -12,8 +12,13 @@
 .m3d-plane { transform-style: preserve-3d; will-change: transform; }
 
 /* Slots keep their own 3D context so a card's dolly-in is perspectival
-   rather than a plain scale. */
-.m3d-slot { transform-style: preserve-3d; height: 100%; }
+   rather than a plain scale. `position: relative` plus a raised z-index on
+   hover puts the pushed-forward card above its neighbours in paint order --
+   without it, a card can visually bleed over the next grid cell while a
+   sibling later in the DOM still paints on top of it, which reads as the
+   grid overlapping itself. */
+.m3d-slot { position: relative; z-index: 0; transform-style: preserve-3d; height: 100%; }
+.m3d-slot:hover { z-index: 4; }
 
 /* NOTE: no `overflow: hidden` here, ever. Overflow forces a flat rendering
    context, which silently collapses every translateZ inside the card. The

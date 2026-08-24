@@ -119,7 +119,6 @@ export default function HeroV2({ activePill, rotatingPills }) {
 
   return (
     <section className="hv2 hv2-section is-tint hv2-hero">
-      <span className="hv2-grid-bg" aria-hidden="true" />
       <span className="hv2-bloom one" aria-hidden="true" />
       <span className="hv2-bloom two" aria-hidden="true" />
 

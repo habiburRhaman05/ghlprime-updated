@@ -336,7 +336,7 @@
   border-radius: 19px;
   transition: transform .5s cubic-bezier(.22, 1, .36, 1);
 }
-.iv-leader:hover .iv-photo-frame img { transform: scale(1.025); }
+/* No hover zoom on the leader photo -- Team page images stay still. */
 .iv-badge-pill {
   position: absolute;
   top: 1.35rem;
@@ -436,7 +436,6 @@
   padding: 1.25rem 1.5rem; border-radius: 18px;
   background: linear-gradient(165deg, #ffffff, #f2f8ff);
   border: 1px solid var(--line);
-  border-left: 3px solid #1895ff;
   font-size: .96rem; line-height: 1.72; color: #33475f;
 }
 .iv-social-rail { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.4rem; }
@@ -493,7 +492,8 @@
   object-position: center 22%;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.pv2-expert:hover .iv-expert-photo img { transform: scale(1.05); }
+/* Team page images stay still on hover; About keeps the zoom. */
+.about-page:not(.team-page) .pv2-expert:hover .iv-expert-photo img { transform: scale(1.05); }
 .iv-expert-static .skills-badges { margin-top: 0.45rem; justify-content: center; }
 
 /* ---------- CTA aurora ------------------------------------------------------ */

@@ -22,6 +22,7 @@ export default function FaqPage() {
       <FaqSection
         eyebrow="GHL Prime FAQ"
         title="Common questions about our team and process"
+        titleAs="h1"
         intro="Pricing, process, white-label, AI agents, SaaS Mode, snapshots, HIPAA, and how to get started."
         faqs={PAGE_FAQS}
       />

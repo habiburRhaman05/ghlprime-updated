@@ -11,12 +11,18 @@ const EASE = [0.22, 1, 0.36, 1]
 export default function FaqSection({
   eyebrow = 'FAQ',
   title = 'Frequently asked questions',
+  // Every other page that embeds this section already has its own h1 in the
+  // hero above, so this heading is correctly an h2 there. The standalone
+  // /faq page has nothing else on it, so it passes 'h1' to make this the
+  // page's one and only h1 instead of leaving the page without one.
+  titleAs = 'h2',
   intro,
   faqs = [],
   className = '',
 }) {
   const [openIndex, setOpenIndex] = useState(0)
   const uid = useId()
+  const Title = titleAs
 
   if (!faqs.length) return null
 
@@ -36,7 +42,7 @@ export default function FaqSection({
           transition={{ duration: 0.6, ease: EASE }}
         >
           <span className="faq2-eyebrow">{eyebrow}</span>
-          <h2>{title}</h2>
+          <Title>{title}</Title>
           {intro ? <p className="faq2-intro">{intro}</p> : null}
 
           <div className="faq2-help">
@@ -64,7 +70,6 @@ export default function FaqSection({
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.45, ease: EASE, delay: Math.min(i, 8) * 0.04 }}
               >
-                <span className="faq2-rule" aria-hidden="true" />
                 <button
                   type="button"
                   className="faq2-q"

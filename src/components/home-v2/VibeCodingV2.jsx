@@ -2,17 +2,18 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { Check } from 'lucide-react'
 import { Plane, Stage } from '../motion3d/Depth'
 import './home-v2.css'
 
 // Carried over from the old Vibe Coding capability chips.
 const CHIPS = [
-  { label: 'Custom Integrations', tone: '#1684ea' },
-  { label: 'API Connections', tone: '#06b6d4' },
-  { label: 'Custom Dashboards', tone: '#8b5cf6' },
-  { label: 'AI-Assisted Dev', tone: '#f59e0b' },
-  { label: 'Webhooks & Triggers', tone: '#10b981' },
-  { label: 'Third-Party Syncs', tone: '#f43f5e' },
+  'Custom Integrations',
+  'API Connections',
+  'Custom Dashboards',
+  'AI-Assisted Dev',
+  'Webhooks & Triggers',
+  'Third-Party Syncs',
 ]
 
 // Each line is [class, text]; 'c' comment, 'k' keyword, 's' string, '' plain.
@@ -104,14 +105,14 @@ export default function VibeCodingV2() {
             {CHIPS.map((chip, i) => (
               <motion.span
                 className="hv2-vibe-chip"
-                key={chip.label}
-                style={{ '--chip': chip.tone }}
+                key={chip}
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.6 }}
                 transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9, delay: i * 0.05 }}
               >
-                {chip.label}
+                <Check size={14} aria-hidden="true" />
+                {chip}
               </motion.span>
             ))}
           </div>

@@ -172,6 +172,7 @@ export default function BentoV2() {
                 key={card.title}
                 index={i}
                 columns={2}
+                lift={26}
               >
                 <span className="ic hv2-bento-icon m3d-l3"><Icon size={22} /></span>
                 <h3 className="m3d-l2">{card.title}</h3>

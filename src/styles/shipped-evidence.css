@@ -40,19 +40,28 @@
   border-radius: 18px;
   box-shadow: var(--shadow-soft);
   overflow: hidden;
+  /* Same depth vocabulary the home page stat band uses (TrustBandV2 /
+     .hv2-stats): each tile pushes toward the viewer on hover rather than
+     just brightening. */
+  perspective: 900px;
 }
 .se-stat {
   padding: clamp(1.4rem, 2.6vw, 2.1rem);
   text-align: center;
   border-right: 1px solid var(--line);
+  transition: box-shadow .4s ease;
 }
 .se-stat:last-child { border-right: none; }
+.se-stat:hover { box-shadow: 0 22px 40px -26px rgba(24, 149, 255, .8); }
 .se-stat-value {
   display: block;
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 800;
   letter-spacing: normal;
-  color: var(--text);
+  /* Counts up on scroll into view (see ShowcaseStat) and reads in the same
+     gradient the home page's numbers use, instead of a flat static digit. */
+  background: var(--primary-gradient, linear-gradient(90deg, #1895ff, #022646));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .se-stat-label {
   display: inline-flex;

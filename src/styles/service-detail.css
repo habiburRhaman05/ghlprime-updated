@@ -105,25 +105,19 @@
 .svc-hero-ctas { display: flex; flex-wrap: wrap; gap: .85rem; justify-content: center; margin-top: 2rem; }
 .svc-hero-ctas .primary-pill, .svc-hero-ctas .secondary-pill { min-height: 3.1rem; padding-inline: 1.6rem; font-size: .98rem; }
 .svc-badges { display: flex; flex-wrap: wrap; gap: .55rem; justify-content: center; margin-top: 1.9rem; }
-/* Each pill owns a hue via --pill-line, cycling every 6, so the row reads as
-   a set of distinct credentials rather than one repeated chip. The hue lives
-   entirely in the resting border; hover only lifts the pill and deliberately
-   changes no colour at all. */
+/* One plain border for every pill -- a leading tick mark carries the
+   "included" meaning now, so the row no longer needs a different colour per
+   pill to read as a set of distinct credentials. */
 .svc-badge {
-  --pill-line: rgba(22,132,234,.55);
-  display: inline-flex; align-items: center;
+  display: inline-flex; align-items: center; gap: .4rem;
   font-size: .82rem; font-weight: 600; color: #3d5169;
   background: linear-gradient(180deg, #ffffff, #f7fafe);
-  border: 1px solid var(--pill-line); border-radius: 50px; padding: .45rem .95rem;
+  border: 1px solid var(--svc-border-card, rgba(15,31,53,.14)); border-radius: 50px; padding: .45rem .95rem;
   box-shadow: 0 1px 2px rgba(15,31,53,.05);
   transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s ease;
 }
-.svc-badge:nth-child(6n+2) { --pill-line: rgba(22,163,74,.55); }
-.svc-badge:nth-child(6n+3) { --pill-line: rgba(139,92,246,.55); }
-.svc-badge:nth-child(6n+4) { --pill-line: rgba(245,158,11,.6); }
-.svc-badge:nth-child(6n+5) { --pill-line: rgba(236,72,153,.55); }
-.svc-badge:nth-child(6n+6) { --pill-line: rgba(6,182,212,.6); }
 .svc-badge:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -10px rgba(15,31,53,.5); }
+.svc-badge-check { flex: none; color: #16a34a; }
 
 /* ---------- Stats bar ---------- */
 .svc-stats {
