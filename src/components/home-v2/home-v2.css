@@ -1042,12 +1042,6 @@
    very close to) natural size, clipped at the right edge instead of
    genuinely shrinking. Percentage-based sizing has no such race: the browser
    computes it correctly on every layout pass by construction. */
-/* The heading above keeps the standard reading-width column (it has its own
-   max-width via .hv2-head regardless), but the diagram itself is wide by
-   nature -- widen just this section's .hv2-inner so the canvas actually
-   uses the spare width on a big screen instead of sitting cramped inside
-   the same column a paragraph of text uses. */
-.hv2-wf-section .hv2-inner { width: min(1680px, calc(100% - 2.5rem)); }
 .hv2-wf-canvas {
   position: relative; width: 100%; aspect-ratio: 1420 / 650;
   container-type: inline-size;
