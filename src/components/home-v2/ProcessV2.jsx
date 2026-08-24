@@ -118,7 +118,7 @@ export default function ProcessV2() {
             the second one arrives, so the chain reads as being assembled
             rather than four boxes that happened to fade in together. */}
         <div className="hv2-phases">
-          {PHASES.map(({ icon: Icon, title, text }, i) => (
+          {PHASES.map(({ title, text }, i) => (
             <motion.div
               className="hv2-phase"
               key={title}
@@ -157,7 +157,6 @@ export default function ProcessV2() {
                     transition={{ duration: 0.85, delay: i * 0.16 + 0.2, ease: 'easeOut' }}
                   />
                 </motion.span>
-                <span className="hv2-phase-icon"><Icon size={26} /></span>
               </div>
               <h3>{title}</h3>
               <p>{text}</p>

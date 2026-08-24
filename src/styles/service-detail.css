@@ -19,7 +19,7 @@
 }
 
 /* ---------- Shared section primitives ---------- */
-.svc-section { padding: 5.5rem 0; }
+.svc-section { padding: 3.75rem 0; }
 .svc-section.alt { background: var(--svc-bg-alt); }
 .svc-head { max-width: 50rem; margin-bottom: 2.4rem; }
 .svc-head.center { margin-inline: auto; text-align: center; }
@@ -782,7 +782,7 @@
   .svc-flow-arrow { transform: rotate(90deg); justify-content: center; padding: .2rem 0; }
 }
 @media (max-width: 600px) {
-  .svc-section { padding: 3.6rem 0; }
+  .svc-section { padding: 2.75rem 0; }
   .svc-grid, .svc-grid.two { grid-template-columns: 1fr; }
   .svc-hero { padding: 2rem 0 3rem; }
   .svc-timeline { --rail-x: 1.05rem; --pad: 3rem; }

@@ -369,7 +369,6 @@ export default function AboutPage() {
               >
                 <div className="av-card-top">
                   <span className="ic ic-solid ic-lg"><Icon size={24} /></span>
-                  <span className="av-card-num">{String(i + 1).padStart(2, '0')}</span>
                 </div>
                 <h3>{title}</h3>
                 <p>{text}</p>
@@ -443,9 +442,9 @@ export default function AboutPage() {
           {/* A ledger rather than a timeline: five rows on one rule, each one
               fading up as it scrolls into view. */}
           <div className="av-ledger">
-            {beliefs.map(({ icon: Icon, tone, title, text }, i) => (
+            {beliefs.map(({ tone, title, text }, i) => (
               <motion.div
-                className={`av-row ic-hover ${tone}`}
+                className={`av-row ${tone}`}
                 key={title}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -453,7 +452,6 @@ export default function AboutPage() {
                 transition={{ ...SPRING, delay: (i % 3) * 0.06 }}
               >
                 <span className="av-row-num">{String(i + 1).padStart(2, '0')}</span>
-                <span className="ic"><Icon size={19} /></span>
                 <div className="av-row-body">
                   <h3>{title}</h3>
                   <p>{text}</p>

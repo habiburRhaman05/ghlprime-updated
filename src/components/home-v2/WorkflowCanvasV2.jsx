@@ -18,7 +18,6 @@ import {
   UserRoundPlus,
   Voicemail,
 } from 'lucide-react'
-import Tilt from '../motion3d/Tilt'
 import './home-v2.css'
 
 // A real, causally-sound automation, not a placeholder: everything a
@@ -271,9 +270,8 @@ export default function WorkflowCanvasV2() {
           viewport={{ once: true, amount: 0.2 }}
           transition={SPRING}
         >
-          <Tilt
+          <div
             className={`hv2-wf-canvas ${isMobile ? 'is-vertical' : 'is-horizontal'}`}
-            max={4}
             role="img"
             aria-label="An automation workflow: a new lead is captured, then routed by whether it is currently business hours. During business hours the lead is called immediately, then branches again on whether the call was answered, ending in either a scheduled discovery call or the lead being added to a call queue with a voicemail left. Outside business hours the lead gets an after-hours text, is tagged for next-day follow-up, and is queued for the morning. On a weekend the lead gets an automatic reply and is queued to be followed up with Monday morning."
           >
@@ -314,7 +312,7 @@ export default function WorkflowCanvasV2() {
                 canvasH={canvasH}
               />
             ))}
-          </Tilt>
+          </div>
         </motion.div>
       </div>
     </section>

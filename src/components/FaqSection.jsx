@@ -3,7 +3,7 @@
 import { useId, useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, Plus } from 'lucide-react'
+import { ArrowRight, MessageCircleQuestion, Plus } from 'lucide-react'
 import './faq-v2.css'
 
 const EASE = [0.22, 1, 0.36, 1]
@@ -46,11 +46,9 @@ export default function FaqSection({
           {intro ? <p className="faq2-intro">{intro}</p> : null}
 
           <div className="faq2-help">
-            <span className="faq2-help-dot" aria-hidden="true" />
-            <div>
-              <strong>Still have a question?</strong>
-              <p>Ask us directly, same-day reply, no commitment.</p>
-            </div>
+            <span className="ic ic-solid faq2-help-icon" aria-hidden="true"><MessageCircleQuestion size={20} /></span>
+            <strong>Still have a question?</strong>
+            <p>Ask us directly, same-day reply, no commitment.</p>
             <Link href="/booking" className="faq2-help-link">
               Book a free call <ArrowRight size={15} />
             </Link>

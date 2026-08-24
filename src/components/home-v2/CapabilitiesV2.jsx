@@ -152,21 +152,60 @@ export default function CapabilitiesV2() {
 
         <div className="hv2-cap">
           <div className="hv2-cap-list" role="tablist" aria-label="Capabilities">
-            {CAPS.map((cap, i) => (
-              <button
-                type="button"
-                role="tab"
-                aria-selected={i === active}
-                className={`hv2-cap-item${i === active ? ' is-active' : ''}`}
-                key={cap.title}
-                onClick={() => setActive(i)}
-                onMouseEnter={() => setActive(i)}
-              >
-                <span className="hv2-cap-num">{String(i + 1).padStart(2, '0')}</span>
-                <span className="hv2-cap-title">{cap.title}</span>
-                <ChevronRight size={16} className="hv2-cap-chev" />
-              </button>
-            ))}
+            {CAPS.map((cap, i) => {
+              const RowIcon = cap.icon
+              const open = i === active
+              return (
+                <div className="hv2-cap-row" key={cap.title}>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={open}
+                    aria-expanded={open}
+                    aria-controls={`hv2-cap-inline-${i}`}
+                    className={`hv2-cap-item${open ? ' is-active' : ''}`}
+                    onClick={() => setActive(i)}
+                    onMouseEnter={() => setActive(i)}
+                  >
+                    <span className="hv2-cap-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="hv2-cap-title">{cap.title}</span>
+                    <ChevronRight size={16} className="hv2-cap-chev" />
+                  </button>
+
+                  {/* Mobile only (see CSS): the list stacks above the panel
+                      once the layout goes single-column, so picking an item
+                      near the bottom meant scrolling back up to see it change.
+                      Below that breakpoint the same content opens inline,
+                      right under the row that was tapped, instead. */}
+                  <AnimatePresence initial={false}>
+                    {open ? (
+                      <motion.div
+                        className="hv2-cap-inline"
+                        id={`hv2-cap-inline-${i}`}
+                        role="region"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{
+                          height: { type: 'spring', stiffness: 220, damping: 30, mass: 0.8 },
+                          opacity: { duration: 0.22 },
+                        }}
+                      >
+                        <div className="hv2-cap-inline-body">
+                          <span className={`ic ic-solid hv2-cap-inline-icon ${cap.tone}`}><RowIcon size={19} /></span>
+                          <p>{cap.text}</p>
+                          <div className="hv2-cap-points">
+                            {cap.points.map((p) => (
+                              <span className="hv2-cap-point" key={p}><Check size={15} /> {p}</span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    ) : null}
+                  </AnimatePresence>
+                </div>
+              )
+            })}
           </div>
 
           <div className="hv2-cap-panel">

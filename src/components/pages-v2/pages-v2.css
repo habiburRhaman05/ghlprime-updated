@@ -22,7 +22,7 @@
   --radius: 20px;
 }
 
-.pv2-section { position: relative; padding: clamp(4rem, 7vw, 6.5rem) 0; }
+.pv2-section { position: relative; padding: clamp(2.5rem, 4.5vw, 4rem) 0; }
 .pv2-section.is-white { background: #fff; }
 .pv2-section.is-paper { background: var(--paper); }
 .pv2-section.is-tint {
