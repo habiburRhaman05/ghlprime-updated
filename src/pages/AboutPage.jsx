@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import {
   ArrowRight,
   Award,
@@ -194,16 +194,19 @@ const trustPillars = [
     icon: UsersRound,
     title: 'A GHL-only team',
     text: 'We do not generalize across platforms or dilute our expertise across fifty different tools. Every specialist works exclusively in the GoHighLevel ecosystem, which means we build faster and troubleshoot better than a generalist freelancer ever could.',
+    chips: ['One ecosystem', 'Faster builds', 'Deeper troubleshooting'],
   },
   {
     icon: Award,
     title: 'Credentials that back it up',
-    text: 'Our Certified Admin badge is the highest-level GoHighLevel certification available. Combined with 10 specialty certifications including HIPAA Compliance, A2P, AI Employee, and SaaS Mode, we carry the formal credentials behind every claim we make.',
+    text: 'Our Certified Admin badge is the highest-level GoHighLevel certification available. Combined with 10 specialty certifications, we carry the formal credentials behind every claim we make.',
+    chips: ['Certified Admin', 'HIPAA Compliance', 'A2P', 'AI Employee', 'SaaS Mode'],
   },
   {
     icon: EyeOff,
     title: 'Invisible behind your brand',
     text: 'We operate fully white-labeled, which means your clients never know we exist. Your agency is the front door. We are the engine room. That is how it is supposed to work.',
+    chips: ['Fully white-labeled', 'Client-invisible delivery'],
   },
 ]
 
@@ -219,6 +222,60 @@ const heroLine = {
   show: { opacity: 1, y: 0, transition: SPRING },
 }
 const heroLineProps = { variants: heroLine }
+
+// ---------------------------------------------------------------------------
+// Trust deck -- a scroll-driven stack of full-width panels.
+//
+// Each panel pins under the header as you scroll and the next one slides up
+// over it (position:sticky + a per-panel offset), so the section reads as a
+// deck being dealt rather than three boxes in a grid. Content inside each
+// panel staggers up once the panel itself is on screen.
+// ---------------------------------------------------------------------------
+
+const panelStack = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.12 } } }
+const panelRise = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 96, damping: 17 } },
+}
+
+function TrustPanel({ pillar, index }) {
+  const reduceMotion = useReducedMotion()
+  const { icon: Icon, title, text, chips } = pillar
+
+  return (
+    <motion.article
+      className="av-panel"
+      style={{ '--deck-i': index }}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 72 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ type: 'spring', stiffness: 62, damping: 16, mass: 0.9 }}
+    >
+      <motion.div
+        className="av-panel-body"
+        variants={panelStack}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.35 }}
+      >
+        <div className="av-panel-id">
+          <span className="ic ic-lg"><Icon size={26} /></span>
+          <span className="av-panel-num">{String(index + 1).padStart(2, '0')}</span>
+        </div>
+        <h3>{title}</h3>
+
+        <div className="av-panel-detail">
+          <p>{text}</p>
+          <ul className="av-panel-chips">
+            {chips.map((chip) => (
+              <motion.li variants={panelRise} key={chip}>{chip}</motion.li>
+            ))}
+          </ul>
+        </div>
+      </motion.div>
+    </motion.article>
+  )
+}
 
 export default function AboutPage() {
   const [experts, setExperts] = useState([])
@@ -408,48 +465,35 @@ export default function AboutPage() {
       </section>
 
       {/* --------------------------------------------------------- trust */}
-      <section className="pv2-section is-white" aria-labelledby="why-agencies-trust-heading">
-        <div className="pv2-inner av-trust">
+      <section className="pv2-section is-paper" aria-labelledby="why-agencies-trust-heading">
+        <div className="pv2-inner">
           <motion.div
-            className="av-trust-rail"
-            initial={{ opacity: 0, y: 24 }}
+            className="pv2-head centered"
+            initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={SPRING}
           >
             <span className="pv2-eyebrow">Why Us</span>
             <h2 id="why-agencies-trust-heading">Why Agencies <span className="pv2-hl">Trust GHL Prime</span></h2>
-            <span className="av-trust-rule" aria-hidden="true" />
           </motion.div>
 
-          <div className="av-trust-main">
-            <motion.p
-              className="av-trust-lede"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={SPRING}
-            >
-              {trustStatement}
-            </motion.p>
+          <motion.p
+            className="av-trust-lede"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={SPRING}
+          >
+            {trustStatement}
+          </motion.p>
 
-            <motion.div
-              className="av-pillars"
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={SPRING}
-            >
-              {trustPillars.map(({ icon: Icon, title, text }) => (
-                <div className="av-pillar" key={title}>
-                  <span className="ic"><Icon size={19} /></span>
-                  <div>
-                    <strong>{title}</strong>
-                    <p>{text}</p>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+          {/* A scroll-driven deck: each panel pins and the next slides up
+              over it -- dealt one argument at a time. */}
+          <div className="av-deck">
+            {trustPillars.map((pillar, i) => (
+              <TrustPanel key={pillar.title} pillar={pillar} index={i} />
+            ))}
           </div>
         </div>
       </section>

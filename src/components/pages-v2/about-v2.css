@@ -3,9 +3,11 @@
 
    A different presentation of the same copy: the page is now built from a
    centred hero sitting inside a receding "well", a stepped shelf of three
-   cards, a single ecosystem plaque, a numbered ledger of principles, and an
-   editorial two-column close. Nothing rotates -- every 3D move here is along
-   Z, matching the home page, so text stays square to the screen.
+   cards, a single ecosystem plaque, a numbered ledger of principles, and a
+   closing trust spread -- a scroll-driven deck of full-width panels that
+   stack over each other as you scroll.
+   Nothing rotates -- every 3D move here is along Z, matching the home page,
+   so text stays square to the screen.
 
    Tokens come from pages-v2.css (.pv2). Namespaced av- so none of it can
    reach the Team page, which still uses the iv- layer.
@@ -142,34 +144,76 @@
 }
 .av-cta-actions { display: flex; flex-wrap: wrap; gap: .85rem; justify-content: center; margin-top: 2rem; }
 
-/* ---------- editorial close ------------------------------------------------ */
-.av-trust { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-.av-trust-rail { position: sticky; top: 7rem; }
-.av-trust-rail h2 {
-  margin: 1rem 0 0; font-size: clamp(1.8rem, 3.2vw, 2.6rem); line-height: 1.1;
-  letter-spacing: -.025em; font-weight: 800; color: var(--navy); text-wrap: balance;
+/* ---------- why agencies trust --------------------------------------------- */
+/* A scroll-driven deck. Each panel is position:sticky with a per-panel top
+   offset (--deck-i), so as the reader scrolls, every new argument slides up
+   over the previous one and pins just below it -- a deck being dealt, one
+   edge of the stack always visible. */
+.av-trust-lede {
+  margin: 0 auto clamp(2.2rem, 4vw, 3rem);
+  max-width: 54rem;
+  text-align: center;
+  font-size: clamp(1.08rem, 1.7vw, 1.24rem);
+  line-height: 1.78;
+  color: #33475f;
+  font-weight: 500;
 }
-.av-trust-rule { display: block; width: 3.4rem; height: 3px; margin-top: 1.4rem; border-radius: 99px; background: var(--primary-gradient, #1895ff); }
 
-/* The opening premise reads as a statement; the supporting arguments follow
-   as a quiet icon-led list in one shared panel -- rows, not three separate
-   boxes each carrying their own colour, so there is nothing chromatic
-   competing with the paragraph above it. */
-.av-trust-lede { margin: 0; font-size: clamp(1.08rem, 1.7vw, 1.22rem); line-height: 1.78; color: #33475f; font-weight: 500; }
-.av-pillars {
-  margin-top: 1.8rem; border-radius: 18px; overflow: hidden;
-  border: 1px solid var(--line);
-  background: linear-gradient(165deg, #ffffff, #f8fbff);
+.av-deck {
+  display: grid;
+  gap: clamp(1.6rem, 3vw, 2.4rem);
+  padding-bottom: .75rem;
 }
-.av-pillar {
-  display: flex; align-items: flex-start; gap: 1rem;
-  padding: 1.2rem 1.4rem;
-  transition: background .3s ease;
+
+.av-panel {
+  position: sticky;
+  top: calc(7rem + var(--deck-i) * 1.7rem);
+  padding: clamp(1.9rem, 3.6vw, 3rem);
+  border-radius: 26px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  transition: border-color .35s ease;
 }
-.av-pillar + .av-pillar { border-top: 1px solid var(--line); }
-.av-pillar:hover { background: rgba(24, 149, 255, .05); }
-.av-pillar strong { display: block; font-size: 1.02rem; font-weight: 800; color: var(--navy); letter-spacing: -.01em; }
-.av-pillar p { margin: .45rem 0 0; font-size: .93rem; line-height: 1.66; color: var(--body); }
+.av-panel:hover { border-color: rgba(24, 149, 255, .38); }
+
+/* Identity column left (icon + badge over the title), argument column right
+   (copy over the chip row). */
+.av-panel-body {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  grid-template-areas:
+    'id detail'
+    'title detail';
+  align-items: center;
+  column-gap: clamp(1.6rem, 3.5vw, 3rem);
+  row-gap: .9rem;
+  min-height: clamp(16rem, 24vw, 19rem);
+}
+.av-panel-id { grid-area: id; display: flex; align-items: center; gap: 1rem; }
+.av-panel h3 { grid-area: title; margin: .4rem 0 0; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: var(--navy); text-wrap: balance; align-self: start; }
+.av-panel-detail { grid-area: detail; }
+
+.av-panel p { margin: 0; font-size: 1rem; line-height: 1.75; color: var(--body); max-width: 34rem; }
+.av-panel-chips {
+  list-style: none; margin: 1.35rem 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: .55rem;
+}
+.av-panel-chips li {
+  padding: .45rem .95rem; border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: .82rem; font-weight: 600; color: #33475f;
+}
+
+/* Same gradient disc the numbered badges use across the site. */
+.av-panel-num {
+  display: grid; place-items: center; flex: none;
+  width: 2.15rem; height: 2.15rem; border-radius: 50%;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .78rem; font-weight: 700; color: #fff;
+  background: var(--primary-gradient, linear-gradient(135deg, #1895ff, #022646));
+  box-shadow: 0 8px 16px -8px rgba(2, 38, 70, .6);
+}
 
 /* ---------- hero trust chips ------------------------------------------------ */
 .av-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1.6rem; }
@@ -185,12 +229,23 @@
 /* ---------- responsive ------------------------------------------------------ */
 @media (max-width: 1080px) {
   .av-shelf { grid-template-columns: repeat(2, 1fr); }
-  .av-trust { grid-template-columns: 1fr; }
-  .av-trust-rail { position: static; }
 }
 @media (max-width: 860px) {
   .av-row {
     grid-template-columns: 2.3rem 2.6rem minmax(0, 1fr);
+    align-items: start;
+  }
+  /* The deck keeps its stack on small screens but sits tighter under the
+     header, and each panel flows as one column instead of two. */
+  .av-panel { top: calc(5.75rem + var(--deck-i) * 1.15rem); padding: clamp(1.5rem, 4.5vw, 2rem); }
+  .av-panel-body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'id'
+      'title'
+      'detail';
+    row-gap: 1rem;
+    min-height: 0;
     align-items: start;
   }
 }

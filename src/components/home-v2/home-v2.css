@@ -893,21 +893,22 @@
   display: grid; place-items: center; width: 4.6rem; height: 4.6rem;
   border-radius: 16px; background: #fff; border: 1px solid var(--line);
   box-shadow: 0 1px 3px rgba(15, 31, 53, .05);
-  /* Settling this transition covers the un-hover only: the spin itself is a
-     one-shot @keyframes below, not a transition on transform. A transition
-     retriggers on every fresh :hover match while the cursor drifts across a
-     row of these, which reads as one continuous, never-ending spin instead
-     of a single turn. */
-  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  /* The tile itself never transforms -- only the image inside it spins (see
+     below). Transforming the tile used to move the hover target mid-turn: a
+     cursor resting near the tile's bottom edge slipped off as the badge
+     lifted, :hover dropped and instantly re-matched, restarting the spin --
+     which read as endless rotation until the pointer moved away. */
+  transition: border-color .3s ease, box-shadow .3s ease;
 }
-/* A full turn on hover -- the badge spins like a coin rather than tipping.
-   `forwards` holds the end frame for as long as the pointer stays put, and
-   because it is an animation (not a transition) it runs exactly once per
-   hover-enter no matter how long the hover lasts. */
+/* Border/glow ride on the tile hover; the single coin-flip rides on the img,
+   so the spin runs exactly once per hover-enter no matter where the cursor
+   sits on the badge or how long it stays. */
 .hv2-cert:hover {
-  animation: hv2CertSpin .85s cubic-bezier(.22, 1, .36, 1) forwards;
   border-color: rgba(24, 149, 255, .4);
   box-shadow: 0 18px 32px -20px rgba(24, 149, 255, .9);
+}
+.hv2-cert:hover img {
+  animation: hv2CertSpin .85s cubic-bezier(.22, 1, .36, 1) forwards;
 }
 @keyframes hv2CertSpin {
   from { transform: perspective(700px) rotateY(0deg) translateY(0) scale(1); }
