@@ -14,6 +14,7 @@ import HeroV2 from '../components/home-v2/HeroV2'
 import TrustBandV2 from '../components/home-v2/TrustBandV2'
 import WhoWeAreV2 from '../components/home-v2/WhoWeAreV2'
 import BentoV2 from '../components/home-v2/BentoV2'
+import WorkflowCanvasV2 from '../components/home-v2/WorkflowCanvasV2'
 import CapabilitiesV2 from '../components/home-v2/CapabilitiesV2'
 import AgentV2 from '../components/home-v2/AgentV2'
 import VibeCodingV2 from '../components/home-v2/VibeCodingV2'
@@ -199,6 +200,7 @@ export default function HomePage() {
       <TrustBandV2 />
       <WhoWeAreV2 />
       <BentoV2 />
+      <WorkflowCanvasV2 />
       <CapabilitiesV2 />
       <AgentV2 />
       <VibeCodingV2 />

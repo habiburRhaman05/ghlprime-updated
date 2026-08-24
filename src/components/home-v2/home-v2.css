@@ -1028,6 +1028,63 @@
 .hv2-cta-actions { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: .9rem; justify-content: center; margin-top: 2.2rem; }
 
 /* =========================================================================
+   WORKFLOW CANVAS -- an automation drawing itself node by node
+   ========================================================================= */
+/* No card: no background, no border, no shadow, no grid -- the diagram sits
+   directly on the page's own background. `container-type: inline-size` is
+   what makes this work at every width with nothing ever scrolled or clipped
+   out of view: every node below is sized in `cqw` (a percentage of THIS
+   element's own inline size), not rem or px, so node width, padding, and
+   font-size shrink in lockstep with the canvas itself. A JS-measured
+   transform: scale() was tried first and dropped -- it depends on a
+   ResizeObserver firing with the right value at the right time, and on this
+   card the visible result was the canvas nearly always rendering at (or
+   very close to) natural size, clipped at the right edge instead of
+   genuinely shrinking. Percentage-based sizing has no such race: the browser
+   computes it correctly on every layout pass by construction. */
+/* The heading above keeps the standard reading-width column (it has its own
+   max-width via .hv2-head regardless), but the diagram itself is wide by
+   nature -- widen just this section's .hv2-inner so the canvas actually
+   uses the spare width on a big screen instead of sitting cramped inside
+   the same column a paragraph of text uses. */
+.hv2-wf-section .hv2-inner { width: min(1680px, calc(100% - 2.5rem)); }
+.hv2-wf-canvas {
+  position: relative; width: 100%; aspect-ratio: 1420 / 650;
+  container-type: inline-size;
+}
+.hv2-wf-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; overflow: visible; }
+.hv2-wf-wire { fill: none; stroke: rgba(24, 149, 255, .5); stroke-width: 2.5; stroke-linecap: round; }
+.hv2-wf-pulse { fill: #1895ff; filter: drop-shadow(0 0 5px rgba(24, 149, 255, .85)); }
+
+/* Nodes sit in front of the wires and float a little further off the page
+   under the tilt, the same layered-depth vocabulary the hero console uses. */
+/* Width is deliberately tight against the gap between columns (see the
+   MARGIN_X/DIAGRAM_W comment in the component for the actual numbers) --
+   labels wrap to two lines rather than truncating, which is what lets the
+   card stay narrow enough for neighbouring nodes in the same row to never
+   touch without cutting any text off. */
+.hv2-wf-node {
+  position: absolute; z-index: 2; transform: translate(-50%, -50%) translateZ(24px);
+  display: flex; align-items: center; gap: .7cqw;
+  width: 13cqw; padding: .65cqw .8cqw .65cqw .6cqw;
+  background: #fff; border: 1px solid var(--line-strong); border-radius: 1.1cqw;
+  box-shadow: 0 14px 26px -18px rgba(15, 31, 53, .5);
+}
+.hv2-wf-node .ic { --ic-size: 2.6cqw; border-radius: 1cqw; }
+.hv2-wf-node .ic svg { width: 1.4cqw; height: 1.4cqw; }
+.hv2-wf-node.kind-condition { border-color: rgba(99, 102, 241, .4); border-style: dashed; }
+.hv2-wf-node.kind-end { border-color: rgba(16, 185, 129, .4); background: linear-gradient(165deg, #fff, #f2fbf7); }
+.hv2-wf-node-body { display: flex; flex-direction: column; min-width: 0; }
+.hv2-wf-node-body strong {
+  font-size: 1.2cqw; font-weight: 700; color: var(--navy); line-height: 1.22;
+  white-space: normal; word-break: break-word;
+}
+.hv2-wf-node-body em {
+  font-style: normal; margin-top: .25cqw; font-size: .95cqw; letter-spacing: .03em;
+  text-transform: uppercase; color: var(--muted); font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* =========================================================================
    Responsive
    ========================================================================= */
 @media (max-width: 1080px) {
