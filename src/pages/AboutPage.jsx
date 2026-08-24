@@ -259,8 +259,7 @@ function TrustPanel({ pillar, index }) {
         viewport={{ once: true, amount: 0.35 }}
       >
         <div className="av-panel-id">
-          <span className="ic ic-lg"><Icon size={26} /></span>
-          <span className="av-panel-num">{String(index + 1).padStart(2, '0')}</span>
+          <span className="ic ic-solid ic-lg"><Icon size={26} /></span>
         </div>
         <h3>{title}</h3>
 

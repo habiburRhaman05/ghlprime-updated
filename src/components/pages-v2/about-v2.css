@@ -191,6 +191,13 @@
   min-height: clamp(16rem, 24vw, 19rem);
 }
 .av-panel-id { grid-area: id; display: flex; align-items: center; gap: 1rem; }
+/* Always the solid tile (see ic-solid on the markup) with no separate hover
+   state on top of it -- .ic:hover still lifts/scales any .ic tile globally,
+   so that's cancelled here specifically. */
+.av-panel-id .ic:hover {
+  transform: none;
+  box-shadow: 0 12px 24px -14px color-mix(in srgb, var(--ic-to, #022646) 75%, transparent);
+}
 .av-panel h3 { grid-area: title; margin: .4rem 0 0; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: var(--navy); text-wrap: balance; align-self: start; }
 .av-panel-detail { grid-area: detail; }
 

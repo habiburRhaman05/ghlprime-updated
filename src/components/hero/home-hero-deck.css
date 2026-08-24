@@ -265,8 +265,9 @@
   box-shadow: 0 10px 22px -12px rgba(23, 59, 108, 0.28);
 }
 .secondary-pill.hh-cta-ghost:hover {
-  border-color: rgba(22, 132, 234, 0.5);
-  background: #fff;
+  border-color: transparent;
+  background: var(--warm-gradient);
+  color: #1a1206;
 }
 
 .hh-cta > *:focus-visible {
