@@ -2,15 +2,21 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import Lightbox from './Lightbox'
 import './home-v2.css'
 
 // Same photo set the previous Life At GHL Prime section used, served from
 // /public. Split into two rows that scroll in opposite directions.
 const FILES = [
-  'DSC00041 (1).jpg', 'DSC00043 (1).jpg', 'DSC00056 (1).jpg', 'DSC00064 (1).jpg',
-  'DSC00071 (1).jpg', 'DSC00072 (1).jpg', 'DSC00110 (1).jpg', 'DSC00111 (1).jpg',
+  'DSC00064 (1).jpg',
+  'DSC00071 (1).jpg', 'DSC00072 (1).jpg', 'DSC00111 (1).jpg',
   'DSC00353 (1).jpg', 'DSC00361 (1).jpg', 'DSC00382 (1).jpg',
+  'Image (2).jpg', 'Image (3).jpg', 'Image (4).jpg', 'Image (7).jpg',
+  'Image (8).jpg', 'Image (9).jpg', 'Image (11).jpg', 'Image (12).jpg',
+  'Image (13).jpg', 'Image (14).jpg', 'Image (17).jpg', 'Image (18).jpg',
+  'Image (20).jpg', 'Image (21).jpg', 'Image (22).jpg', 'Image (23).jpg',
+  'Image (24).jpg', 'Image (40).jpg',
 ]
 
 const SHOTS = FILES.map((file, i) => ({
@@ -67,7 +73,21 @@ export default function LifeAtGhlV2() {
                     onClick={() => setViewing(SHOTS.indexOf(shot))}
                     aria-label="View photo full screen"
                   >
-                    <img src={shot.src} alt="" loading="lazy" decoding="async" />
+                    {/* These source photos come straight off a phone (several
+                        run 5-11MB at 6000px+), decoded and thrown at a
+                        272x204 tile -- that decode cost, repeated across
+                        every tile in the marquee, was the actual lag, not
+                        the CSS animation. next/image asks Next's image
+                        endpoint for a tile-sized, compressed copy instead of
+                        shipping the original. The lightbox still opens the
+                        full-resolution file directly. */}
+                    <Image
+                      src={shot.src}
+                      alt=""
+                      fill
+                      sizes="(max-width: 760px) 208px, 272px"
+                      quality={60}
+                    />
                   </button>
                 ))}
               </div>

@@ -24,6 +24,14 @@ const nextConfig = {
   // requires a config change rather than a route file rename.
   pageExtensions: ['tsx', 'ts'],
 
+  // The Life at GHL Prime marquee (src/components/home-v2/LifeAtGhlV2.jsx)
+  // is the one place using next/image so far, requesting quality 60 for its
+  // small, decorative tiles -- Next 16 rejects any quality not explicitly
+  // allow-listed here.
+  images: {
+    qualities: [60, 75],
+  },
+
   env: {
     NEXT_PUBLIC_BUILD_DATE: BUILD_DATE,
     // Client code (src/lib/supabase.js, src/lib/apiClient.js) reads these under
