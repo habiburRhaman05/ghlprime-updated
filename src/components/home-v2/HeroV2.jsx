@@ -91,7 +91,7 @@ export default function HeroV2({ activePill, rotatingPills }) {
             transition={{ type: 'spring', stiffness: 130, damping: 15, mass: 0.9, delay: 0.15 }}
           >
             <Image
-              src="/services-assests/hero-1.jpeg"
+              src="/db3.png"
               alt="A GoHighLevel dashboard managed by GHL Prime"
               fill
               priority
@@ -105,7 +105,7 @@ export default function HeroV2({ activePill, rotatingPills }) {
             transition={{ type: 'spring', stiffness: 130, damping: 15, mass: 0.9, delay: 0.3 }}
           >
             <Image
-              src="/services-assests/hero-2.jpeg"
+              src="/dashboard5.png"
               alt="A GoHighLevel reporting dashboard managed by GHL Prime"
               fill
               sizes="(max-width: 900px) 90vw, 640px"

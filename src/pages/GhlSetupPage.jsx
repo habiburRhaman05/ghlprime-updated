@@ -26,8 +26,8 @@ export const config = {
     images: [
       '/dashboard1.png',
       '/dashboard2.png',
-      '/dashboard3.jpg',
-      '/dashboard4.avif'
+      '/db3.png',
+      '/dashboard5.png'
     ]
   },
   stats: [
@@ -45,7 +45,7 @@ export const config = {
       `Whether you are launching a brand-new account or untangling one another vendor left broken, we configure it to standard and document everything. If you also need a productized platform for your own clients, our [SaaS CRM build-out](/services/saas-crm) extends the same foundation. Want a clean account without the trial and error? [Book a free consultation](/booking) and we will audit your setup, scope the work, and give you a realistic timeline on the call.`,
     ],
     cta: { label: 'Book a Free Call', to: '/booking' },
-    visual: { kind: 'dashboard' },
+    visual: { kind: 'dashboard-photo', photoSrc: '/db6.png', photoAlt: 'A GoHighLevel dashboard managed by GHL Prime' },
   },
   deliver: {
     h2: 'GoHighLevel Setup: What We Deliver',

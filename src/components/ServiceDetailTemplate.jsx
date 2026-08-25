@@ -2,6 +2,7 @@
 
 import { useState, Fragment, useMemo, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useReducedMotion, useScroll, useSpring, useInView } from 'framer-motion'
 import {
   ArrowRight, ChevronRight, CheckCircle2, Check, Code2, Terminal, LayoutDashboard,
@@ -609,6 +610,24 @@ function WhatIsVisual({ visual }) {
   if (visual.kind === 'code' || !visual.kind) {
     return <CodeCard filename={visual.filename} code={visual.code} />
   }
+  // Two panels stacked to match the text column's height, same technique as
+  // the home hero: each only has to cover roughly half the height, so a real
+  // screenshot next to the built mockup doesn't need a hard crop to fill the
+  // slot. Bypasses the shared m3d-float/Tilt wrapper below -- that wrapper
+  // assumes one intrinsically-sized mockup, not a stack stretched to match a
+  // sibling column, and Tilt's rotate would only fight the stretch.
+  if (visual.kind === 'dashboard-photo') {
+    return (
+      <div className="svc-whatis-stack">
+        <div className="svc-whatis-stack-row">
+          <CrmDashboard />
+        </div>
+        <div className="svc-whatis-stack-row">
+          <Image src={visual.photoSrc} alt={visual.photoAlt || 'A GoHighLevel dashboard'} fill sizes="(max-width: 900px) 90vw, 560px" />
+        </div>
+      </div>
+    )
+  }
   const inner =
     visual.kind === 'figma' ? <FigmaSplit />
     : visual.kind === 'helpdesk' ? <HelpdeskCard data={visual} />
@@ -970,7 +989,11 @@ export default function ServiceDetailTemplate({ config }) {
                 </Link>
               ) : null}
             </div>
-            <motion.div {...fade} transition={{ duration: 0.55, delay: 0.1 }}>
+            <motion.div
+              className={config.whatIs.visual?.kind === 'dashboard-photo' ? 'svc-whatis-visual-col' : undefined}
+              {...fade}
+              transition={{ duration: 0.55, delay: 0.1 }}
+            >
               <WhatIsVisual visual={config.whatIs.visual} />
             </motion.div>
           </div>

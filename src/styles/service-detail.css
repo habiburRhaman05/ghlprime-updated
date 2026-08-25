@@ -159,6 +159,34 @@
 .svc-highlight { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .svc-highlight-text h2 { margin: 0 0 1rem; font-size: clamp(1.7rem, 3.2vw, 2.4rem); color: var(--svc-heading); letter-spacing: normal; line-height: 1.18; }
 
+/* Only the dashboard-photo visual opts into matching the text column's
+   height exactly -- every other visual kind here is a fixed-size mockup
+   that .svc-highlight's default align-items: center already suits. */
+.svc-whatis-visual-col { align-self: stretch; }
+.svc-whatis-stack { display: flex; flex-direction: column; gap: 1.25rem; height: 100%; }
+/* Both rows split the stack evenly -- same width (the column's, by default
+   flex stretch) and same height (flex: 1 each), rather than the built mockup
+   keeping its own natural size while the photo is sized separately. The
+   photo uses object-fit: contain so the full frame always shows with no
+   crop; the mockup is centered and clipped by its row the same way any
+   fixed-size panel would be inside a shorter box. */
+.svc-whatis-stack-row { flex: 1; }
+.svc-whatis-stack-row:first-child {
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  border-radius: 18px; background: #fff; border: 1px solid var(--svc-border-card, rgba(15, 31, 53, .14));
+}
+.svc-whatis-stack-row:last-child {
+  position: relative; border-radius: 18px; overflow: hidden;
+  background: #fff; border: 1px solid var(--svc-border-card, rgba(15, 31, 53, .14));
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .05), 0 24px 48px -30px rgba(15, 31, 53, .45);
+}
+.svc-whatis-stack-row:last-child img { object-fit: contain; object-position: center; }
+@media (max-width: 960px) {
+  .svc-whatis-visual-col { align-self: auto; }
+  .svc-whatis-stack { height: auto; }
+  .svc-whatis-stack-row { flex: none; aspect-ratio: 16 / 9; }
+}
+
 /* Hero copy needs a 3D context for the unfold, and the eyebrow pill has to
    stop being inline for a rotation to apply to it at all. */
 .svc-hero-inner { perspective: 1000px; }
