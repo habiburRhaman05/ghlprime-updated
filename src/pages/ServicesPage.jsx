@@ -52,28 +52,28 @@ const expertHandles = [
 const steps = [
   {
     number: '01',
-    title: 'Tell us what you need',
+    title: 'Tell Us What You Need',
     text: 'Book a free call. We listen, map your setup, and figure out the right hire model full-time, part-time, or task-based.',
     pills: ['same-day reply', 'no commitment'],
     time: '~30 min',
   },
   {
     number: '02',
-    title: 'We match you an expert',
+    title: 'We Match You an Expert',
     text: "You're paired with a GHL-certified specialist from our team. No generalists, no guessing and you interview them before saying yes.",
     pills: ['4+ yrs avg GHL experience', 'swap anytime'],
     time: '~24 hr',
   },
   {
     number: '03',
-    title: 'They get to work',
+    title: 'They Get to Work',
     text: 'Your expert plugs in immediately building automations, handling support, training your team all under your brand. Invisible to your clients.',
     pills: ['white-labeled', 'daily status updates'],
     time: '~48 hr',
   },
   {
     number: '04',
-    title: 'You focus on growth',
+    title: 'You Focus on Growth',
     text: 'The tech is handled. You close clients, pitch new business, and scale without ever touching the back-end again.',
     metric: 'avg +30% revenue at 90 days',
     time: 'day 7+',
@@ -178,7 +178,7 @@ export default function ServicesPage() {
         <div className="container services-redesign-hero-grid">
           <div className="services-redesign-hero-copy">
             <span className="eyebrow-label">Hire Experts</span>
-            <h1>Hire the expert team your agency actually needs.</h1>
+            <h1>Hire the Expert Team Your Agency Actually Needs.</h1>
             <p>GHL Prime gives you access to trained GoHighLevel specialists you can hire hourly, per project, or full-time without hiring in-house, onboarding freelancers, or managing the tech yourself.</p>
             <div className="services-redesign-hero-pills">
               <span className="negative">No expensive hires</span>
@@ -255,7 +255,7 @@ export default function ServicesPage() {
           <div className="how-it-works-card">
             <div className="how-it-works-head">
               <span className="eyebrow-label">How it works</span>
-              <h2>Four moves <span className="how-it-works-accent">from hello to handled.</span></h2>
+              <h2>Four Moves <span className="how-it-works-accent">From Hello to Handled.</span></h2>
               <p>The whole process what we do, when we do it, what you do instead.</p>
             </div>
             <div className="how-it-works-list">
@@ -300,7 +300,7 @@ export default function ServicesPage() {
         <div className="container">
           <div className="section-title centered services-section-heading">
             <span className="eyebrow-label">Expert Skills</span>
-            <h2>Our team knows the full stack.</h2>
+            <h2>Our Team Knows the Full Stack.</h2>
             <p>Every expert on the GHL Prime team is trained across the tools and systems that modern agencies run on.</p>
           </div>
           <div className="services-skills-pills">
@@ -313,7 +313,7 @@ export default function ServicesPage() {
         <div className="container">
           <div className="services-why-head">
             <span className="eyebrow-label">Why GHL Prime</span>
-            <h2>You could hire a freelancer. You could DIY it. Or you could <span className="services-why-accent">look at the math.</span></h2>
+            <h2>You Could Hire a Freelancer. You Could DIY It. Or You Could <span className="services-why-accent">Look at the Math.</span></h2>
             <p>Here&rsquo;s how the three options compare across the things that actually move agency revenue.</p>
           </div>
 
@@ -368,7 +368,7 @@ export default function ServicesPage() {
       <section className="section services-redesign-final-cta-section">
         <div className="container">
           <div className="services-redesign-final-cta">
-            <h2>Ready to hire your expert team?</h2>
+            <h2>Ready to Hire Your Expert Team?</h2>
             <p>Tell us what you need hourly, project, or full-time. We’ll match you with the right expert and get started fast.</p>
             <div className="final-cta-actions">
               <a href="https://www.upwork.com/agencies/ghlprime/" target="_blank" rel="noopener noreferrer" className="primary-pill large">Hire via Upwork</a>

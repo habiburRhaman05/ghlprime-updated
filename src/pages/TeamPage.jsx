@@ -108,10 +108,10 @@ function LeaderSpotlight({ leader, index }) {
 // Hiring standards rendered as a numbered track rather than a wall of prose:
 // each paragraph becomes one step on a single connecting rule.
 const hiringSteps = [
-  { title: 'Experienced GHL people only', text: hiringParagraphs[0] },
-  { title: 'Certified and assessed', text: hiringParagraphs[1] },
-  { title: 'Matched by specialty', text: hiringParagraphs[2] },
-  { title: 'Two-layer leadership review', text: hiringParagraphs[3] },
+  { title: 'Experienced GHL People Only', text: hiringParagraphs[0] },
+  { title: 'Certified and Assessed', text: hiringParagraphs[1] },
+  { title: 'Matched by Specialty', text: hiringParagraphs[2] },
+  { title: 'Two-Layer Leadership Review', text: hiringParagraphs[3] },
 ]
 const hiringNote = hiringParagraphs[4]
 
@@ -182,7 +182,7 @@ export default function TeamPage() {
         <div className="pv2-inner pv2-hero-grid">
           <motion.div variants={heroStack} initial="hidden" animate="show">
             <motion.span className="pv2-eyebrow" {...heroLineProps}>Team</motion.span>
-            <motion.h1 {...heroLineProps}>The people behind GHL Prime.</motion.h1>
+            <motion.h1 {...heroLineProps}>The People Behind GHL Prime.</motion.h1>
             <motion.p className="pv2-lede" {...heroLineProps}>
               GHL Prime combines strategy, automation architecture, and premium system design. The team brings together
               business thinking and technical execution to build cleaner, more scalable GoHighLevel systems.
@@ -230,7 +230,7 @@ export default function TeamPage() {
             transition={SPRING}
           >
             <span className="pv2-eyebrow">Meet The Experts</span>
-            <h2>Specialists supporting the work <span className="pv2-hl">behind the scenes.</span></h2>
+            <h2>Specialists Supporting the Work <span className="pv2-hl">Behind the Scenes.</span></h2>
             <p>Focused team members supporting design, systems, delivery, and execution across GHL Prime projects.</p>
           </motion.div>
 
@@ -276,7 +276,7 @@ export default function TeamPage() {
             <span className="pv2-eyebrow" style={{ position: 'relative', zIndex: 2 }}>
               Want to see the team’s work in action?
             </span>
-            <h2>Explore the services and client systems shaped by the people behind GHL Prime.</h2>
+            <h2>Explore the Services and Client Systems Shaped by the People Behind GHL Prime.</h2>
             <div className="pv2-cta-actions">
               <Link href="/case-studies" className="primary-pill large">View Case Studies <ArrowRight size={16} /></Link>
               <Link href="/services" className="secondary-pill large">Explore Services</Link>

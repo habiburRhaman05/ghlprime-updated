@@ -98,6 +98,12 @@
   margin: .2rem 0 0; font-size: clamp(2.25rem, 5vw, 3.55rem); line-height: 1.1;
   letter-spacing: normal; color: var(--svc-heading); font-weight: 700;
 }
+/* Same wordmark colours as the home page hero, wherever "GoHighLevel" lands
+   inside a service page's h1. */
+.svc-hero-ghl { white-space: nowrap; }
+.svc-hero h1 .go { color: #b8791a; }
+.svc-hero h1 .high { color: #1895ff; }
+.svc-hero h1 .level { color: #0f8f43; }
 .svc-hero-sub {
   margin: 1.2rem auto 0; max-width: 40rem; font-size: clamp(1.02rem, 1.4vw, 1.17rem);
   line-height: 1.7; color: var(--svc-body);

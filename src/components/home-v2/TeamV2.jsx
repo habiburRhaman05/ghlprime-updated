@@ -45,7 +45,7 @@ export default function TeamV2() {
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
           <span className="hv2-eyebrow">The people behind it</span>
-          <h2>Meet <span className="hv2-hl">your mentors.</span></h2>
+          <h2>Meet <span className="hv2-hl">Your Mentors.</span></h2>
           <p>
             Our leaders bring years of experience building automation systems, CRM
             infrastructures, and AI-powered workflows for growth-focused businesses.

@@ -79,9 +79,9 @@ const SCRIPT = [
 ]
 
 const POINTS = [
-  { icon: IconMoonStars, tone: 'ic-indigo', title: 'Answers in seconds, at 3am', text: 'No queue, no missed enquiry, no lead going cold overnight while your team sleeps.' },
-  { icon: IconTargetHit, tone: 'ic-amber', title: 'Qualifies before it books', text: 'Intent, budget, and timeline captured up front, so the calls that land are worth taking.' },
-  { icon: IconCrmWrite, tone: 'ic-teal', title: 'Writes straight back to your CRM', text: 'Contact, notes, pipeline stage, and calendar entry all updated without anyone touching it.' },
+  { icon: IconMoonStars, tone: 'ic-indigo', title: 'Answers in Seconds, at 3am', text: 'No queue, no missed enquiry, no lead going cold overnight while your team sleeps.' },
+  { icon: IconTargetHit, tone: 'ic-amber', title: 'Qualifies Before It Books', text: 'Intent, budget, and timeline captured up front, so the calls that land are worth taking.' },
+  { icon: IconCrmWrite, tone: 'ic-teal', title: 'Writes Straight Back to Your CRM', text: 'Contact, notes, pipeline stage, and calendar entry all updated without anyone touching it.' },
 ]
 
 const REPLY_MS = 1150
@@ -133,7 +133,7 @@ export default function AgentV2() {
         >
           <div className="hv2-head" style={{ marginBottom: 0 }}>
             <span className="hv2-eyebrow">AI agents, deployed</span>
-            <h2>Your best closer <span className="hv2-hl">never sleeps.</span></h2>
+            <h2>Your Best Closer <span className="hv2-hl">Never Sleeps.</span></h2>
             <p>
               We design, build, and deploy AI agents tailored to your agency&apos;s workflow, 
               qualifying leads, handling inquiries, running AI call centers, and booking

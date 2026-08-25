@@ -142,7 +142,7 @@ const separationReasons = [
   {
     icon: IconSpeedGauge,
     tone: 'ic-amber',
-    title: 'Built For Faster Innovation',
+    title: 'Built for Faster Innovation',
     text: 'Separating the brand created room to move faster with niche services, AI workflows, and highly specialized automation offers.',
   },
 ]
@@ -164,7 +164,7 @@ const beliefs = [
   {
     icon: IconServerLeds,
     tone: 'ic-indigo',
-    title: 'Backend Matters As Much As Frontend',
+    title: 'Backend Matters as Much as Frontend',
     text: 'A clean backend improves team performance, customer experience, and the overall perceived quality of the brand.',
   },
   {
@@ -192,19 +192,19 @@ const trustStatement = 'GHL Prime is built on a simple premise: agencies should 
 const trustPillars = [
   {
     icon: UsersRound,
-    title: 'A GHL-only team',
+    title: 'A GHL-Only Team',
     text: 'We do not generalize across platforms or dilute our expertise across fifty different tools. Every specialist works exclusively in the GoHighLevel ecosystem, which means we build faster and troubleshoot better than a generalist freelancer ever could.',
     chips: ['One ecosystem', 'Faster builds', 'Deeper troubleshooting'],
   },
   {
     icon: Award,
-    title: 'Credentials that back it up',
+    title: 'Credentials That Back It Up',
     text: 'Our Certified Admin badge is the highest-level GoHighLevel certification available. Combined with 10 specialty certifications, we carry the formal credentials behind every claim we make.',
     chips: ['Certified Admin', 'HIPAA Compliance', 'A2P', 'AI Employee', 'SaaS Mode'],
   },
   {
     icon: EyeOff,
-    title: 'Invisible behind your brand',
+    title: 'Invisible Behind Your Brand',
     text: 'We operate fully white-labeled, which means your clients never know we exist. Your agency is the front door. We are the engine room. That is how it is supposed to work.',
     chips: ['Fully white-labeled', 'Client-invisible delivery'],
   },
@@ -321,7 +321,7 @@ export default function AboutPage() {
         <div className="pv2-inner">
           <motion.div variants={heroStack} initial="hidden" animate="show">
             <motion.span className="pv2-eyebrow" {...heroLineProps}>About Us</motion.span>
-            <motion.h1 {...heroLineProps}>Built For One Thing: GoHighLevel Growth Systems</motion.h1>
+            <motion.h1 {...heroLineProps}>Built for One Thing: GoHighLevel Growth Systems</motion.h1>
             <motion.p className="pv2-lede" {...heroLineProps}>
               GHL Prime exists to help businesses build better CRM structure, smarter automation, stronger follow-up,
               and a more premium backend growth system powered by GoHighLevel.
@@ -350,7 +350,7 @@ export default function AboutPage() {
             transition={SPRING}
           >
             <span className="pv2-eyebrow">Why We Created A Separate Brand</span>
-            <h2>Focused. Clear. Built for a <span className="pv2-hl">specific kind of client need.</span></h2>
+            <h2>Focused. Clear. Built for a <span className="pv2-hl">Specific Kind of Client Need.</span></h2>
             <p>GHL Prime was created as a distinct brand so the service offering could feel sharper, more intentional, and more specialized.</p>
           </motion.div>
 
@@ -388,7 +388,7 @@ export default function AboutPage() {
             transition={SPRING}
           >
             <span className="pv2-eyebrow">Powered By A Stronger Ecosystem</span>
-            <h2>Backed by Octopi Digital a broader <span className="pv2-hl">digital growth and technology company.</span></h2>
+            <h2>Backed by Octopi Digital a Broader <span className="pv2-hl">Digital Growth and Technology Company.</span></h2>
             <p>
               While GHL Prime focuses specifically on GoHighLevel, AI, and automation, it is supported by the broader execution strength of Octopi Digital.
               That means more operational support, more implementation depth, and a stronger environment for delivering real systems work.
@@ -434,7 +434,7 @@ export default function AboutPage() {
             transition={SPRING}
           >
             <span className="pv2-eyebrow">What We Believe</span>
-            <h2>The principles behind <span className="pv2-hl">how we build.</span></h2>
+            <h2>The Principles Behind <span className="pv2-hl">How We Build.</span></h2>
             <p>These ideas shape the way GHL Prime approaches systems, automation, design quality, and client delivery.</p>
           </motion.div>
 
@@ -506,7 +506,7 @@ export default function AboutPage() {
             transition={SPRING}
           >
             <span className="pv2-eyebrow">Our Experts</span>
-            <h2>The team supporting <span className="pv2-hl">delivery behind the scenes.</span></h2>
+            <h2>The Team Supporting <span className="pv2-hl">Delivery Behind the Scenes.</span></h2>
             <p>Certified GoHighLevel specialists, automation engineers, and support leads who deliver the builds behind our client work.</p>
           </motion.div>
 
@@ -542,7 +542,7 @@ export default function AboutPage() {
           >
             <div className="av-cta-inner">
               <span className="pv2-eyebrow">Want the same kind of structure for your business?</span>
-              <h2>Explore the services, systems, and backend strategy behind GHL Prime.</h2>
+              <h2>Explore the Services, Systems, and Backend Strategy Behind GHL Prime.</h2>
               <div className="av-cta-actions">
                 <Link href="/services" className="primary-pill large">Explore Services <ArrowRight size={16} /></Link>
                 <Link href="/booking" className="secondary-pill large">Get a free consultation</Link>

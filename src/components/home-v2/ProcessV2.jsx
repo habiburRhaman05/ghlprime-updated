@@ -65,22 +65,22 @@ const IconSkillRise = ({ size }) => (
 const PHASES = [
   {
     icon: IconScanRadar,
-    title: 'Scope & audit',
+    title: 'Scope & Audit',
     text: 'We review your account, map the sales process, and identify exactly what needs to be built, fixed, or migrated.',
   },
   {
     icon: IconBuildBlocks,
-    title: 'Build the system',
+    title: 'Build the System',
     text: 'Sub-accounts, pipelines, automations, AI agents, and integrations assembled and wired end to end.',
   },
   {
     icon: IconHandoffPanels,
-    title: 'Walkthrough & handoff',
+    title: 'Walkthrough & Handoff',
     text: 'We walk you through everything we have built, how it works, why it is set up that way, and how to use it confidently with your clients.',
   },
   {
     icon: IconSkillRise,
-    title: 'Ongoing support & upskilling',
+    title: 'Ongoing Support & Upskilling',
     text: 'As the platform evolves and your agency grows, we keep you updated, new features, better workflows, smarter approaches.',
   },
 ]
@@ -108,7 +108,7 @@ export default function ProcessV2() {
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
           <span className="hv2-eyebrow">How we work</span>
-          <h2>You run it. <span className="hv2-hl">We support you when needed.</span></h2>
+          <h2>You Run It. <span className="hv2-hl">We Support You When Needed.</span></h2>
           <p>No black boxes. You end up owning a system you understand, with a team on call when you want to extend it.</p>
         </motion.div>
 

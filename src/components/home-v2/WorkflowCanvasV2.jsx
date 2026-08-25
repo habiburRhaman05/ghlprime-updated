@@ -252,7 +252,7 @@ export default function WorkflowCanvasV2() {
           transition={SPRING}
         >
           <span className="hv2-eyebrow">How the builds actually work</span>
-          <h2>One lead. Three branches. <span className="hv2-hl">Every path ends somewhere.</span></h2>
+          <h2>One Lead. Three Branches. <span className="hv2-hl">Every Path Ends Somewhere.</span></h2>
           <p>
             This is the same node-and-branch logic running behind every account we build, triggers,
             conditions, and actions wired together so a lead is never waiting on a human to move it forward.

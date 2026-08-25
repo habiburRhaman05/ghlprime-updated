@@ -32,7 +32,7 @@ export default function ProofV2() {
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
           <span className="hv2-eyebrow">Proof of work</span>
-          <h2>Systems already <span className="hv2-hl">running in production.</span></h2>
+          <h2>Systems Already <span className="hv2-hl">Running in Production.</span></h2>
           <p>Real builds for real agencies, the automations, AI agents, and CRMs behind them are live right now.</p>
         </motion.div>
 

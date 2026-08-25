@@ -145,11 +145,11 @@ export default function HeroV2({ activePill, rotatingPills }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
           >
-            Hire a dedicated team of{' '}
+            Hire a Dedicated Team of{' '}
             <span className="hv2-nowrap">
               <span className="go">Go</span><span className="high">High</span><span className="level">Level</span>
             </span>{' '}
-            automation experts.
+            Automation Experts.
           </motion.h1>
 
           <motion.p

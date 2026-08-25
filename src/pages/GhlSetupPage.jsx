@@ -16,7 +16,7 @@ export const config = {
   hero: {
     mockup: 'setup',
     eyebrow: 'GHL Setup & Configuration',
-    h1: 'Your GoHighLevel setup and configuration, done right the first time',
+    h1: 'Your GoHighLevel Setup and Configuration, Done Right the First Time',
     subhead: `A messy GoHighLevel account costs you leads, deliverability, and hours every week. GHL Prime's GoHighLevel Certified Admins set up your sub-accounts, pipelines, calendars, A2P/Twilio compliance, and snapshots correctly the first time so you can stop fighting the platform and start using it.`,
     ctaPrimary: { label: 'Book a Free Call', to: '/booking' },
     ctaSecondary: { label: 'See Our Work', to: '/case-studies' },

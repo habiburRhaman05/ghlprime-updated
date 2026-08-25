@@ -110,35 +110,35 @@ const CARDS = [
     icon: IconBellStrike,
     tone: 'ic-sky',
     tag: 'On demand',
-    title: 'No GHL expert on your team',
+    title: 'No GHL Expert on Your Team',
     text: 'Stop paying for a full-time hire you barely need. Tap certified GHL specialists on demand for builds, fixes, strategy, or anything in between.',
   },
   {
     icon: IconRocketLaunch,
     tone: 'ic-violet',
     tag: 'White-label',
-    title: "Can't launch your SaaS fast enough",
+    title: "Can't Launch Your SaaS Fast Enough",
     text: 'We set up your fully white-labeled CRM from scratch: branded, configured, and client-ready. You own the product. We do the build.',
   },
   {
     icon: IconGearsMesh,
     tone: 'ic-amber',
     tag: 'Automation',
-    title: 'Broken or half-built automations',
+    title: 'Broken or Half-Built Automations',
     text: 'Leaking leads, missed follow-ups, workflows that randomly break. We build, audit, and fix automations end-to-end, so every lead is handled perfectly.',
   },
   {
     icon: IconNeuralOrbit,
     tone: 'ic-indigo',
     tag: 'AI agents',
-    title: 'AI agents that actually work for your agency',
+    title: 'AI Agents That Actually Work for Your Agency',
     text: "We design, build, and deploy AI agents tailored to your agency's workflow. Qualify leads, handle inquiries, run AI call centers, and book meetings 24/7, without you touching a thing.",
   },
   {
     icon: IconClockSweep,
     tone: 'ic-teal',
     tag: '24/7',
-    title: 'No support = clients leave your platform',
+    title: 'No Support = Clients Leave Your Platform',
     text: "Your clients expect fast answers. We provide round-the-clock GHL expert support, fully under your brand. They think it's your team; we make you look like a well-staffed operation.",
   },
 ]
@@ -155,7 +155,7 @@ export default function BentoV2() {
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
           <span className="hv2-eyebrow">What we handle for you</span>
-          <h2>You get the experts. We work <span className="hv2-hl">behind the scenes.</span></h2>
+          <h2>You Get the Experts. We Work <span className="hv2-hl">Behind the Scenes.</span></h2>
           <p>
             From white-label launch support to automation builds, AI deployment, and client
             support, we become the technical team your agency can rely on.

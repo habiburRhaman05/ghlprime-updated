@@ -19,7 +19,7 @@ export default function FinalCtaV2() {
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
           <span className="hv2-eyebrow" style={{ position: 'relative', zIndex: 2 }}>Ready when you are</span>
-          <h2>You close the clients. <br />We handle everything else.</h2>
+          <h2>You Close the Clients. <br />We Handle Everything Else.</h2>
           <p>
             Tell us where your agency stands and we will map the build, the automations, and the
             support model. Same-day reply, no commitment.

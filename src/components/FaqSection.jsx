@@ -10,7 +10,7 @@ const EASE = [0.22, 1, 0.36, 1]
 
 export default function FaqSection({
   eyebrow = 'FAQ',
-  title = 'Frequently asked questions',
+  title = 'Frequently Asked Questions',
   // Every other page that embeds this section already has its own h1 in the
   // hero above, so this heading is correctly an h2 there. The standalone
   // /faq page has nothing else on it, so it passes 'h1' to make this the

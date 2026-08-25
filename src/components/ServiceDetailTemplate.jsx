@@ -66,6 +66,20 @@ function rich(text) {
   return parts
 }
 
+// "GoHighLevel" inside a hero h1 gets the same tri-colour wordmark treatment
+// the home page hero uses, wherever it appears in the string.
+function heroTitle(text) {
+  const i = text.indexOf('GoHighLevel')
+  if (i === -1) return text
+  return [
+    text.slice(0, i),
+    <span className="svc-hero-ghl" key="ghl">
+      <span className="go">Go</span><span className="high">High</span><span className="level">Level</span>
+    </span>,
+    text.slice(i + 'GoHighLevel'.length),
+  ]
+}
+
 const KW = new Set([
   'const', 'let', 'var', 'await', 'async', 'function', 'return', 'new', 'import',
   'from', 'export', 'CREATE', 'TABLE', 'ALTER', 'ENABLE', 'ROW', 'LEVEL',
@@ -865,7 +879,7 @@ export default function ServiceDetailTemplate({ config }) {
                 <motion.span className="svc-eyebrow-pill" {...heroLineProps}>
                   <span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span>
                 </motion.span>
-                <motion.h1 {...heroLineProps}>{config.hero.h1}</motion.h1>
+                <motion.h1 {...heroLineProps}>{heroTitle(config.hero.h1)}</motion.h1>
                 <motion.p className="svc-hero-sub" {...heroLineProps}>{formConfig.heroSubhead || config.hero.subhead}</motion.p>
                 <HeroBadges badges={config.hero.badges} />
                 <motion.a
@@ -897,7 +911,7 @@ export default function ServiceDetailTemplate({ config }) {
                 <motion.span className="svc-eyebrow-pill" {...heroLineProps}>
                   <span className="svc-eyebrow-pill-text">{config.hero.eyebrow}</span>
                 </motion.span>
-                <motion.h1 {...heroLineProps}>{config.hero.h1}</motion.h1>
+                <motion.h1 {...heroLineProps}>{heroTitle(config.hero.h1)}</motion.h1>
                 <motion.p className="svc-hero-sub" {...heroLineProps}>{config.hero.subhead}</motion.p>
                 <div className="svc-hero-ctas">
                   <Link href={config.hero.ctaPrimary.to} className="primary-pill large">{config.hero.ctaPrimary.label} <ArrowRight size={18} /></Link>

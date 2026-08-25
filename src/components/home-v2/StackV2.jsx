@@ -43,7 +43,7 @@ export default function StackV2() {
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
           <span className="hv2-eyebrow">Our stack</span>
-          <h2>Enterprise tech delivered by <span className="hv2-hl">our expert teams.</span></h2>
+          <h2>Enterprise Tech Delivered by <span className="hv2-hl">Our Expert Teams.</span></h2>
           <p>
             We combine powerful design tools, modern development frameworks, and smart automation
             platforms to build digital systems that perform, scale, and convert.

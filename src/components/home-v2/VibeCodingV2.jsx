@@ -94,7 +94,7 @@ export default function VibeCodingV2() {
         >
           <div className="hv2-head" style={{ marginBottom: 0 }}>
             <span className="hv2-eyebrow">Vibe coding</span>
-            <h2>If GHL can&rsquo;t do it, <span className="hv2-hl">we build it.</span></h2>
+            <h2>If GHL Can&rsquo;t Do It, <span className="hv2-hl">We Build It.</span></h2>
             <p>
               When the platform stops short, we write the layer that closes the gap, custom
               endpoints, dashboards, and logic wired straight back into your workflows.

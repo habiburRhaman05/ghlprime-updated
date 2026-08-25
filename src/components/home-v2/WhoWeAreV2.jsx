@@ -126,7 +126,7 @@ export default function WhoWeAreV2() {
         >
           <div className="hv2-head" style={{ marginBottom: 0 }}>
             <span className="hv2-eyebrow">What we actually are</span>
-            <h2>We&rsquo;re not software. We&rsquo;re your <span className="hv2-hl">expert team.</span></h2>
+            <h2>We&rsquo;re Not Software. We&rsquo;re Your <span className="hv2-hl">Expert Team.</span></h2>
             <p>
               Real specialists, not a subscription. You get people who build, fix, and run the
               technical side of your agency, and who your clients never have to meet.

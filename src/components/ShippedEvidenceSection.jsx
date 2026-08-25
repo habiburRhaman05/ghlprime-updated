@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { fetchShowcaseForPage, fetchShowcaseStats } from '../lib/showcaseApi'
 import '../styles/shipped-evidence.css'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
 function isImageUrl(value) {
   return typeof value === 'string' && /^https?:\/\//i.test(value.trim())
 }
@@ -107,6 +107,74 @@ function OriginLogo({ icon, name }) {
   )
 }
 
+// One card in the sticky stack. Raw scroll progress moves in lockstep with
+// the finger/wheel, which reads as mechanical -- spring-smoothing it first
+// (same technique ServiceDetailTemplate's timeline rail uses) makes the
+// shrink lag and settle instead of snapping frame to frame. Progress is
+// measured against the card's own box: 0 when its top reaches the viewport
+// top (the moment it sticks), 1 once the next card has scrolled all the way
+// over it, so the card visibly recedes as it gets covered.
+//
+// Opacity is deliberately NOT part of that recede -- a translucent card lets
+// its own text show through the opaque card stacked on top of it, which
+// reads as double-exposed, ghosted text rather than depth. The card has to
+// stay fully solid for the next one to actually cover it; scale is the only
+// cue that it is receding.
+function StackedPair({ item, index, reduceMotion }) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const smoothed = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 })
+  const scale = useTransform(smoothed, [0, 1], [1, 0.93])
+
+  const tags = normalizeTags(item.adaptation_tags)
+  const originHref = item.origin_url
+    ? (/^https?:\/\//i.test(item.origin_url) ? item.origin_url : `https://${item.origin_url}`)
+    : null
+
+  return (
+    <motion.article
+      ref={ref}
+      className="se-pair"
+      style={{ ['--i']: index, scale: reduceMotion ? 1 : scale }}
+      initial={{ opacity: 0, y: 46 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ type: 'spring', stiffness: 90, damping: 20, mass: 0.9 }}
+    >
+      <div className="se-pair-origin">
+        <span className="se-kicker">Consumer Origin</span>
+        <OriginLogo icon={item.origin_icon} name={item.origin_name} />
+        <strong className="se-origin-name">{item.origin_name}</strong>
+        {originHref ? (
+          <a className="se-origin-url" href={originHref} target="_blank" rel="noreferrer">
+            {item.origin_url.replace(/^https?:\/\//i, '')} <ExternalLink size={12} aria-hidden="true" />
+          </a>
+        ) : null}
+        {item.origin_description ? <p className="se-origin-desc">{item.origin_description}</p> : null}
+        {item.origin_tagline ? <p className="se-origin-tagline">{item.origin_tagline}</p> : null}
+      </div>
+
+      <div className="se-pair-connector" aria-hidden="true">
+        <span className="se-arrow"><ArrowRight size={18} /></span>
+        <span className="se-index">{String(index + 1).padStart(2, '0')}</span>
+      </div>
+
+      <div className="se-pair-adaptation">
+        <span className="se-adapt-badge">{item.adaptation_badge || 'Enterprise Adaptation'}</span>
+        <h3 className="se-adapt-name">{item.adaptation_name}</h3>
+        {item.adaptation_description ? <p className="se-adapt-desc">{item.adaptation_description}</p> : null}
+        {tags.length > 0 ? (
+          <div className="se-tags">
+            {tags.map((tag) => (
+              <span key={tag} className="se-tag">{tag}</span>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </motion.article>
+  )
+}
+
 export default function ShippedEvidenceSection({
   pageKey,
   eyebrow = 'Shipped Evidence',
@@ -177,48 +245,11 @@ export default function ShippedEvidenceSection({
         </div>
 
         <div className="se-pairs">
-          {items.length >  0 ? items.map((item, index) => {
-            const tags = normalizeTags(item.adaptation_tags)
-            const originHref = item.origin_url
-              ? (/^https?:\/\//i.test(item.origin_url) ? item.origin_url : `https://${item.origin_url}`)
-              : null
-            return (
-              <article key={item.id} className="se-pair" style={{ ['--i']: index }}>
-                <div className="se-pair-origin">
-                  <span className="se-kicker">Consumer Origin</span>
-                  <OriginLogo icon={item.origin_icon} name={item.origin_name} />
-                  <strong className="se-origin-name">{item.origin_name}</strong>
-                  {originHref ? (
-                    <a className="se-origin-url" href={originHref} target="_blank" rel="noreferrer">
-                      {item.origin_url.replace(/^https?:\/\//i, '')} <ExternalLink size={12} aria-hidden="true" />
-                    </a>
-                  ) : null}
-                  {item.origin_description ? <p className="se-origin-desc">{item.origin_description}</p> : null}
-                  {item.origin_tagline ? <p className="se-origin-tagline">{item.origin_tagline}</p> : null}
-                </div>
-
-                <div className="se-pair-connector" aria-hidden="true">
-                  <span className="se-arrow"><ArrowRight size={18} /></span>
-                  <span className="se-index">{String(index + 1).padStart(2, '0')}</span>
-                </div>
-
-                <div className="se-pair-adaptation">
-                  <span className="se-adapt-badge">{item.adaptation_badge || 'Enterprise Adaptation'}</span>
-                  <h3 className="se-adapt-name">{item.adaptation_name}</h3>
-                  {item.adaptation_description ? <p className="se-adapt-desc">{item.adaptation_description}</p> : null}
-                  {tags.length > 0 ? (
-                    <div className="se-tags">
-                      {tags.map((tag) => (
-                        <span key={tag} className="se-tag">{tag}</span>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              </article>
-            )
-          }) : <div>
-            failed to load data
-            </div>}
+          {items.length > 0
+            ? items.map((item, index) => (
+                <StackedPair key={item.id} item={item} index={index} reduceMotion={reduceMotion} />
+              ))
+            : <div>failed to load data</div>}
         </div>
       </div>
     </section>

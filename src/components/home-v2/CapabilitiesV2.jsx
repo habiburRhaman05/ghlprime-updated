@@ -90,42 +90,42 @@ const CAPS = [
   {
     icon: IconSupportWrench,
     tone: 'ic-sky',
-    title: 'GHL technical support',
+    title: 'GHL Technical Support',
     text: 'Direct expert support for setup, troubleshooting, cleanup, and backend execution.',
     points: ['Same-day response on build issues', 'Account audits and cleanup', 'Backend execution without hand-holding'],
   },
   {
     icon: IconAgentBot,
     tone: 'ic-violet',
-    title: 'AI agents & call center setup',
+    title: 'AI Agents & Call Center Setup',
     text: 'Deploy AI systems that qualify leads, support clients, and automate repetitive communication.',
     points: ['Lead qualification round the clock', 'Voice and chat agents inside GHL', 'Books straight into your calendar'],
   },
   {
     icon: IconGhostEye,
     tone: 'ic-indigo',
-    title: 'White-labeled client support',
+    title: 'White-Labeled Client Support',
     text: 'Stay invisible behind your agency while we help you support clients under your own brand.',
     points: ['Your brand on every touchpoint', 'Clients never know we exist', 'Coverage across US, CA, UK, AU'],
   },
   {
     icon: IconLinkPulse,
     tone: 'ic-teal',
-    title: 'API integrations',
+    title: 'API Integrations',
     text: 'Connect HighLevel with third-party tools, CRMs, dashboards, and custom workflows.',
     points: ['Zapier, Slack, Google Workspace', 'Custom endpoints when none exist', 'Webhooks, triggers, and syncs'],
   },
   {
     icon: IconTerminalDev,
     tone: 'ic-amber',
-    title: 'Vibe coding & custom dev',
+    title: 'Vibe Coding & Custom Dev',
     text: 'If HighLevel can’t do it natively, we can build around it with custom code and automation logic.',
     points: ['Custom dashboards and portals', 'AI-assisted development', 'Logic the platform does not ship'],
   },
   {
     icon: IconRunbook,
     tone: 'ic-emerald',
-    title: 'Training & SOP support',
+    title: 'Training & SOP Support',
     text: 'We train your team, document the system, and help you scale delivery with more confidence.',
     points: ['Live technical deep dives', 'Documented runbooks', 'Ongoing upskilling as you grow'],
   },
@@ -147,7 +147,7 @@ export default function CapabilitiesV2() {
           transition={{ type: 'spring', stiffness: 120, damping: 20, mass: 0.9 }}
         >
           <span className="hv2-eyebrow">Everything your agency needs</span>
-          <h2>One team for the whole <span className="hv2-hl">technical stack.</span></h2>
+          <h2>One Team for the Whole <span className="hv2-hl">Technical Stack.</span></h2>
         </motion.div>
 
         <div className="hv2-cap">
