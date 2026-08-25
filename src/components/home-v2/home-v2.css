@@ -99,7 +99,7 @@
 }
 .hv2-hero-grid {
   display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
-  gap: clamp(2rem, 5vw, 4.5rem); align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem); align-items: stretch;
 }
 
 .hv2-pill-slot { height: 2.15rem; margin-bottom: 1.4rem; }
@@ -133,6 +133,26 @@
 .hv2-hero-trust { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2.4rem; }
 .hv2-trust-item { display: inline-flex; align-items: center; gap: .5rem; font-size: .85rem; color: var(--body); font-weight: 500; }
 .hv2-trust-item svg { color: #16a34a; flex: none; }
+
+/* ---------- Hero visual: two real dashboard screenshots ------------------- */
+/* Two panels stacked in a column rather than one image stretched to fill the
+   slot -- a single wide screenshot forced to match the text column's height
+   needed such a hard object-fit: cover crop that it stopped reading as a
+   dashboard. Split across two panels, each only has to cover roughly half
+   the height, which lands close enough to a real dashboard screenshot's own
+   width:height ratio that the crop is barely noticeable, and the pair still
+   fills the same vertical space the text column does. */
+.hv2-hero-photo { display: flex; flex-direction: column; gap: 1.1rem; height: 100%; }
+.hv2-hero-photo-row {
+  position: relative; flex: 1; border-radius: 18px; overflow: hidden;
+  background: #fff; border: 1px solid var(--line-strong);
+  box-shadow: 0 1px 3px rgba(15, 31, 53, .05), 0 24px 48px -30px rgba(15, 31, 53, .45);
+  aspect-ratio: 1600 / 764;
+}
+.hv2-hero-photo-row img { object-fit: cover; object-position: center; }
+@media (min-width: 1081px) {
+  .hv2-hero-photo-row { aspect-ratio: auto; }
+}
 
 /* ---------- Hero visual: a live automation pipeline ---------------------- */
 .hv2-console {

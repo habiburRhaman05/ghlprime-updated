@@ -13,7 +13,7 @@ export const teamMembers = [
     years_experience: '10+',
     description:
       'Jewel Rana is a experiences business coach and agency leader who has helped freelancers and service providers build profitable careers and scalable service businesses. Scale your agency.',
-    image_url: '/jewel-rana.png',
+    image_url: '/CEO.png',
     sort_order: 1,
     linkedin_url: 'https://www.linkedin.com/in/thejewelrana/',
     facebook_url: 'https://www.facebook.com/thenewjewel',
@@ -31,7 +31,7 @@ export const teamMembers = [
     years_experience: '3+',
     description:
       'Niyamul Islam Sajal is a senior automation engineer with extensive experience building AI-powered systems, CRM infrastructures, and custom integrations for agencies.',
-    image_url: '/niyamul-islam-sajal.png',
+    image_url: '/COO.png',
     sort_order: 2,
     linkedin_url: 'https://www.linkedin.com/in/niyamulislam/',
     facebook_url: 'https://www.facebook.com/niaymul.islam.2025/',

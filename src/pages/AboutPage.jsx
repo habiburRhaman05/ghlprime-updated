@@ -295,8 +295,8 @@ export default function AboutPage() {
           ],
         }) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([
-          { '@context': 'https://schema.org', '@type': 'Person', name: 'Jewel Rana', image: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69a7daecb701feb9ee7f20f7.png', jobTitle: 'CEO & Co-Founder', worksFor: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, sameAs: ['https://www.linkedin.com/in/thejewelrana/','https://www.facebook.com/thenewjewel','https://www.bokaboss.com/'] },
-          { '@context': 'https://schema.org', '@type': 'Person', name: 'Niyamul Islam Sajal', image: 'https://assets.cdn.filesafe.space/j53xn6YJHwIdPImV00rn/media/69a7daec618c8d0100ae531c.png', jobTitle: 'COO & Co-Founder', worksFor: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, sameAs: ['https://www.linkedin.com/in/niyamulislam/','https://www.facebook.com/niaymul.islam.2025/'] },
+          { '@context': 'https://schema.org', '@type': 'Person', name: 'Jewel Rana', image: 'https://ghlprime.com/CEO.png', jobTitle: 'CEO & Co-Founder', worksFor: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, sameAs: ['https://www.linkedin.com/in/thejewelrana/','https://www.facebook.com/thenewjewel','https://www.bokaboss.com/'] },
+          { '@context': 'https://schema.org', '@type': 'Person', name: 'Niyamul Islam Sajal', image: 'https://ghlprime.com/COO.png', jobTitle: 'COO & Co-Founder', worksFor: { '@type': 'Organization', name: 'GHL Prime', url: 'https://ghlprime.com' }, sameAs: ['https://www.linkedin.com/in/niyamulislam/','https://www.facebook.com/niaymul.islam.2025/'] },
         ]) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
