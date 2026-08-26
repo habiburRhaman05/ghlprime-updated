@@ -4,10 +4,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 
-// Build date is injected by Vite (see define in vite.config.js) so this
-// never drifts from reality the way the old hand-edited constant did.
-const SITE_LAST_UPDATED = typeof process.env.NEXT_PUBLIC_BUILD_DATE === 'string' ? process.env.NEXT_PUBLIC_BUILD_DATE : new Date().toISOString().slice(0, 10)
-const SITE_LAST_UPDATED_LABEL = new Date(SITE_LAST_UPDATED + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
 const CURRENT_YEAR = new Date().getFullYear()
 
 const ASK_AI_PROMPT = 'Who is GHL Prime and what services do they offer?'
@@ -83,6 +79,32 @@ export default function SiteFooter() {
               </a>
             ))}
           </div>
+
+          <div className="footer-legal-links">
+            <Link href="/privacy-policy" onClick={handleFooterNavigate}>Privacy Policy</Link>
+            <Link href="/terms" onClick={handleFooterNavigate}>Terms &amp; Conditions</Link>
+          </div>
+          <span className="footer-parent-brand">
+            <a href="https://octopi-digital.com/" target="_blank" rel="noopener noreferrer">A specialized brand by Octopi Digital</a>
+          </span>
+          <div className="footer-ask-ai">
+            <span className="footer-ask-ai-label">Ask AI about us</span>
+            <div className="footer-ask-ai-row">
+              {ASK_AI_ASSISTANTS.map((ai) => (
+                <a
+                  key={ai.name}
+                  href={ai.buildUrl(encodeURIComponent(ASK_AI_PROMPT))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-ask-ai-btn"
+                  aria-label={`Ask ${ai.name} about GHL Prime`}
+                  title={`Ask ${ai.name} about GHL Prime`}
+                >
+                  <img src={ai.icon} alt="" width="16" height="16" />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div>
@@ -148,40 +170,7 @@ export default function SiteFooter() {
       </div>
 
       <div className="container footer-bottom redesigned-footer-bottom">
-        <div className="footer-bottom-left">
-          <span>&copy; {CURRENT_YEAR} GHL Prime LLC. All rights reserved.</span>
-          <span className="footer-last-updated">Last updated: <time dateTime={SITE_LAST_UPDATED}>{SITE_LAST_UPDATED_LABEL}</time></span>
-        </div>
-        <div className="footer-bottom-right">
-          <div className="footer-legal-links">
-            <Link href="/privacy-policy" onClick={handleFooterNavigate}>Privacy Policy</Link>
-            <Link href="/terms" onClick={handleFooterNavigate}>Terms &amp; Conditions</Link>
-            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">Sitemap</a>
-            <a href="/robots.txt" target="_blank" rel="noopener noreferrer">Robots</a>
-            <a href="/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt</a>
-          </div>
-          <span className="footer-parent-brand">
-            <a href="https://octopi-digital.com/" target="_blank" rel="noopener noreferrer">A specialized brand by Octopi Digital</a>
-          </span>
-          <div className="footer-ask-ai">
-            <span className="footer-ask-ai-label">Ask AI about us</span>
-            <div className="footer-ask-ai-row">
-              {ASK_AI_ASSISTANTS.map((ai) => (
-                <a
-                  key={ai.name}
-                  href={ai.buildUrl(encodeURIComponent(ASK_AI_PROMPT))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-ask-ai-btn"
-                  aria-label={`Ask ${ai.name} about GHL Prime`}
-                  title={`Ask ${ai.name} about GHL Prime`}
-                >
-                  <img src={ai.icon} alt="" width="16" height="16" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
+        <span>&copy; {CURRENT_YEAR} GHL Prime LLC. All rights reserved.</span>
       </div>
     </footer>
   )

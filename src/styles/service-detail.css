@@ -889,12 +889,19 @@
 .crmd-xlabels { display: flex; justify-content: space-between; margin-top: 6px; }
 .crmd-xlabels span { font-size: 9px; color: #94a3b8; }
 .crmd-donut { flex: 1; min-width: 0; }
-.crmd-donut-body { display: flex; align-items: center; gap: 10px; }
+/* Column, not row: this card's flex share (1 part against the line chart's
+   1.5) only ever gives it ~110-140px of content width, and the 76px chart
+   plus the legend's own min-content width together need more than that
+   side by side -- something always gave, either the legend wrapping over
+   itself or overflowing and getting clipped by an ancestor. Stacked, only
+   the wider of the two needs to fit the available width, and there is
+   plenty of height for two rows. */
+.crmd-donut-body { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .crmd-donut-chart { position: relative; width: 76px; height: 76px; flex: none; }
 .crmd-donut-chart svg { width: 76px; height: 76px; display: block; }
 .crmd-donut-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: #0f172a; }
 .crmd-legend { display: flex; flex-direction: column; gap: 5px; }
-.crmd-legend span { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #475569; }
+.crmd-legend span { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #475569; white-space: nowrap; }
 .crmd-legend i { width: 8px; height: 8px; border-radius: 2px; flex: none; }
 .crmd-metrics { display: flex; gap: 12px; }
 .crmd-metric { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }

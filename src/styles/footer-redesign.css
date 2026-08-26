@@ -49,6 +49,21 @@
   width: 1rem;
   height: 1rem;
 }
+
+/* Legal links, parent-brand credit, and the Ask AI row moved here from what
+   used to be a separate bar under the footer grid -- same look, just living
+   in the brand column now instead of a strip of their own. */
+.footer-brand .footer-legal-links {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.5rem 1.15rem; margin: 1.25rem 0 0;
+}
+.footer-brand .footer-legal-links a:hover { color: #fff; }
+.footer-brand .footer-parent-brand {
+  display: block; margin-top: 0.85rem; white-space: nowrap; line-height: 1.5;
+}
+.footer-brand .footer-parent-brand a { opacity: 0.75; }
+.footer-brand .footer-parent-brand a:hover { opacity: 1; }
+.footer-brand .footer-ask-ai { margin-top: 0.85rem; }
 .footer-hire-column p {
   max-width: 15rem;
   line-height: 1.8;
@@ -112,57 +127,12 @@
 }
 
 
-.footer-last-updated {
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 13px;
-  margin-left: 12px;
-}
-.footer-last-updated time {
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 500;
-}
-
-/* ---------------------------------------------------------------------------
-   Bottom bar alignment. Previously four direct flex children were spread with
-   space-between, which squeezed each one into a narrow column and forced
-   mid-phrase wrapping ("All rights reserved." and the date breaking onto a
-   second line, the attribution dropping under the links). Grouping them into
-   a left and right cluster keeps everything on one baseline.
---------------------------------------------------------------------------- */
+/* Bottom bar is just the copyright line now -- legal links, the parent-brand
+   credit, and Ask AI moved up into the brand column above. */
 .redesigned-footer-bottom {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* The two groups never fit on one line at the container max-width, so they
-     stack as two left-aligned rows flush with the footer columns above. */
-  justify-content: flex-start;
-  gap: 0.55rem 2rem;
-}
-.redesigned-footer-bottom .footer-bottom-left,
-.redesigned-footer-bottom .footer-bottom-right {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 1.5rem;
-  margin: 0;
-}
-.redesigned-footer-bottom .footer-legal-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 1.15rem;
-  margin: 0;
-}
-.redesigned-footer-bottom .footer-bottom-left > span,
-.redesigned-footer-bottom .footer-parent-brand {
-  white-space: nowrap;
-  line-height: 1.5;
-}
-.redesigned-footer-bottom .footer-parent-brand a {
-  opacity: 0.75;
-}
-.redesigned-footer-bottom .footer-parent-brand a:hover {
-  opacity: 1;
 }
 
 .footer-ask-ai {
@@ -203,13 +173,8 @@
   opacity: 0.85;
 }
 
-/* On narrow screens let the long phrases wrap normally and stack left. */
 @media (max-width: 900px) {
-  .redesigned-footer-bottom {
-    justify-content: flex-start;
-  }
-  .redesigned-footer-bottom .footer-bottom-left > span,
-  .redesigned-footer-bottom .footer-parent-brand {
+  .footer-brand .footer-parent-brand {
     white-space: normal;
   }
 }

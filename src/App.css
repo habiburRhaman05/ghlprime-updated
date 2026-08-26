@@ -24,9 +24,9 @@
   --primary: #1684ea;
   /* Primary button fill: brand light blue into brand navy, left to right. */
   --primary-gradient: linear-gradient(90deg, #1895ff, #022646);
-  /* Hover fill for white secondary pills -- warm contrast against the
-     site's blue everywhere else, on purpose. */
-  --warm-gradient: linear-gradient(135deg, #ffc247, #ff7a18);
+  /* Hover fill for white secondary pills -- the navy-to-gold of the logo
+     mark, warm contrast against the site's blue everywhere else. */
+  --warm-gradient: linear-gradient(135deg, #10253f, #d4af37);
   --primary-dark: #0a66cc;
   --soft-blue: #edf5ff;
   --soft-slate: #eef4f8;
@@ -243,7 +243,7 @@ button { font: inherit; }
 }
 .login-link.nav-ghost svg { flex-shrink: 0; opacity: .75; transition: opacity .25s ease; }
 .login-link.nav-ghost:hover {
-  color: #1a1206;
+  color: #fff;
   border-color: transparent;
   background: var(--warm-gradient);
   transform: translateY(-1px);
@@ -306,7 +306,7 @@ button { font: inherit; }
 .primary-pill.large, .secondary-pill { min-height: 3rem; padding-inline: 1.25rem; }
 .secondary-pill { border: 1px solid rgba(22, 132, 234, 0.16); color: var(--primary); background: rgba(255,255,255,.92); }
 /* Every white secondary pill warms up on hover instead of just lifting. */
-.secondary-pill:hover { background: var(--warm-gradient); border-color: transparent; color: #1a1206; }
+.secondary-pill:hover { background: var(--warm-gradient); border-color: transparent; color: #fff; }
 
 .hero { position: relative; padding: 4.25rem 0 4.2rem; text-align: center; }
 .hero-copy { max-width: 56rem; margin: 0 auto; }

@@ -267,7 +267,7 @@
 .secondary-pill.hh-cta-ghost:hover {
   border-color: transparent;
   background: var(--warm-gradient);
-  color: #1a1206;
+  color: #fff;
 }
 
 .hh-cta > *:focus-visible {
